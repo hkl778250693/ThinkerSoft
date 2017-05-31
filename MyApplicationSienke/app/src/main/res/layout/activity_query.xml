@@ -128,7 +128,7 @@
             android:layout_marginLeft="11dp"
             android:layout_marginRight="11dp"
             android:layout_marginTop="36dp"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/user_detail_save_btn_selector"
             android:text="查询"
             android:textColor="@android:color/white"
             android:textSize="18sp" />

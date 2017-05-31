@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.administrator.thinker_soft.activity.SecurityGuideActivity" android:screenOrientation="portrait">
+        <activity android:name="com.example.administrator.thinker_soft.activity.MoveLoginActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,11 +52,12 @@
         <activity android:name="com.example.administrator.thinker_soft.activity.NewTaskDetailActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.example.administrator.thinker_soft.activity.ContinueCheckUserActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.example.administrator.thinker_soft.activity.MyPhotoGalleryActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.example.administrator.thinker_soft.activity.SecurityGuideActivity" android:screenOrientation="portrait"/>
 
         //移动APP
+        <!--<activity android:name="com.example.administrator.thinker_soft.activity.MoveLoginActivity" android:screenOrientation="portrait"/>-->
         <activity android:name="com.example.administrator.thinker_soft.activity.MoveHomePageActivity" android:screenOrientation="portrait"/>
-        <activity android:name="com.example.administrator.thinker_soft.activity.MoveLoginActivity" android:screenOrientation="portrait"/>
-        <activity android:name="com.example.administrator.thinker_soft.activity.MoveGuideActivity" android:screenOrientation="portrait"/>
+
 
         <provider
             android:name="android.support.v4.content.FileProvider"

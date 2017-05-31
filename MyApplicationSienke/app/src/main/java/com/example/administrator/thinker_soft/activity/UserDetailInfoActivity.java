@@ -27,6 +27,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -154,6 +155,19 @@ public class UserDetailInfoActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(onClickListener);
         remarksRb1.setOnClickListener(onClickListener);
         remarksRb2.setOnClickListener(onClickListener);
+        userAddress.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //触摸的是EditText并且当前EditText可以滚动则将事件交给EditText处理；否则将事件交由其父类处理
+                if ((v.getId() == R.id.user_address && canVerticalScroll(userAddress))) {
+                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                    }
+                }
+                return false;
+            }
+        });
 
         adapter = new GridviewImageAdapter(UserDetailInfoActivity.this, cropPathLists);
         //gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -199,6 +213,27 @@ public class UserDetailInfoActivity extends AppCompatActivity {
                 return true;
             }
         });*/
+    }
+
+    /**
+     * EditText竖直方向是否可以滚动
+     * @param editText  需要判断的EditText
+     * @return  true：可以滚动   false：不可以滚动
+     */
+    private boolean canVerticalScroll(EditText editText) {
+        //滚动的距离
+        int scrollY = editText.getScrollY();
+        //控件内容的总高度
+        int scrollRange = editText.getLayout().getHeight();
+        //控件实际显示的高度
+        int scrollExtent = editText.getHeight() - editText.getCompoundPaddingTop() -editText.getCompoundPaddingBottom();
+        //控件内容总高度与实际显示高度的差值
+        int scrollDifference = scrollRange - scrollExtent;
+
+        if(scrollDifference == 0) {
+            return false;
+        }
+        return (scrollY > 0) || (scrollY < scrollDifference - 1);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -1065,7 +1100,6 @@ public class UserDetailInfoActivity extends AppCompatActivity {
                     break;
                 case 18:
                     createNoOperate();
-                    saveBtn.setText(getString(R.string.no_edit));
                     break;
                 case 19:
                     securityCheckCase.setText("无");

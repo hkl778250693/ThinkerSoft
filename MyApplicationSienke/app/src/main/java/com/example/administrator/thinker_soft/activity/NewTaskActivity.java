@@ -195,7 +195,7 @@ public class NewTaskActivity extends Activity {
                             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                             String currentTime = formatter.format(new Date());
                             current_res = str2.compareTo(currentTime);
-                            if (current_res > 0) {
+                            if (current_res >= 0) {
                                 res = str1.compareTo(str2);
                                 Log.i("NewTaskActivity", "比较结果:" + res);
                                 if (res <= 0) {

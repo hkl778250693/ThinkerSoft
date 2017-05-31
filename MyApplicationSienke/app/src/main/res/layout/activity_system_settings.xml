@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_thin"
+    android:orientation="vertical"
+    android:id="@+id/root_linearlayout">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="5dp"
+        android:background="@color/theme_colors">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:background="@drawable/circle_selector"
+            android:src="@drawable/back_selector" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="系统设置"
+            android:textColor="@android:color/white"
+            android:textSize="21sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:drawableLeft="@mipmap/ip"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:text="设置IP、端口号"
+        android:textColor="@color/text_black"
+        android:textSize="16sp" />
+    <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="列表每页设置条数"
+        android:textSize="16sp"
+        android:textColor="@color/text_black"
+        android:drawableLeft="@mipmap/list"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        android:drawablePadding="10dp"
+        android:layout_marginTop="10dp"/>-->
+
+    <TextView
+        android:id="@+id/clear_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:drawableLeft="@mipmap/list"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:text="清空本地数据"
+        android:textColor="@color/text_black"
+        android:textSize="16sp" />
+
+</LinearLayout>

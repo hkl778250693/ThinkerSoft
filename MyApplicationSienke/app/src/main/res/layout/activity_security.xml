@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_linearlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/root_relative"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/theme_colors"
+        android:gravity="center_vertical"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="张三"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="安检选项"
+            android:textColor="@android:color/white"
+            android:textSize="21sp" />
+
+        <ImageView
+            android:id="@+id/security_check_go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:background="@drawable/circle_selector"
+            android:src="@mipmap/more" />
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/security_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:background="@color/gray_thin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/option_rbt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/radiogroup_task_choose_selector"
+            android:gravity="center"
+            android:text="选项"
+            android:textColor="@drawable/radiogroup_text_selector"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/data_transfer_rbt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/radiogroup_data_transfer_selector"
+            android:gravity="center"
+            android:text="传输"
+            android:textColor="@drawable/radiogroup_text_selector"
+            android:textSize="10sp" />
+    </RadioGroup>
+
+</LinearLayout>

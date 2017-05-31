@@ -1,0 +1,55 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
+    </style>
+
+    //页面跳转动画
+    <style name="AnimationActivity" parent="@android:style/Animation.Activity" mce_bogus="1">
+        <!--进入一个Acitvity包括两部分，当前Activity退出动画，下一个Activity进入动画-->
+        <item name="android:activityOpenEnterAnimation">@anim/right_in</item>   //下一个Activity进入动画
+        <item name="android:activityOpenExitAnimation">@anim/left_out</item>   //当前Activity退出动画
+
+        <!--跳回一个Activity也包括两部分，当前Activity摧毁动画，上个Actiivty进入动画-->
+        <item name="android:activityCloseEnterAnimation">@anim/left_in</item>   // 上个Activity进入动画
+        <item name="android:activityCloseExitAnimation">@anim/right_out</item>  //当前Activity退出动画
+    </style>
+
+    //弹出框透明样式
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+         <item name="android:windowFrame">@null</item>   <!--边框-->
+         <item name="android:windowIsFloating">true</item>  <!--是否浮现在activity之上-->
+         <item name="android:windowIsTranslucent">false</item>  <!--半透明-->
+         <item name="android:windowNoTitle">true</item>   //无标题
+         <item name="android:background">@color/transparent</item>
+         <item name="android:windowBackground">@color/transparent</item>
+         <item name="android:backgroundDimEnabled">false</item>  <!--模糊-->
+         <item name="android:backgroundDimAmount">0.6</item>   //黑暗度
+    </style>
+
+    <!--下拉列表样式-->
+    <style name="Popupwindow">
+        <item name="android:windowEnterAnimation">@anim/enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/out_anim</item>
+    </style>
+
+    <!--//选择照片弹出框样式 上下移动-->
+    <style name="camera">
+        <item name="android:windowEnterAnimation">@anim/camera_enter</item>
+        <item name="android:windowExitAnimation">@anim/camera_out</item>
+    </style>
+
+    <!--//pupopwindow弹出样式-->
+
+    <style name="mypopwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
+    </style>
+
+
+</resources>

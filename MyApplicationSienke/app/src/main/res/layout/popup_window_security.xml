@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="3dp">
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!--<RadioButton
+            android:id="@+id/file"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/security_popupwindow"
+            android:button="@null"
+            android:drawableLeft="@drawable/security_popupwindow_pic"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:text="文件管理"
+            android:textColor="@drawable/security_popupwindow_text"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="5dp"
+            android:background="@color/gray_thin" />-->
+
+        <RadioButton
+            android:id="@+id/settings"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/security_popupwindow"
+            android:button="@null"
+            android:drawableLeft="@drawable/security_popuwindow_settings_pic"
+            android:drawablePadding="10dp"
+            android:padding="8dp"
+            android:text="系统设置"
+            android:textColor="@drawable/security_popupwindow_text"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+        <RadioButton
+            android:id="@+id/quite"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/security_popupwindow"
+            android:button="@null"
+            android:drawableLeft="@drawable/security_popupwidow_quite_pic"
+            android:drawablePadding="10dp"
+            android:padding="8dp"
+            android:text="退出登录"
+            android:textColor="@drawable/security_popupwindow_text"
+            android:textSize="14sp" />
+
+
+    </RadioGroup>
+
+</LinearLayout>

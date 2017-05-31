@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background6"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="55dp"
+        android:src="@mipmap/thinklogo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="移动APP"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
+
+    <EditText
+        android:id="@+id/edit_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="55dp"
+        android:background="@mipmap/info"
+        android:drawableRight="@mipmap/id"
+        android:hint="账号"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/gray"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/edit_psw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:background="@mipmap/info"
+        android:drawableRight="@mipmap/lock"
+        android:hint="密码"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/gray"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/Ok_byt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/move_login_byt_selector"
+        android:text="登录"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

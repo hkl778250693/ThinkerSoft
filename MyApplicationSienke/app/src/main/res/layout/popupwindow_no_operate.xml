@@ -5,4 +5,17 @@
     android:background="@color/white_transparent"
     android:gravity="center">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已上传，不可修改!"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="@color/text_blue"
+        android:background="@drawable/normal_button_bg_selector"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"/>
+
 </LinearLayout>

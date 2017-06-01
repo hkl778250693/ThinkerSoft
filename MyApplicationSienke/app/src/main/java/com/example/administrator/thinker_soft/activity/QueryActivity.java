@@ -43,7 +43,7 @@ import java.net.URL;
  * Created by Administrator on 2017/2/24 0024.
  */
 public class QueryActivity extends Activity {
-    private ImageView more;
+    private ImageView more,back;
     private Button queryBtn;
     private RadioButton radioButton1;
     private RadioButton radioButton2;
@@ -74,6 +74,7 @@ public class QueryActivity extends Activity {
 
     //绑定控件ID
     private void bindView() {
+        back = (ImageView) findViewById(R.id.back);
         more = (ImageView) findViewById(R.id.more);
         queryBtn = (Button) findViewById(R.id.query_btn);
         radioButton1 = (RadioButton) findViewById(R.id.radio_btn1);
@@ -85,6 +86,7 @@ public class QueryActivity extends Activity {
 
     //设置点击事件
     private void setViewClickListener() {
+        back.setOnClickListener(clickListener);
         more.setOnClickListener(clickListener);
         queryBtn.setOnClickListener(clickListener);
         radioButton1.setOnClickListener(clickListener);
@@ -422,7 +424,7 @@ public class QueryActivity extends Activity {
      * 所以改用 dispatchKeyEvent
      * <p/>
      * 一般的 Activity 用 onKeyDown就可以了
-     */
+     *//*
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
@@ -435,9 +437,9 @@ public class QueryActivity extends Activity {
     }
 
 
-    /**
+    *//**
      * 退出程序
-     */
+     *//*
     private void exitApp() {
         // 判断2次点击事件时间
         if ((System.currentTimeMillis() - exitTime) > 2000) {
@@ -449,5 +451,5 @@ public class QueryActivity extends Activity {
         } else {
             finish();
         }
-    }
+    }*/
 }

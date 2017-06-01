@@ -50,12 +50,10 @@ public class MoveHomePageActivity extends Activity{
                 case R.id.ydaj:
                     Intent intent = new Intent(MoveHomePageActivity.this,SecurityChooseActivity.class);
                     startActivity(intent);
-                    finish();
                     break;
                 case R.id.ydcx:
                     Intent intent1 = new Intent(MoveHomePageActivity.this,QueryActivity.class);
                     startActivity(intent1);
-                    finish();
                     break;
             }
         }

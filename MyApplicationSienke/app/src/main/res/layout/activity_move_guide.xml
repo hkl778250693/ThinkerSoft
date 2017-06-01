@@ -4,10 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <ImageView
-        android:id="@+id/wel"
+        android:id="@+id/image_gif"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/welcome"
         android:scaleType="fitXY"/>
-
 </LinearLayout>

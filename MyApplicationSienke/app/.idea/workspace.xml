@@ -46,10 +46,11 @@
       <file leaf-file-name="MoveHomePageActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/administrator/thinker_soft/activity/MoveHomePageActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.89047617">
-              <caret line="92" column="13" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
+            <state vertical-scroll-proportion="-0.15238096">
+              <caret line="90" column="43" selection-start-line="90" selection-start-column="43" selection-end-line="90" selection-end-column="43" />
               <folding>
                 <element signature="e#2700#3413#0" expanded="true" />
+                <element signature="e#3412#3413#0" expanded="true" />
                 <element signature="e#3464#3669#0" expanded="true" />
                 <element signature="e#3668#3669#0" expanded="true" />
               </folding>
@@ -2599,6 +2600,7 @@
           <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
           <folding>
             <element signature="e#2700#3413#0" expanded="true" />
+            <element signature="e#3412#3413#0" expanded="true" />
             <element signature="e#3464#3669#0" expanded="true" />
             <element signature="e#3668#3669#0" expanded="true" />
           </folding>
@@ -3007,10 +3009,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/administrator/thinker_soft/activity/MoveHomePageActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89047617">
-          <caret line="92" column="13" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
+        <state vertical-scroll-proportion="-0.15238096">
+          <caret line="90" column="43" selection-start-line="90" selection-start-column="43" selection-end-line="90" selection-end-column="43" />
           <folding>
             <element signature="e#2700#3413#0" expanded="true" />
+            <element signature="e#3412#3413#0" expanded="true" />
             <element signature="e#3464#3669#0" expanded="true" />
             <element signature="e#3668#3669#0" expanded="true" />
           </folding>

@@ -11,9 +11,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.administrator.thinker_soft.R;
 
-/*
- * Created by Administrator on 2017/5/27.
- */
 public class MoveGuideActivity extends Activity {
     private ImageView imageViewGif;
     @Override

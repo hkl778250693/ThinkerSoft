@@ -54,13 +54,15 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="5dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true">
             <CheckBox
                 android:id="@+id/remind_me"
@@ -78,31 +80,21 @@
                 android:paddingBottom="5dp"
                 android:textSize="12sp"/>
         </LinearLayout>
-        <LinearLayout
+        <TextView
+            android:id="@+id/ip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:drawableLeft="@mipmap/ip"
+            android:drawablePadding="10dp"
             android:gravity="center_vertical"
-            android:layout_alignParentRight="true">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="自动登录"
-                android:textColor="@android:color/white"
-                android:paddingRight="5dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:textSize="12sp"/>
-            <CheckBox
-                android:id="@+id/login"
-                android:background="@drawable/check_box_selector1"
-                android:button="@null"
-                android:layout_width="24dp"
-                android:layout_height="24dp"/>
-        </LinearLayout>
-
-
-
+            android:text="设置"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:textColor="@drawable/mobile_text_selector"
+            android:textSize="12sp"
+            android:layout_alignParentRight="true" />
+        
     </RelativeLayout>
 
     <Button

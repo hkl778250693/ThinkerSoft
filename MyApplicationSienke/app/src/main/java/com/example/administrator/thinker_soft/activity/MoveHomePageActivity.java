@@ -80,7 +80,6 @@ public class MoveHomePageActivity extends Activity {
     private void setViewClickListener() {
         getData();
         set.setOnClickListener(clickListener);
-
         adapter = new GridviewHomePageAdapter(MoveHomePageActivity.this, gridHomePageItems);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

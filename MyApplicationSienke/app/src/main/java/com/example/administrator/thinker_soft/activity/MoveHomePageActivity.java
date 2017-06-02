@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.adapter.GridviewHomePageAdapter;
@@ -27,11 +30,12 @@ import java.util.List;
  * Created by Administrator on 2017/5/31.
  */
 public class MoveHomePageActivity extends Activity {
-
     private ImageView set;
     private GridView gridView;
     private GridviewHomePageAdapter adapter;
     private List<GridHomePageItem> gridHomePageItems = new ArrayList<>();
+    private LinearLayout zsbg,gzl,qwx,ydaj,ydcx;
+    private long exitTime = 0;//退出程序
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,4 +107,39 @@ public class MoveHomePageActivity extends Activity {
             }
         }
     };
+
+    /**
+     * 捕捉返回事件按钮
+     * 因为此 Activity继承 TabActivity,用 onKeyDown无响应，
+     * 所以改用 dispatchKeyEvent
+     * <p/>
+     * 一般的 Activity 用 onKeyDown就可以了
+     */
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+                this.exitApp();
+            }
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+
+    /**
+     * 退出程序
+     */
+    private void exitApp() {
+        // 判断2次点击事件时间
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Log.i("exitTime==========>", System.currentTimeMillis() - exitTime + "");
+            //-------------Activity.this的context 返回当前activity的上下文，属于activity，activity 摧毁他就摧毁
+            //-------------getApplicationContext() 返回应用的上下文，生命周期是整个应用，应用摧毁它才摧毁
+            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
+    }
 }

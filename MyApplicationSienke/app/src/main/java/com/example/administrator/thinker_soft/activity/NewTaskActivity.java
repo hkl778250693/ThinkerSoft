@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -199,6 +200,7 @@ public class NewTaskActivity extends Activity {
                                 res = str1.compareTo(str2);
                                 Log.i("NewTaskActivity", "比较结果:" + res);
                                 if (res <= 0) {
+                                    showPopupwindow();
                                     new Thread() {
                                         @Override
                                         public void run() {
@@ -229,7 +231,7 @@ public class NewTaskActivity extends Activity {
                 case R.id.start_date:
                     startDate.setClickable(false);
                     //开始时间选择器
-                    new DatePickerDialog(NewTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    DatePickerDialog startDateDialog = new DatePickerDialog(NewTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             startDate.setText(new StringBuilder().append(year).append("-").append((monthOfYear + 1) < 10 ? "0" + (monthOfYear + 1) : (monthOfYear + 1) + "")
@@ -237,12 +239,19 @@ public class NewTaskActivity extends Activity {
                                     .append((dayOfMonth < 10) ? "0" + dayOfMonth : dayOfMonth + ""));
                             startDate.setClickable(true);
                         }
-                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                    startDateDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            startDate.setClickable(true);
+                        }
+                    });
+                    startDateDialog.show();
                     break;
                 case R.id.end_date:
                     endDate.setClickable(false);
                     //结束时间选择器
-                    new DatePickerDialog(NewTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    DatePickerDialog endDateDialog = new DatePickerDialog(NewTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             endDate.setText(new StringBuilder().append(year).append("-").append((monthOfYear + 1) < 10 ? "0" + (monthOfYear + 1) : (monthOfYear + 1) + "")
@@ -250,7 +259,14 @@ public class NewTaskActivity extends Activity {
                                     .append((dayOfMonth < 10) ? "0" + dayOfMonth : dayOfMonth + ""));
                             endDate.setClickable(true);
                         }
-                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                    endDateDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            endDate.setClickable(true);
+                        }
+                    });
+                    endDateDialog.show();
                     break;
             }
         }
@@ -325,7 +341,7 @@ public class NewTaskActivity extends Activity {
                     if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
                         ip = public_sharedPreferences.getString("security_ip", "");
                     } else {
-                        ip = "192.168.2.201:";
+                        ip = "88.88.88.31:";
                     }
                     if (!public_sharedPreferences.getString("security_port", "").equals("")) {
                         port = public_sharedPreferences.getString("security_port", "");
@@ -376,9 +392,13 @@ public class NewTaskActivity extends Activity {
                         result = stringBuilder.toString();
                         Log.i("postMyTask_result====>", result);
                         JSONObject jsonObject = new JSONObject(result);
-                        if (jsonObject.optString("message", "").equals("保存成功！")) {
+                        if (jsonObject.optString("message", "").equals("1")) {
                             handler.sendEmptyMessage(1);
-                        } else {
+                        }else if(jsonObject.optString("message", "").equals("2")){
+                            handler.sendEmptyMessage(14);
+                        }else if(jsonObject.optString("message", "").equals("3")){
+                            handler.sendEmptyMessage(13);
+                        }else {
                             handler.sendEmptyMessage(2);
                         }
                     } else {
@@ -483,7 +503,7 @@ public class NewTaskActivity extends Activity {
                     if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
                         ip = public_sharedPreferences.getString("security_ip", "");
                     } else {
-                        ip = "192.168.2.201:";
+                        ip = "88.88.88.31:";
                     }
                     if (!public_sharedPreferences.getString("security_port", "").equals("")) {
                         port = public_sharedPreferences.getString("security_port", "");
@@ -613,27 +633,28 @@ public class NewTaskActivity extends Activity {
                         JSONObject taskObject = new JSONObject(result);
                         resultTaskId = taskObject.optInt("safetyPlanId", 0) + "";
                         requireSecurityId("getUserCheck.do", "safetyPlan=" + resultTaskId);
-                        insertTaskDataBase();  //将新增的任务数据存到本地数据库任务表
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     break;
                 case 2:
-                    Toast.makeText(NewTaskActivity.this, "任务新增失败！", Toast.LENGTH_SHORT).show();
+                    popupWindow.dismiss();
+                    Toast.makeText(NewTaskActivity.this, "操作异常！", Toast.LENGTH_SHORT).show();
                     break;
                 case 3:
+                    popupWindow.dismiss();
                     Toast.makeText(NewTaskActivity.this, "网络错误！", Toast.LENGTH_SHORT).show();
                     break;
                 case 4:
                     try {
-                        showPopupwindow();
                         setProgress();
                         JSONObject userObject = new JSONObject(userResult);
                         JSONArray array = userObject.getJSONArray("rows");
                         for (int i = 0; i < array.length(); i++) {
                             object = array.getJSONObject(i);
-                            insertUserDataBase(object.optInt("safetyInspectionId", 0) + "");  //将添加的用户信息数据存到本地数据库用户表
+                            insertUserDataBase(String.valueOf(object.optInt("safetyInspectionId", 0)));  //将添加的用户信息数据存到本地数据库用户表
                         }
+                        insertTaskDataBase();  //将新增的任务数据存到本地数据库任务表
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -679,6 +700,15 @@ public class NewTaskActivity extends Activity {
                     break;
                 case 12:
                     securityType.setText("无");
+                    break;
+                case 13:
+                    popupWindow.dismiss();
+                    Toast.makeText(NewTaskActivity.this, "获取安检用户id失败！", Toast.LENGTH_SHORT).show();
+                    break;
+                case 14:
+                    //获取计划id失败
+                    popupWindow.dismiss();
+                    Toast.makeText(NewTaskActivity.this, "获取计划id失败！", Toast.LENGTH_SHORT).show();
                     break;
             }
             super.handleMessage(msg);

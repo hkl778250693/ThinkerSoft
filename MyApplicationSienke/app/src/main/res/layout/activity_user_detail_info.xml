@@ -4,24 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:orientation="vertical"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/root_relative"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:paddingLeft="5dp"
-        android:background="@color/theme_colors">
+        android:background="@color/theme_colors"
+        android:paddingLeft="5dp">
 
         <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="10dp"
             android:background="@drawable/circle_selector"
+            android:padding="10dp"
             android:src="@drawable/back_selector" />
 
         <TextView
@@ -34,10 +34,13 @@
     </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/parent_scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:scrollbarThumbVertical="@color/text_blue"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbarSize="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,9 +70,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text=""
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
+                    android:text=""
                     android:textColor="@color/text_gray"
                     android:textSize="12sp" />
 
@@ -105,9 +108,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text=""
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
+                    android:text=""
                     android:textColor="@color/text_gray"
                     android:textSize="12sp" />
 
@@ -123,9 +126,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:gravity="center_vertical"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:gravity="center_vertical">
+                android:paddingRight="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -141,26 +144,27 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
                     android:gravity="right"
-                    android:layout_marginLeft="20dp">
+                    android:orientation="horizontal">
+
                     <EditText
                         android:id="@+id/meter_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="添加"
-                        android:gravity="right"
-                        android:textColor="@color/text_gray"
-                        android:textSize="12sp"
-                        android:inputType="textVisiblePassword"
-                        android:digits="0123456789abcdefghijgklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                        android:maxLength="40"
                         android:background="@drawable/normal_button_bg_selector"
-                        android:paddingTop="2dp"
+                        android:digits="0123456789abcdefghijgklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:gravity="right"
+                        android:hint="添加"
+                        android:inputType="textVisiblePassword"
+                        android:maxLength="40"
+                        android:paddingBottom="2dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:paddingBottom="2dp"/>
+                        android:paddingTop="2dp"
+                        android:textColor="@color/text_gray"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -175,9 +179,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:gravity="center_vertical"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:gravity="center_vertical">
+                android:paddingRight="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -192,24 +196,25 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
                     android:gravity="right"
-                    android:layout_marginLeft="20dp">
+                    android:orientation="horizontal">
+
                     <EditText
                         android:id="@+id/user_phone_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="添加"
-                        android:textColor="@color/text_gray"
-                        android:textSize="12sp"
+                        android:background="@drawable/normal_button_bg_selector"
                         android:gravity="right"
+                        android:hint="添加"
                         android:maxLength="40"
+                        android:paddingBottom="2dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:background="@drawable/normal_button_bg_selector"
                         android:paddingTop="2dp"
-                        android:paddingBottom="2dp"/>
+                        android:textColor="@color/text_gray"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -224,9 +229,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:gravity="center_vertical"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:gravity="center_vertical">
+                android:paddingRight="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -239,30 +244,36 @@
                     android:textSize="14sp" />
 
                 <ScrollView
+                    android:id="@+id/inner_scrollview"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
                     android:layout_gravity="center_vertical"
-                    android:fillViewport="true">
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:fillViewport="true"
+                    android:scrollbarThumbVertical="@color/text_blue"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbarSize="2dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical|right">
+                        android:gravity="center_vertical|right"
+                        android:orientation="horizontal">
+
                         <EditText
                             android:id="@+id/user_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="添加"
-                            android:textColor="@color/text_gray"
-                            android:textSize="12sp"
                             android:background="@drawable/normal_button_bg_selector"
                             android:gravity="top"
+                            android:hint="添加"
+                            android:paddingBottom="2dp"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:paddingTop="2dp"
-                            android:paddingBottom="2dp"/>
+                            android:textColor="@color/text_gray"
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </ScrollView>
 
@@ -298,9 +309,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text=""
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
+                    android:text=""
                     android:textColor="@color/text_gray"
                     android:textSize="14sp" />
 
@@ -354,18 +365,18 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:paddingTop="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:text="安检情况："
                     android:textColor="@color/text_black"
-                    android:layout_centerVertical="true"
                     android:textSize="14sp" />
 
                 <TextView
@@ -373,17 +384,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/normal_button_bg_selector"
                     android:drawablePadding="10dp"
                     android:drawableRight="@mipmap/down"
                     android:paddingBottom="4dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:layout_centerVertical="true"
                     android:paddingTop="4dp"
                     android:text=""
-                    android:textSize="12sp"
-                    android:textColor="@color/text_gray" />
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp" />
             </RelativeLayout>
 
             <LinearLayout
@@ -399,31 +410,31 @@
                     android:layout_height="wrap_content"
                     android:text="表编号："
                     android:textColor="@color/text_black"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/new_meter_numb"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/linearlayout_shape"
                     android:hint="请输入表编号(选填)"
-                    android:textColor="@color/text_gray"
-                    android:textSize="12sp"
-                    android:paddingTop="6dp"
                     android:paddingBottom="6dp"
                     android:paddingLeft="8dp"
-                    android:paddingRight="8dp"/>
+                    android:paddingRight="8dp"
+                    android:paddingTop="6dp"
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/hidden_type_root"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:visibility="visible">
 
                 <TextView
@@ -447,18 +458,18 @@
                     android:paddingRight="10dp"
                     android:paddingTop="4dp"
                     android:text=""
-                    android:textSize="12sp"
-                    android:textColor="@color/text_gray" />
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/hidden_reason_root"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:visibility="visible">
 
                 <TextView
@@ -482,27 +493,27 @@
                     android:paddingRight="10dp"
                     android:paddingTop="4dp"
                     android:text=""
-                    android:textSize="12sp"
-                    android:textColor="@color/text_gray" />
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp" />
             </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/remarks_root"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:paddingBottom="5dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:gravity="center_vertical">
+                android:paddingTop="5dp">
 
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:text="@string/remarks"
                     android:textColor="@color/text_black"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
                 <!--<EditText
                     android:id="@+id/remarks"
@@ -519,39 +530,42 @@
                     android:paddingRight="8dp"/>-->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal">
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
                     <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_horizontal">
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
                         <RadioButton
                             android:id="@+id/remarks_rb1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:button="@null"
+                            android:drawableLeft="@drawable/radio_drawable_selector"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical"
                             android:padding="8dp"
                             android:text="需要复检"
-                            android:drawableLeft="@drawable/radio_drawable_selector"
                             android:textColor="@drawable/radio_text_selector"
-                            android:textSize="12sp"
-                            android:gravity="center_vertical"
-                            android:drawablePadding="10dp"/>
+                            android:textSize="12sp" />
+
                         <RadioButton
                             android:id="@+id/remarks_rb2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:button="@null"
-                            android:text="现场已整改"
-                            android:padding="8dp"
-                            android:gravity="center_vertical"
                             android:drawableLeft="@drawable/radio_drawable_selector"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical"
+                            android:padding="8dp"
+                            android:text="现场已整改"
                             android:textColor="@drawable/radio_text_selector"
-                            android:textSize="12sp"
-                            android:drawablePadding="10dp"/>
+                            android:textSize="12sp" />
                     </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
@@ -559,46 +573,49 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:paddingTop="10dp"
-                android:gravity="center_vertical">
+                android:paddingTop="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="照        片："
                     android:layout_marginRight="5dp"
+                    android:text="照        片："
                     android:textColor="@color/text_black"
                     android:textSize="14sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(最多可保存9张图片)"
                     android:layout_marginRight="5dp"
+                    android:text="(最多可保存9张图片)"
                     android:textColor="@color/text_gray"
                     android:textSize="12sp" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/check_hidden_danger_down_shape"
-                android:orientation="vertical"
-                android:padding="10dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="10dp"
-                android:gravity="center_horizontal">
+                android:background="@drawable/check_hidden_danger_down_shape"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp">
+
                 <com.example.administrator.thinker_soft.mode.MyGridview
                     android:id="@+id/gridview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:stretchMode="columnWidth"
                     android:gravity="center"
                     android:numColumns="5"
-                    android:verticalSpacing="5dp"/>
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="5dp" />
             </LinearLayout>
 
             <Button

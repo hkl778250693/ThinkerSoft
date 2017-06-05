@@ -69,9 +69,8 @@ public class NewTaskDetailActivity extends Activity {
     private SharedPreferences sharedPreferences, sharedPreferences_login, public_sharedPreferences;
     private SharedPreferences.Editor editor;
     private LayoutInflater layoutInflater;
-    private LinearLayout rootLinearlayout;
-    private RelativeLayout newTaskSelectLayout;
-    private TextView selectAll, reverse, selectCancel;
+    private LinearLayout rootLinearlayout,newTaskSelectLayout;
+    private TextView selectAll, reverse, selectCancel,totalUserNumber;
     private ImageView frameAnimation;
     private AnimationDrawable animationDrawable;
     public int responseCode = 0;
@@ -102,10 +101,11 @@ public class NewTaskDetailActivity extends Activity {
         save = (TextView) findViewById(R.id.save);
         no_data = (TextView) findViewById(R.id.no_data);
         rootLinearlayout = (LinearLayout) findViewById(R.id.root_linearlayout);
-        newTaskSelectLayout = (RelativeLayout) findViewById(R.id.new_task_select_layout);
+        newTaskSelectLayout = (LinearLayout) findViewById(R.id.new_task_select_layout);
         selectAll = (TextView) findViewById(R.id.select_all);
         reverse = (TextView) findViewById(R.id.reverse);
         selectCancel = (TextView) findViewById(R.id.select_cancel);
+        totalUserNumber = (TextView) findViewById(R.id.total_user_number);
         editDelete = (ImageView) findViewById(R.id.edit_delete);
         selectRb1 = (RadioButton) findViewById(R.id.select_rb1);
         selectRb2 = (RadioButton) findViewById(R.id.select_rb2);
@@ -517,11 +517,11 @@ public class NewTaskDetailActivity extends Activity {
     public void showPopupwindow() {
         layoutInflater = LayoutInflater.from(NewTaskDetailActivity.this);
         view = layoutInflater.inflate(R.layout.popupwindow_query_loading, null);
-        popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         frameAnimation = (ImageView) view.findViewById(R.id.frame_animation);
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.loading_shape));
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
         popupWindow.setAnimationStyle(R.style.camera);
         //popupWindow.update();
         popupWindow.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
@@ -820,6 +820,7 @@ public class NewTaskDetailActivity extends Activity {
                             newTaskListviewItemList.add(item);
                         }
                         if (newTaskListviewItemList.size() != 0) {
+                            totalUserNumber.setText(String.valueOf(jsonObject.optInt("total", 0)));  //搜索到的用户总数
                             no_data.setVisibility(View.GONE);
                             Log.i("NewTaskDetailActivity", "传入的数据长度为：" + newTaskListviewItemList.size());
                             newTaskListviewAdapter = new NewTaskListviewAdapter(NewTaskDetailActivity.this, newTaskListviewItemList);

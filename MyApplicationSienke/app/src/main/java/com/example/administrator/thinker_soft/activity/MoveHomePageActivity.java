@@ -44,7 +44,6 @@ public class MoveHomePageActivity extends Activity {
 
         bindView();//绑定控件
         setViewClickListener();//设置点击事件
-
     }
 
     //绑定控件

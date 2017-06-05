@@ -101,7 +101,7 @@ public class NoCheckUserListActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                item = noCheckUserItemList.get((int) parent.getAdapter().getItemId(position));
+                item = (UserListviewItem) userListviewAdapter.getItem(position);
                 currentPosition = position;
                 Intent intent = new Intent(NoCheckUserListActivity.this, UserDetailInfoActivity.class);
                 intent.putExtra("position", currentPosition);

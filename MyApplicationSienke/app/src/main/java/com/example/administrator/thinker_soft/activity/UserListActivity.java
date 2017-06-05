@@ -103,7 +103,9 @@ public class UserListActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                item = userListviewItemList.get((int) parent.getAdapter().getItemId(position));
+                Log.i("UserListActivity", "userListviewItemList点击事件进来了，集合长度为："+userListviewItemList.size());
+                //item = userListviewItemList.get((int) parent.getAdapter().getItemId(position));
+                item = (UserListviewItem) userListviewAdapter.getItem(position);
                 currentPosition = position;
                 Intent intent = new Intent(UserListActivity.this, UserDetailInfoActivity.class);
                 intent.putExtra("position", currentPosition);
@@ -177,6 +179,7 @@ public class UserListActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 0:
+                    Log.i("UserListActivity", "UserListActivit的数据源长度为："+userListviewItemList.size());
                     userListviewAdapter = new UserListviewAdapter(UserListActivity.this, userListviewItemList);
                     userListviewAdapter.notifyDataSetChanged();
                     listView.setAdapter(userListviewAdapter);
@@ -313,5 +316,6 @@ public class UserListActivity extends Activity {
     public void onDestroy() {
         super.onDestroy();
         db.close(); //释放和数据库的连接
+        UserListviewAdapter.searchContent="";
     }
 }

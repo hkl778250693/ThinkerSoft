@@ -3,6 +3,7 @@ package com.example.administrator.thinker_soft.fragment;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -355,29 +356,47 @@ public class DataTransferFragment extends Fragment {
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startDate.setClickable(false);
                 //开始时间选择器
-                new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog startDateDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        startDate.setText(new StringBuilder().append(year).append("-").append((monthOfYear + 1) < 10 ? "0" + (monthOfYear + 1) : (monthOfYear + 1)+"")
+                        startDate.setText(new StringBuilder().append(year).append("-").append((monthOfYear + 1) < 10 ? "0" + (monthOfYear + 1) : (monthOfYear + 1) + "")
                                 .append("-")
-                                .append((dayOfMonth < 10) ? "0" + dayOfMonth : dayOfMonth+""));
+                                .append((dayOfMonth < 10) ? "0" + dayOfMonth : dayOfMonth + ""));
+                        startDate.setClickable(true);
                     }
-                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                startDateDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        startDate.setClickable(true);
+                    }
+                });
+                startDateDialog.show();
             }
         });
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                endDate.setClickable(false);
                 //结束时间选择器
-                new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog endDateDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        endDate.setText(new StringBuilder().append(year).append("-").append((monthOfYear + 1) < 10 ? "0" + (monthOfYear + 1) : (monthOfYear + 1)+"")
+                        endDate.setText(new StringBuilder().append(year).append("-").append((monthOfYear + 1) < 10 ? "0" + (monthOfYear + 1) : (monthOfYear + 1) + "")
                                 .append("-")
-                                .append((dayOfMonth < 10) ? "0" + dayOfMonth : dayOfMonth+""));
+                                .append((dayOfMonth < 10) ? "0" + dayOfMonth : dayOfMonth + ""));
+                        endDate.setClickable(true);
                     }
-                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                endDateDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        endDate.setClickable(true);
+                    }
+                });
+                endDateDialog.show();
             }
         });
         Log.i("NewTaskActivity", "开始时间:" + startDate.getText().toString());

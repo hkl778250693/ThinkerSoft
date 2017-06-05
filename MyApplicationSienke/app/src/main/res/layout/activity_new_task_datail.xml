@@ -169,48 +169,55 @@
         android:layout_height="5dp"
         android:background="@color/gray_thin" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <ListView
+            android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:divider="@color/white_transparent"
+            android:dividerHeight="8dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:listSelector="#00000000"
+            android:scrollbarThumbVertical="@color/text_blue"
+            android:scrollbarStyle="insideInset"
+            android:scrollbarSize="2dp"/>
 
-            <ListView
-                android:id="@+id/listview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@color/white_transparent"
-                android:dividerHeight="8dp"
-                android:padding="5dp"
-                android:listSelector="#00000000"/>
+        <TextView
+            android:id="@+id/no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:text="请根据条件查询哦~"
+            android:textColor="@color/text_blue"
+            android:textSize="14sp"
+            android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/no_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:drawablePadding="10dp"
-                android:gravity="center_horizontal"
-                android:text="请根据条件查询哦~"
-                android:textColor="@color/text_blue"
-                android:textSize="14sp"
-                android:visibility="gone" />
-
+        <LinearLayout
+            android:id="@+id/new_task_select_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white_transparent"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:visibility="gone">
             <RelativeLayout
-                android:id="@+id/new_task_select_layout"
                 style="@style/camera"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="3dp"
-                android:background="@drawable/select_bg_shape"
-                android:layout_alignParentBottom="true"
-                android:visibility="gone">
+                android:padding="8dp"
+                android:background="@drawable/select_bg_shape">
 
                 <TextView
                     android:id="@+id/select_all"
@@ -247,6 +254,37 @@
                     android:textColor="@drawable/search_text_color_selector"
                     android:textSize="14sp" />
             </RelativeLayout>
-        </RelativeLayout>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@drawable/select_bg_shape"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="共"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_gray"/>
+                <TextView
+                    android:id="@+id/total_user_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="73"
+                    android:textColor="@color/text_blue"
+                    android:layout_marginLeft="3dp"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="条"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_gray"
+                    android:layout_marginLeft="3dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

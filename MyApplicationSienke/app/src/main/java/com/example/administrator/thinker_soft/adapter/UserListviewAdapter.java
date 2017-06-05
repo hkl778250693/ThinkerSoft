@@ -36,10 +36,10 @@ public class UserListviewAdapter extends BaseAdapter implements Filterable {
         this.context = context;
         this.userListviewList = userListviewList;
         //backList是暂存原来所用的数据，当筛选内容为空时，显示所有数据，并且必须 new 一个对象，
-        //而不能backList = userListviewList;,这样的话当arrayList改变时copyList也就改变了
-       /* backList = new ArrayList<>();
-        backList.addAll(userListviewList);*/
-        backList = userListviewList;
+        //而不能backList = userListviewList;,这样的话当userListviewList改变时backList也就改变了
+        backList = new ArrayList<>();
+        backList.addAll(userListviewList);
+        //backList = userListviewList;
         if (context != null) {
             layoutInflater = LayoutInflater.from(context);
         }
@@ -50,6 +50,7 @@ public class UserListviewAdapter extends BaseAdapter implements Filterable {
         if (userListviewList == null) {
             return 0;
         } else {
+            Log.i("UserListviewAdapter", "UserListviewAdapter返回的数据源长度为："+userListviewList.size());
             return userListviewList.size();
         }
     }
@@ -231,7 +232,7 @@ public class UserListviewAdapter extends BaseAdapter implements Filterable {
             userListviewList = (List<UserListviewItem>) results.values;
             if (results.count > 0) {
                 notifyDataSetChanged();  //通知数据发生了改变
-                Log.i("publishResults", "publishResults进来了！");
+                Log.i("publishResults", "publishResults进来了！数据源长度为："+userListviewList.size());
             } else {
                 notifyDataSetInvalidated();  //通知数据失效
             }

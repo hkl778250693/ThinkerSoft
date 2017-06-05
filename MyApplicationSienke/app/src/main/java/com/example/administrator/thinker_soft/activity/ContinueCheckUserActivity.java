@@ -108,7 +108,7 @@ public class ContinueCheckUserActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                item = userListviewItemList.get((int) parent.getAdapter().getItemId(position));
+                item = (UserListviewItem) userListviewAdapter.getItem(position);
                 currentPosition = position;
                 Intent intent = new Intent(ContinueCheckUserActivity.this, UserDetailInfoActivity.class);
                 intent.putExtra("position", currentPosition);

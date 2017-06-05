@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:background="@mipmap/statistics_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginTop="50dp"
+            android:layout_weight="4"
+            android:background="@mipmap/statistics_table2x"
+            android:orientation="vertical">
+
+            <!-- 户数 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dip"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="3dip"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@mipmap/user_tag"
+                        android:gravity="left" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:text="户   数:"
+                        android:textColor="#DE000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:id="@+id/allid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 已抄 字段（CSSZ抄表标志） -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dip"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="3dip"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@mipmap/user_done"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:text="已   抄:"
+
+                        android:textColor="#DE000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:id="@+id/yichao"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 未抄 (用户数减已抄) -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dip"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="3dip"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@mipmap/user_none"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:text="未   抄:"
+
+                        android:textColor="#DE000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:id="@+id/weichao"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 完成率 (已抄表除以用户数) -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dip"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dip"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@mipmap/user_count"
+                        android:gravity="left" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:text="抄表量:"
+
+                        android:textColor="#DE000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:id="@+id/caobiaoliang"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dip"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dip"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:background="@mipmap/user_rate"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:text="完成率:"
+                        android:textColor="#DE000000"
+
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:id="@+id/gailu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/tonhjisuoyou"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:onClick="onAction"
+                    android:text="统计所有用户"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dip"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/chaobiaotongji"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:onClick="onAction"
+                    android:text="按抄表本统计"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dip"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

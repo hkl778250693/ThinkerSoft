@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/theme_colors"
+        android:paddingLeft="5dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/circle_selector"
+            android:padding="10dp"
+            android:src="@drawable/back_selector" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="查询"
+            android:textColor="@android:color/white"
+            android:textSize="21sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_met"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="right|center_vertical"
+                    android:text="抄  表  本"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tv_show_met"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/editbox_background_normal"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="onAction"
+                    android:text="单击选择" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right|center_vertical"
+                    android:text="抄表序号"
+                    android:textSize="18dp" />
+
+                <EditText
+                    android:id="@+id/meter_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/normal_button_bg_selector"
+                    android:digits="1234567890"
+                    android:hint="请输入抄表序号"
+                    android:inputType="number"
+                    android:paddingLeft="5dp"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancel_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/user_detail_save_btn_selector"
+                    android:text="取消"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/search_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/user_detail_save_btn_selector"
+                    android:text="查询"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="6"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/tv_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#DBD6CA" />
+
+            <LinearLayout
+                android:id="@+id/ll_lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/lv_show_men"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_line"
+                    android:visibility="gone">
+
+                </ListView>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/tv_line1"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/ll_lv"
+                android:background="#DBD6CA" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

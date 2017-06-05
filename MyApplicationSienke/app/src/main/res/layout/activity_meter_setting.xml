@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/theme_colors"
+        android:paddingLeft="5dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/circle_selector"
+            android:padding="10dp"
+            android:src="@drawable/back_selector" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="系统设置"
+            android:textColor="@android:color/white"
+            android:textSize="21sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_set_bluetooth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/background_sett"
+                android:gravity="center_vertical"
+                android:onClick="onAction"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/lanya" />
+
+                <TextView
+                    android:id="@+id/tv_set_bluetooth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="11dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="连接蓝牙设备"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tv_set_bluetooth_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="未配对"
+                    android:textColor="@color/red"
+                    android:textSize="18dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_set_ip_port"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/background_set"
+                android:gravity="center_vertical"
+                android:onClick="onAction"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/ip_port_bg" />
+
+                <TextView
+                    android:id="@+id/tv_set_ip_port"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="11dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="设置IP、端口号"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_set_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/background_set"
+                android:gravity="center_vertical"
+                android:onClick="onAction">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/delete_file_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="11dp"
+                    android:text="删除下载文件"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_set_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/background_set"
+                android:gravity="center_vertical"
+                android:onClick="onAction">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/setcount_bg" />
+
+                <TextView
+                    android:id="@+id/tv_set_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="11dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="列表每页设置条数"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_map_xiazhai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/background_set"
+                android:gravity="center_vertical"
+                android:onClick="onAction">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/mapxiazhai" />
+
+                <TextView
+                    android:id="@+id/map_xiazhai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="11dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="本地地图下载"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_print_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/background_set"
+                android:gravity="center_vertical"
+                android:onClick="onAction"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/beizhu" />
+
+                <TextView
+                    android:id="@+id/print_note_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="11dp"
+                    android:ellipsize="end"
+                    android:maxEms="10"
+                    android:singleLine="true"
+                    android:text="编辑打印备注"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/replace_use"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/background_set"
+                android:gravity="center_vertical"
+                android:onClick="onAction">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/qiehuanyonghu" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="11dp"
+                    android:ellipsize="end"
+                    android:maxEms="10"
+                    android:singleLine="true"
+                    android:text="更换账号"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/exit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/move_login_byt_selector"
+                    android:gravity="center"
+                    android:onClick="onAction"
+                    android:text="退出程序"
+                    android:textColor="#000000" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

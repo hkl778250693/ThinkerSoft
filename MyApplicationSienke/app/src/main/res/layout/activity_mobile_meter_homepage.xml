@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme_colors">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/circle_selector"
+            android:padding="10dp"
+            android:src="@drawable/back_selector" />
+
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"
+            android:src="@mipmap/more" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@android:id/tabcontent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9" />
+
+    <TabWidget
+        android:id="@android:id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:visibility="gone" />
+
+    <RadioGroup
+        android:id="@+id/main_radio"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dp"
+        android:layout_weight="1.0"
+        android:background="@mipmap/tabbar_bgblack"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_button0"
+            style="@style/main_tab_bottom"
+            android:checked="true"
+            android:drawableTop="@drawable/select_icon_1"
+            android:text="抄表选项" />
+
+        <RadioButton
+            android:id="@+id/radio_button1"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/select_icon_2"
+            android:text="扫码抄表" />
+
+        <RadioButton
+            android:id="@+id/radio_button2"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/select_icon_3"
+            android:text="自定义查询" />
+
+        <RadioButton
+            android:id="@+id/radio_button3"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/select_icon_4"
+            android:text="数据传输"
+            android:textColor="@drawable/select_color" />
+
+    </RadioGroup>
+
+</LinearLayout>

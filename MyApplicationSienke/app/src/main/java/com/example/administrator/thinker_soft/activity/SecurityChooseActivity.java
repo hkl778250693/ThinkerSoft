@@ -57,14 +57,8 @@ import java.util.Set;
  * Created by Administrator on 2017/3/14.
  */
 public class SecurityChooseActivity extends FragmentActivity {
-    private RadioButton file, settings, quite; //文件管理 系统设置 退出应用
+    private RadioButton settings, quite; //系统设置 退出应用
     private boolean isFirst;   //是否第一次近日app
-    private LayoutInflater inflater; //转换器
-    private View popupwindowView,quiteView;
-    private Button cancelRb,saveRb;
-    private LinearLayout rootLinearlayout;
-    private RelativeLayout rootRelative;
-    private PopupWindow popupWindow,quitePopup;
     private ImageView security_check_go,back;
     private RadioButton optionRbt;  //选项按钮
     private TextView name, userName,tips;
@@ -162,8 +156,6 @@ public class SecurityChooseActivity extends FragmentActivity {
         viewPager = (ViewPager) findViewById(R.id.security_viewpager);
         name = (TextView) findViewById(R.id.name);
         userName = (TextView) findViewById(R.id.user_name);
-        rootLinearlayout = (LinearLayout) findViewById(R.id.root_linearlayout);
-        rootRelative = (RelativeLayout) findViewById(R.id.root_relative);
     }
 
     //点击事件
@@ -209,10 +201,8 @@ public class SecurityChooseActivity extends FragmentActivity {
                     finish();
                     break;
                 case R.id.security_check_go:
-                    security_check_go.setClickable(false);
-                    createPopupwindow();
-                    Log.i("createPopupwindow===>", "true");
-                    security_check_go.setClickable(true);
+                    Intent intent = new Intent(SecurityChooseActivity.this,SystemSettingActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.option_rbt:
                     viewPager.setCurrentItem(0);
@@ -225,119 +215,6 @@ public class SecurityChooseActivity extends FragmentActivity {
             }
         }
     };
-
-    //系统设置popupwindow
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void createPopupwindow() {
-        inflater = LayoutInflater.from(SecurityChooseActivity.this);
-        popupwindowView = inflater.inflate(R.layout.popup_window_security, null);
-        popupWindow = new PopupWindow(popupwindowView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        //绑定控件ID
-        //file = (RadioButton) popupwindowView.findViewById(R.id.file);//文件管理
-        settings = (RadioButton) popupwindowView.findViewById(R.id.settings);//系统设置
-        quite = (RadioButton) popupwindowView.findViewById(R.id.quite);//安全退出
-        //设置点击事件
-        /*file.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.file:
-                        Intent intent = new Intent(SecurityChooseActivity.this, FileManageActivity.class);
-                        startActivity(intent);
-                        popupWindow.dismiss();
-                        break;
-                }
-            }
-        });*/
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.settings:
-                        Intent intent = new Intent(SecurityChooseActivity.this, SystemSettingActivity.class);
-                        startActivity(intent);
-                        popupWindow.dismiss();
-                        break;
-                }
-            }
-        });
-
-        quite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //System.exit(0);
-                popupWindow.dismiss();
-                showQuitePopup();
-            }
-        });
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.update();
-        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_page_more_shape));
-        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
-        popupWindow.showAsDropDown(rootRelative,0,0,Gravity.RIGHT);
-        backgroundAlpha(0.6F);
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                backgroundAlpha(1.0F);
-            }
-        });
-    }
-
-    //弹出退出登录前提示popupwindow
-    public void showQuitePopup() {
-        inflater = LayoutInflater.from(SecurityChooseActivity.this);
-        quiteView = inflater.inflate(R.layout.popupwindow_user_detail_info_save, null);
-        quitePopup = new PopupWindow(quiteView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        //绑定控件ID
-        tips = (TextView) quiteView.findViewById(R.id.tips);
-        cancelRb = (RadioButton) quiteView.findViewById(R.id.cancel_rb);
-        saveRb = (RadioButton) quiteView.findViewById(R.id.save_rb);
-        //设置点击事件
-        tips.setText("退出后不会删除历史数据，下次登录依然可以使用本账号！");
-        saveRb.setTextColor(getResources().getColor(R.color.red));
-        saveRb.setText("退出登录");
-        cancelRb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                quitePopup.dismiss();
-            }
-        });
-        saveRb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                quitePopup.dismiss();
-                Intent intent = new Intent(SecurityChooseActivity.this, MobileSecurityLoginActivity.class);
-                startActivity(intent);
-                sharedPreferences_login.edit().putBoolean("have_logined",false).apply();
-                finish();
-            }
-        });
-        quitePopup.update();
-        quitePopup.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
-        quitePopup.setAnimationStyle(R.style.camera);
-        quitePopup.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
-        backgroundAlpha(0.6F);   //背景变暗
-        quitePopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                backgroundAlpha(1.0F);
-            }
-        });
-    }
-
-    //设置背景透明度
-    public void backgroundAlpha(float bgAlpha) {
-        WindowManager.LayoutParams lp = SecurityChooseActivity.this.getWindow().getAttributes();
-        lp.alpha = bgAlpha; //0.0-1.0
-        if (bgAlpha == 1) {
-            SecurityChooseActivity.this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
-        } else {
-            SecurityChooseActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
-        }
-        SecurityChooseActivity.this.getWindow().setAttributes(lp);
-    }
 
     //初始化设置
     private void defaultSetting() {

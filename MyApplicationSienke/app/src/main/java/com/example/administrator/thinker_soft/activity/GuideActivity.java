@@ -18,7 +18,7 @@ import com.example.administrator.thinker_soft.R;
  */
 public class GuideActivity extends Activity {
     private TextView companyName;
-    private SharedPreferences sharedPreferences = null;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

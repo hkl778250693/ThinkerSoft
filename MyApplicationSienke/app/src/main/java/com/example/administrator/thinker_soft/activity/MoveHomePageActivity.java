@@ -1,28 +1,31 @@
 package com.example.administrator.thinker_soft.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.adapter.GridviewHomePageAdapter;
-import com.example.administrator.thinker_soft.adapter.GridviewImageAdapter;
 import com.example.administrator.thinker_soft.model.GridHomePageItem;
-import com.example.administrator.thinker_soft.model.GridviewHomePageViewHolder;
-import com.example.administrator.thinker_soft.model.NewTaskViewHolder;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +39,15 @@ public class MoveHomePageActivity extends Activity {
     private List<GridHomePageItem> gridHomePageItems = new ArrayList<>();
     private LinearLayout zsbg,gzl,qwx,ydaj,ydcx;
     private long exitTime = 0;//退出程序
+    private LayoutInflater inflater; //转换器
+    private View popupwindowView,quiteView;
+    private Button cancelRb,saveRb;
+    private PopupWindow popupWindow,quitePopup;
+    private RadioButton settings, quite; //系统设置 退出应用
+    private TextView tips;
+    private RelativeLayout rootRelative;
+    private LinearLayout rootLinearlayout;
+    private SharedPreferences sharedPreferences_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +55,7 @@ public class MoveHomePageActivity extends Activity {
         setContentView(R.layout.activity_move_homepage);
 
         bindView();//绑定控件
+        defaultSetting();
         setViewClickListener();//设置点击事件
     }
 
@@ -50,6 +63,8 @@ public class MoveHomePageActivity extends Activity {
     private void bindView() {
         set = (ImageView) findViewById(R.id.set);
         gridView = (GridView) findViewById(R.id.gridview);
+        rootLinearlayout = (LinearLayout) findViewById(R.id.root_linearlayout);
+        rootRelative = (RelativeLayout) findViewById(R.id.root_relative);
     }
 
     public void getData() {
@@ -73,6 +88,11 @@ public class MoveHomePageActivity extends Activity {
             }
             gridHomePageItems.add(item);
         }
+    }
+
+    //初始化设置
+    private void defaultSetting() {
+        sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);  //退出登录以后需要这个备份记录是否更换账号
     }
 
     //点击事件
@@ -101,10 +121,109 @@ public class MoveHomePageActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.set:
+                    createPopupwindow();
                     break;
             }
         }
     };
+
+    //系统设置popupwindow
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public void createPopupwindow() {
+        inflater = LayoutInflater.from(MoveHomePageActivity.this);
+        popupwindowView = inflater.inflate(R.layout.popup_window_security, null);
+        popupWindow = new PopupWindow(popupwindowView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        //绑定控件ID
+        settings = (RadioButton) popupwindowView.findViewById(R.id.settings);//系统设置
+        quite = (RadioButton) popupwindowView.findViewById(R.id.quite);//安全退出
+        //设置点击事件
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.settings:
+                        Intent intent = new Intent(MoveHomePageActivity.this, SystemSettingActivity.class);
+                        startActivity(intent);
+                        popupWindow.dismiss();
+                        break;
+                }
+            }
+        });
+        quite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                showQuitePopup();
+            }
+        });
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.update();
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_page_more_shape));
+        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+        popupWindow.showAsDropDown(rootRelative,0,0, Gravity.RIGHT);
+        backgroundAlpha(0.6F);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0F);
+            }
+        });
+    }
+
+    //弹出退出登录前提示popupwindow
+    public void showQuitePopup() {
+        inflater = LayoutInflater.from(MoveHomePageActivity.this);
+        quiteView = inflater.inflate(R.layout.popupwindow_user_detail_info_save, null);
+        quitePopup = new PopupWindow(quiteView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        //绑定控件ID
+        tips = (TextView) quiteView.findViewById(R.id.tips);
+        cancelRb = (RadioButton) quiteView.findViewById(R.id.cancel_rb);
+        saveRb = (RadioButton) quiteView.findViewById(R.id.save_rb);
+        //设置点击事件
+        tips.setText("退出后不会删除历史数据，下次登录依然可以使用本账号！");
+        saveRb.setTextColor(getResources().getColor(R.color.red));
+        saveRb.setText("退出登录");
+        cancelRb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quitePopup.dismiss();
+            }
+        });
+        saveRb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quitePopup.dismiss();
+                Intent intent = new Intent(MoveHomePageActivity.this, MoveLoginActivity.class);
+                startActivity(intent);
+                sharedPreferences_login.edit().putBoolean("have_logined",false).apply();
+                finish();
+            }
+        });
+        quitePopup.update();
+        quitePopup.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
+        quitePopup.setAnimationStyle(R.style.camera);
+        quitePopup.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
+        backgroundAlpha(0.6F);   //背景变暗
+        quitePopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0F);
+            }
+        });
+    }
+
+    //设置背景透明度
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = MoveHomePageActivity.this.getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        if (bgAlpha == 1) {
+            MoveHomePageActivity.this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+        } else {
+            MoveHomePageActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+        }
+        MoveHomePageActivity.this.getWindow().setAttributes(lp);
+    }
 
     /**
      * 捕捉返回事件按钮

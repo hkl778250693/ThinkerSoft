@@ -58,8 +58,8 @@ public class QueryActivity extends Activity {
     private long exitTime = 0;//退出程序
     public int responseCode = 0;
     private String result; //网络请求结果
-    private String ip;  //接口ip地址
-    private SharedPreferences sharedPreferences;
+    private String ip,port;  //接口ip地址   端口
+    private SharedPreferences public_sharedPreferences;
     private SharedPreferences.Editor editor;
 
     @Override
@@ -147,8 +147,8 @@ public class QueryActivity extends Activity {
 
     //初始化设置
     private void defaultSetting() {
-        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        public_sharedPreferences = this.getSharedPreferences("data", Context.MODE_PRIVATE);
+        editor = public_sharedPreferences.edit();
     }
 
     //开始旋转动画
@@ -184,24 +184,22 @@ public class QueryActivity extends Activity {
     public void showPopupwindow() {
         layoutInflater = LayoutInflater.from(QueryActivity.this);
         view = layoutInflater.inflate(R.layout.popupwindow_query_loading, null);
-        popupWindow = new PopupWindow(view, 250, 250);
+        popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         frameAnimation = (ImageView) view.findViewById(R.id.frame_animation);
-        //popupWindow.setFocusable(true);
-        //popupWindow.setOutsideTouchable(true);
-        //popupWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#E6E6E6")));
-        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.loading_shape));
-        popupWindow.setAnimationStyle(R.style.dialog);
-        //popupWindow.update();
+        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
+        popupWindow.setAnimationStyle(R.style.camera);
+        popupWindow.update();
         popupWindow.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
-        backgroundAlpha(0.8F);   //背景变暗
+        backgroundAlpha(0.6F);   //背景变暗
+        startFrameAnimation();
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 backgroundAlpha(1.0F);
             }
         });
-        //开始加载动画
-        startFrameAnimation();
     }
 
     //设置背景透明度
@@ -255,14 +253,18 @@ public class QueryActivity extends Activity {
                 try {
                     URL url;
                     HttpURLConnection httpURLConnection;
-                    Log.i("sharedPreferences====>", sharedPreferences.getString("IP", ""));
-                    if (!sharedPreferences.getString("IP", "").equals("")) {
-                        ip = sharedPreferences.getString("IP", "");
-                        //Log.i("sharedPreferences=ip=>",ip);
+                    Log.i("sharedPreferences====>", public_sharedPreferences.getString("IP", ""));
+                    if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
+                        ip = public_sharedPreferences.getString("security_ip", "");
                     } else {
-                        ip = "192.168.2.201:8080";
+                        ip = "192.168.2.201:";
                     }
-                    String httpUrl = "http://" + ip + "/SMDemo/" + method;
+                    if (!public_sharedPreferences.getString("security_port", "").equals("")) {
+                        port = public_sharedPreferences.getString("security_port", "");
+                    } else {
+                        port = "8080";
+                    }
+                    String httpUrl = "http://" + ip + port + "/SMDemo/" + method;
                     //有参数传递
                     if (!keyAndValue.equals("")) {
                         url = new URL(httpUrl + "?" + keyAndValue);
@@ -417,39 +419,4 @@ public class QueryActivity extends Activity {
             }
         }
     }
-
-    /**
-     * 捕捉返回事件按钮
-     * 因为此 Activity继承 TabActivity,用 onKeyDown无响应，
-     * 所以改用 dispatchKeyEvent
-     * <p/>
-     * 一般的 Activity 用 onKeyDown就可以了
-     *//*
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
-                this.exitApp();
-            }
-            return true;
-        }
-        return super.dispatchKeyEvent(event);
-    }
-
-
-    *//**
-     * 退出程序
-     *//*
-    private void exitApp() {
-        // 判断2次点击事件时间
-        if ((System.currentTimeMillis() - exitTime) > 2000) {
-            Log.i("exitTime==========>", System.currentTimeMillis() - exitTime + "");
-            //-------------Activity.this的context 返回当前activity的上下文，属于activity，activity 摧毁他就摧毁
-            //-------------getApplicationContext() 返回应用的上下文，生命周期是整个应用，应用摧毁它才摧毁
-            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
-            exitTime = System.currentTimeMillis();
-        } else {
-            finish();
-        }
-    }*/
 }

@@ -24,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
@@ -52,7 +53,6 @@ import cc.thksoft.myfirstpro.service.LocationService.LocationBinder;
 import cc.thksoft.myfirstpro.threadsocket.SocketInteraction;
 import cc.thksoft.myfirstpro.util.AnimationTabHost;
 import cc.thksoft.myfirstpro.util.AssembleUpmes;
-import cc.thksoft.myfirstpro.util.Gadget;
 import cc.thksoft.myfirstpro.util.JaugeInternetState;
 import cc.thksoft.myfirstpro.util.JsonAnalyze;
 import cc.thksoft.myfirstpro.util.MyDialog;
@@ -65,6 +65,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 	private TextView systemSet_badget_tv;
 	private TextView homepageTitle;
 	private PopupWindow popupWindow;
+	private ImageView cbjBackBtn;
 	private EditText et;
 	private int POPWINDOWWIDTH;
 	private GestureDetector gestureDetector;
@@ -207,6 +208,14 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 		radio_button2=(RadioButton) findViewById(R.id.radio_button2);
 		radio_button3=(RadioButton) findViewById(R.id.radio_button3);
 		radioderGroup=(RadioGroup) findViewById(R.id.main_radio);
+		cbjBackBtn = (ImageView) findViewById(R.id.cbj_back_btn);
+
+		cbjBackBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		
 		//ʵ����TabHost
 		mTabHost =  (AnimationTabHost)findViewById(android.R.id.tabhost);
@@ -242,6 +251,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
                 return false;
             }
         };
+
         
         homepageTitle = (TextView) findViewById(R.id.homepageTitle);
         homepageTitle.setText("����ѡ��");
@@ -398,6 +408,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 			}
 		}
 	}
+
 	
 	
 	@Override
@@ -444,14 +455,16 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		unregisterReceiver(receiver);
+		/*unregisterReceiver(receiver);*/
 		JaugeInternetState.closeGPSSettings(getApplicationContext());
 		
 		if (mBound) {
 			unbindService(mConnection);
 			mBound = false;
 		}
+/*
 		MyApplication.bdLocationModel.stopLocation();
+*/
 	}
 	
 	@Override
@@ -552,9 +565,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 			radio_button2.setChecked(false);
 			radio_button3.setChecked(true);
 			break;
-		case R.id.cbj_back_btn:
-			Gadget.closeKeybord(et, CBJActivity.this);
-			finish();
+
 		}
 		
 	}

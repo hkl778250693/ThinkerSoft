@@ -22,6 +22,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -51,6 +52,7 @@ import cc.thksoft.myfirstpro.service.LocationService.LocationBinder;
 import cc.thksoft.myfirstpro.threadsocket.SocketInteraction;
 import cc.thksoft.myfirstpro.util.AnimationTabHost;
 import cc.thksoft.myfirstpro.util.AssembleUpmes;
+import cc.thksoft.myfirstpro.util.Gadget;
 import cc.thksoft.myfirstpro.util.JaugeInternetState;
 import cc.thksoft.myfirstpro.util.JsonAnalyze;
 import cc.thksoft.myfirstpro.util.MyDialog;
@@ -63,6 +65,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 	private TextView systemSet_badget_tv;
 	private TextView homepageTitle;
 	private PopupWindow popupWindow;
+	private EditText et;
 	private int POPWINDOWWIDTH;
 	private GestureDetector gestureDetector;
 	private AnimationTabHost mTabHost;
@@ -549,6 +552,9 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 			radio_button2.setChecked(false);
 			radio_button3.setChecked(true);
 			break;
+		case R.id.cbj_back_btn:
+			Gadget.closeKeybord(et, CBJActivity.this);
+			finish();
 		}
 		
 	}

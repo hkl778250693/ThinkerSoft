@@ -17,6 +17,7 @@ public class NewTaskViewHolder {
     public TextView phone_number;  //电话号码
     public TextView user_id;  //用户新编号
     public TextView old_user_id;  //用户老编号
+    public TextView userProperty;  //用气性质
     public TextView address;   //地址
     public CheckBox checkBox;  //选择框
 }

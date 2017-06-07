@@ -82,6 +82,7 @@ public class UserListviewAdapter extends BaseAdapter implements Filterable {
             viewHolder.phone_number = (TextView) convertView.findViewById(R.id.phone_number);
             viewHolder.security_type = (TextView) convertView.findViewById(R.id.security_type);
             viewHolder.user_id = (TextView) convertView.findViewById(R.id.user_id);
+            viewHolder.userProperty = (TextView) convertView.findViewById(R.id.user_property);
             viewHolder.address = (TextView) convertView.findViewById(R.id.address);
             viewHolder.if_edit = (ImageView) convertView.findViewById(R.id.if_edit);
             viewHolder.ifChecked = (TextView) convertView.findViewById(R.id.if_checked);
@@ -123,6 +124,7 @@ public class UserListviewAdapter extends BaseAdapter implements Filterable {
         } else {
             viewHolder.user_id.setText("无");
         }
+        viewHolder.userProperty.setText(userListviewItem.getUserProperty());
         if(!userListviewItem.getAdress().equals("null")){
             viewHolder.address.setText(userListviewItem.getAdress());
         }else {
@@ -189,6 +191,7 @@ public class UserListviewAdapter extends BaseAdapter implements Filterable {
         TextView phone_number;  //电话号码
         TextView security_type;   //安检类型
         TextView user_id;  //用户编号
+        TextView userProperty;  //用气性质
         TextView address;   //地址
         ImageView if_edit;   //是否编辑（图片）
         TextView ifChecked;  //文字

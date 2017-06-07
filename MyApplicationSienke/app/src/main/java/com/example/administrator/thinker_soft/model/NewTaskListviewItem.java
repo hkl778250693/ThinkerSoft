@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 public class NewTaskListviewItem implements Parcelable {
     private String userName;              //姓名
+    private String userproperty;          //用气性质
     private String securityState;         //安检状态
     private String remarks;               //备注
     private String number;                //表编号
@@ -23,6 +24,14 @@ public class NewTaskListviewItem implements Parcelable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getUserproperty() {
+        return userproperty;
+    }
+
+    public void setUserproperty(String userproperty) {
+        this.userproperty = userproperty;
     }
 
     public String getSecurityState() {
@@ -97,6 +106,7 @@ public class NewTaskListviewItem implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(userName);
+        parcel.writeString(userproperty);
         parcel.writeString(number);
         parcel.writeString(phoneNumber);
         parcel.writeString(userId);
@@ -108,6 +118,7 @@ public class NewTaskListviewItem implements Parcelable {
         public NewTaskListviewItem createFromParcel(Parcel parcel) {
             NewTaskListviewItem item = new NewTaskListviewItem();
             item.userName = parcel.readString();
+            item.userproperty = parcel.readString();
             item.number = parcel.readString();
             item.phoneNumber = parcel.readString();
             item.userId = parcel.readString();

@@ -111,11 +111,14 @@ public class MoveHomePageActivity extends Activity {
                     Intent intent = new Intent(MoveHomePageActivity.this,SecurityChooseActivity.class);
                     startActivity(intent);
                 }else if(item.getImageName().equals("移动查询")){
-                    Intent intent1 = new Intent(MoveHomePageActivity.this,QueryActivity.class);
-                    startActivity(intent1);
+                    Intent intent = new Intent(MoveHomePageActivity.this,QueryActivity.class);
+                    startActivity(intent);
                 }else if(item.getImageName().equals("掌上办公")){
-                    Intent intent2 = new Intent(MoveHomePageActivity.this,CBJActivity.class);
-                    startActivity(intent2);
+                    Intent intent = new Intent(MoveHomePageActivity.this,CBJActivity.class);
+                    startActivity(intent);
+                }else if(item.getImageName().equals("工作流")){
+                    Intent intent = new Intent(MoveHomePageActivity.this,BusinessWebviewActivity.class);
+                    startActivity(intent);
                 }
             }
         });

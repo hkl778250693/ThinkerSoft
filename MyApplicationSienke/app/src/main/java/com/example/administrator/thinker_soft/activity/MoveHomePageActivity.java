@@ -1,16 +1,12 @@
 package com.example.administrator.thinker_soft.activity;
 
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,13 +14,12 @@ import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.adapter.GridviewHomePageAdapter;
-import com.example.administrator.thinker_soft.adapter.GridviewImageAdapter;
 import com.example.administrator.thinker_soft.model.GridHomePageItem;
-import com.example.administrator.thinker_soft.model.GridviewHomePageViewHolder;
-import com.example.administrator.thinker_soft.model.NewTaskViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import example.android_cbjactivity.CBJActivity;
 
 /**
  * Created by Administrator on 2017/5/31.
@@ -91,6 +86,9 @@ public class MoveHomePageActivity extends Activity {
                 }else if(item.getImageName().equals("移动查询")){
                     Intent intent1 = new Intent(MoveHomePageActivity.this,QueryActivity.class);
                     startActivity(intent1);
+                }else if(item.getImageName().equals("掌上办公")){
+                    Intent intent2 = new Intent(MoveHomePageActivity.this,CBJActivity.class);
+                    startActivity(intent2);
                 }
             }
         });

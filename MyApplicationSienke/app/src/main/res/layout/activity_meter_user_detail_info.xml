@@ -28,6 +28,7 @@
             android:textSize="21sp" />
 
         <TextView
+            android:id="@+id/bluetooth_printbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -1397,7 +1398,7 @@
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_weight="4"
-        android:background="@drawable/keyboard_pictrue"
+        android:background="@mipmap/keyboard_pictrue"
         android:orientation="vertical"
         android:visibility="gone">
 

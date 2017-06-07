@@ -32,7 +32,7 @@
     </RelativeLayout>
 
     <EditText
-        android:id="@+id/ip_edit"
+        android:id="@+id/et_set_ip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -45,7 +45,7 @@
         android:textSize="14sp" />
 
     <EditText
-        android:id="@+id/port_edit"
+        android:id="@+id/et_set_port"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -58,7 +58,7 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/edit"
+        android:id="@+id/btn_set_ip_port_done"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginLeft="11dp"

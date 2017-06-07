@@ -5,4 +5,9 @@
     <dimen name="bottom_tab_font_size">10.0dip</dimen>
     <dimen name="bottom_tab_padding_up">2.0dip</dimen>
     <dimen name="bottom_tab_padding_drawable">2.0dip</dimen>
+    <dimen name="dialog_padding">25dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">10dp</dimen>
+    <dimen name="header_footer_left_right_padding">25dp</dimen>
+    <dimen name="header_footer_max_width">320dp</dimen>
+    <dimen name="indicator_right_padding">10dp</dimen>
 </resources>

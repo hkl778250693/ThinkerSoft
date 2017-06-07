@@ -29,6 +29,8 @@ import com.example.administrator.thinker_soft.model.GridHomePageItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import example.android_cbjactivity.CBJActivity;
+
 /**
  * Created by Administrator on 2017/5/31.
  */
@@ -111,6 +113,9 @@ public class MoveHomePageActivity extends Activity {
                 }else if(item.getImageName().equals("移动查询")){
                     Intent intent1 = new Intent(MoveHomePageActivity.this,QueryActivity.class);
                     startActivity(intent1);
+                }else if(item.getImageName().equals("掌上办公")){
+                    Intent intent2 = new Intent(MoveHomePageActivity.this,CBJActivity.class);
+                    startActivity(intent2);
                 }
             }
         });

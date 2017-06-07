@@ -66,6 +66,245 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <uses-sdk
+            android:minSdkVersion="10"
+            android:targetSdkVersion="17" />
+        <!-- 获取当前运行的Activity -->
+        <uses-permission android:name="android.permission.GET_TASKS"/>
+        <!-- 蓝牙权限 -->
+        <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+        <uses-permission android:name="android.permission.BLUETOOTH" />
+        <!-- 控制灯光权限-->
+        <uses-permission android:name="android.permission.CAMERA" />
+        <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+        <uses-feature android:name="android.hardware.camera" />
+        <uses-feature android:name="android.hardware.camera.autofocus" />
+        <uses-feature android:name="android.hardware.camera.flash" />
+
+        <!-- 设置GPS权限 -->
+        <uses-permission android:name="android.permission.WRITE_SETTINGS" ></uses-permission>
+
+        <!-- 扫码相关 -->
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+        <uses-permission android:name="android.permission.VIBRATE" />
+        <uses-permission android:name="android.permission.CAMERA" />
+        <uses-feature android:name="android.hardware.camera" />
+        <uses-feature android:name="android.hardware.camera.autofocus" />
+
+        <!-- 配置文件的读写权限 -->
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+        <!-- 上网权限 -->
+        <uses-permission android:name="android.permission.INTERNET" >
+        </uses-permission>
+        <!-- wifi -->
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+        </uses-permission>
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+        </uses-permission>
+        <uses-permission android:name="android.permission.WAKE_LOCK" >
+        </uses-permission>
+
+        <!-- GPS定位信息 -->
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<!--
+        <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+-->
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+        <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+        <!-- 这个权限用于进行网络定位-->
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+        <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+        <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+        <!--允许应用读取低级别的系统日志文件 -->
+        <uses-permission android:name="android.permission.READ_LOGS"></uses-permission>
+        <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE"></uses-permission>
+
+        <!-- 上网权限 -->
+        <uses-permission android:name="android.permission.INTERNET" >
+        </uses-permission>
+        <!-- wifi -->
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+        </uses-permission>
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+        </uses-permission>
+        <uses-permission android:name="android.permission.WAKE_LOCK" >
+        </uses-permission>
+
+        <!--使用导航功能所需权限  -->
+        <uses-permission android:name="android.permission.ACCES_MOCK_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+        <uses-permission android:name="android.permission.WAKE_LOCK" />
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_GPS" />
+        <uses-permission android:name="android.permission.GET_TASKS" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+        <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+        <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+        <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+        <activity
+            android:name="example.android_cbjactivity.Verificationactivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name="example.android_cbjactivity.CBJActivity" android:screenOrientation="portrait"/>
+        <!-- 所有的Activity -->
+        <activity
+            android:name="example.android_cbjactivity.ChaoBiaoActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.CaptureActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.ChaXunActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.SJCSActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.XiaZaiActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.YongHuMingCX" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.BianHaoCXActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.BiaoHaoCXActivity" android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name="example.android_cbjactivity.CbbCXAction"
+            android:label="@string/title_activity_dialog_by_met_num"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+
+        </activity>
+
+
+        <activity
+            android:name="example.android_cbjactivity.ChaoBiaoBenTongjiActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.ShowListviewActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.WeiChaoBaoActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.ChaoBiaoXuanZeActivity"
+            android:screenOrientation="portrait"/>
+
+
+        <activity
+            android:name="example.android_cbjactivity.SheZiActivity" android:screenOrientation="portrait"/>
+
+
+        <activity
+            android:name="example.android_cbjactivity.UserDetailActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.Ip_Port_activity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.DelDataBasesActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.ChooseCountActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name="example.android_cbjactivity.dialog_loadname_activity" android:screenOrientation="portrait"/>
+        <activity
+            android:name="example.android_cbjactivity.MapMeterActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name="cc.thksoft.myfirstpro.navigation.BNavigatorActivity"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"/>
+        <activity
+            android:name="example.android_cbjactivity.LoginActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="example.android_cbjactivity.ActualMissionNEW"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
+            android:name="example.android_cbjactivity.GPSCollectorActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="example.android_cbjactivity.GpsMapCollectorActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
+            android:name="example.android_cbjactivity.DeviceDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+
+        <activity
+            android:name="example.android_cbjactivity.MapXiazhaiActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+
+        <activity
+            android:name="example.android_cbjactivity.printNoteActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
+            android:name="example.android_cbjactivity.BaseMapDemo"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+
+        <activity
+            android:name="cc.thksoft.myfirstpro.fragment.newWorkXiangQing"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
+            android:name="cc.thksoft.myfirstpro.fragment.oldWorkXiangQing"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
+            android:name="example.android_cbjactivity.SearchBTActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+
+        <receiver android:name="cc.thksoft.myfirstpro.broadcast.MyBroadcast">
+            <intent-filter>
+                <action android:name="cc.thksoft.myfirstpro.broadcast.MyBroadcast">
+
+                </action>
+            </intent-filter>
+        </receiver>
+
+        <!--百度地图 验证码  -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="9GU0GricyaSjlepVEvMcbd7K" />
+
+        <service android:name="lvrenyang.myprinter.WorkService" />
+        <service
+            android:name="com.baidu.navi.location.f"
+            android:enabled="true" />
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote">
+
+        </service>
+        <service
+            android:name="cc.thksoft.myfirstpro.service.LocationService"
+            android:enabled="true">
+
+        </service>
     </application>
 
 

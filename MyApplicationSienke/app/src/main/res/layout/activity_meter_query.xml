@@ -11,7 +11,7 @@
         android:paddingLeft="5dp">
 
         <ImageView
-            android:id="@+id/back"
+            android:id="@+id/cbbcx_back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -110,7 +110,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/cancel_btn"
+                    android:id="@+id/btn_cancel"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_marginLeft="10dp"
@@ -121,7 +121,7 @@
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/search_btn"
+                    android:id="@+id/btn_done"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_marginLeft="10dp"

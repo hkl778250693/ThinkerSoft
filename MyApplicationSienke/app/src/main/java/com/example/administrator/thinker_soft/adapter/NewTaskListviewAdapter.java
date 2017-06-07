@@ -66,6 +66,7 @@ public class NewTaskListviewAdapter extends BaseAdapter {
             viewHolder = new NewTaskViewHolder();
             convertView = layoutInflater.inflate(R.layout.newtask_listview_item, null);
             viewHolder.user_name = (TextView) convertView.findViewById(R.id.user_name);
+            viewHolder.userProperty = (TextView) convertView.findViewById(R.id.user_property);
             viewHolder.securityState = (TextView) convertView.findViewById(R.id.security_state);
             viewHolder.securityStateRoot = (LinearLayout) convertView.findViewById(R.id.security_state_root);
             viewHolder.remarks = (TextView) convertView.findViewById(R.id.remarks);
@@ -100,6 +101,7 @@ public class NewTaskListviewAdapter extends BaseAdapter {
         }else {
             viewHolder.user_name.setText("无");
         }
+        viewHolder.userProperty.setText(item.getUserproperty());
         if(!item.getNumber().equals("null")){
             viewHolder.number.setText(item.getNumber());
         }else {

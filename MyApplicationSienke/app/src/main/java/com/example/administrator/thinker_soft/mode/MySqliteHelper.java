@@ -18,7 +18,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
             "securityType varchar(200),oldUserId varchar(200),newUserId varchar(200),userAddress varchar(200),taskId varchar(200),ifChecked varchar(200)," +
             "security_content varchar(200),newMeterNumber varchar(200),remarks varchar(200),security_hidden varchar(200),security_hidden_reason varchar(200)," +
             "photoNumber varchar(200),ifUpload varchar(200),currentTime varchar(200),ifPass varchar(200),loginName varchar(200),security_state varchar(200)," +
-            "newUserPhone varchar(200),newUserAddress varchar(200))";
+            "newUserPhone varchar(200),newUserAddress varchar(200),userProperty varchar(200))";
 
     //任务表
     final String CREATE_TABLE_SQL_TASK = "CREATE TABLE Task " +
@@ -55,17 +55,17 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     }
 
     public MySqliteHelper(Context context,//上下文
-                              String name,//数据库的名字
-                              SQLiteDatabase.CursorFactory factory,//游标对象
-                              int version) {//版本号
+                          String name,//数据库的名字
+                          SQLiteDatabase.CursorFactory factory,//游标对象
+                          int version) {//版本号
         super(context, name, factory, version);
     }
 
     public MySqliteHelper(Context context,//上下文
-                              String name,//数据库的名字
-                              SQLiteDatabase.CursorFactory factory,//游标对象
-                              int version,//版本号
-                              DatabaseErrorHandler errorHandler) {//异常handler
+                          String name,//数据库的名字
+                          SQLiteDatabase.CursorFactory factory,//游标对象
+                          int version,//版本号
+                          DatabaseErrorHandler errorHandler) {//异常handler
         super(context, name, factory, version, errorHandler);
     }
 

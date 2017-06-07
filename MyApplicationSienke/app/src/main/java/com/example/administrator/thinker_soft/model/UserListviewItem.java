@@ -9,7 +9,8 @@ public class UserListviewItem {
     private String number;               //表编号
     private String phoneNumber;          //电话号码
     private String securityType;         //安检类型
-    private String userId;               //时间
+    private String userId;               //用户编号
+    private String userProperty;         //用气性质
     private String adress;               //地址
     private String securityNumber;       //安检编号
     private int ifEdit;                  //是否编辑(图片)
@@ -62,6 +63,14 @@ public class UserListviewItem {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserProperty() {
+        return userProperty;
+    }
+
+    public void setUserProperty(String userProperty) {
+        this.userProperty = userProperty;
     }
 
     public String getAdress() {

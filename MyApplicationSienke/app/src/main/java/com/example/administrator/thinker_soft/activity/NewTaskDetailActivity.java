@@ -763,6 +763,7 @@ public class NewTaskDetailActivity extends Activity {
                             NewTaskListviewItem item = new NewTaskListviewItem();
                             if(object.optInt("flag",0) == 0){
                                 item.setUserName(object.optString("c_user_name", ""));
+                                item.setUserproperty(object.optString("c_properties_name", ""));
                                 if(object.optInt("n_safety_state",0) == 0){
                                     item.setSecurityState("未安检");
                                 }else if(object.optInt("n_safety_state",0) == 1){
@@ -789,6 +790,7 @@ public class NewTaskDetailActivity extends Activity {
                                 item.setFlag(0);
                             }else if(object.optInt("flag",0) == 1){
                                 item.setUserName(object.optString("c_user_name", ""));
+                                item.setUserproperty(object.optString("c_properties_name", ""));
                                 item.setNumber(object.optString("c_meter_number", ""));
                                 item.setPhoneNumber(object.optString("c_user_phone", ""));
                                 item.setUserId(object.optString("c_user_id", ""));
@@ -797,6 +799,7 @@ public class NewTaskDetailActivity extends Activity {
                                 item.setFlag(1);
                             }else if(object.optInt("flag",0) == 2){
                                 item.setUserName(object.optString("c_user_name", ""));
+                                item.setUserproperty(object.optString("c_properties_name", ""));
                                 if(object.optInt("n_safety_state",0) == 0){
                                     item.setSecurityState("未安检");
                                 }else if(object.optInt("n_safety_state",0) == 1){

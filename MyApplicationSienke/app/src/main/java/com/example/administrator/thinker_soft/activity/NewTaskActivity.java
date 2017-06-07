@@ -93,7 +93,7 @@ public class NewTaskActivity extends Activity {
     private Cursor cursor;
     private PopupwindowListAdapter adapter;
     private String itemId;
-    private int res,current_res;
+    private int res, current_res;
     private String security_Type;
 
     @Override
@@ -211,7 +211,7 @@ public class NewTaskActivity extends Activity {
                                     save_btn.setClickable(true);
                                     Toast.makeText(NewTaskActivity.this, "开始时间不能大于结束时间哦！", Toast.LENGTH_SHORT).show();
                                 }
-                            }else {
+                            } else {
                                 save_btn.setClickable(true);
                                 Toast.makeText(NewTaskActivity.this, "结束时间不能小于当天时间哦！", Toast.LENGTH_SHORT).show();
                             }
@@ -341,7 +341,7 @@ public class NewTaskActivity extends Activity {
                     if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
                         ip = public_sharedPreferences.getString("security_ip", "");
                     } else {
-                        ip = "88.88.88.31:";
+                        ip = "192.168.2.201:";
                     }
                     if (!public_sharedPreferences.getString("security_port", "").equals("")) {
                         port = public_sharedPreferences.getString("security_port", "");
@@ -394,11 +394,11 @@ public class NewTaskActivity extends Activity {
                         JSONObject jsonObject = new JSONObject(result);
                         if (jsonObject.optString("message", "").equals("1")) {
                             handler.sendEmptyMessage(1);
-                        }else if(jsonObject.optString("message", "").equals("2")){
+                        } else if (jsonObject.optString("message", "").equals("2")) {
                             handler.sendEmptyMessage(14);
-                        }else if(jsonObject.optString("message", "").equals("3")){
+                        } else if (jsonObject.optString("message", "").equals("3")) {
                             handler.sendEmptyMessage(13);
-                        }else {
+                        } else {
                             handler.sendEmptyMessage(2);
                         }
                     } else {
@@ -488,6 +488,7 @@ public class NewTaskActivity extends Activity {
         values.put("security_state", "0");
         values.put("newUserPhone", "");
         values.put("newUserAddress", "");
+        values.put("userProperty", object.optString("c_properties_name", ""));    //用户性质
         db.insert("User", null, values);
     }
 
@@ -503,7 +504,7 @@ public class NewTaskActivity extends Activity {
                     if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
                         ip = public_sharedPreferences.getString("security_ip", "");
                     } else {
-                        ip = "88.88.88.31:";
+                        ip = "192.168.2.201:";
                     }
                     if (!public_sharedPreferences.getString("security_port", "").equals("")) {
                         port = public_sharedPreferences.getString("security_port", "");
@@ -632,7 +633,7 @@ public class NewTaskActivity extends Activity {
                     try {
                         JSONObject taskObject = new JSONObject(result);
                         resultTaskId = taskObject.optInt("safetyPlanId", 0) + "";
-                        requireSecurityId("getUserCheck.do", "safetyPlan=" + resultTaskId);
+                        requireSecurityId("getUserCheck.do", "safetyPlan=" + resultTaskId + "&safetyState=0");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

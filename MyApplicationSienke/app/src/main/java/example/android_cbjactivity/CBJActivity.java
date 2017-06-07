@@ -53,6 +53,7 @@ import cc.thksoft.myfirstpro.service.LocationService.LocationBinder;
 import cc.thksoft.myfirstpro.threadsocket.SocketInteraction;
 import cc.thksoft.myfirstpro.util.AnimationTabHost;
 import cc.thksoft.myfirstpro.util.AssembleUpmes;
+import cc.thksoft.myfirstpro.util.Gadget;
 import cc.thksoft.myfirstpro.util.JaugeInternetState;
 import cc.thksoft.myfirstpro.util.JsonAnalyze;
 import cc.thksoft.myfirstpro.util.MyDialog;
@@ -565,7 +566,9 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 			radio_button2.setChecked(false);
 			radio_button3.setChecked(true);
 			break;
-
+		case R.id.cbj_back_btn:
+			Gadget.closeKeybord(et, CBJActivity.this);
+			finish();
 		}
 		
 	}

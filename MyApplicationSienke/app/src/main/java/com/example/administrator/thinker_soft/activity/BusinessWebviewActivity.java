@@ -11,6 +11,7 @@ import android.view.View;
 import android.webkit.ClientCertRequest;
 import android.webkit.HttpAuthHandler;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -35,6 +36,7 @@ public class BusinessWebviewActivity extends Activity {
         setOnClickListener();//点击事件
         //webView加载业务办理APP网页
         webView.setWebViewClient(new MyWebClient());
+        webView.setWebChromeClient(new WebChromeClient());
         WebSettings webSettings = webView.getSettings();
         // 让WebView能够执行javaScript
         webSettings.setJavaScriptEnabled(true);
@@ -57,7 +59,7 @@ public class BusinessWebviewActivity extends Activity {
         // 设置可以被显示的屏幕控制
         webSettings.setDisplayZoomControls(true);
         // 设置默认字体大小
-        webSettings.setDefaultFontSize(12);
+        //webSettings.setDefaultFontSize(12);
         //webView.loadUrl("http://www.baidu.com/");
         webView.loadUrl("http://88.88.88.231:8080/x5/UI2/v_/thinksoft/index.w#!main");
     }

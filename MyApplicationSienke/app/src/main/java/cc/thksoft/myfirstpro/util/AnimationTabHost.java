@@ -10,71 +10,47 @@ import com.example.administrator.thinker_soft.R;
 
 
 public class AnimationTabHost extends TabHost {
-	 private Animation slideLeftIn;
+    private Animation slideLeftIn;
+    private Animation slideLeftOut;
+    private Animation slideRightIn;
+    private Animation slideRightOut;
 
-	    private Animation slideLeftOut;
+    /**
+     * ��¼�Ƿ�򿪶���Ч��
+     */
 
-	    private Animation slideRightIn;
+    private boolean isOpenAnimation;
 
-	    private Animation slideRightOut;
+    /**
+     * ��¼��ǰ��ǩҳ������
+     */
 
-	 
+    private int mTabCount;
 
-	    /** ��¼�Ƿ�򿪶���Ч�� */
+    public AnimationTabHost(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        slideLeftIn = AnimationUtils.loadAnimation(context,
+                R.anim.slide_left_in);
+        slideLeftOut = AnimationUtils.loadAnimation(context,
+                R.anim.slide_left_out);
+        slideRightIn = AnimationUtils.loadAnimation(context,
+                R.anim.slide_right_in);
+        slideRightOut = AnimationUtils.loadAnimation(context,
+                R.anim.slide_right_out);
+        isOpenAnimation = false;
+    }
 
-	    private boolean isOpenAnimation;
 
-	    /** ��¼��ǰ��ǩҳ������ */
+    /**
+     * �����Ƿ�򿪶���Ч��
+     *
+     * @param isOpenAnimation true����
+     */
 
-	    private int mTabCount;
+    public void setOpenAnimation(boolean isOpenAnimation) {
+        this.isOpenAnimation = isOpenAnimation;
 
-	 
-
-	    public AnimationTabHost(Context context, AttributeSet attrs) {
-
-	        super(context, attrs);
-
-	 
-
-	        slideLeftIn = AnimationUtils.loadAnimation(context,
-
-	                R.anim.slide_left_in);
-
-	        slideLeftOut = AnimationUtils.loadAnimation(context,
-
-	                R.anim.slide_left_out);
-
-	        slideRightIn = AnimationUtils.loadAnimation(context,
-
-	                R.anim.slide_right_in);
-
-	        slideRightOut = AnimationUtils.loadAnimation(context,
-
-	                R.anim.slide_right_out);
-
-	 
-
-	        isOpenAnimation = false;
-
-	    }
-
-	 
-
-	    /**
-
-	     * �����Ƿ�򿪶���Ч��
-
-	     * @param isOpenAnimation
-
-	     *            true����
-
-	     */
-
-	    public void setOpenAnimation(boolean isOpenAnimation) {
-
-	        this.isOpenAnimation = isOpenAnimation;
-
-	    }
+    }
 /*	    ˵���������Animation�����Զ���Ķ���Ч����������res/anim���ҵ���Ӧ��XML�ļ���������slide_left_in.xml��˵������Ĵ���÷�
 
 	    slide_left_in.xml
@@ -109,149 +85,77 @@ public class AnimationTabHost extends TabHost {
 
 	    ��alpha��ǩ�ڶ������͸���ȣ�0Ϊȫ͸����1.0Ϊ��͸��������Ϊ300���룬��ViewΪ�𽥳��ֵĹ��̡�*/
 
-	     
 
-	    /**
+    /**
+     * ���ñ�ǩ����������<br>
+     * <p>
+     * ����˳��Ϊ���������>�������>�ҽ�����>�ҳ���
+     *
+     * @param animationResIDs ��������Դ�ļ�ID
+     * @return true���ĸ������ļ�;<br>
+     * <p>
+     * false�����ĸ������ļ����޷�ƥ�䣬����Ĭ�϶�����
+     */
 
-	         * ���ñ�ǩ����������<br>
+    public boolean setTabAnimation(int[] animationResIDs) {
+        if (3 == animationResIDs.length) {
+            slideLeftIn = AnimationUtils.loadAnimation(getContext(),
+                    animationResIDs[0]);
+            slideLeftOut = AnimationUtils.loadAnimation(getContext(),
+                    animationResIDs[1]);
+            slideRightIn = AnimationUtils.loadAnimation(getContext(),
+                    animationResIDs[2]);
+            slideRightOut = AnimationUtils.loadAnimation(getContext(),
+                    animationResIDs[3]);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	         * ����˳��Ϊ���������>�������>�ҽ�����>�ҳ���
+    /**
+     * @return ���ص�ǰ��ǩҳ������
+     */
 
-	         *
+    public int getTabCount() {
+        return mTabCount;
+    }
 
-	         * @param animationResIDs
+    @Override
+    public void addTab(TabSpec tabSpec) {
+        mTabCount++;
+        super.addTab(tabSpec);
+    }
 
-	         *            ��������Դ�ļ�ID
-
-	         * @return true���ĸ������ļ�;<br>
-
-	         *         false�����ĸ������ļ����޷�ƥ�䣬����Ĭ�϶�����
-
-	         */
-
-	        public boolean setTabAnimation(int[] animationResIDs) {
-
-	            if (3 == animationResIDs.length) {
-
-	                slideLeftIn = AnimationUtils.loadAnimation(getContext(),
-
-	                        animationResIDs[0]);
-
-	                slideLeftOut = AnimationUtils.loadAnimation(getContext(),
-
-	                        animationResIDs[1]);
-
-	                slideRightIn = AnimationUtils.loadAnimation(getContext(),
-
-	                        animationResIDs[2]);
-
-	              slideRightOut =AnimationUtils.loadAnimation(getContext(),
-
-	                        animationResIDs[3]);
-
-	     
-
-	                return true;
-
-	            } else {
-
-	                return false;
-
-	            }
-
-	        }
-
-	     
-
-	        /**
-
-	         * @return ���ص�ǰ��ǩҳ������
-
-	         */
-
-	        public int getTabCount() {
-
-	            return mTabCount;
-
-	        }
-
-	     
-
-	        @Override
-
-	        public void addTab(TabSpec tabSpec) {
-
-	            mTabCount++;
-
-	            super.addTab(tabSpec);
-
-	        }
-
-        @Override
-
-        public void setCurrentTab(int index) {
-
-            int mCurrentTabID = getCurrentTab();
-
-     
-
-            if (null != getCurrentView()) {
-
-                // ��һ������ Tab ʱ����ֵΪ null��
-
-     
-
-                if (isOpenAnimation) {
-
-                    if (mCurrentTabID == (mTabCount - 1) && index == 0) {
-
-                        getCurrentView().startAnimation(slideLeftOut);
-
-                    } else if (mCurrentTabID == 0 && index == (mTabCount - 1)) {
-
-                        getCurrentView().startAnimation(slideRightOut);
-
-                    } else if (index > mCurrentTabID) {
-
-                        getCurrentView().startAnimation(slideLeftOut);
-
-                    } else if (index < mCurrentTabID) {
-
-                        getCurrentView().startAnimation(slideRightOut);
-
-                    }
-
-                }
-
-            }
-
-     
-
-            super.setCurrentTab(index);
-
-     
-
+    @Override
+    public void setCurrentTab(int index) {
+        int mCurrentTabID = getCurrentTab();
+        if (null != getCurrentView()) {
             if (isOpenAnimation) {
-
                 if (mCurrentTabID == (mTabCount - 1) && index == 0) {
-
-                    getCurrentView().startAnimation(slideLeftIn);
-
+                    getCurrentView().startAnimation(slideLeftOut);
                 } else if (mCurrentTabID == 0 && index == (mTabCount - 1)) {
-
-                    getCurrentView().startAnimation(slideRightIn);
-
+                    getCurrentView().startAnimation(slideRightOut);
                 } else if (index > mCurrentTabID) {
-
-                    getCurrentView().startAnimation(slideLeftIn);
-
+                    getCurrentView().startAnimation(slideLeftOut);
                 } else if (index < mCurrentTabID) {
-
-                    getCurrentView().startAnimation(slideRightIn);
-
+                    getCurrentView().startAnimation(slideRightOut);
                 }
-
+            }
+        }
+        super.setCurrentTab(index);
+        if (isOpenAnimation) {
+            if (mCurrentTabID == (mTabCount - 1) && index == 0) {
+                getCurrentView().startAnimation(slideLeftIn);
+            } else if (mCurrentTabID == 0 && index == (mTabCount - 1)) {
+                getCurrentView().startAnimation(slideRightIn);
+            } else if (index > mCurrentTabID) {
+                getCurrentView().startAnimation(slideLeftIn);
+            } else if (index < mCurrentTabID) {
+                getCurrentView().startAnimation(slideRightIn);
             }
 
         }
+
+    }
 }

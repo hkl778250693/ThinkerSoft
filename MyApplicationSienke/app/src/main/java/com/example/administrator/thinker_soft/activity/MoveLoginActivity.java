@@ -113,13 +113,13 @@ public class MoveLoginActivity extends Activity{
                 case R.id.login_btn:
                     loginBtn.setClickable(false);
                     if (editUser.getText().toString().equals("") && editPsw.getText().toString().equals("")) {
-                        Toast.makeText(MoveLoginActivity.this, "用户名或密码不能为空", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MoveLoginActivity.this, "请您输入用户名和密码！", Toast.LENGTH_LONG).show();
                         loginBtn.setClickable(true);
                     } else if (editUser.getText().toString().equals("")) {
-                        Toast.makeText(MoveLoginActivity.this, "请输入用户名", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MoveLoginActivity.this, "请您输入用户名！", Toast.LENGTH_LONG).show();
                         loginBtn.setClickable(true);
                     } else if (editPsw.getText().toString().equals("")) {
-                        Toast.makeText(MoveLoginActivity.this, "请输入密码", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MoveLoginActivity.this, "请您输入密码！", Toast.LENGTH_LONG).show();
                         loginBtn.setClickable(true);
                     }
                     if (!editUser.getText().toString().equals("") && !editPsw.getText().toString().equals("")) {

@@ -7,16 +7,16 @@
 
     <!-- 标题 -->
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#1A4B76"
+        android:background="@color/theme_colors"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/set_del_database_back_Btn"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:gravity="center"
@@ -31,7 +31,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="4"
             android:gravity="center">
 
@@ -47,7 +47,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"></LinearLayout>
     </LinearLayout>
 
@@ -80,7 +80,7 @@
                 android:textSize="15sp" />
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:orientation="horizontal">
@@ -98,12 +98,12 @@
         </LinearLayout>
 
         <View
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@mipmap/grey_line" />
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="5"
@@ -111,8 +111,8 @@
 
             <com.baoyz.swipemenulistview.SwipeMenuListView
                 android:id="@+id/lv_set_del"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:divider="#999999"
                 android:dividerHeight="1dp">
 
@@ -121,7 +121,7 @@
         </LinearLayout>
 
         <View
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@mipmap/grey_line" />
     </LinearLayout>

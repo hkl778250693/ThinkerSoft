@@ -24,7 +24,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
@@ -66,7 +65,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 	private TextView systemSet_badget_tv;
 	private TextView homepageTitle;
 	private PopupWindow popupWindow;
-	private ImageView cbjBackBtn;
+	private LinearLayout cbjBackBtn;
 	private EditText et;
 	private int POPWINDOWWIDTH;
 	private GestureDetector gestureDetector;
@@ -209,7 +208,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 		radio_button2=(RadioButton) findViewById(R.id.radio_button2);
 		radio_button3=(RadioButton) findViewById(R.id.radio_button3);
 		radioderGroup=(RadioGroup) findViewById(R.id.main_radio);
-		cbjBackBtn = (ImageView) findViewById(R.id.cbj_back_btn);
+		cbjBackBtn = (LinearLayout) findViewById(R.id.cbj_back_btn);
 
 		cbjBackBtn.setOnClickListener(new OnClickListener() {
 			@Override

@@ -269,6 +269,7 @@ public class UserListActivity extends Activity {
             userListviewItem.setSecurityType(cursor.getString(5));
             userListviewItem.setUserId(cursor.getString(6));
             userListviewItem.setAdress(cursor.getString(8));
+            userListviewItem.setUserProperty(cursor.getString(24));
             Log.i("UserList=cursor", "安检状态为 = " + cursor.getString(10));
             if (cursor.getString(10).equals("true")) {
                 Log.i("UserList=cursor", "安检状态为true");

@@ -18,6 +18,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import com.example.administrator.thinker_soft.R;
 
@@ -26,6 +27,7 @@ import com.example.administrator.thinker_soft.R;
  */
 public class BusinessWebviewActivity extends Activity {
     private WebView webView;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +69,13 @@ public class BusinessWebviewActivity extends Activity {
     //绑定控件ID
     private void bindView() {
         webView = (WebView) findViewById(R.id.business_webview);
+        back = (ImageView) findViewById(R.id.back);
     }
 
     //点击事件
     private void setOnClickListener() {
-
+        back.setOnClickListener(clickListener
+        );
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {

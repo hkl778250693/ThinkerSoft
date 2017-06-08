@@ -532,7 +532,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
 		case R.id.radio_button0:
-			homepageTitle.setText("����ѡ��");
+			homepageTitle.setText("移动抄表");
 			mTabHost.setCurrentTabByTag("ONE");
 			radio_button0.setChecked(true);
 			radio_button1.setChecked(false);
@@ -540,7 +540,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 			radio_button3.setChecked(false);
 			break;
 		case R.id.radio_button1:
-			homepageTitle.setText("ɨ�볭��");
+			homepageTitle.setText("扫码抄表");
 			mTabHost.setCurrentTabByTag("TWO");
 			radio_button0.setChecked(false);
 			radio_button1.setChecked(true);
@@ -548,7 +548,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 			radio_button3.setChecked(false);
 			break;
 		case R.id.radio_button2:
-			homepageTitle.setText("�Զ����ѯ");
+			homepageTitle.setText("自定义查询");
 			mTabHost.setCurrentTabByTag("THREE");
 			radio_button0.setChecked(false);
 			radio_button1.setChecked(false);
@@ -556,7 +556,7 @@ public class CBJActivity extends TabActivity implements RadioGroup.OnCheckedChan
 			radio_button3.setChecked(false);
 			break;
 		case R.id.radio_button3:
-			homepageTitle.setText("���ݴ���");
+			homepageTitle.setText("数据传输");
 			mTabHost.setCurrentTabByTag("FOUR");
 			radio_button0.setChecked(false);
 			radio_button1.setChecked(false);

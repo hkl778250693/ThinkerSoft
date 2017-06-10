@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import example.android_cbjactivity.CBJActivity;
+import mobile_business.MobileBusinessActivity;
 
 /**
  * Created by Administrator on 2017/5/31.
@@ -118,6 +119,9 @@ public class MoveHomePageActivity extends Activity {
                     startActivity(intent);
                 }else if(item.getImageName().equals("工作流")){
                     Intent intent = new Intent(MoveHomePageActivity.this,BusinessWebviewActivity.class);
+                    startActivity(intent);
+                }else if (item.getImageName().equals("抢维修")){
+                    Intent intent= new Intent(MoveHomePageActivity.this, MobileBusinessActivity.class);
                     startActivity(intent);
                 }
             }

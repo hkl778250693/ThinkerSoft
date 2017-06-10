@@ -27,7 +27,7 @@
             android:layout_centerInParent="true"
             android:text="数据上传"
             android:textColor="@android:color/white"
-            android:textSize="21sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/up_load"

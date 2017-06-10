@@ -1,13 +1,10 @@
 package com.example.administrator.thinker_soft.activity;
 
-import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,31 +12,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.adapter.SecurityCheckViewPagerAdapter;
 import com.example.administrator.thinker_soft.fragment.DataTransferFragment;
 import com.example.administrator.thinker_soft.fragment.SecurityChooseFragment;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 import com.example.administrator.thinker_soft.mode.Tools;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

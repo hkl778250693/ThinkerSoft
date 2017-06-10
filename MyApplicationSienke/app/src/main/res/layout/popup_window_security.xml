@@ -59,8 +59,6 @@
             android:text="退出登录"
             android:textColor="@drawable/security_popupwindow_text"
             android:textSize="14sp" />
-
-
     </RadioGroup>
 
 </LinearLayout>

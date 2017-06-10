@@ -41,7 +41,7 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <cc.thksoft.myfirstpro.refreshListView.RefreshPullToRefreshListView
+        <com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshListView
             android:id="@+id/gps_valve_fragment_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -56,7 +56,7 @@
             android:transcriptMode="disabled"
             android:visibility="visible">
 
-        </cc.thksoft.myfirstpro.refreshListView.RefreshPullToRefreshListView>
+        </com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshListView>
 
         <ScrollView
             android:id="@+id/gps_valve_ll"
@@ -334,7 +334,7 @@
                                 android:src="@mipmap/loading_wait" />
                         </LinearLayout>
 
-                        <cc.thksoft.myfirstpro.wheel.WheelView
+                        <com.example.administrator.thinker_soft.myfirstpro.wheel.WheelView
                             android:id="@+id/gps_valve_wheelview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -342,7 +342,7 @@
                             android:layout_marginRight="1dp"
                             android:visibility="gone">
 
-                        </cc.thksoft.myfirstpro.wheel.WheelView>
+                        </com.example.administrator.thinker_soft.myfirstpro.wheel.WheelView>
                     </LinearLayout>
 
                     <View

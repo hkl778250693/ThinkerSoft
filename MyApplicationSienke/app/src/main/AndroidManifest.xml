@@ -157,38 +157,38 @@
         <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
         <activity
-            android:name="example.android_cbjactivity.Verificationactivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.Verificationactivity" android:screenOrientation="portrait"/>
         <activity
-            android:name="example.android_cbjactivity.CBJActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.CBJActivity" android:screenOrientation="portrait"/>
         <!-- 所有的Activity -->
         <activity
-            android:name="example.android_cbjactivity.ChaoBiaoActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.ChaoBiaoActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.CaptureActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.CaptureActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.ChaXunActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.ChaXunActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.SJCSActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.SJCSActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.XiaZaiActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.XiaZaiActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.YongHuMingCX" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.YongHuMingCX" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.BianHaoCXActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.BianHaoCXActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.BiaoHaoCXActivity" android:screenOrientation="portrait">
+            android:name=".android_cbjactivity.BiaoHaoCXActivity" android:screenOrientation="portrait">
 
         </activity>
 
         <activity
-            android:name="example.android_cbjactivity.CbbCXAction"
+            android:name=".android_cbjactivity.CbbCXAction"
             android:label="@string/title_activity_dialog_by_met_num"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"
@@ -198,87 +198,87 @@
 
 
         <activity
-            android:name="example.android_cbjactivity.ChaoBiaoBenTongjiActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.ChaoBiaoBenTongjiActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.ShowListviewActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.ShowListviewActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.WeiChaoBaoActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.WeiChaoBaoActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.ChaoBiaoXuanZeActivity"
+            android:name=".android_cbjactivity.ChaoBiaoXuanZeActivity"
             android:screenOrientation="portrait"/>
 
 
         <activity
-            android:name="example.android_cbjactivity.SheZiActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.SheZiActivity" android:screenOrientation="portrait"/>
 
 
         <activity
-            android:name="example.android_cbjactivity.UserDetailActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.UserDetailActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.Ip_Port_activity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.Ip_Port_activity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.DelDataBasesActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.DelDataBasesActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.ChooseCountActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.ChooseCountActivity" android:screenOrientation="portrait"/>
         <activity
-            android:name="example.android_cbjactivity.dialog_loadname_activity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.dialog_loadname_activity" android:screenOrientation="portrait"/>
         <activity
-            android:name="example.android_cbjactivity.MapMeterActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.MapMeterActivity" android:screenOrientation="portrait"/>
         <activity
-            android:name="cc.thksoft.myfirstpro.navigation.BNavigatorActivity"
+            android:name=".myfirstpro.navigation.BNavigatorActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"/>
         <activity
-            android:name="example.android_cbjactivity.LoginActivity" android:screenOrientation="portrait"/>
+            android:name=".android_cbjactivity.LoginActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name="example.android_cbjactivity.ActualMissionNEW"
+            android:name=".android_cbjactivity.ActualMissionNEW"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name="example.android_cbjactivity.GPSCollectorActivity"
+            android:name=".android_cbjactivity.GPSCollectorActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="example.android_cbjactivity.GpsMapCollectorActivity"
+            android:name=".android_cbjactivity.GpsMapCollectorActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name="example.android_cbjactivity.DeviceDetailActivity"
+            android:name=".android_cbjactivity.DeviceDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <activity
-            android:name="example.android_cbjactivity.MapXiazhaiActivity"
+            android:name=".android_cbjactivity.MapXiazhaiActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <activity
-            android:name="example.android_cbjactivity.printNoteActivity"
+            android:name=".android_cbjactivity.printNoteActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name="example.android_cbjactivity.BaseMapDemo"
+            android:name=".android_cbjactivity.BaseMapDemo"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <activity
-            android:name="cc.thksoft.myfirstpro.fragment.newWorkXiangQing"
+            android:name=".myfirstpro.fragment.newWorkXiangQing"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name="cc.thksoft.myfirstpro.fragment.oldWorkXiangQing"
+            android:name=".myfirstpro.fragment.oldWorkXiangQing"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name="example.android_cbjactivity.SearchBTActivity"
+            android:name=".android_cbjactivity.SearchBTActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 
-        <receiver android:name="cc.thksoft.myfirstpro.broadcast.MyBroadcast">
+        <receiver android:name=".myfirstpro.broadcast.MyBroadcast">
             <intent-filter>
                 <action android:name="cc.thksoft.myfirstpro.broadcast.MyBroadcast">
 
@@ -291,7 +291,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="9GU0GricyaSjlepVEvMcbd7K" />
 
-        <service android:name="lvrenyang.myprinter.WorkService" />
+        <service android:name=".myprinter.WorkService" />
         <service
             android:name="com.baidu.navi.location.f"
             android:enabled="true" />
@@ -302,7 +302,7 @@
 
         </service>
         <service
-            android:name="cc.thksoft.myfirstpro.service.LocationService"
+            android:name=".myfirstpro.service.LocationService"
             android:enabled="true">
 
         </service>

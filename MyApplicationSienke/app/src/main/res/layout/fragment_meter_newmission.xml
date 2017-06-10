@@ -29,7 +29,7 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
-        <cc.thksoft.myfirstpro.refreshListView.RefreshPullToRefreshListView
+        <com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshListView
             android:id="@+id/new_mission_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,7 +39,7 @@
             android:listSelector="@null"
             android:scrollbars="none">
 
-        </cc.thksoft.myfirstpro.refreshListView.RefreshPullToRefreshListView>
+        </com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshListView>
 
         <LinearLayout
             android:id="@+id/new_mission_control_choose"

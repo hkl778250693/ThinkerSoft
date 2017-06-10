@@ -39,7 +39,7 @@
             android:layout_centerInParent="true"
             android:text="安检选项"
             android:textColor="@android:color/white"
-            android:textSize="21sp" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/security_check_go"
@@ -60,7 +60,7 @@
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="61dp"
+        android:layout_height="55dp"
         android:background="@color/gray_thin"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -77,7 +77,7 @@
             android:gravity="center"
             android:text="选项"
             android:textColor="@drawable/radiogroup_text_selector"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <RadioButton
             android:id="@+id/data_transfer_rbt"
@@ -91,7 +91,7 @@
             android:gravity="center"
             android:text="传输"
             android:textColor="@drawable/radiogroup_text_selector"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
     </RadioGroup>
 
 </LinearLayout>

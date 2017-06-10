@@ -29,7 +29,7 @@ import com.example.administrator.thinker_soft.model.GridHomePageItem;
 import java.util.ArrayList;
 import java.util.List;
 
-import example.android_cbjactivity.CBJActivity;
+import com.example.administrator.thinker_soft.android_cbjactivity.CBJActivity;
 
 /**
  * Created by Administrator on 2017/5/31.

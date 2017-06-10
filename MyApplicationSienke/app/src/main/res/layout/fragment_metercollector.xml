@@ -39,7 +39,7 @@
             android:textSize="15sp" />
     </LinearLayout>
 
-    <cc.thksoft.myfirstpro.refreshListView.RefreshPullToRefreshListView
+    <com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshListView
         android:id="@+id/gps_meter_fragment_lv"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -53,5 +53,5 @@
         android:scrollbars="none"
         android:transcriptMode="disabled">
 
-    </cc.thksoft.myfirstpro.refreshListView.RefreshPullToRefreshListView>
+    </com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshListView>
 </LinearLayout>

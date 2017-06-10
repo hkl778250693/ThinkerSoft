@@ -1,4 +1,4 @@
-package mobile_business;
+package com.example.administrator.thinker_soft.mobile_business;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,16 +10,17 @@ import com.example.administrator.thinker_soft.R;
 /**
  * Created by Administrator on 2017/6/9.
  */
-public class BusinessNewsActivity extends Activity {
+public class BusinessMessageActivity extends Activity {
 
     private ImageView back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_news);
+        setContentView(R.layout.activity_business_message);
 
-        bindView();
-        setViewClickListener();
+        bindView();//绑定控件
+        setViewClickListener();//点击事件
     }
 
     public void bindView(){

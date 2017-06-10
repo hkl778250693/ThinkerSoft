@@ -1,4 +1,4 @@
-package mobile_business;
+package com.example.administrator.thinker_soft.mobile_business;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import com.example.administrator.thinker_soft.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import mobile_business.BusinessEmailListviewItem;
 
 /**
  * Created by Administrator on 2017/6/9.

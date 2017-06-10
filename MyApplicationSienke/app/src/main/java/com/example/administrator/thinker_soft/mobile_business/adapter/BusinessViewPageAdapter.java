@@ -1,4 +1,4 @@
-package mobile_business.adapter;
+package com.example.administrator.thinker_soft.mobile_business.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

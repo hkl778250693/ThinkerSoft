@@ -1,4 +1,4 @@
-package mobile_business.adapter;
+package com.example.administrator.thinker_soft.mobile_business.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,10 +10,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.mobile_business.BusinessEmailListviewItem;
 
 import java.util.List;
-
-import mobile_business.BusinessEmailListviewItem;
 
 /**
  * Created by Administrator on 2017/6/9.

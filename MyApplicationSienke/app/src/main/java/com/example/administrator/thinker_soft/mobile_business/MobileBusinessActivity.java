@@ -1,4 +1,4 @@
-package mobile_business;
+package com.example.administrator.thinker_soft.mobile_business;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -54,6 +54,11 @@
         <activity android:name="com.example.administrator.thinker_soft.activity.MyPhotoGalleryActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.example.administrator.thinker_soft.activity.SecurityGuideActivity" android:screenOrientation="portrait"/>
 
+        //掌上办公
+        <activity android:name="mobile_business.MobileBusinessActivity" android:screenOrientation="portrait"/>
+        <activity android:name="mobile_business.BusinessNewsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="mobile_business.BusinessMessageActivity" android:screenOrientation="portrait"/>
+        <activity android:name="mobile_business.BusinessEmailInfoActivity" android:screenOrientation="portrait"/>
         //移动APP
         <activity android:name="com.example.administrator.thinker_soft.activity.MoveLoginActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.example.administrator.thinker_soft.activity.MoveHomePageActivity" android:screenOrientation="portrait"/>

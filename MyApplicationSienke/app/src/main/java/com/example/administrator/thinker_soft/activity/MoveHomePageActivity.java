@@ -23,13 +23,16 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.adapter.GridviewHomePageAdapter;
+import com.example.administrator.thinker_soft.android_cbjactivity.CBJActivity;
 import com.example.administrator.thinker_soft.model.GridHomePageItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.administrator.thinker_soft.android_cbjactivity.CBJActivity;
+import mobile_business.MobileBusinessActivity;
 
 /**
  * Created by Administrator on 2017/5/31.
@@ -118,6 +121,9 @@ public class MoveHomePageActivity extends Activity {
                     startActivity(intent);
                 }else if(item.getImageName().equals("工作流")){
                     Intent intent = new Intent(MoveHomePageActivity.this,BusinessWebviewActivity.class);
+                    startActivity(intent);
+                }else if (item.getImageName().equals("抢维修")){
+                    Intent intent= new Intent(MoveHomePageActivity.this, MobileBusinessActivity.class);
                     startActivity(intent);
                 }
             }

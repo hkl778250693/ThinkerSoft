@@ -11,16 +11,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.mobile_business.BusinessCommunityActivity;
+import com.example.administrator.thinker_soft.mobile_business.BusinessMessageActivity;
+import com.example.administrator.thinker_soft.mobile_business.BusinessNewsActivity;
 
-import mobile_business.BusinessMessageActivity;
-import mobile_business.BusinessNewsActivity;
 
 /**
  * Created by Administrator on 2017/6/9.
  */
 public class PublicMessageFragment extends Fragment {
     private View view;
-    private TextView news,message;
+    private TextView news,message,community;
 
     @Nullable
     @Override
@@ -37,12 +38,14 @@ public class PublicMessageFragment extends Fragment {
     public void bindView(){
         news = (TextView) view.findViewById(R.id.news);
         message = (TextView) view.findViewById(R.id.message);
+        community = (TextView) view.findViewById(R.id.community);
     }
 
     //点击事件
     public void setViewClickListener(){
         news.setOnClickListener(clickListener);
         message.setOnClickListener(clickListener);
+        community.setOnClickListener(clickListener);
     }
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
@@ -55,6 +58,10 @@ public class PublicMessageFragment extends Fragment {
                 case R.id.message:
                     Intent intent1 = new Intent(getActivity(), BusinessMessageActivity.class);
                     startActivity(intent1);
+                    break;
+                case R.id.community:
+                    Intent intent2 = new Intent(getActivity(), BusinessCommunityActivity.class);
+                    startActivity(intent2);
                     break;
             }
         }

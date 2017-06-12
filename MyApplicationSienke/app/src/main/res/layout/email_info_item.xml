@@ -11,12 +11,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/check"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="0.5"
             android:background="@drawable/email_info_selector"
             android:button="@null" />
 
@@ -53,16 +52,17 @@
             android:layout_weight="3"
             android:orientation="horizontal">
 
-            <DatePicker
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="04/22/2017" />
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/start_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/email_info_star_selector" />
+                android:background="@drawable/email_info_star_selector"
+                android:button="@null" />
         </LinearLayout>
 
     </LinearLayout>

@@ -11,8 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.mobile_business.BusinessEmailInfoActivity;
+import com.example.administrator.thinker_soft.mobile_business.BusinessNetPhoneBookActivity;
 
-import mobile_business.BusinessEmailInfoActivity;
 
 /**
  * Created by Administrator on 2017/6/9.
@@ -45,6 +46,7 @@ public class NetFragment extends Fragment {
     //点击事件
     public void setViewClickListener(){
         email.setOnClickListener(clickListener);
+        phoneBook.setOnClickListener(clickListener);
     }
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
@@ -53,6 +55,10 @@ public class NetFragment extends Fragment {
                 case R.id.email:
                     Intent intent = new Intent(getActivity(), BusinessEmailInfoActivity.class);
                     startActivity(intent);
+                    break;
+                case R.id.phone_book:
+                    Intent intent1 = new Intent(getActivity(), BusinessNetPhoneBookActivity.class);
+                    startActivity(intent1);
                     break;
             }
         }

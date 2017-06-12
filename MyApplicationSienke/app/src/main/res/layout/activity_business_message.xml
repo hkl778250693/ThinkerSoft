@@ -94,7 +94,7 @@
                 android:drawablePadding="15dp"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="报告类型："
+                android:text="报告时间："
                 android:textColor="@color/text_black"
                 android:textSize="16sp" />
 

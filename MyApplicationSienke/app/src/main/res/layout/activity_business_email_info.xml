@@ -43,18 +43,38 @@
         android:background="@color/gray_thin"
         android:orientation="horizontal">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/checked"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/email_info_selector"
-            android:padding="10dp"
-            android:text="全选"
-            android:textColor="@drawable/business_text_selector"
-            android:textSize="16sp" />
+            android:layout_gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/email_info_selector"
+                android:layout_gravity="center"
+                android:layout_marginLeft="3dp"
+                android:button="@null" />
+
+            <TextView
+                android:id="@+id/choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="全选"
+                android:textColor="@drawable/business_text_selector"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <Button
+            android:id="@+id/weidu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -63,6 +83,7 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/yidu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -71,6 +92,7 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/delete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -79,6 +101,7 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -5,47 +5,46 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
-import com.example.administrator.thinker_soft.mobile_business.BusinessEmailListviewItem;
+import com.example.administrator.thinker_soft.mobile_business.PhoneBookListviewItem;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/6/9.
+ * Created by Administrator on 2017/6/10.
  */
-public class EmailInfoAdapter extends BaseAdapter {
+public class PhoneBookAdapter extends BaseAdapter {
     private Context context;
-    private List<BusinessEmailListviewItem> businessEmailListviewItems;
     private LayoutInflater layoutInflater;
+    private List<PhoneBookListviewItem> phoneBookListviewItems;
 
 
-    public EmailInfoAdapter(Context context, List<BusinessEmailListviewItem> businessEmailListviewItemList) {
+    public PhoneBookAdapter(Context context, List<PhoneBookListviewItem> phoneBookListviewItemList) {
         this.context = context;
-        this.businessEmailListviewItems = businessEmailListviewItemList;
+        this.phoneBookListviewItems = phoneBookListviewItemList;
         if (context != null) {
             layoutInflater = LayoutInflater.from(context);
         }
     }
 
-
     @Override
     public int getCount() {
-        if (businessEmailListviewItems == null) {
+        if (phoneBookListviewItems == null) {
             return 0;
         } else {
-            return businessEmailListviewItems.size();
+            return phoneBookListviewItems.size();
         }
     }
 
     @Override
     public Object getItem(int position) {
-        if (businessEmailListviewItems == null) {
+        if (phoneBookListviewItems == null) {
             return null;
         } else {
-            return businessEmailListviewItems.get(position);
+            return phoneBookListviewItems.get(position);
         }
     }
 
@@ -59,20 +58,21 @@ public class EmailInfoAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = layoutInflater.inflate(R.layout.email_info_item, null);
-            viewHolder.check = (CheckBox) convertView.findViewById(R.id.check);
-            viewHolder.email_adress = (TextView) convertView.findViewById(R.id.email_adress);
-            viewHolder.start_check = (CheckBox) convertView.findViewById(R.id.start_check);
+            convertView = layoutInflater.inflate(R.layout.business_net_book_listview_item, null);
+            viewHolder.name_pic = (ImageView) convertView.findViewById(R.id.name_pic);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.name);
+            viewHolder.guanzhu = (TextView) convertView.findViewById(R.id.guanzhu);
             convertView.setTag(viewHolder);
-        } else {
+        }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         return convertView;
     }
 
     public class ViewHolder {
-        CheckBox check;
-        TextView email_adress;
-        CheckBox start_check;
+        ImageView name_pic;
+        TextView name;
+        TextView jihuo;
+        TextView guanzhu;
     }
 }

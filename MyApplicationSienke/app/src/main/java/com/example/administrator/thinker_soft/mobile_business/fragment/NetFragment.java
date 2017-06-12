@@ -14,7 +14,6 @@ import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.mobile_business.BusinessEmailInfoActivity;
 import com.example.administrator.thinker_soft.mobile_business.BusinessNetPhoneBookActivity;
 
-
 /**
  * Created by Administrator on 2017/6/9.
  */

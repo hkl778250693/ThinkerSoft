@@ -31,7 +31,6 @@ public class WeiChaoBaoActivity extends Activity {
 		choose_meter = (TextView) findViewById(R.id.tv_choose_met);
 		choose_all = (TextView) findViewById(R.id.tv_choose_all);
 		choose_meter.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				Intent intent = getIntent();

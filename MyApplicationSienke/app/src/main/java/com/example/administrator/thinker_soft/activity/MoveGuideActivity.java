@@ -23,7 +23,7 @@ public class MoveGuideActivity extends Activity {
         setContentView(R.layout.activity_move_guide);
 
         imageViewGif = (ImageView) findViewById(R.id.image_gif);
-        Glide.with(MoveGuideActivity.this).load(R.mipmap.welcome1).asGif().diskCacheStrategy(DiskCacheStrategy.NONE).into(imageViewGif);
+        Glide.with(MoveGuideActivity.this).load(R.mipmap.welcome1).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageViewGif);
         sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);
         new Handler(){
             @Override

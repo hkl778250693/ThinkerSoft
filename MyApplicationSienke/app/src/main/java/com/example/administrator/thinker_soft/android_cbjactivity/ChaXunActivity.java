@@ -46,7 +46,8 @@ public class ChaXunActivity extends Activity {
 
         bindView();
         defaultSetting();
-        setViewClickListener();}
+        setViewClickListener();
+    }
 
     //绑定控件
     private void bindView() {
@@ -79,7 +80,7 @@ public class ChaXunActivity extends Activity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.by_met_num:
+                case R.id.by_met_book:
                     Intent intent1 = new Intent(ChaXunActivity.this, CbbCXAction.class);
                     startActivity(intent1);
                     break;
@@ -145,5 +146,4 @@ public class ChaXunActivity extends Activity {
         super.onSaveInstanceState(outState);
         Log.v("onSaveInstanceState:", "onSaveInstanceState()");
     }
-
 }

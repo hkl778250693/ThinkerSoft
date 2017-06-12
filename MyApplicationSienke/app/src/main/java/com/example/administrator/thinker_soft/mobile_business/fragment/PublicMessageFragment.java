@@ -15,7 +15,6 @@ import com.example.administrator.thinker_soft.mobile_business.BusinessCommunityA
 import com.example.administrator.thinker_soft.mobile_business.BusinessMessageActivity;
 import com.example.administrator.thinker_soft.mobile_business.BusinessNewsActivity;
 
-
 /**
  * Created by Administrator on 2017/6/9.
  */

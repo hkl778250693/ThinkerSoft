@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/gray_thin">
+        android:background="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,8 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/normal_button_bg_selector"
                 android:gravity="center"
+                android:background="@drawable/normal_button_bg_selector"
                 android:padding="10dp"
                 android:text="单击选择"
                 android:textColor="@color/text_gray"
@@ -73,7 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -99,15 +100,19 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_thin" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:background="@android:color/white"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/cancel"
@@ -115,12 +120,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
                 android:background="@drawable/search"
-                android:button="@null"
                 android:gravity="center_horizontal"
-                android:paddingBottom="10dp"
+                android:paddingBottom="5dp"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
-                android:paddingTop="10dp"
+                android:paddingTop="5dp"
                 android:text="取消"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
@@ -130,22 +134,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/user_detail_save_btn_selector"
-                android:button="@null"
                 android:gravity="center_horizontal"
-                android:paddingBottom="10dp"
+                android:paddingBottom="5dp"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
-                android:paddingTop="10dp"
+                android:paddingTop="5dp"
                 android:text="查询"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
         </LinearLayout>
 
         <View
-            android:id="@+id/tv_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray" />
+            android:background="@color/gray_thin" />
 
         <ListView
             android:id="@+id/list_view"

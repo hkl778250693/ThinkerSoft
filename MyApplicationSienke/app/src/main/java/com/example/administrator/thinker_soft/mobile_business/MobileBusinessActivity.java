@@ -19,8 +19,6 @@ import com.example.administrator.thinker_soft.mobile_business.fragment.PublicMes
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 /**
  * Created by Administrator on 2017/6/8.
  */

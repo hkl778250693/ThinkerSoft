@@ -2,33 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/recode"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:layout_height="match_parent"
     android:background="@drawable/dialog_bg"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_height="50dp"
+        android:background="@mipmap/nav_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/circle_selector"
+            android:padding="10dp"
+            android:src="@drawable/back_selector" />
 
         <TextView
-            android:id="@+id/chooseHead_tv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerInParent="true"
             android:text="文件选择"
-            android:textColor="@color/base_text_color"
-            android:textSize="21sp"
-            android:textStyle="normal" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:background="#999999" />
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,40 +43,18 @@
         android:orientation="vertical">
 
         <ListView
-            android:id="@+id/meter_db_lv"
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:divider="#999999"
-            android:dividerHeight="1dp"
-            android:listSelector="@null"
-            android:scrollbars="none"
-            android:textSize="18sp">
-            
-        </ListView>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#999999" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
-
-        <TextView
-            android:id="@+id/tv_xuanze_fanhui"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="onAction"
-            android:text="返回"
-            android:textColor="@color/bblue"
-            android:textSize="21sp"
-            android:textStyle="bold" />
+            android:divider="@color/white_transparent"
+            android:dividerHeight="8dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:listSelector="#00000000"
+            android:scrollbarThumbVertical="@color/text_blue"
+            android:scrollbarStyle="insideInset"
+            android:scrollbarSize="2dp"/>
     </LinearLayout>
 
 </LinearLayout>

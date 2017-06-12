@@ -64,5 +64,4 @@ public class BaseMapDemo extends Activity {
 		// activity ����ʱͬʱ���ٵ�ͼ�ؼ�
 		mMapView.onDestroy();
 	}
-
 }

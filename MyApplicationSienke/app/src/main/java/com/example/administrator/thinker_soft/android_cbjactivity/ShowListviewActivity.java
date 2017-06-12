@@ -25,16 +25,21 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 import com.example.administrator.thinker_soft.myfirstpro.paging.noMeterPageDataBuffer;
 import com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshBase;
+import com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshListView;
 import com.example.administrator.thinker_soft.myfirstpro.service.DBService;
+import com.example.administrator.thinker_soft.niftydialogeffects.Effectstype;
 import com.example.administrator.thinker_soft.niftydialogeffects.NiftyDialogBuilder;
+import com.example.administrator.thinker_soft.viewbadger.BadgeView;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -45,11 +50,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
-import com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshListView;
-import com.example.administrator.thinker_soft.niftydialogeffects.Effectstype;
-import com.example.administrator.thinker_soft.viewbadger.BadgeView;
-
 
 @SuppressLint("NewApi")
 public class ShowListviewActivity extends Activity{
@@ -58,24 +58,21 @@ public class ShowListviewActivity extends Activity{
 	private List<UsersInfo> totalinfos;
 	private List<UsersInfo> pageinfos;
 	private Map<Integer,String> mMapContent;
-	private LinearLayout layout;//����
-	private EditText editText;//�����
-	private TextView textView;//���
-	//���ݿⷽ��
+	private LinearLayout layout;
+	private EditText editText;
+	private TextView textView;
 	private DBService dbService;
 	private String dbName;
 	private String filepath;
-	//��ҳ
 	private LinearLayout page_show_ll;
 	private TextView up;
 	private TextView show;
 	private TextView down;
-	private LinearLayout control_page_show;
+	private ImageView control_page_show;
 	private int currentdatanum;//������ʾ����
 	private int currentdatacount;//����������
 	private int pagenum=0;//��ǰҳ  Ĭ�ϵ�һҳ
 	private int pagecount;//��ҳ��
-	//����
 	private LayoutInflater layoutInflater;
 	private View progressBar;
 	private TextView tv_show;
@@ -83,7 +80,6 @@ public class ShowListviewActivity extends Activity{
 	private MyHandler handler;
 	private int UP_LOAD_SUCCESS = 1;
 	private int DOWN_LOAD_SUCCESS = 2;
-	//����
 	private int indexpos;//�������λ��
 	private int indexsign = -2;//�����ʾλ��
 	private int indexmsg;//����������ʾλ��
@@ -93,15 +89,12 @@ public class ShowListviewActivity extends Activity{
 	private StringBuffer result;
 	private int location;//�����EditText��λ��
 	NormalShouYeAdapter adapter;
-	
 	private static final int REQUESTCODE = 10;
-	
 	private SharedPreferences sharedPreferences;
 	private SharedPreferences.Editor editor;	
 	private String LONGITUDE;
 	private String LATIUDE;//γ��
 	private String sb;
-	//����
 	private int signal;//��ҳ���ܱ�־
 	private int con_signal;//���������־
 	private String bookName;
@@ -118,22 +111,30 @@ public class ShowListviewActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shouyechaobiaos);
-		MyActivityManager mam = MyActivityManager.getInstance();
-		mam.pushOneActivity(this);
-		handler = new MyHandler();
+
+		bindView();
+		defaultSetting();
+		setViewClickListener();
+	}
+
+	//绑定控件
+	private void bindView() {
 		mylistView = (RefreshPullToRefreshListView)findViewById(R.id.list_shouye);
-		mylistView.setMode(RefreshPullToRefreshBase.Mode.BOTH);// ����ˢ��ģʽ ���� ���� Ĭ������
-		mylistView.setOnRefreshListener(onRefreshListener2);
-		mMapContent = new HashMap<Integer, String>();
 		layout = (LinearLayout) findViewById(R.id.ll_Home_btn);
 		page_show_ll = (LinearLayout) findViewById(R.id.page_show_ll);
 		up = (TextView) findViewById(R.id.page_up);
 		show = (TextView) findViewById(R.id.page_show);
 		down = (TextView) findViewById(R.id.page_down);
-		control_page_show = (LinearLayout) findViewById(R.id.control_page_show);	
-		//������
-		result = new StringBuffer("");
+		control_page_show = (ImageView) findViewById(R.id.control_page_show);
+	}
 
+	//初始化设置
+	private void defaultSetting() {
+		MyActivityManager mam = MyActivityManager.getInstance();
+		mam.pushOneActivity(this);
+		handler = new MyHandler();
+		mMapContent = new HashMap<Integer, String>();
+		result = new StringBuffer("");
 		sharedPreferences = getApplication().getSharedPreferences("IP_PORT_DBNAME", 0);
 		dbName = sharedPreferences.getString("dbName", "");
 		Log.v("ZT", "���ݿ�����"+dbName);
@@ -144,7 +145,6 @@ public class ShowListviewActivity extends Activity{
 		usName = sharedPreferences.getString("usName", "");
 		usId = sharedPreferences.getString("usId", "");
 		meterId = sharedPreferences.getString("meterId", "");
-		
 		filepath = Environment.getDataDirectory().getPath() + "/data/"+"com.example.android_cbjactivity"+"/databases/";
 		Log.v("ZT", "�ļ�·����"+filepath);
 		File file = new File(filepath+dbName);
@@ -152,25 +152,31 @@ public class ShowListviewActivity extends Activity{
 		currentdatanum = sharedPreferences.getInt("number", 0);
 		if(currentdatanum==0){
 			currentdatanum = 50;//Ĭ����ʾ50������
-		}	
+		}
 		if(initdata()==false){
 			Toast.makeText(ShowListviewActivity.this, "û�г����¼", Toast.LENGTH_SHORT).show();
 			finish();
-		};
-
+		}
 		if(pageinfos==null||pageinfos.size()<0){
 			return;
 		}
 		adapter = new NormalShouYeAdapter(ShowListviewActivity.this, pageinfos);
 		layoutInflater = getLayoutInflater();
-		
+
 		mylistView.setVerticalScrollBarEnabled(true);
 		mylistView.setAdapter(adapter);
 		if(continue_person!=0){
 			mylistView.getRefreshableView().setSelection(con_position%currentdatanum);
 		}
+	}
+
+	//点击事件
+	public void setViewClickListener() {
+		mylistView.setMode(RefreshPullToRefreshBase.Mode.BOTH);// ����ˢ��ģʽ ���� ���� Ĭ������
+		mylistView.setOnRefreshListener(onRefreshListener2);
+
 		control_page_show.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				if(page_show_ll.getVisibility()==View.GONE){
@@ -182,7 +188,7 @@ public class ShowListviewActivity extends Activity{
 		});
 
 		up.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				if(pagenum>0){
@@ -198,13 +204,13 @@ public class ShowListviewActivity extends Activity{
 					mylistView.getRefreshableView().setSelection(currentdatanum);
 					indexsign=-2;
 					location = 0;
-					layout.setVisibility(LinearLayout.GONE);	
+					layout.setVisibility(LinearLayout.GONE);
 				}
 				//down up show  currentdatanum currentdatacount pagenum
 			}
 		});
 		down.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				if(pagenum<pagecount-1){
@@ -220,12 +226,12 @@ public class ShowListviewActivity extends Activity{
 					mylistView.getRefreshableView().setSelection(1);
 					indexsign=-2;
 					location = 0;
-					layout.setVisibility(LinearLayout.GONE);	
+					layout.setVisibility(LinearLayout.GONE);
 				}
 			}
 		});
-
 	}
+
 	public void dealdata(){
 		if(signal == 1){
 			if(con_signal == 0){
@@ -951,7 +957,7 @@ public class ShowListviewActivity extends Activity{
 	public void onButton(View v) {
 		int id = v.getId();
 		switch (id) {
-		case R.id.HomeMeter_back:
+		case R.id.back:
 			this.finish();
 			break;
 			case R.id.listone:

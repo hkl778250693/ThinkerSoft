@@ -12,14 +12,13 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.mobile_business.adapter.BusinessViewPageAdapter;
+import com.example.administrator.thinker_soft.mobile_business.fragment.NetFragment;
+import com.example.administrator.thinker_soft.mobile_business.fragment.PersonWorkFragment;
+import com.example.administrator.thinker_soft.mobile_business.fragment.PublicMessageFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import mobile_business.adapter.BusinessViewPageAdapter;
-import mobile_business.fragment.NetFragment;
-import mobile_business.fragment.PersonWorkFragment;
-import mobile_business.fragment.PublicMessageFragment;
 
 /**
  * Created by Administrator on 2017/6/8.

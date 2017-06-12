@@ -11,9 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
-
-import mobile_business.BusinessMessageActivity;
-import mobile_business.BusinessNewsActivity;
+import com.example.administrator.thinker_soft.mobile_business.BusinessMessageActivity;
+import com.example.administrator.thinker_soft.mobile_business.BusinessNewsActivity;
 
 /**
  * Created by Administrator on 2017/6/9.

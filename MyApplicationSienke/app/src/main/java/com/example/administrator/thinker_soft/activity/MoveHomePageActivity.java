@@ -27,12 +27,11 @@ import android.widget.Toast;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.adapter.GridviewHomePageAdapter;
 import com.example.administrator.thinker_soft.android_cbjactivity.CBJActivity;
+import com.example.administrator.thinker_soft.mobile_business.MobileBusinessActivity;
 import com.example.administrator.thinker_soft.model.GridHomePageItem;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import mobile_business.MobileBusinessActivity;
 
 /**
  * Created by Administrator on 2017/5/31.

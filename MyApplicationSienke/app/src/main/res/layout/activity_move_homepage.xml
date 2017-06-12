@@ -46,7 +46,7 @@
         android:numColumns="3"
         android:verticalSpacing="20dp"
         android:listSelector="#00000000"
-        android:background="@color/gray_thin"
+        android:background="@android:color/white"
         android:scrollbarThumbVertical="@color/text_blue"
         android:scrollbarStyle="insideInset"
         android:scrollbarSize="2dp"/>

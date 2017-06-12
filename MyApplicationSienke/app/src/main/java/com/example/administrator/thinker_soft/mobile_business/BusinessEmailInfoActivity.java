@@ -12,8 +12,6 @@ import com.example.administrator.thinker_soft.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobile_business.BusinessEmailListviewItem;
-
 /**
  * Created by Administrator on 2017/6/9.
  */

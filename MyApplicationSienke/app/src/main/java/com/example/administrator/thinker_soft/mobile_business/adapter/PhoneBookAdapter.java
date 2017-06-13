@@ -61,7 +61,6 @@ public class PhoneBookAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.business_net_book_listview_item, null);
             viewHolder.name_pic = (ImageView) convertView.findViewById(R.id.name_pic);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
-            viewHolder.guanzhu = (TextView) convertView.findViewById(R.id.guanzhu);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -72,7 +71,5 @@ public class PhoneBookAdapter extends BaseAdapter {
     public class ViewHolder {
         ImageView name_pic;
         TextView name;
-        TextView jihuo;
-        TextView guanzhu;
     }
 }

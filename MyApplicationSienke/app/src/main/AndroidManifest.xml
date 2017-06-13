@@ -61,10 +61,17 @@
         <activity android:name=".mobile_business.BusinessEmailInfoActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessNetPhoneBookActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessCommunityActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessPersonSettingActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessScheduleActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessWorkReportActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessEmailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessCheckingInActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessCheckingInInfoActivity" android:screenOrientation="portrait"/>
         //移动APP
         <activity android:name="com.example.administrator.thinker_soft.activity.MoveLoginActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.example.administrator.thinker_soft.activity.MoveHomePageActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.example.administrator.thinker_soft.activity.BusinessWebviewActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessDataInfo" android:screenOrientation="portrait"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.administrator.thinker_soft.fileprovider"

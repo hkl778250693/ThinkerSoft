@@ -80,7 +80,6 @@ public class MobileBusinessActivity extends FragmentActivity {
     //点击事件
     public void setViewClickListener() {
         back.setOnClickListener(clickListener);
-        more.setOnClickListener(clickListener);
         publicMessage.setOnClickListener(clickListener);
         net.setOnClickListener(clickListener);
         person.setOnClickListener(clickListener);

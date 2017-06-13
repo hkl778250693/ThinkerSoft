@@ -30,7 +30,6 @@ public class EmailInfoAdapter extends BaseAdapter {
         }
     }
 
-
     @Override
     public int getCount() {
         if (businessEmailListviewItems == null) {
@@ -63,6 +62,7 @@ public class EmailInfoAdapter extends BaseAdapter {
             viewHolder.check = (CheckBox) convertView.findViewById(R.id.check);
             viewHolder.email_adress = (TextView) convertView.findViewById(R.id.email_adress);
             viewHolder.start_check = (CheckBox) convertView.findViewById(R.id.start_check);
+            viewHolder.check1 = (CheckBox) convertView.findViewById(R.id.check1);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -70,9 +70,13 @@ public class EmailInfoAdapter extends BaseAdapter {
         return convertView;
     }
 
+
+
     public class ViewHolder {
-        CheckBox check;
-        TextView email_adress;
-        CheckBox start_check;
+        public CheckBox check;
+        public TextView email_adress;
+        public CheckBox start_check;
+        public CheckBox check1;
+
     }
 }

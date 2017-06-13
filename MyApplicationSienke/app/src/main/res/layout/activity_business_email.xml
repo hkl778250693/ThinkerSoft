@@ -26,18 +26,10 @@
             android:text="邮件"
             android:textColor="@android:color/white"
             android:textSize="21sp" />
-
-        <ImageView
-            android:id="@+id/more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:padding="16dp"
-            android:src="@drawable/selecter_main_option" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/inbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/text_font_color_white">
@@ -107,7 +99,7 @@
             android:drawablePadding="17dp"
             android:gravity="center"
             android:padding="10dp"
-            android:text="记事本"
+            android:text="发送邮件"
             android:textColor="@color/text_black"
             android:textSize="16sp" />
 

@@ -83,48 +83,48 @@ public class NewTaskListviewAdapter extends BaseAdapter {
         }
 
         NewTaskListviewItem item = newTaskListviewItemList.get(position);
-        if(item.getFlag() == 0){
+        if (item.getFlag() == 0) {
             viewHolder.securityStateRoot.setVisibility(View.VISIBLE);
             viewHolder.remarksRoot.setVisibility(View.VISIBLE);
             viewHolder.securityState.setText(item.getSecurityState());
             viewHolder.remarks.setText(item.getRemarks());
-        }else if(item.getFlag() == 1){
+        } else if (item.getFlag() == 1) {
             viewHolder.securityStateRoot.setVisibility(View.GONE);
             viewHolder.remarksRoot.setVisibility(View.GONE);
-        }else {
+        } else {
             viewHolder.securityStateRoot.setVisibility(View.VISIBLE);
             viewHolder.securityState.setText(item.getSecurityState());
             viewHolder.remarksRoot.setVisibility(View.GONE);
         }
-        if(!item.getUserName().equals("null")){
+        if (!item.getUserName().equals("null")) {
             viewHolder.user_name.setText(item.getUserName());
-        }else {
+        } else {
             viewHolder.user_name.setText("无");
         }
         viewHolder.userProperty.setText(item.getUserproperty());
-        if(!item.getNumber().equals("null")){
+        if (!item.getNumber().equals("null")) {
             viewHolder.number.setText(item.getNumber());
-        }else {
+        } else {
             viewHolder.number.setText("无");
         }
-        if(!item.getPhoneNumber().equals("null")){
+        if (!item.getPhoneNumber().equals("null")) {
             viewHolder.phone_number.setText(item.getPhoneNumber());
-        }else {
+        } else {
             viewHolder.phone_number.setText("无");
         }
-        if(!item.getUserId().equals("null")){
+        if (!item.getUserId().equals("null")) {
             viewHolder.user_id.setText(item.getUserId());
-        }else {
+        } else {
             viewHolder.user_id.setText("无");
         }
-        if(!item.getOldUserId().equals("null")){
+        if (!item.getOldUserId().equals("null")) {
             viewHolder.old_user_id.setText(item.getOldUserId());
-        }else {
+        } else {
             viewHolder.old_user_id.setText("无");
         }
-        if(!item.getAdress().equals("null")){
+        if (!item.getAdress().equals("null")) {
             viewHolder.address.setText(item.getAdress());
-        }else {
+        } else {
             viewHolder.address.setText("无");
         }
         // 设置状态
@@ -138,6 +138,6 @@ public class NewTaskListviewAdapter extends BaseAdapter {
 
     public static void setIsCheck(HashMap<Integer, Boolean> isCheck) {
         NewTaskListviewAdapter.isCheck = isCheck;
-        Log.i("setIsCheck", "setIsCheck进来了！"+isCheck);
+        Log.i("setIsCheck", "setIsCheck进来了！" + isCheck);
     }
 }

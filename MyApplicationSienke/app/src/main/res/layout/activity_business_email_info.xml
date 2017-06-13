@@ -26,15 +26,6 @@
             android:text="收件箱"
             android:textColor="@android:color/white"
             android:textSize="21sp" />
-
-        <ImageView
-            android:id="@+id/more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:padding="16dp"
-            android:src="@drawable/selecter_main_option" />
     </RelativeLayout>
 
     <LinearLayout

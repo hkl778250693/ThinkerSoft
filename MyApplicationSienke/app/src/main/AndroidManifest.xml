@@ -67,6 +67,11 @@
         <activity android:name=".mobile_business.BusinessEmailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessCheckingInActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessCheckingInInfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessSendEmailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessPopPublishActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessColumeMessageActivity" android:screenOrientation="portrait"/>
+
+
         //移动APP
         <activity android:name="com.example.administrator.thinker_soft.activity.MoveLoginActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.example.administrator.thinker_soft.activity.MoveHomePageActivity" android:screenOrientation="portrait"/>

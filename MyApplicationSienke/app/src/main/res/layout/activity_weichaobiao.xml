@@ -2,79 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/no_recode"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:background="@mipmap/bg_boeder"
-    android:gravity="center_horizontal"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="未抄抄表选择"
+        android:textColor="@color/base_text_color"
+        android:textSize="21sp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="未抄抄表选择"
-            android:textColor="@color/base_text_color"
-            android:textSize="21sp"
-            android:textStyle="normal" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_choose_met"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onAction"
+        android:text="单个抄表本"
+        android:textColor="@drawable/xz_color_selector"
+        android:textSize="17sp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+    <TextView
+        android:id="@+id/tv_choose_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onAction"
+        android:text="所有抄表本"
+        android:textColor="@drawable/xz_color_selector"
+        android:textSize="17dp"
+        android:textStyle="normal" />
 
-        <TextView
-            android:id="@+id/tv_choose_met"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="onAction"
-            android:text="单个抄表本"
-            android:textColor="@drawable/xz_color_selector"
-            android:textSize="17dp"
-            android:textStyle="normal" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/tv_choose_all"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="onAction"
-            android:text="所有抄表本"
-            android:textColor="@drawable/xz_color_selector"
-            android:textSize="17dp"
-            android:textStyle="normal" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/tv_weichaobiao_back"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="onAction"
-            android:text="返回"
-            android:textColor="@color/bblue"
-            android:textSize="21sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_weichaobiao_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onAction"
+        android:text="返回"
+        android:textColor="@color/bblue"
+        android:textSize="21sp"
+        android:textStyle="bold" />
 </LinearLayout>

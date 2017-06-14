@@ -46,7 +46,6 @@ import java.util.Vector;
 
 //work=��ת���������ҽ������Activity
 public class CaptureActivity extends Activity implements Callback,OnClickListener{
-
 	private CaptureActivityHandler handler;
 	private RelativeLayout perviw_parent;
 	private ViewfinderView viewfinderView;
@@ -139,10 +138,6 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 			initCamera(surfaceHolder);
 		} else {
 			surfaceHolder.addCallback(this);
-			/**
-			 * SURFACE_TYPE_PUSH_BUFFERS������Surface������ԭ�����ݣ�Surface�õ������������������ṩ��
-			 * ��Cameraͼ��Ԥ���о�ʹ�ø����͵�Surface����Camera�����ṩ��Ԥ��Surface���ݣ�����ͼ��Ԥ����Ƚ�������
-			 */
 			surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		}
 		decodeFormats = null;
@@ -156,11 +151,13 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 		initBeepSound();
 		vibrate = true;
 	}
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		Log.v("onSaveInstanceState:", "onSaveInstanceState()");
 	}
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -175,17 +172,20 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 		isRun = false;
 		CameraManager.get().closeDriver();
 	}
+
 	@Override
 	protected void onStart() {
 		super.onStart();
 
 	}
+
 	@Override
 	protected void onStop() {
 		super.onStop();
 		Log.v("onStop:", "onStop()");
 
 	}
+
 	@Override
 	protected void onDestroy() {
 		Log.v("onDestroy:", "onDestroy()");
@@ -233,10 +233,8 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 				intent.putExtra("action", "CaptureActivity");
 				intent.putExtra("usInfo", (Serializable)usList.get(0));
 				startActivity(intent);
-				;
 			}
 		}
-		//��ת���������ҽ������Activity
 	}
 
 	private void initCamera(SurfaceHolder surfaceHolder) {

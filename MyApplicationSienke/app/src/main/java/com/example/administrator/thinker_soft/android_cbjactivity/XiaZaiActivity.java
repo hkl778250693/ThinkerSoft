@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout.LayoutParams;
@@ -29,7 +30,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.myfirstpro.database.MyDBOpenHelper;
+import com.example.administrator.thinker_soft.myfirstpro.entity.AreaInfo;
+import com.example.administrator.thinker_soft.myfirstpro.entity.BookInfo;
+import com.example.administrator.thinker_soft.myfirstpro.entity.PropertyInfo;
+import com.example.administrator.thinker_soft.myfirstpro.entity.ProportionInfo;
+import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
 import com.example.administrator.thinker_soft.myfirstpro.lvadapter.AreaDataAdapter;
+import com.example.administrator.thinker_soft.myfirstpro.lvadapter.BookDataAdapter;
+import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
+import com.example.administrator.thinker_soft.myfirstpro.service.DBService;
+import com.example.administrator.thinker_soft.myfirstpro.threadsocket.SocketInteraction;
+import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
+import com.example.administrator.thinker_soft.myfirstpro.util.JaugeInternetState;
+import com.example.administrator.thinker_soft.myfirstpro.util.JsonAnalyze;
+import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
 
 import org.json.JSONException;
 
@@ -40,24 +55,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.example.administrator.thinker_soft.myfirstpro.database.MyDBOpenHelper;
-import com.example.administrator.thinker_soft.myfirstpro.entity.AreaInfo;
-import com.example.administrator.thinker_soft.myfirstpro.entity.BookInfo;
-import com.example.administrator.thinker_soft.myfirstpro.entity.PropertyInfo;
-import com.example.administrator.thinker_soft.myfirstpro.entity.ProportionInfo;
-import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
-import com.example.administrator.thinker_soft.myfirstpro.lvadapter.BookDataAdapter;
-import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
-import com.example.administrator.thinker_soft.myfirstpro.service.DBService;
-import com.example.administrator.thinker_soft.myfirstpro.threadsocket.SocketInteraction;
-import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
-import com.example.administrator.thinker_soft.myfirstpro.util.JaugeInternetState;
-import com.example.administrator.thinker_soft.myfirstpro.util.JsonAnalyze;
-import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
-
 @SuppressLint("NewApi") public class XiaZaiActivity extends Activity {
-	
-	private LinearLayout mImageView;
+	private ImageView back;
 	private ListView arealistView;
 	private ListView booklistView;	
 	private AreaDataAdapter areaAdapter;
@@ -87,29 +86,20 @@ import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
 	private EditText endNum;
 	private Dialog DownDialog;
 	private Button downLoadbtn;
-	
 	private int areatvcount = 0;
 	private int booktvcount = 0;
 	private boolean booksignal = true;
 	private boolean areasignal = true;
-	
-	
 	int requestCode;
-	//.............................
-	//����ΪSoecket��������
 	private String ip;
 	private String defaultPort;
 	private String operName = "NANBU";
 	private MyHandler dataHandler;
-	//�����ݿ��������
 	private DBService dbservice;
 	private String dbPath;
-	//.............................
-	//����Ϊ���ݿ����
 	private String version = "1";
 	private String tempDBName;
 	private String filepath = Environment.getDataDirectory().getPath() + "/data/"+"com.example.android_cbjactivity"+"/databases/";
-	
 	private Map<Integer,Boolean> dialogControl;
 	private int clickCount;
 	
@@ -118,36 +108,44 @@ import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_xiaozai);
-		MyActivityManager mam = MyActivityManager.getInstance();
-		mam.pushOneActivity(this);
-		mImageView=(LinearLayout) findViewById(R.id.back_Button);
+
+		bindView();
+		defaultSetting();
+		setViewClickListener();
+	}
+
+	//绑定控件ID
+	private void bindView() {
+		back=(ImageView) findViewById(R.id.back);
 		arealistView = (ListView)findViewById(R.id.lv_data_area);
 		booklistView = (ListView)findViewById(R.id.lv_data_book);
-		bookID = new ArrayList<String>();
-		areaID = new ArrayList<String>();
-		areaName = new ArrayList<String>();
-		bookName = new ArrayList<String>();
-		bookrecord = new ArrayList<Integer>();
-		arearecord = new ArrayList<Integer>();
 		booktv = (TextView) findViewById(R.id.add_book);
 		areatv = (TextView) findViewById(R.id.add_area);
 		book_scroll_ll = (LinearLayout) findViewById(R.id.book_scroll_ll);
 		area_scroll_ll = (LinearLayout) findViewById(R.id.area_scroll_ll);
 		begianNum = (EditText) findViewById(R.id.begain_num);
 		endNum = (EditText) findViewById(R.id.end_num);
-		
 		downLoadbtn = (Button) findViewById(R.id.downLoadbtn);
-		
+	}
+
+	//初始化设置
+	private void defaultSetting() {
+		MyActivityManager mam = MyActivityManager.getInstance();
+		mam.pushOneActivity(this);
+		bookID = new ArrayList<String>();
+		areaID = new ArrayList<String>();
+		areaName = new ArrayList<String>();
+		bookName = new ArrayList<String>();
+		bookrecord = new ArrayList<Integer>();
+		arearecord = new ArrayList<Integer>();
 		SharedPreferences sharedPreferences = getApplication().getSharedPreferences("IP_PORT_DBNAME", 0);
 		ip = sharedPreferences.getString("ip", "");
 		defaultPort = sharedPreferences.getString("port", "");
-		
-		
 		if("".equals(ip)||ip==null){
-			Toast.makeText(XiaZaiActivity.this, "������IP", Toast.LENGTH_LONG).show();				
+			Toast.makeText(XiaZaiActivity.this, "������IP", Toast.LENGTH_LONG).show();
 		}else if("".equals(defaultPort)||defaultPort==null){
 			Toast.makeText(XiaZaiActivity.this, "�����ö˿�", Toast.LENGTH_LONG).show();
-			finish();		
+			finish();
 		}else{
 			Intent intent = getIntent();
 			bookList = (ArrayList<BookInfo>)intent.getSerializableExtra("bookList");
@@ -165,53 +163,53 @@ import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
 		}
 		dialogControl = new HashMap<Integer, Boolean>();
 	}
-/*	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0){
-			if(DownDialog!=null&&DownDialog.isShowing()){
 
+	//点击事件
+	private void setViewClickListener() {
+		back.setOnClickListener(onClickListener);
+	}
+
+	View.OnClickListener onClickListener = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()){
+				case R.id.back:
+					finish();
+					break;
+				case R.id.downLoadbtn:
+					if("".equals(begianNum.getText().toString())&&!"".equals(endNum.getText().toString())){
+						Toast.makeText(XiaZaiActivity.this, "����ȷ��д��ѯ��Ϣ", Toast.LENGTH_LONG).show();
+						begianNum.setFocusable(true);
+					}else if(!"".equals(begianNum.getText().toString())&&"".equals(endNum.getText().toString())){
+						Toast.makeText(XiaZaiActivity.this, "����ȷ��д��ѯ��Ϣ", Toast.LENGTH_LONG).show();
+						endNum.setFocusable(true);
+					}else{
+						if((areaName!=null&&areaName.size()>0)||(bookName!=null&&bookName.size()>0)){
+							Intent intent = new Intent(XiaZaiActivity.this,dialog_loadname_activity.class);
+							if(areaName!=null&&areaName.size()>0){
+								intent.putExtra("areaName", (Serializable)areaName);
+							}
+							if(bookName!=null&&bookName.size()>0){
+								intent.putExtra("bookName", (Serializable)bookName);
+							}
+							int requestCode = 1;
+							startActivityForResult(intent, requestCode);
+						}else{
+							Toast.makeText(XiaZaiActivity.this, "��ѡ����������", Toast.LENGTH_LONG).show();
+						}
+					}
+					break;
+				default:
+					break;
 			}
 		}
-		return super.onKeyDown(keyCode, event);
-	}*/
+	};
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 	}
-	public void onAction(View v) {
-		int id=v.getId();
-		
-		switch (id) {
-		case R.id.downLoadbtn:
-			if("".equals(begianNum.getText().toString())&&!"".equals(endNum.getText().toString())){
-				Toast.makeText(this, "����ȷ��д��ѯ��Ϣ", Toast.LENGTH_LONG).show();
-				begianNum.setFocusable(true);
-			}else if(!"".equals(begianNum.getText().toString())&&"".equals(endNum.getText().toString())){
-				Toast.makeText(this, "����ȷ��д��ѯ��Ϣ", Toast.LENGTH_LONG).show();
-				endNum.setFocusable(true);
-			}else{
-				if((areaName!=null&&areaName.size()>0)||(bookName!=null&&bookName.size()>0)){
-					
-					Intent intent = new Intent(XiaZaiActivity.this,dialog_loadname_activity.class);
-					if(areaName!=null&&areaName.size()>0){			
-						intent.putExtra("areaName", (Serializable)areaName); 
-					}
-					if(bookName!=null&&bookName.size()>0){
-						intent.putExtra("bookName", (Serializable)bookName);   
-					}
-					int requestCode = 1;
-					startActivityForResult(intent, requestCode);
-				}else{
-					Toast.makeText(this, "��ѡ����������", Toast.LENGTH_LONG).show();
-				}
-			}
-			break;
-		case R.id.back_Button:
-			finish();
-		default:
-			break;
-		}
-	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
@@ -270,6 +268,7 @@ import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
 			}
 		}
 	}
+
 	private void createDataBase(String DBName) {
 			MyDBOpenHelper myDB = new MyDBOpenHelper(this, DBName, null, Integer.parseInt(version));
 			myDB.getWritableDatabase();
@@ -351,7 +350,6 @@ import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
 			areaID.add(areaList.get(position).getID());
 			areaName.add(areaList.get(position).getArea());
 			arealayout.setOnClickListener(new OnClickListener() {
-				
 				@Override
 				public void onClick(View v) {
 					areatvcount--;
@@ -397,9 +395,7 @@ import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
 	}
 	class BookLVClickListener implements OnItemClickListener{
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View view, final int position,
-				long arg3) {
-			
+		public void onItemClick(AdapterView<?> arg0, View view, final int position, long arg3) {
 			for(int i =0;i<bookrecord.size();i++){
 				if(bookrecord.get(i) == position){
 					return;

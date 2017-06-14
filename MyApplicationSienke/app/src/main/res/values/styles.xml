@@ -39,7 +39,7 @@
     </style>
 
     <!--//选择照片弹出框样式 上下移动-->
-    <style name="camera">
+    <style name="camera" >
         <item name="android:windowEnterAnimation">@anim/camera_enter</item>
         <item name="android:windowExitAnimation">@anim/camera_out</item>
     </style>

@@ -8,20 +8,19 @@ import android.os.IBinder;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.Marker;
+import com.example.administrator.thinker_soft.myfirstpro.entity.Db_Name;
 import com.example.administrator.thinker_soft.myfirstpro.lvadapter.GPSMeterAdapter;
 import com.example.administrator.thinker_soft.myfirstpro.lvadapter.GPSValveAdapter;
+import com.example.administrator.thinker_soft.myfirstpro.lvadapter.MapMeterAdapter.MapMHandler;
+import com.example.administrator.thinker_soft.myfirstpro.service.LocationService;
+import com.example.administrator.thinker_soft.myfirstpro.service.LocationService.LocationBinder;
+import com.example.administrator.thinker_soft.myfirstpro.util.BDLocationModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import com.example.administrator.thinker_soft.myfirstpro.entity.Db_Name;
-import com.example.administrator.thinker_soft.myfirstpro.lvadapter.MapMeterAdapter.MapMHandler;
-import com.example.administrator.thinker_soft.myfirstpro.service.LocationService;
-import com.example.administrator.thinker_soft.myfirstpro.service.LocationService.LocationBinder;
-import com.example.administrator.thinker_soft.myfirstpro.util.BDLocationModel;
 
 public class MyApplication extends Application {
     public static GPSMeterAdapter.GPSMeterHandler gpsmeterHandler;
@@ -31,8 +30,7 @@ public class MyApplication extends Application {
     public static boolean Bluetoo_isClick = false;
     public static List<Db_Name> dbname = new ArrayList<Db_Name>();
     public static List<Marker> clickMarkers = new ArrayList<Marker>(1);
-    public static List<BitmapDescriptor> clickMarkers_icon = new ArrayList<BitmapDescriptor>(
-            1);
+    public static List<BitmapDescriptor> clickMarkers_icon = new ArrayList<BitmapDescriptor>(1);
     //public static List<DeviceInfo> deviceInfos;
     public static int MARKERTYPEFARNEAR = 0;//0����� 1����Զ
     public boolean mBound = false;
@@ -41,7 +39,6 @@ public class MyApplication extends Application {
     public static BDLocationModel bdLocationModel;
     public static Lock lock = new ReentrantLock();
     public ServiceConnection mConnection = new ServiceConnection() {//�����������service�Ķ��󣬵���δ����
-
         @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
             // �����Ѿ��󶨵���LocalService����IBinder����ǿ������ת�����һ�ȡLocalServiceʵ����

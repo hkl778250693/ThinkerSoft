@@ -24,7 +24,6 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,7 +87,7 @@ public class NewTaskDetailActivity extends Activity {
 
         bindView();//绑定控件
         defaultSetting();//初始化设置
-        setOnClickListener();//点击事件
+        setViewClickListener();//点击事件
     }
 
     //绑定控件ID
@@ -137,7 +136,7 @@ public class NewTaskDetailActivity extends Activity {
     }
 
     //点击事件
-    private void setOnClickListener() {
+    private void setViewClickListener() {
         back.setOnClickListener(onClickListener);
         filter.setOnClickListener(onClickListener);
         save.setOnClickListener(onClickListener);

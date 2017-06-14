@@ -57,7 +57,7 @@ public class BiaoHaoCXActivity extends Activity {
         if (DBName != null && !"".equals(DBName)) {
             filepath = Environment.getDataDirectory().getPath() + "/data/" + "com.example.android_cbjactivity" + "/databases/";
         } else {
-            Toast.makeText(getApplicationContext(), "�������ҳ�ļ�ѡ��", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "请先完成首页文件选择哦！", Toast.LENGTH_SHORT).show();
         }
     }
 

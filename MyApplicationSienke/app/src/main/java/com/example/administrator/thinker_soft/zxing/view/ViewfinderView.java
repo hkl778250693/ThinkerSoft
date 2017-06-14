@@ -36,8 +36,7 @@ import java.util.HashSet;
 
 public final class ViewfinderView extends View {
 
-	private static final int[] SCANNER_ALPHA = { 0, 64, 128, 192, 255, 192,
-			128, 64 };
+	private static final int[] SCANNER_ALPHA = { 0, 64, 128, 192, 255, 192, 128, 64 };
 	private static final long ANIMATION_DELAY = 100L;
 	private static final int OPAQUE = 0xFF;
 
@@ -100,6 +99,7 @@ public final class ViewfinderView extends View {
 		paint.setAlpha(80);
 		canvas.drawLine(10, moveLength, getWidth()-10, moveLength, paint);
 	}
+
 	public void drawViewfinder() {
 		resultBitmap = null;
 		invalidate();

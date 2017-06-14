@@ -23,22 +23,22 @@ public class MoveGuideActivity extends Activity {
         setContentView(R.layout.activity_move_guide);
 
         imageViewGif = (ImageView) findViewById(R.id.image_gif);
-        Glide.with(MoveGuideActivity.this).load(R.mipmap.welcome1).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageViewGif);
+        Glide.with(MoveGuideActivity.this).load(R.mipmap.welcome1).asGif().diskCacheStrategy(DiskCacheStrategy.ALL).into(imageViewGif);
         sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);
-        new Handler(){
+        new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                if(sharedPreferences_login.getBoolean("have_logined",false)){
-                    Intent intent = new Intent(MoveGuideActivity.this,MoveHomePageActivity.class);
+                if (sharedPreferences_login.getBoolean("have_logined", false)) {
+                    Intent intent = new Intent(MoveGuideActivity.this, MoveHomePageActivity.class);
                     startActivity(intent);
                     finish();
-                }else {
-                    Intent intent = new Intent(MoveGuideActivity.this,MoveLoginActivity.class);
+                } else {
+                    Intent intent = new Intent(MoveGuideActivity.this, MoveLoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
                 super.handleMessage(msg);
             }
-        }.sendEmptyMessageDelayed(0,3900);
+        }.sendEmptyMessageDelayed(0, 5000);
     }
 }

@@ -58,7 +58,7 @@
         <activity android:name=".mobile_business.MobileBusinessActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessNewsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessMessageActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".mobile_business.BusinessEmailInfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessEmailInboxActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessNetPhoneBookActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessCommunityActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessPersonSettingActivity" android:screenOrientation="portrait"/>
@@ -70,6 +70,10 @@
         <activity android:name=".mobile_business.BusinessSendEmailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessPopPublishActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessColumeMessageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessFlowActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessFlowInfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessEmailInfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessAnswerEmailActivity" android:screenOrientation="portrait"/>
 
 
         //移动APP

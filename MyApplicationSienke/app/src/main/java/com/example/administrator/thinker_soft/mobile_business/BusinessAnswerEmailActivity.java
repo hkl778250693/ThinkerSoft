@@ -9,29 +9,29 @@ import android.widget.RelativeLayout;
 import com.example.administrator.thinker_soft.R;
 
 /**
- * Created by Administrator on 2017/6/12.
+ * Created by Administrator on 2017/6/15.
  */
-public class BusinessWorkReportActivity extends Activity {
+public class BusinessAnswerEmailActivity extends Activity {
+
     private ImageView back;
-    private RelativeLayout save;
+    private RelativeLayout send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_work_report);
+        setContentView(R.layout.activity_business_answer_email);
 
-        bindView();
-        setViewClickListener();
+        bindView();//绑定控件
+        setOnClickListener();//点击事件
     }
 
     public void bindView(){
         back = (ImageView) findViewById(R.id.back);
-        save = (RelativeLayout) findViewById(R.id.save);
+        send = (RelativeLayout) findViewById(R.id.send);
     }
-
-    public void setViewClickListener(){
+    public void setOnClickListener(){
         back.setOnClickListener(clickListener);
-        save.setOnClickListener(clickListener);
+        send.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {

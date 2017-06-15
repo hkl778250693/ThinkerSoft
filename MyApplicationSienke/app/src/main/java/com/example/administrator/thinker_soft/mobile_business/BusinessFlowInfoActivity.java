@@ -4,34 +4,30 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.example.administrator.thinker_soft.R;
 
 /**
- * Created by Administrator on 2017/6/12.
+ * Created by Administrator on 2017/6/15.
  */
-public class BusinessWorkReportActivity extends Activity {
+public class BusinessFlowInfoActivity extends Activity {
     private ImageView back;
-    private RelativeLayout save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_work_report);
+        setContentView(R.layout.activity_business_flow_info);
 
         bindView();
-        setViewClickListener();
+        setOnClickListener();
     }
 
     public void bindView(){
         back = (ImageView) findViewById(R.id.back);
-        save = (RelativeLayout) findViewById(R.id.save);
     }
 
-    public void setViewClickListener(){
+    public void setOnClickListener(){
         back.setOnClickListener(clickListener);
-        save.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {

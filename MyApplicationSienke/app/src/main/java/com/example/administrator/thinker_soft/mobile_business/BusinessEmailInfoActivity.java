@@ -1,33 +1,25 @@
 package com.example.administrator.thinker_soft.mobile_business;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
 
 import com.example.administrator.thinker_soft.R;
-import com.example.administrator.thinker_soft.mobile_business.adapter.EmailInfoAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by Administrator on 2017/6/9.
+ * Created by Administrator on 2017/6/15.
  */
 public class BusinessEmailInfoActivity extends Activity {
 
-    private ListView listViewEmail;
-    private LinearLayout checked;
-    private ImageView back;
-    private List<BusinessEmailListviewItem> businessEmailListviewItemList = new ArrayList<>();
-    private TextView check;
-    private Button weidu,yidu,delete,cancel;
-    private EmailInfoAdapter adapter;
+    private ImageView back, more;
+    private PopupWindow window;
+    private RadioButton huifu, zhuanfa, detail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,34 +30,39 @@ public class BusinessEmailInfoActivity extends Activity {
         setOnClickListener();//点击事件
     }
 
-    public void bindView(){
-        listViewEmail = (ListView) findViewById(R.id.listview_email);
-        check = (TextView) findViewById(R.id.check);
-        weidu = (Button) findViewById(R.id.weidu);
-        delete = (Button) findViewById(R.id.delete);
-        cancel = (Button) findViewById(R.id.cancel);
+    public void bindView() {
         back = (ImageView) findViewById(R.id.back);
-        checked = (LinearLayout) findViewById(R.id.checked);
-
+        more = (ImageView) findViewById(R.id.more);
     }
 
-    //假数据
-    public void getData(){
-        for(int i=0;i<10;i++){
-            BusinessEmailListviewItem item = new BusinessEmailListviewItem();
-            item.setEmailAdress("thinkersoft@163.com"+i);
-            businessEmailListviewItemList.add(item);
-        }
-    }
-
-    public void setOnClickListener(){
-        getData();
-        adapter= new EmailInfoAdapter(BusinessEmailInfoActivity.this,businessEmailListviewItemList);
-        listViewEmail.setAdapter(adapter);
+    public void setOnClickListener() {
         back.setOnClickListener(clickListener);
-        listViewEmail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        more.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(View v) {
+                View popupView = BusinessEmailInfoActivity.this.getLayoutInflater().inflate(R.layout.popupwindow_business_email_inbox, null);
+                window = new PopupWindow(popupView, 600, 400);
+                window.setAnimationStyle(R.style.Popupwindow);
+                window.setFocusable(true);
+                backgroundAlpha(0.6F);   //背景变暗
+                window.setOutsideTouchable(true);
+                window.update();
+                window.showAsDropDown(more, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        backgroundAlpha(1.0F);
+                        more.setClickable(true);
+                    }
+                });
+
+                huifu = (RadioButton) popupView.findViewById(R.id.huifu);
+                zhuanfa = (RadioButton) popupView.findViewById(R.id.zhuanfa);
+                detail = (RadioButton) popupView.findViewById(R.id.detail);
+
+                huifu.setOnClickListener(clickListener);
+                zhuanfa.setOnClickListener(clickListener);
+                detail.setOnClickListener(clickListener);
             }
         });
     }
@@ -73,13 +70,32 @@ public class BusinessEmailInfoActivity extends Activity {
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.back:
                     finish();
                     break;
-                case R.id.check:
+                case R.id.huifu:
+                    Intent intent = new Intent(BusinessEmailInfoActivity.this, BusinessAnswerEmailActivity.class);
+                    startActivity(intent);
+                    window.dismiss();
+                    break;
+                case R.id.zhuanfa:
+                    break;
+                case R.id.detail:
                     break;
             }
         }
     };
+
+    //设置背景透明度
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = BusinessEmailInfoActivity.this.getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        if (bgAlpha == 1) {
+            BusinessEmailInfoActivity.this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+        } else {
+            BusinessEmailInfoActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+        }
+        BusinessEmailInfoActivity.this.getWindow().setAttributes(lp);
+    }
 }

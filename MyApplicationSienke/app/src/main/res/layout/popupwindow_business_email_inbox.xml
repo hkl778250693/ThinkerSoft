@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/moreview"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_thin">
 
         <RadioButton
-            android:id="@+id/message"
+            android:id="@+id/huifu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/security_popupwindow"
             android:button="@null"
-            android:drawableLeft="@mipmap/community_message"
+            android:drawableLeft="@mipmap/huifu"
             android:gravity="center"
             android:padding="15dp"
-            android:text="栏目信息"
+            android:text="回复"
             android:textColor="@color/text_black"
             android:textSize="16sp" />
 
@@ -30,16 +28,16 @@
             android:background="@color/text_font_color_white" />
 
         <RadioButton
-            android:id="@+id/send"
+            android:id="@+id/zhuanfa"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/security_popupwindow"
             android:button="@null"
-            android:drawableLeft="@mipmap/send_message"
+            android:drawableLeft="@mipmap/zhuanfa"
             android:gravity="center"
             android:padding="15dp"
-            android:text="发布文章"
+            android:text="转发"
             android:textColor="@color/text_black"
             android:textSize="16sp" />
 
@@ -49,19 +47,19 @@
             android:background="@color/text_font_color_white" />
 
         <RadioButton
-            android:id="@+id/take_photo"
+            android:id="@+id/detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/security_popupwindow"
             android:button="@null"
-            android:drawableLeft="@mipmap/community_photo"
+            android:drawableLeft="@mipmap/shanchu"
             android:gravity="center"
             android:padding="15dp"
-            android:text="栏目信息"
+            android:drawablePadding="10dp"
+            android:text="删除"
             android:textColor="@color/text_black"
             android:textSize="16sp" />
     </RadioGroup>
-
 
 </LinearLayout>

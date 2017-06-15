@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_thin"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -33,7 +34,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -81,17 +82,19 @@
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/text_font_color_white"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@color/gray_thin">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:drawableLeft="@mipmap/finish"
@@ -111,13 +114,13 @@
 
             </RelativeLayout>
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="创建报告"
-                android:textColor="@color/text_black"
-                android:textSize="16sp" />
+                android:background="@drawable/normal_button_bg_selector"
+                android:hint="创建报告"
+                android:padding="10dp"
+                android:textSize="20sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -128,7 +131,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:drawableLeft="@mipmap/business_tips"
@@ -138,13 +141,13 @@
 
             </RelativeLayout>
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="创建报告心得"
-                android:textColor="@color/text_black"
-                android:textSize="16sp" />
+                android:background="@drawable/normal_button_bg_selector"
+                android:hint="创建报告心得"
+                android:padding="10dp"
+                android:textSize="20sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -155,7 +158,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:drawableLeft="@mipmap/business_plan"
@@ -165,18 +168,13 @@
 
             </RelativeLayout>
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="创建下周计划报告"
-                android:textColor="@color/text_black"
-                android:textSize="16sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:background="@color/gray_thin" />
+                android:background="@drawable/normal_button_bg_selector"
+                android:hint="创建下周工作计划"
+                android:padding="10dp"
+                android:textSize="20sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -199,12 +197,24 @@
                     android:paddingRight="10dp"
                     android:src="@mipmap/move_go" />
             </RelativeLayout>
-
-            <View
+            <RelativeLayout
+                android:id="@+id/save"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:background="@color/gray_thin" />
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@color/text_font_color_white">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="保   存"
+                    android:textColor="@drawable/business_text_selector"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>

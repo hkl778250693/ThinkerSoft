@@ -17,6 +17,7 @@ import com.example.administrator.thinker_soft.R;
 public class BusinessPopPublishActivity extends Activity {
     private ImageView back;
     private TextView popText,zhiliao,shenghuo,jianyi,jianwen;
+    private PopupWindow window;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class BusinessPopPublishActivity extends Activity {
             @Override
             public void onClick(View v) {
                 View popupView = BusinessPopPublishActivity.this.getLayoutInflater().inflate(R.layout.popupwindow_pup_publish,null);
-                PopupWindow window = new PopupWindow(popupView,600,400);
+                window = new PopupWindow(popupView,600,400);
                 window.setAnimationStyle(R.style.Popupwindow);
                 window.setFocusable(true);
                 backgroundAlpha(0.6F);   //背景变暗
@@ -74,17 +75,19 @@ public class BusinessPopPublishActivity extends Activity {
                     break;
                 case R.id.zhiliao:
                     popText.setText("常备资料");
-                    PopupWindow window = new PopupWindow();
                     window.dismiss();
                     break;
                 case R.id.shenghuo:
                     popText.setText("文化生活");
+                    window.dismiss();
                     break;
                 case R.id.jianyi:
                     popText.setText("管理建议");
+                    window.dismiss();
                     break;
                 case R.id.jianwen:
                     popText.setText("趣事见闻");
+                    window.dismiss();
                     break;
             }
         }

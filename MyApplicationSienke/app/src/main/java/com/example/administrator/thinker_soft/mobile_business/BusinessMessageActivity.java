@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.example.administrator.thinker_soft.R;
 
@@ -13,6 +14,7 @@ import com.example.administrator.thinker_soft.R;
 public class BusinessMessageActivity extends Activity {
 
     private ImageView back;
+    private RelativeLayout send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +27,12 @@ public class BusinessMessageActivity extends Activity {
 
     public void bindView(){
         back= (ImageView) findViewById(R.id.back);
+        send = (RelativeLayout) findViewById(R.id.send);
     }
 
     public void setViewClickListener(){
         back.setOnClickListener(clickListener);
+        send.setOnClickListener(clickListener);
     }
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
@@ -37,6 +41,7 @@ public class BusinessMessageActivity extends Activity {
                 case R.id.back:
                     finish();
                     break;
+
             }
         }
     };

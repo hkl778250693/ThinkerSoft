@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.mobile_business.BusinessCheckingInActivity;
+import com.example.administrator.thinker_soft.mobile_business.BusinessFlowActivity;
 import com.example.administrator.thinker_soft.mobile_business.BusinessPersonSettingActivity;
 import com.example.administrator.thinker_soft.mobile_business.BusinessScheduleActivity;
 import com.example.administrator.thinker_soft.mobile_business.BusinessWorkReportActivity;
@@ -21,7 +22,7 @@ import com.example.administrator.thinker_soft.mobile_business.BusinessWorkReport
 public class PersonWorkFragment extends Fragment {
 
     private View view;
-    private TextView schedule,personSet,workReport,GPS;
+    private TextView schedule,personSet,workReport,GPS,examine;
 
     @Nullable
     @Override
@@ -40,6 +41,7 @@ public class PersonWorkFragment extends Fragment {
         personSet = (TextView) view.findViewById(R.id.person_set);
         workReport = (TextView) view.findViewById(R.id.work_report);
         GPS = (TextView) view.findViewById(R.id.GPS);
+        examine = (TextView) view.findViewById(R.id.examine);
     }
 
     //点击事件
@@ -48,6 +50,7 @@ public class PersonWorkFragment extends Fragment {
         personSet.setOnClickListener(clickListener);
         workReport.setOnClickListener(clickListener);
         GPS.setOnClickListener(clickListener);
+        examine.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
@@ -69,6 +72,10 @@ public class PersonWorkFragment extends Fragment {
                 case R.id.GPS:
                     Intent intent3 = new Intent(getActivity(), BusinessCheckingInActivity.class);
                     startActivity(intent3);
+                    break;
+                case R.id.examine:
+                    Intent intent4 = new Intent(getActivity(), BusinessFlowActivity.class);
+                    startActivity(intent4);
                     break;
             }
         }

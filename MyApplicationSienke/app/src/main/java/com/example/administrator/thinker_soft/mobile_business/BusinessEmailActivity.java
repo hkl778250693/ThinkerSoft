@@ -46,7 +46,7 @@ public class BusinessEmailActivity extends Activity {
                     finish();
                     break;
                 case R.id.inbox:
-                    Intent intent = new Intent(BusinessEmailActivity.this, BusinessEmailInfoActivity.class);
+                    Intent intent = new Intent(BusinessEmailActivity.this, BusinessEmailInboxActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.send:

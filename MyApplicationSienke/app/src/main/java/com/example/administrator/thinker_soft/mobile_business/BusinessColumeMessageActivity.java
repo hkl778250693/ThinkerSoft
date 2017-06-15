@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.mobile_business.adapter.ColumnMessageAdapter;
@@ -22,6 +22,7 @@ public class BusinessColumeMessageActivity extends Activity {
     private ImageView back;
     private RadioButton all,byt1,byt2,byt3,byt4;
     private ListView listView;
+    private TextView search;
     private ColumnMessageAdapter adapter;
     private List<BusinessColumnListviewItem> businessColumnListviewItemList = new ArrayList<>();
 
@@ -42,6 +43,7 @@ public class BusinessColumeMessageActivity extends Activity {
         byt3 = (RadioButton) findViewById(R.id.byt3);
         byt4 = (RadioButton) findViewById(R.id.byt4);
         listView = (ListView) findViewById(R.id.listview);
+        search = (TextView) findViewById(R.id.search);
     }
 
     //假数据
@@ -67,6 +69,7 @@ public class BusinessColumeMessageActivity extends Activity {
         byt2.setOnClickListener(clickListener);
         byt3.setOnClickListener(clickListener);
         byt4.setOnClickListener(clickListener);
+        search.setOnClickListener(clickListener);
         getData();
         adapter= new ColumnMessageAdapter(BusinessColumeMessageActivity.this,businessColumnListviewItemList);
         listView.setAdapter(adapter);

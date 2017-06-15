@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_thin"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -26,86 +25,87 @@
             android:text="收件箱"
             android:textColor="@android:color/white"
             android:textSize="21sp" />
+
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:padding="16dp"
+            android:src="@drawable/selecter_main_option" />
     </RelativeLayout>
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_thin"
-        android:orientation="horizontal">
+        android:padding="10dp"
+        android:text="邮件主题:"
+        android:textColor="@color/text_black"
+        android:textSize="16sp" />
 
-        <LinearLayout
-            android:id="@+id/checked"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="horizontal">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_thin" />
 
-            <CheckBox
-                android:id="@+id/check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/email_info_selector"
-                android:layout_gravity="center"
-                android:layout_marginLeft="3dp"
-                android:button="@null" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="发   件  人：" />
 
-            <TextView
-                android:id="@+id/choose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="5dp"
-                android:text="全选"
-                android:textColor="@drawable/business_text_selector"
-                android:textSize="16sp" />
-        </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_thin" />
 
-        <Button
-            android:id="@+id/weidu"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/emaile_biaoji_selector"
-            android:text="标记未读"
-            android:textSize="16sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="收   件  人：" />
 
-        <Button
-            android:id="@+id/yidu"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/emaile_biaoji_selector"
-            android:text="标记已读"
-            android:textSize="16sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_thin" />
 
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/emaile_biaoji_selector"
-            android:text="删   除"
-            android:textSize="16sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="时         间：" />
 
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/emaile_biaoji_selector"
-            android:text="取   消"
-            android:textSize="16sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_thin" />
 
-    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="附         件：" />
 
-    <ListView
-        android:id="@+id/listview_email"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/gray_thin" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:padding="10dp"
+                android:text="邮件内容 ：" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

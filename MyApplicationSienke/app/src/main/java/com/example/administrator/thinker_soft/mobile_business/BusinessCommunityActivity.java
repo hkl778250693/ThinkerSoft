@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
@@ -28,7 +28,8 @@ public class BusinessCommunityActivity extends Activity {
     private ImageView more;
     private List<CommunityListViewItem> communityListViewItemList = new ArrayList<>();
     private CommunityAdapter adapter;
-    private LinearLayout message, send, takePhoto;
+    private RadioButton message, send, takePhoto;
+    private PopupWindow window;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class BusinessCommunityActivity extends Activity {
             @Override
             public void onClick(View v) {
                 View popupView = BusinessCommunityActivity.this.getLayoutInflater().inflate(R.layout.popupwidow_business_community, null);
-                PopupWindow window = new PopupWindow(popupView, 400, 600);
+                window = new PopupWindow(popupView, 400, 600);
                 window.setAnimationStyle(R.mipmap.pop_banner);
                 window.setFocusable(true);
                 backgroundAlpha(0.6F);   //背景变暗
@@ -85,9 +86,9 @@ public class BusinessCommunityActivity extends Activity {
                         more.setClickable(true);
                     }
                 });
-                message = (LinearLayout) popupView.findViewById(R.id.message);
-                send = (LinearLayout) popupView.findViewById(R.id.send);
-                takePhoto = (LinearLayout) popupView.findViewById(R.id.take_photo);
+                message = (RadioButton) popupView.findViewById(R.id.message);
+                send = (RadioButton) popupView.findViewById(R.id.send);
+                takePhoto = (RadioButton) popupView.findViewById(R.id.take_photo);
 
                 message.setOnClickListener(clickListener);
                 send.setOnClickListener(clickListener);
@@ -113,10 +114,12 @@ public class BusinessCommunityActivity extends Activity {
                 case R.id.message:
                     Intent intent1 = new Intent(BusinessCommunityActivity.this,BusinessColumeMessageActivity.class);
                     startActivity(intent1);
+                    window.dismiss();
                     break;
                 case R.id.send:
                     Intent intent = new Intent(BusinessCommunityActivity.this,BusinessPopPublishActivity.class);
                     startActivity(intent);
+                    window.dismiss();
                     break;
                 case R.id.take_photo:
                     break;

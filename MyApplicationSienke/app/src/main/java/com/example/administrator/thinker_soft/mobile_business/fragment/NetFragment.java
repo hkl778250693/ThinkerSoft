@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
-import com.example.administrator.thinker_soft.mobile_business.BusinessEmailInfoActivity;
+import com.example.administrator.thinker_soft.mobile_business.BusinessEmailActivity;
 import com.example.administrator.thinker_soft.mobile_business.BusinessNetPhoneBookActivity;
 
 /**
@@ -52,7 +52,7 @@ public class NetFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.email:
-                    Intent intent = new Intent(getActivity(), BusinessEmailInfoActivity.class);
+                    Intent intent = new Intent(getActivity(), BusinessEmailActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.phone_book:

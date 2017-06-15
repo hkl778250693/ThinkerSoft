@@ -26,15 +26,6 @@
             android:text="会议纪要"
             android:textColor="@android:color/white"
             android:textSize="21sp" />
-
-        <ImageView
-            android:id="@+id/more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:padding="16dp"
-            android:src="@drawable/selecter_main_option" />
     </RelativeLayout>
 
     <LinearLayout
@@ -43,14 +34,16 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/text_font_color_white">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/text_font_color_white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
             <TextView
-                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -62,32 +55,33 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/leixin"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/title"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/normal_button_bg_selector"
+                android:drawableRight="@mipmap/down"
+                android:gravity="center"
                 android:padding="10dp"
                 android:text="会议纪要"
                 android:textColor="@color/text_black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:padding="10dp"
-                android:src="@mipmap/move_go" />
+        </LinearLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:background="@color/text_font_color_white">
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/text_font_color_white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
             <TextView
-                android:id="@+id/title1"
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -98,24 +92,21 @@
                 android:textColor="@color/text_black"
                 android:textSize="16sp" />
 
-            <TextClock
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/security_type"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/title1"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/normal_button_bg_selector"
+                android:drawableRight="@mipmap/down"
+                android:gravity="center"
                 android:padding="10dp"
-                android:text="会议纪要"
+                android:text="2017-6-13"
                 android:textColor="@color/text_black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:padding="10dp"
-                android:src="@mipmap/move_go" />
-
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -135,12 +126,13 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/normal_button_bg_selector"
                 android:hint="请输入主持人"
-                android:padding="10dp"
-                android:textColor="@color/text_black"
-                android:textSize="16sp" />
+                android:padding="8dp"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -162,12 +154,13 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/normal_button_bg_selector"
                 android:hint="请输入参会人员"
-                android:padding="10dp"
-                android:textColor="@color/text_black"
-                android:textSize="16sp" />
+                android:padding="8dp"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -189,12 +182,13 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/normal_button_bg_selector"
                 android:hint="请输入会议内容"
-                android:padding="10dp"
-                android:textColor="@color/text_black"
-                android:textSize="16sp" />
+                android:padding="8dp"
+                android:textSize="14sp" />
 
         </LinearLayout>
 

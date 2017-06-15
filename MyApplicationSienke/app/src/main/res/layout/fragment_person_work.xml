@@ -60,7 +60,7 @@
                     android:drawableTop="@mipmap/dw"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="通讯录"
+                    android:text="移动考勤"
                     android:textColor="@color/text_black" />
 
             </LinearLayout>

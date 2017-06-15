@@ -77,6 +77,8 @@ public class BusinessEmailInfoActivity extends Activity {
                 case R.id.back:
                     finish();
                     break;
+                case R.id.check:
+                    break;
             }
         }
     };

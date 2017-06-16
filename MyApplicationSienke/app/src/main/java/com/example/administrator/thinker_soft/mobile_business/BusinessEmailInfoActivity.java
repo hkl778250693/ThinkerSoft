@@ -80,8 +80,15 @@ public class BusinessEmailInfoActivity extends Activity {
                     window.dismiss();
                     break;
                 case R.id.zhuanfa:
+                    Intent intent1 = new Intent(BusinessEmailInfoActivity.this, BusinessIntransitEmailActivity.class);
+                    startActivity(intent1);
+                    window.dismiss();
                     break;
                 case R.id.detail:
+                    window.dismiss();
+                    Intent intent2 = new Intent();
+                    setResult(RESULT_OK,intent2);
+                    finish();
                     break;
             }
         }

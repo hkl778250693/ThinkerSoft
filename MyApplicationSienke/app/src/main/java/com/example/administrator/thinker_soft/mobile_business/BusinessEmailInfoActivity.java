@@ -24,7 +24,7 @@ public class BusinessEmailInfoActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_email_info);
+        setContentView(R.layout.activity_business_email_info);//收件箱详细
 
         bindView();//绑定控件
         setOnClickListener();//点击事件

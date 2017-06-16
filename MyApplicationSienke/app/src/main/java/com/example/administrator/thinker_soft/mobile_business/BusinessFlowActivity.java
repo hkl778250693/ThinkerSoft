@@ -27,7 +27,7 @@ public class BusinessFlowActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_flow);
+        setContentView(R.layout.activity_business_flow);//审批流程
 
         bindView();//绑定控件
         setOnClickListener();//点击事件

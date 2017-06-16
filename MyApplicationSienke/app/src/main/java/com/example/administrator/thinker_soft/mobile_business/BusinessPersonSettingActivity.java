@@ -15,7 +15,7 @@ public class BusinessPersonSettingActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_person_setting);
+        setContentView(R.layout.activity_business_person_setting);//个人设置
 
         bindView();//绑定控件
         setOnClickListener();//点击事件

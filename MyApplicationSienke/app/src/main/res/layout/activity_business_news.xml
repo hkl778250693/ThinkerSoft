@@ -43,12 +43,12 @@
             android:textColor="@color/text_black"
             android:textSize="20sp" />
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_weight="1"
             android:background="@drawable/normal_button_bg_selector"
-            android:hint="请输入内容"
+            android:text="为思恩科服务 为思恩科奉献！！！"
             android:padding="11dp"
             android:textSize="12sp" />
 

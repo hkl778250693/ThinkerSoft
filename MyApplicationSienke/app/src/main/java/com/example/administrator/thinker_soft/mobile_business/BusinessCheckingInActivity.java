@@ -18,7 +18,7 @@ public class BusinessCheckingInActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_checking_in);
+        setContentView(R.layout.activity_business_checking_in);//考勤
 
         bindView();//绑定控件
         setOnClickListener();//点击事件

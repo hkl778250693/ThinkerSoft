@@ -30,9 +30,9 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="会议纪要"
+            android:text="发布公告"
             android:textColor="@color/text_black"
-            android:drawableTop="@mipmap/hyjy"
+            android:drawableTop="@mipmap/fbgg"
             android:gravity="center"
             android:drawablePadding="10dp"
             android:padding="15dp"/>

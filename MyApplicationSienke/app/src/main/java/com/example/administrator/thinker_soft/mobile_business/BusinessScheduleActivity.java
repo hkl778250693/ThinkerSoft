@@ -17,7 +17,7 @@ public class BusinessScheduleActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_data);
+        setContentView(R.layout.activity_business_data);//日程安排
 
         bindView();
         setViewClickListener();

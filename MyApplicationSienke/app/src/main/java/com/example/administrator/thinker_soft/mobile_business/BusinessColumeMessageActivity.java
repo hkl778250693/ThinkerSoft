@@ -29,7 +29,7 @@ public class BusinessColumeMessageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_column_message);
+        setContentView(R.layout.activity_business_column_message);//栏目信息
 
         bindView();//绑定控件
         setOnClickListener();//点击事件

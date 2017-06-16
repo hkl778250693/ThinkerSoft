@@ -20,7 +20,7 @@ public class BusinessEmailActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_email);
+        setContentView(R.layout.activity_business_email);//邮件
 
         bindView();//绑定控件
         setOnClickListener();//点击事件

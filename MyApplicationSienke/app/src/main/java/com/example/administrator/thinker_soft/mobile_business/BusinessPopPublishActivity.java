@@ -22,7 +22,7 @@ public class BusinessPopPublishActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pup_publish);
+        setContentView(R.layout.activity_pup_publish);//发布文章
 
         bindView();//绑定控件
         setOnClickListener();//点击事件

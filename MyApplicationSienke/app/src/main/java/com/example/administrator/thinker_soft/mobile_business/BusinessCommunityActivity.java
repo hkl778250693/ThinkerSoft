@@ -28,13 +28,13 @@ public class BusinessCommunityActivity extends Activity {
     private ImageView more;
     private List<CommunityListViewItem> communityListViewItemList = new ArrayList<>();
     private CommunityAdapter adapter;
-    private RadioButton message, send, takePhoto;
+    private RadioButton message, send;
     private PopupWindow window;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_community);
+        setContentView(R.layout.activity_business_community);//公司社区
 
         bindView();//绑定控件
         setOnClickListener();//点击事件
@@ -88,11 +88,9 @@ public class BusinessCommunityActivity extends Activity {
                 });
                 message = (RadioButton) popupView.findViewById(R.id.message);
                 send = (RadioButton) popupView.findViewById(R.id.send);
-                takePhoto = (RadioButton) popupView.findViewById(R.id.take_photo);
 
                 message.setOnClickListener(clickListener);
                 send.setOnClickListener(clickListener);
-                takePhoto.setOnClickListener(clickListener);
             }
         });
         search.setOnClickListener(clickListener);

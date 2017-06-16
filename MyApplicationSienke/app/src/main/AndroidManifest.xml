@@ -167,6 +167,7 @@
         <activity android:name=".mobile_business.BusinessFlowInfoActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessEmailInfoActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessAnswerEmailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessIntransitEmailActivity" android:screenOrientation="portrait"/>
 
 
         //移动APP

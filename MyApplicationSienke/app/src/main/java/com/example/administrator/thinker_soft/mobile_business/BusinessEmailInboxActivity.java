@@ -30,6 +30,8 @@ public class BusinessEmailInboxActivity extends Activity {
     private TextView check;
     private Button weidu,yidu,delete,cancel;
     private EmailInfoAdapter adapter;
+    private BusinessEmailListviewItem item;
+    private int currentPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class BusinessEmailInboxActivity extends Activity {
     //假数据
     public void getData(){
         for(int i=0;i<10;i++){
-            BusinessEmailListviewItem item = new BusinessEmailListviewItem();
+            item = new BusinessEmailListviewItem();
             item.setEmailAdress("thinkersoft@163.com"+i);
             businessEmailListviewItemList.add(item);
         }
@@ -68,8 +70,10 @@ public class BusinessEmailInboxActivity extends Activity {
         listViewEmail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                item = (BusinessEmailListviewItem) adapter.getItem(position);
+                currentPosition = position;
                 Intent intent = new Intent(BusinessEmailInboxActivity.this,BusinessEmailInfoActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,currentPosition);
                 Log.i("InboxActivity","进来了");
             }
         });
@@ -87,4 +91,13 @@ public class BusinessEmailInboxActivity extends Activity {
             }
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            businessEmailListviewItemList.remove(currentPosition);
+            adapter.notifyDataSetChanged();
+        }
+    }
 }

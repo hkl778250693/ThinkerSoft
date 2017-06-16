@@ -11,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.thinker_soft.R;
 
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
@@ -45,7 +44,6 @@ public class SheZiActivity extends Activity {
     // ----------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SDKInitializer.initialize(getApplicationContext());
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         mam.pushOneActivity(this);

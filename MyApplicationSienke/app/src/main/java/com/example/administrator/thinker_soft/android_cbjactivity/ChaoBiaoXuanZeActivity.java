@@ -80,29 +80,28 @@ public class ChaoBiaoXuanZeActivity extends Activity {
                     }
                 }
             if (list == null || list.size() <= 0) {
-                System.out.println("Ϊ��");
-                list.add("û���ļ�");
+                list.add("没有文件");
             }
             meterDBAdapter = new MeterDBAdapter(this, list);
-        } else if (signal == 2) {//��������
+        } else if (signal == 2) {
             DBName = getIntent().getStringExtra("DBName");
             service = new DBService(filepath + DBName);
             list = service.queryBookofUser();
             service.connclose();
             meterDBAdapter = new MeterDBAdapter(this, list);
-        } else if (signal == 4) {//δ������
+        } else if (signal == 4) {
             DBName = getIntent().getStringExtra("DBName");
             service = new DBService(filepath + DBName);
             list = service.queryBookofUser();
             service.connclose();
             meterDBAdapter = new MeterDBAdapter(this, list);
-        } else if (signal == 10) {//����ͳ��
+        } else if (signal == 10) {
             DBName = getIntent().getStringExtra("DBName");
             service = new DBService(filepath + DBName);
             list = service.queryBookofUser();
             service.connclose();
             meterDBAdapter = new MeterDBAdapter(this, list);
-        } else if (signal == 11) {//�����ϴ��ļ�ѡ��
+        } else if (signal == 11) {
             File file = new File(filepath);
             String[] filename = file.list();
             if (filename != null)
@@ -118,7 +117,7 @@ public class ChaoBiaoXuanZeActivity extends Activity {
                 }
             if (list == null || list.size() <= 0) {
                 System.out.println("Ϊ��");
-                list.add("û���ļ�");
+                list.add("没有文件");
             }
             meterDBAdapter = new MeterDBAdapter(this, list);
         }

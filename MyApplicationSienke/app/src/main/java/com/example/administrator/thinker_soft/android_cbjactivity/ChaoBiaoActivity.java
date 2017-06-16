@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
@@ -18,12 +17,9 @@ import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ChaoBiaoActivity extends Activity {
 	private GridView gridView;
-
 	private static final int CODE = 1;
 	private SharedPreferences sharedPreferences;
 	private SharedPreferences.Editor editor;
@@ -43,15 +39,9 @@ public class ChaoBiaoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_chaobiao);
-		mam = MyActivityManager.getInstance();
-		mam.pushOneActivity(this);
-		filepath = Environment.getDataDirectory().getPath() + "/data/"
-				+ "com.example.android_cbjactivity" + "/databases/";
-		sharedPreferences = getApplication().getSharedPreferences(
-				"IP_PORT_DBNAME", 0);
-		editor = sharedPreferences.edit();
-		DBName = sharedPreferences.getString("dbName", "");
+
 		bindView();
+		defaultSetting();
 		setViewClickListener();
 	}
 
@@ -63,6 +53,18 @@ public class ChaoBiaoActivity extends Activity {
 		fourth_layout = (LinearLayout) findViewById(R.id.fourth_layout);
 		fifth_layout  = (LinearLayout) findViewById(R.id.fifth_layout);
 		sixth_layout = (LinearLayout) findViewById(R.id.sixth_layout);
+	}
+
+	//初始化设置
+	private void defaultSetting() {
+		mam = MyActivityManager.getInstance();
+		mam.pushOneActivity(this);
+		filepath = Environment.getDataDirectory().getPath() + "/data/"
+				+ "com.example.android_cbjactivity" + "/databases/";
+		sharedPreferences = getApplication().getSharedPreferences(
+				"IP_PORT_DBNAME", 0);
+		editor = sharedPreferences.edit();
+		DBName = sharedPreferences.getString("dbName", "");
 	}
 
 	//点击事件
@@ -89,7 +91,7 @@ public class ChaoBiaoActivity extends Activity {
 						Intent intent = new Intent(ChaoBiaoActivity.this, ShowListviewActivity.class);
 						startActivityForResult(intent, CODE);
 					} else {
-						Toast.makeText(getApplicationContext(), "��ѡ�񳭱�", Toast.LENGTH_SHORT).show();
+						Toast.makeText(ChaoBiaoActivity.this, "请您选择抄表本！", Toast.LENGTH_SHORT).show();
 						return;
 					}
 					break;
@@ -107,7 +109,7 @@ public class ChaoBiaoActivity extends Activity {
 						intent.putExtra("DBName", DBName);
 						startActivityForResult(intent, CODE);
 					} else {
-						Toast.makeText(getApplicationContext(), "��ѡ�񳭱�", Toast.LENGTH_SHORT).show();
+						Toast.makeText(ChaoBiaoActivity.this, "请您选择抄表本！", Toast.LENGTH_SHORT).show();
 						return;
 					}
 					break;
@@ -125,7 +127,7 @@ public class ChaoBiaoActivity extends Activity {
 						Intent intent = new Intent(ChaoBiaoActivity.this, ShowListviewActivity.class);
 						startActivityForResult(intent, CODE);
 					} else {
-						Toast.makeText(getApplicationContext(), "��ѡ�񳭱�", Toast.LENGTH_SHORT).show();
+						Toast.makeText(ChaoBiaoActivity.this, "请您选择抄表本！", Toast.LENGTH_SHORT).show();
 						return;
 					}
 					break;
@@ -141,7 +143,7 @@ public class ChaoBiaoActivity extends Activity {
 						intent.putExtra("DBName", DBName);
 						startActivityForResult(intent, CODE);
 					} else {
-						Toast.makeText(getApplicationContext(), "��ѡ�񳭱�", Toast.LENGTH_SHORT).show();
+						Toast.makeText(ChaoBiaoActivity.this, "请您选择抄表本！", Toast.LENGTH_SHORT).show();
 						return;
 					}
 					break;
@@ -183,147 +185,5 @@ public class ChaoBiaoActivity extends Activity {
 			startActivity(intent);
 			finish();
 		}
-	}
-
-	/*public void action(View v) {
-		int id = v.getId();
-		Intent intent = new Intent();
-		switch (id) {
-		case R.id.first_btn:
-			signal = 1;
-			editor = sharedPreferences.edit();
-			editor.putInt("signal", signal);
-			editor.commit();
-			DBName = sharedPreferences.getString("dbName", "");
-			if (DBName != null && !"".equals(DBName)) {
-				intent.setClass(ChaoBiaoActivity.this,
-						ShowListviewActivity.class);
-				startActivityForResult(intent, CODE);
-			} else {
-				Toast.makeText(getApplicationContext(), "��ѡ�񳭱�",
-						Toast.LENGTH_SHORT).show();
-				return;
-			}
-			break;
-		// ��������
-		case R.id.second_btn:
-			signal = 2;
-			con_signal = 2;
-			editor = sharedPreferences.edit();
-			editor.putInt("signal", signal);
-			editor.putInt("con_signal", con_signal);
-			editor.commit();
-			DBName = sharedPreferences.getString("dbName", "");
-			System.out.println("DBName:" + DBName);
-			if (DBName != null && !"".equals(DBName)) {
-				intent.putExtra("DBName", DBName);
-				intent.setClass(ChaoBiaoActivity.this,
-						ChaoBiaoXuanZeActivity.class);
-				startActivityForResult(intent, CODE);
-			} else {
-				Toast.makeText(getApplicationContext(), "��ѡ�񳭱�",
-						Toast.LENGTH_SHORT).show();
-				return;
-			}
-			break;
-		// ��ҳ����
-		case R.id.third_btn:
-			signal = 3;
-			con_signal = 3;
-
-			editor = sharedPreferences.edit();
-			editor.putInt("signal", signal);
-			editor.putInt("con_signal", con_signal);
-			editor.commit();
-
-			// SharedPreferences sharedPreferences =
-			// getApplication().getSharedPreferences("IP_PORT_DBNAME", 0);
-			DBName = sharedPreferences.getString("dbName", "");
-			if (DBName != null && !"".equals(DBName)) {
-				intent.setClass(ChaoBiaoActivity.this,
-						ShowListviewActivity.class);
-				startActivityForResult(intent, CODE);
-			} else {
-				Toast.makeText(getApplicationContext(), "��ѡ�񳭱�",
-						Toast.LENGTH_SHORT).show();
-				return;
-			}
-			break;
-		// δ������
-		case R.id.fourth_btn:
-			signal = 4;
-			con_signal = 4;
-
-			editor.putInt("signal", signal);
-			editor.putInt("con_signal", con_signal);
-			editor.commit();
-			DBName = sharedPreferences.getString("dbName", "");
-			if (DBName != null && !"".equals(DBName)) {
-				intent.putExtra("DBName", DBName);
-				intent.setClass(ChaoBiaoActivity.this, WeiChaoBaoActivity.class);
-				startActivityForResult(intent, CODE);
-			} else {
-				Toast.makeText(getApplicationContext(), "��ѡ�񳭱�",
-						Toast.LENGTH_SHORT).show();
-				return;
-			}
-			break;
-		// ����ͳ��
-		case R.id.fifth_btn:
-			intent.setClass(ChaoBiaoActivity.this,
-					ChaoBiaoBenTongjiActivity.class);
-			startActivity(intent);
-			break;
-		// �ļ�ѡ��
-		case R.id.sixth_btn:
-			signal = 6;
-			editor.putInt("signal", signal);
-			editor.commit();
-			intent.setClass(ChaoBiaoActivity.this, ChaoBiaoXuanZeActivity.class);
-			startActivity(intent);
-			break;
-		default:
-			break;
-		}
-
-	}*/
-
-	/**
-	 * 
-	 * �˵������ؼ���Ӧ
-	 */
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			// ����˫���˳�����
-			exitBy2Click();
-		}
-		return false;
-	}
-
-	/**
-	 * 
-	 * ˫���˳�����
-	 */
-	private static Boolean isExit = false;
-
-	private void exitBy2Click() {
-		Timer tExit = null;
-		if (isExit == false) {
-			// ׼���˳�
-			isExit = true;
-			tExit = new Timer();
-			tExit.schedule(new TimerTask() {
-
-				@Override
-				public void run() {
-					// ȡ���˳�
-					isExit = false;
-				}
-			}, 4000);// ���4������û�а��·��ؼ�����������ʱ��ȡ�����ղ�ִ�е�����
-		} else {
-			mam.finishAllActivity();
-		}
-
 	}
 }

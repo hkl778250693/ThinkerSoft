@@ -82,7 +82,7 @@ public class CbbCXAction extends Activity {
         } else {
             /*selectMeterBook.setEnabled(false);
             query.setEnabled(false);*/
-            Toast.makeText(getApplicationContext(), "�������ҳ�ļ�ѡ��", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "请先完成首页文件选择哦！", Toast.LENGTH_SHORT).show();
         }
     }
 

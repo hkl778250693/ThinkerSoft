@@ -1344,10 +1344,7 @@ public class DBService {
 	 */
 	public int queryUsInforofminusCount() {
 		int count = 0;
-		Cursor cursor = db
-				.rawQuery(
-						"select count(thk.'�û����') from THK_USER thk where thk.'��������' like ?",
-						new String[] { "-" + "%" });
+		Cursor cursor = db.rawQuery("select count(thk.'�û����') from THK_USER thk where thk.'��������' like ?", new String[] { "-" + "%" });
 		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 			count = Integer.parseInt((cursor.getString(0)));
 		}

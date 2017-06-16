@@ -26,20 +26,19 @@ import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
+import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 import com.example.administrator.thinker_soft.myfirstpro.service.DBService;
 import com.example.administrator.thinker_soft.myfirstpro.util.Mytoast;
+import com.example.administrator.thinker_soft.myprinter.Global;
 import com.example.administrator.thinker_soft.myprinter.WorkService;
+import com.example.administrator.thinker_soft.niftydialogeffects.Effectstype;
 import com.example.administrator.thinker_soft.niftydialogeffects.NiftyDialogBuilder;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
-import com.example.administrator.thinker_soft.niftydialogeffects.Effectstype;
-import com.example.administrator.thinker_soft.myprinter.Global;
 
 public class UserDetailActivity extends Activity {
 	private String TAG = "UserDetailActivity";
@@ -334,7 +333,6 @@ public class UserDetailActivity extends Activity {
 					if (position != -1)
 						bundle.putInt("position", position);
 					msg.setData(bundle);
-					MyApplication.mapmhandler.sendMessage(msg);
 				}
 				UserDetailActivity.this.finish();
 			}
@@ -376,7 +374,6 @@ public class UserDetailActivity extends Activity {
 				if (position != -1)
 					bundle.putInt("position", position);
 				msg.setData(bundle);
-				MyApplication.mapmhandler.sendMessage(msg);
 			}
 			UserDetailActivity.this.finish();
 			break;
@@ -406,16 +403,7 @@ public class UserDetailActivity extends Activity {
 
 			// �ж������Ƿ��
 			BluetoothAdapter mAdapter = BluetoothAdapter.getDefaultAdapter();
-			if (!mAdapter.isEnabled()) {
-				// �����Ի�����ʾ�û��Ǻ��
-				Mytoast.showToast(this, "�������򿪺����µ����������ӡ��", 2000);
-				Intent enabler = new Intent(
-						BluetoothAdapter.ACTION_REQUEST_ENABLE);
-				startActivityForResult(enabler, 2);
-				// // ������ʾ��ǿ�д�
-				// mAdapter.enable();
-				break;
-			}
+
 			if (MyApplication.Bluetoo_isClick == false) {
 				Toast.makeText(this, "����ϵͳ���������Ӵ�ӡ��", Toast.LENGTH_SHORT).show();
 			} else {

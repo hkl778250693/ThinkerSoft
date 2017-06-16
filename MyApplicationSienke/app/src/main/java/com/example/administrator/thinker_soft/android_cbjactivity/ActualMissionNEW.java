@@ -27,11 +27,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.utils.DistanceUtil;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
 import com.example.administrator.thinker_soft.myfirstpro.fragment.newMissionFragment;
+import com.example.administrator.thinker_soft.myfirstpro.fragment.oldMissionFragment;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 import com.example.administrator.thinker_soft.viewbadger.BadgeView;
 
@@ -40,15 +39,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.example.administrator.thinker_soft.myfirstpro.fragment.oldMissionFragment;
-
 /**
  * ����������
  *
  * @author Administrator
  */
-public class ActualMissionNEW extends FragmentActivity implements
-        OnClickListener {
+public class ActualMissionNEW extends FragmentActivity implements OnClickListener {
     private MyApplication myapp;
     public List<String[]> allWork_lists = new ArrayList<String[]>();
     private Intent intent;
@@ -167,12 +163,12 @@ public class ActualMissionNEW extends FragmentActivity implements
                         .get("C_TASK_Y")));
                 mLon2 = Double.valueOf(Double.parseDouble(localMap
                         .get("C_TASK_X")));
-                double d = DistanceUtil.getDistance(
+                /*double d = DistanceUtil.getDistance(
                         new LatLng(mLat1.doubleValue(), mLon1.doubleValue()),
                         new LatLng(mLat2.doubleValue(), mLon2.doubleValue()));
                 int j = (int) (d / 1000.0D);
                 int k = (int) d % 1000;
-                result[18] = (String.valueOf(j) + "." + String.valueOf(k) + "km");
+                result[18] = (String.valueOf(j) + "." + String.valueOf(k) + "km");*/
             }
 
             result[8] = localMap.get("D_TASK_TIME");// �����·�ʱ��
@@ -210,7 +206,7 @@ public class ActualMissionNEW extends FragmentActivity implements
         //pagerTabStrip = (PagerTabStrip) findViewById(R.id.pagerTabStrip);
         LayoutInflater inflater = getLayoutInflater();
         String temp = getResources().getString(R.string.pulldown_to_loading);
-        temp = String.format(temp, "�޸ĳɹ�û�У���");
+        //temp = String.format(temp, "�޸ĳɹ�û�У���");
         mission_current = (TextView) findViewById(R.id.mission_current);
         mission_history = (TextView) findViewById(R.id.mission_history);
         prompt_current = (TextView) findViewById(R.id.prompt_current);
@@ -418,7 +414,7 @@ public class ActualMissionNEW extends FragmentActivity implements
         }
 
 /*		@Override
-		public CharSequence getPageTitle(int position) {
+        public CharSequence getPageTitle(int position) {
 			return this.titlearray[position];
 		}*/
 
@@ -442,7 +438,6 @@ public class ActualMissionNEW extends FragmentActivity implements
                 }
             }
         }
-
     }
 
     public BadgeView getBadgeView() {

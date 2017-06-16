@@ -19,27 +19,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.navisdk.BNaviPoint;
-import com.baidu.navisdk.BaiduNaviManager;
-import com.baidu.navisdk.BaiduNaviManager.OnStartNavigationListener;
-import com.baidu.navisdk.comapi.routeplan.RoutePlanParams.NE_RoutePlan_Mode;
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.android_cbjactivity.ActualMissionNEW;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 import com.example.administrator.thinker_soft.myfirstpro.threadsocket.SocketInteraction;
 import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
 import com.example.administrator.thinker_soft.myfirstpro.util.Gadget;
+import com.example.administrator.thinker_soft.myfirstpro.util.JaugeInternetState;
 import com.example.administrator.thinker_soft.myfirstpro.util.JsonAnalyze;
 import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
 import com.example.administrator.thinker_soft.myfirstpro.util.Mytoast;
+import com.example.administrator.thinker_soft.niftydialogeffects.Effectstype;
 import com.example.administrator.thinker_soft.niftydialogeffects.NiftyDialogBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.example.administrator.thinker_soft.myfirstpro.navigation.BNavigatorActivity;
-import com.example.administrator.thinker_soft.myfirstpro.util.JaugeInternetState;
-import com.example.administrator.thinker_soft.android_cbjactivity.ActualMissionNEW;
-import com.example.administrator.thinker_soft.niftydialogeffects.Effectstype;
 
 /**
  * ���������� �޸ģ�û�н�������ǰ�ǲ��ܵ����� ����������жϸ����Ƿ��������û�еĻ���ֻ��ʾ���������񡱣������������˽��Ⱥ��ܽ��ȶ���ɡ��ѽ��ա���
@@ -248,10 +242,6 @@ public class newWorkXiangQing extends Activity implements OnClickListener {
 					} if(endLat==null||"".equals(endLat)){
 						endLat = "0";
 					}
-					launchNavigator(Double.parseDouble(startLon),
-							Double.parseDouble(startLat),
-							Double.parseDouble(endLon),
-							Double.parseDouble(endLat));
 				} else {
 					Mytoast.showToast(newWorkXiangQing.this,
 							"��⵽����ֻ�ȱ��SD��������ʹ�õ������ܣ�", Toast.LENGTH_SHORT);
@@ -436,33 +426,5 @@ public class newWorkXiangQing extends Activity implements OnClickListener {
 		return false;
 	}
 
-	private void launchNavigator(double latitude1, double longitude1,
-			double latitude2, double longitude2) {
-		BNaviPoint startPoint = new BNaviPoint(latitude1, longitude1, "���",
-				BNaviPoint.CoordinateType.BD09_MC);
-		BNaviPoint endPoint = new BNaviPoint(latitude2, longitude2, "�յ�",
-				BNaviPoint.CoordinateType.BD09_MC);
-		BaiduNaviManager.getInstance().launchNavigator(this,
-				startPoint, // ��㣨��ָ������ϵ��
-				endPoint, // �յ㣨��ָ������ϵ��
-				NE_RoutePlan_Mode.ROUTE_PLAN_MOD_MIN_TIME,// ��·��ʽ
-				true, // ��ʵ����
-				BaiduNaviManager.STRATEGY_FORCE_ONLINE_PRIORITY,
-				new OnStartNavigationListener() {
 
-					@Override
-					public void onJumpToDownloader() {
-
-					}
-
-					@Override
-					public void onJumpToNavigator(Bundle configParams) {
-						Intent intent = new Intent(newWorkXiangQing.this,
-								BNavigatorActivity.class);
-						intent.putExtras(configParams);
-						startActivity(intent);
-					}
-				} // ��ת����
-				);
-	}
 }

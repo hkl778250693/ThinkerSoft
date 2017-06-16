@@ -1,48 +1,49 @@
 package com.example.administrator.thinker_soft.android_cbjactivity;
 
 import android.app.Dialog;
-import android.app.TabActivity;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
-import android.widget.TabHost.OnTabChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.navisdk.BNaviEngineManager.NaviEngineInitListener;
+import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.android_cbjactivity.adapter.MobileMeterViewPagerAdapter;
+import com.example.administrator.thinker_soft.android_cbjactivity.fragment.CustomQueryFragment;
+import com.example.administrator.thinker_soft.android_cbjactivity.fragment.MeterDataTransferFragment;
+import com.example.administrator.thinker_soft.android_cbjactivity.fragment.MeterHomePageFragment;
+import com.example.administrator.thinker_soft.android_cbjactivity.fragment.ScanCodeMeterFragment;
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
 import com.example.administrator.thinker_soft.myfirstpro.entity.AreaInfo;
 import com.example.administrator.thinker_soft.myfirstpro.entity.BookInfo;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 import com.example.administrator.thinker_soft.myfirstpro.service.LocationService;
-import com.example.administrator.thinker_soft.myfirstpro.service.LocationService.LocationBinder;
 import com.example.administrator.thinker_soft.myfirstpro.threadsocket.SocketInteraction;
-import com.example.administrator.thinker_soft.myfirstpro.util.AnimationTabHost;
 import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
 import com.example.administrator.thinker_soft.myfirstpro.util.JaugeInternetState;
 import com.example.administrator.thinker_soft.myfirstpro.util.JsonAnalyze;
@@ -52,21 +53,21 @@ import com.example.administrator.thinker_soft.viewbadger.BadgeView;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("deprecation")
-public class CBJActivity extends TabActivity implements OnTabChangeListener {
-    private LinearLayout systemSet,rootLinearlayout;
-    private TextView systemSet_badget_tv;
-    private TextView homepageTitle;
+public class CBJActivity extends FragmentActivity{
+    private static final String LTAG = CBJActivity.class.getSimpleName();
+    private TextView mapInfo;
+    private SDKReceiver mReceiver;
+    private RelativeLayout rootRelative;
+    private ViewPager viewPager;
+    private TextView titleName;
     private PopupWindow popupWindow;
-    private ImageView back;
-    private EditText et;
-    private int POPWINDOWWIDTH;
-    private GestureDetector gestureDetector;
-    private AnimationTabHost mTabHost;
-    @SuppressWarnings("unused")
+    private ImageView back,more;
+    private List<Fragment> fragmentList;
+    private MobileMeterViewPagerAdapter adapter;
     private TabWidget mTabWidget;
     private RadioButton radio_button0, radio_button1, radio_button2, radio_button3;
     private List<BookInfo> bookList;
@@ -75,8 +76,6 @@ public class CBJActivity extends TabActivity implements OnTabChangeListener {
     private String filepath;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    //private BDLocationModel bdLocationModel;
-    private int currentTabID = 0;
     private LocationService mService;
     private boolean mBound = false;
     private MyApplication myapp;
@@ -95,109 +94,48 @@ public class CBJActivity extends TabActivity implements OnTabChangeListener {
     private MyActivityManager mam = MyActivityManager.getInstance();
     private boolean popbool;
     private boolean navsignal;
-    private BroadcastReceiver receiver;
-    private ServiceConnection mConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            LocationBinder binder = (LocationBinder) service;
-            mService = binder.getService();
-            mBound = true;
-        }
 
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-            mBound = false;
-        }
-    };
-
-    private NaviEngineInitListener mNaviEngineInitListener = new NaviEngineInitListener() {
-        public void engineInitSuccess() {
-            // mIsEngineInitSuccess = true;
-            Log.i("engineInitSuccess", "�ɹ���");
-        }
-        public void engineInitStart() {
-            Log.i("engineInitStart", "��ʼ��");
-        }
-
-        public void engineInitFail() {
-            Log.i("engineInitFail", "ʧ�ܣ�");
-        }
-    };
-
-    private String getSdcardDir() {
-        if (Environment.getExternalStorageState().equalsIgnoreCase(
-                Environment.MEDIA_MOUNTED)) {
-            return Environment.getExternalStorageDirectory().toString();
-        }
-        return "";
-    }
-
-    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cbj);
-        /*String sdpath = getSdcardDir();
-		if ("".equals(sdpath)) {
-			navsignal = false;
-		} else {
-			navsignal = true;
-			BaiduNaviManager.getInstance().initEngine(this, sdpath,
-					this.mNaviEngineInitListener, "1RUeGi5DkoqZVZYgv0DT9M1x",
-					null);
-		}
-		MyApplication.bdLocationModel.startLoaction();
-		receiver = new BroadcastReceiver() {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				System.out.println("�Ѿ����յ�������Ϣ:"+intent.getAction());
-				System.out.println("�Ѿ����յ�������Ϣ:"+intent.getStringExtra("json"));
-				System.out.println("�Ѿ����յ�������Ϣ");
-				Message msg = new Message();
-				Bundle data = new Bundle();
-				data.putInt("key", 1);
-				msg.setData(data);
-				dataHandler.sendMessage(msg);
-			}
-		};
-		IntentFilter filter = new IntentFilter();
-		filter.addAction("CBJActivityBroadcastReceiver");
-		registerReceiver(receiver, filter);
-		mam.pushOneActivity(this);
 
-		Log.v("onCreate() ", "onCreate()");
-		myapp = (MyApplication) getApplication();
-		dialogControl = new HashMap<Integer, Boolean>();
-		WindowManager manager = getWindowManager();
-		Display display = manager.getDefaultDisplay();
-		POPWINDOWWIDTH = display.getWidth();
-		display.getHeight();
-		
-		filepath = Environment.getDataDirectory().getPath() + "/data/"
-				+ "com.example.android_cbjactivity" + "/databases/";
-		Intent intent = new Intent(this, LocationService.class);
-		// TODO
-		System.out.println("�����Ƿ������¹���"
-				+ bindService(intent, mConnection,
-						Context.BIND_AUTO_CREATE));*/
         bindView();
+        setViewPager();
         defaultSetting();
         setViewClickListener();
+    }
+
+    /**
+     * 构造广播监听类，监听 SDK key 验证以及网络异常广播
+     */
+    public class SDKReceiver extends BroadcastReceiver {
+        public void onReceive(Context context, Intent intent) {
+            String s = intent.getAction();
+            Log.i(LTAG, "action: " + s);
+            if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)) {
+                mapInfo.setText("key 验证出错! 错误码 :" + intent.getIntExtra(SDKInitializer.SDK_BROADTCAST_INTENT_EXTRA_INFO_KEY_ERROR_CODE, 0)
+                        +  " ; 请在 AndroidManifest.xml 文件中检查 key 设置");
+            } else if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)) {
+                mapInfo.setText("key 验证成功! 功能可以正常使用");
+                mapInfo.setTextColor(Color.YELLOW);
+            } else if (s.equals(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR)) {
+                mapInfo.setText("网络出错");
+            }
+        }
     }
 
     //绑定控件
     private void bindView() {
         back = (ImageView) findViewById(R.id.back);
-        homepageTitle = (TextView) findViewById(R.id.homepageTitle);
-        systemSet_badget_tv = (TextView) findViewById(R.id.systemSet_badget_tv);
-        systemSet = (LinearLayout) findViewById(R.id.systemSet);
+        titleName = (TextView) findViewById(R.id.title_name);
+        more = (ImageView) findViewById(R.id.more);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
         radio_button0 = (RadioButton) findViewById(R.id.radio_button0);
         radio_button1 = (RadioButton) findViewById(R.id.radio_button1);
         radio_button2 = (RadioButton) findViewById(R.id.radio_button2);
         radio_button3 = (RadioButton) findViewById(R.id.radio_button3);
-        mTabHost = (AnimationTabHost) findViewById(android.R.id.tabhost);
-        mTabWidget = (TabWidget) findViewById(android.R.id.tabs);
-        rootLinearlayout = (LinearLayout) findViewById(R.id.root_linearlayout);
+        rootRelative = (RelativeLayout) findViewById(R.id.root_relative);
     }
 
     //初始化设置
@@ -207,35 +145,78 @@ public class CBJActivity extends TabActivity implements OnTabChangeListener {
         sharedPreferences = getApplication().getSharedPreferences("IP_PORT_DBNAME", 0);
         editor = sharedPreferences.edit();
         DBName = sharedPreferences.getString("dbName", "");
-        homepageTitle.setText("移动抄表");
-        badgeViewone = new BadgeView(this, systemSet_badget_tv);
-        badgeViewone.setText("");
-        badgeViewone.setTextSize(9);
+        radio_button0.setChecked(true);
+        titleName.setText("移动抄表");
+    }
+
+    //设置viewPager
+    private void setViewPager() {
+        fragmentList = new ArrayList<>();
+        //添加fragment到list
+        fragmentList.add(new MeterHomePageFragment());
+        fragmentList.add(new ScanCodeMeterFragment());
+        fragmentList.add(new CustomQueryFragment());
+        fragmentList.add(new MeterDataTransferFragment());
+        //避免报空指针
+        if (fragmentList != null) {
+            adapter = new MobileMeterViewPagerAdapter(getSupportFragmentManager(), fragmentList);
+        }
+        viewPager.setAdapter(adapter);
     }
 
     //点击事件
     public void setViewClickListener() {
         back.setOnClickListener(onClickListener);
+        more.setOnClickListener(onClickListener);
         radio_button0.setOnClickListener(onClickListener);
         radio_button1.setOnClickListener(onClickListener);
         radio_button2.setOnClickListener(onClickListener);
         radio_button3.setOnClickListener(onClickListener);
-        systemSet.setOnClickListener(onClickListener);
-        mTabHost.setOnTabChangedListener(this);
-        mTabHost.addTab(mTabHost.newTabSpec("ONE").setIndicator("ONE").setContent(new Intent(CBJActivity.this, ChaoBiaoActivity.class)));
-        mTabHost.addTab(mTabHost.newTabSpec("TWO").setIndicator("TWO").setContent(new Intent(CBJActivity.this, CaptureActivity.class)));
-        mTabHost.addTab(mTabHost.newTabSpec("THREE").setIndicator("THREE").setContent(new Intent(CBJActivity.this, ChaXunActivity.class)));
-        mTabHost.addTab(mTabHost.newTabSpec("FOUR").setIndicator("FOUR").setContent(new Intent(CBJActivity.this, SJCSActivity.class)));
-        mTabHost.setOpenAnimation(true);
-        gestureDetector = new GestureDetector(new TabHostTouch());
-        new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                if (gestureDetector.onTouchEvent(event)) {
-                    return true;
-                }
-                return false;
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
-        };
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        titleName.setText("移动抄表");
+                        radio_button0.setChecked(true);
+                        radio_button1.setChecked(false);
+                        radio_button2.setChecked(false);
+                        radio_button3.setChecked(false);
+                        break;
+                    case 1:
+                        titleName.setText("扫码抄表");
+                        radio_button0.setChecked(false);
+                        radio_button1.setChecked(true);
+                        radio_button2.setChecked(false);
+                        radio_button3.setChecked(false);
+                        break;
+                    case 2:
+                        titleName.setText("自定义查询");
+                        radio_button0.setChecked(false);
+                        radio_button1.setChecked(false);
+                        radio_button2.setChecked(true);
+                        radio_button3.setChecked(false);
+                        break;
+                    case 3:
+                        titleName.setText("数据传输");
+                        radio_button0.setChecked(false);
+                        radio_button1.setChecked(false);
+                        radio_button2.setChecked(false);
+                        radio_button3.setChecked(true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -245,142 +226,96 @@ public class CBJActivity extends TabActivity implements OnTabChangeListener {
                 case R.id.back:
                     finish();
                     break;
-                case R.id.systemSet:
+                case R.id.more:
                     AddPopWindowenu();
-                    Log.i("CBJActivity","弹窗点击事件执行");
                     break;
                 case R.id.radio_button0:
-                    homepageTitle.setText("移动抄表");
-                    mTabHost.setCurrentTabByTag("ONE");
-                    radio_button0.setChecked(true);
-                    radio_button1.setChecked(false);
-                    radio_button2.setChecked(false);
-                    radio_button3.setChecked(false);
+                    titleName.setText("移动抄表");
+                    viewPager.setCurrentItem(0);
                     break;
                 case R.id.radio_button1:
-                    homepageTitle.setText("扫码抄表");
-                    mTabHost.setCurrentTabByTag("TWO");
-                    radio_button0.setChecked(false);
-                    radio_button1.setChecked(true);
-                    radio_button2.setChecked(false);
-                    radio_button3.setChecked(false);
+                    titleName.setText("扫码抄表");
+                    viewPager.setCurrentItem(1);
                     break;
                 case R.id.radio_button2:
-                    homepageTitle.setText("自定义查询");
-                    mTabHost.setCurrentTabByTag("THREE");
-                    radio_button0.setChecked(false);
-                    radio_button1.setChecked(false);
-                    radio_button2.setChecked(true);
-                    radio_button3.setChecked(false);
+                    titleName.setText("自定义查询");
+                    viewPager.setCurrentItem(2);
                     break;
                 case R.id.radio_button3:
-                    homepageTitle.setText("数据传输");
-                    mTabHost.setCurrentTabByTag("FOUR");
-                    radio_button0.setChecked(false);
-                    radio_button1.setChecked(false);
-                    radio_button2.setChecked(false);
-                    radio_button3.setChecked(true);
+                    titleName.setText("数据传输");
+                    viewPager.setCurrentItem(3);
                     break;
             }
         }
     };
 
     private void AddPopWindowenu() {
-        if (popupWindow == null) {
-            Log.i("CBJActivity","为空弹窗点击事件进来了");
-            View contentView = getLayoutInflater().inflate(R.layout.popwindow_content, null);
-            popupWindow = new PopupWindow(contentView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            popupWindow.setFocusable(true);
-            popupWindow.setOutsideTouchable(true);
-            popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
-            popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_page_more_shape));
-            TextView sysSet = (TextView) contentView.findViewById(R.id.popwindow_content_sysSet);
-            TextView gpscollector = (TextView) contentView.findViewById(R.id.popwindow_content_gpscollector);
-            TextView mapMeter = (TextView) contentView.findViewById(R.id.popwindow_content_mapMeter);
-            TextView tasks = (TextView) contentView.findViewById(R.id.popwindow_content_actualtask);
-            LinearLayout popwindow_content_actualtask_ll = (LinearLayout) contentView.findViewById(R.id.popwindow_content_actualtask_ll);
-            badgeViewTwo = new BadgeView(CBJActivity.this, popwindow_content_actualtask_ll);
-            badgeViewTwo.setText("����");
-            badgeViewTwo.setTextSize(9);
-            if (badgeViewone != null && badgeViewone.isShown()) {
-                badgeViewTwo.show();
-            }
-            View logout = contentView.findViewById(R.id.popwindow_content_logout);
-            sysSet.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-					/*
-					 * Typeface typeface =
-					 * Typeface.create(Typeface.DEFAULT,Typeface.BOLD);
-					 * ((TextView) v).setTypeface(typeface); Typeface
-					 * mtypeface =
-					 * Typeface.create(Typeface.DEFAULT,Typeface
-					 * .NORMAL); mapMeter.setTypeface(mtypeface);
-					 */
-                    Intent intent = new Intent(CBJActivity.this, SheZiActivity.class);
-                    startActivityForResult(intent, 1);
-                    popupWindow.dismiss();
-                }
-            });
-            gpscollector.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DBName = sharedPreferences.getString("dbName", "");
-                    if (DBName != null && !"".equals(DBName)) {
-                        Intent intent = new Intent(CBJActivity.this, GPSCollectorActivity.class);
-                        startActivity(intent);
-                        popupWindow.dismiss();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "��ѡ�񳭱�", Toast.LENGTH_SHORT).show();
-                        popupWindow.dismiss();
-                    }
-                }
-            });
-            tasks.setOnClickListener(new OnClickListener() {// ��������
+        Log.i("CBJActivity","为空弹窗点击事件进来了");
+        View contentView = getLayoutInflater().inflate(R.layout.popwindow_content, null);
+        popupWindow = new PopupWindow(contentView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_page_more_shape));
+        mapInfo = (TextView) contentView.findViewById(R.id.map_info);
+        TextView sysSet = (TextView) contentView.findViewById(R.id.popwindow_content_sysSet);
+        TextView gpscollector = (TextView) contentView.findViewById(R.id.popwindow_content_gpscollector);
+        TextView mapMeter = (TextView) contentView.findViewById(R.id.popwindow_content_mapMeter);
+        TextView tasks = (TextView) contentView.findViewById(R.id.popwindow_content_actualtask);
+        // 注册 SDK 广播监听者
+        IntentFilter iFilter = new IntentFilter();
+        iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK);
+        iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);
+        iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
+        mReceiver = new SDKReceiver();
+        LocalBroadcastManager.getInstance(CBJActivity.this).registerReceiver(mReceiver, iFilter);
 
-                @Override
-                public void onClick(View v) {
-                    if (myapp.getNewWorkList() == null || myapp.getNewWorkList().size() == 0 || badgeViewTwo.isShown()) {
-                        requestWork();
-                    } else if (myapp.getNewWorkList() != null && myapp.getNewWorkList().size() != 0 && !badgeViewTwo.isShown()) {
-                        popupWindow.dismiss();
-                        Intent intent = new Intent(CBJActivity.this, ActualMissionNEW.class);
-                        intent.setAction("");
-                        startActivity(intent);
-                    }
-                }
-            });
-            mapMeter.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DBName = sharedPreferences.getString("dbName", "");
-                    if (DBName != null && !"".equals(DBName)) {
-                        Intent intent = new Intent(CBJActivity.this, MapMeterActivity.class);
-                        startActivity(intent);
-                        popupWindow.dismiss();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "��ѡ�񳭱�", Toast.LENGTH_SHORT).show();
-                        popupWindow.dismiss();
-                    }
-                }
-            });
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                popupWindow.showAsDropDown(rootLinearlayout, 0, 0, Gravity.END);
-            }
-        } else {
-            Log.i("CBJActivity","不为空弹窗点击事件进来了");
-            if (badgeViewone != null && badgeViewone.isShown()) {
-                if (badgeViewTwo != null) {
-                    badgeViewTwo.show();
-                }
-            }
-            if (!popupWindow.isShowing()) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    popupWindow.showAsDropDown(rootLinearlayout, 0, 0, Gravity.END);
-                }
-            } else {
+        sysSet.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CBJActivity.this, SheZiActivity.class);
+                startActivityForResult(intent, 1);
                 popupWindow.dismiss();
             }
+        });
+        gpscollector.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBName = sharedPreferences.getString("dbName", "");
+                if (DBName != null && !"".equals(DBName)) {
+                    Intent intent = new Intent(CBJActivity.this, GPSCollectorActivity.class);
+                    startActivity(intent);
+                    popupWindow.dismiss();
+                } else {
+                    Toast.makeText(getApplicationContext(), "��ѡ�񳭱�", Toast.LENGTH_SHORT).show();
+                    popupWindow.dismiss();
+                }
+            }
+        });
+        tasks.setOnClickListener(new OnClickListener() {// ��������
+
+            @Override
+            public void onClick(View v) {
+                if (myapp.getNewWorkList() == null || myapp.getNewWorkList().size() == 0 || badgeViewTwo.isShown()) {
+                    requestWork();
+                } else if (myapp.getNewWorkList() != null && myapp.getNewWorkList().size() != 0 && !badgeViewTwo.isShown()) {
+                    popupWindow.dismiss();
+                    Intent intent = new Intent(CBJActivity.this, ActualMissionNEW.class);
+                    intent.setAction("");
+                    startActivity(intent);
+                }
+            }
+        });
+        mapMeter.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CBJActivity.this, MapMeterActivity.class);
+                startActivity(intent);
+                popupWindow.dismiss();
+            }
+        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            popupWindow.showAsDropDown(rootRelative, 0, 0, Gravity.END);
         }
         backgroundAlpha(0.6F);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -404,61 +339,15 @@ public class CBJActivity extends TabActivity implements OnTabChangeListener {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        if (gestureDetector.onTouchEvent(event)) {
-            event.setAction(MotionEvent.ACTION_CANCEL);
-        }
-        return super.dispatchTouchEvent(event);
-    }
-
-    /*	@Override
-        public boolean dispatchKeyEvent(KeyEvent event) {
-            if (event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
-                if(event.getAction()==KeyEvent.ACTION_DOWN){
-                       // ��������������������
-                    if(popbool==false){
-                        popbool = true;
-                        AddPopWindowenu();
-                    }else if(popbool==true){
-                        popbool = false;
-                        if(popupWindow!=null)
-                            popupWindow.dismiss();
-                    }
-                }
-             }
-            return false;
-        }*/
-    @Override
     protected void onResume() {
         super.onResume();
-        Log.v("onResume()", "onResume()");
-
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.v("onRestart() ", "onRestart()");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.v("onStart() ", "onStart()");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-		/*unregisterReceiver(receiver);*/
-        JaugeInternetState.closeGPSSettings(getApplicationContext());
-        if (mBound) {
-            unbindService(mConnection);
-            mBound = false;
-        }
-/*
-		MyApplication.bdLocationModel.stopLocation();
-*/
+        // 取消监听 SDK 广播
+        LocalBroadcastManager.getInstance(CBJActivity.this).unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -471,66 +360,6 @@ public class CBJActivity extends TabActivity implements OnTabChangeListener {
     protected void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
         Log.v("onRestoreInstanceState", "onSaveInstanceState");
-    }
-
-    @Override
-    public void openOptionsMenu() {
-        super.openOptionsMenu();
-
-    }
-
-    @Override
-    public void closeOptionsMenu() {
-        super.closeOptionsMenu();
-    }
-
-    @Override
-    public void onTabChanged(String tabId) {
-        if ("ONE".equals(tabId)) {
-            mTabHost.setCurrentTabByTag("ONE");
-            radio_button0.setChecked(true);
-            radio_button1.setChecked(false);
-            radio_button2.setChecked(false);
-            radio_button3.setChecked(false);
-        } else if ("TWO".equals(tabId)) {
-            mTabHost.setCurrentTabByTag("TWO");
-            radio_button0.setChecked(false);
-            radio_button1.setChecked(true);
-            radio_button2.setChecked(false);
-            radio_button3.setChecked(false);
-        } else if ("THREE".equals(tabId)) {
-            mTabHost.setCurrentTabByTag("THREE");
-            radio_button0.setChecked(false);
-            radio_button1.setChecked(false);
-            radio_button2.setChecked(true);
-            radio_button3.setChecked(false);
-        } else if ("FOUR".equals(tabId)) {
-            mTabHost.setCurrentTabByTag("FOUR");
-            radio_button0.setChecked(false);
-            radio_button1.setChecked(false);
-            radio_button2.setChecked(false);
-            radio_button3.setChecked(true);
-        }
-    }
-
-
-    private class TabHostTouch extends SimpleOnGestureListener {
-        private static final int ON_TOUCH_DISTANCE = 120;
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (e1.getX() - e2.getX() <= (-ON_TOUCH_DISTANCE)) {
-                currentTabID = mTabHost.getCurrentTab() - 1;
-                if (currentTabID < 0) {
-                    currentTabID = mTabHost.getTabCount() - 1;
-                }
-            } else if (e1.getX() - e2.getX() >= ON_TOUCH_DISTANCE) {
-                currentTabID = mTabHost.getCurrentTab() + 1;
-                if (currentTabID >= mTabHost.getTabCount()) {
-                    currentTabID = 0;
-                }
-            }
-            mTabHost.setCurrentTab(currentTabID);
-            return false;
-        }
     }
 
     public void requestWork() {

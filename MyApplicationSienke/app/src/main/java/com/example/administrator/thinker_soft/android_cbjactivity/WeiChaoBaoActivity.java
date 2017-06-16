@@ -41,7 +41,7 @@ public class WeiChaoBaoActivity extends Activity {
 				
 				editor = sharedPreferences.edit();
 				editor.putInt("meter_sg", meter_sg);
-				editor.commit();
+				editor.apply();
 				WeiChaoBaoActivity.this.finish();
 			}
 		});
@@ -54,10 +54,9 @@ public class WeiChaoBaoActivity extends Activity {
 				intent.putExtra("meter_sg", meter_sg);
 				intent.setClass(WeiChaoBaoActivity.this, ShowListviewActivity.class);
 				startActivity(intent);
-				
 				editor = sharedPreferences.edit();
 				editor.putInt("meter_sg", meter_sg);
-				editor.commit();
+				editor.apply();
 				WeiChaoBaoActivity.this.finish();
 			}
 		});

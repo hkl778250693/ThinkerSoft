@@ -5,11 +5,14 @@ import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
+import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.Marker;
+import com.example.administrator.thinker_soft.myfirstpro.entity.Db_Name;
 import com.example.administrator.thinker_soft.myfirstpro.lvadapter.GPSMeterAdapter;
 import com.example.administrator.thinker_soft.myfirstpro.lvadapter.GPSValveAdapter;
+import com.example.administrator.thinker_soft.myfirstpro.service.LocationService;
+import com.example.administrator.thinker_soft.myfirstpro.service.LocationService.LocationBinder;
+import com.example.administrator.thinker_soft.myfirstpro.util.BDLocationModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,22 +20,12 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.example.administrator.thinker_soft.myfirstpro.entity.Db_Name;
-import com.example.administrator.thinker_soft.myfirstpro.lvadapter.MapMeterAdapter.MapMHandler;
-import com.example.administrator.thinker_soft.myfirstpro.service.LocationService;
-import com.example.administrator.thinker_soft.myfirstpro.service.LocationService.LocationBinder;
-import com.example.administrator.thinker_soft.myfirstpro.util.BDLocationModel;
-
 public class MyApplication extends Application {
     public static GPSMeterAdapter.GPSMeterHandler gpsmeterHandler;
     public static GPSValveAdapter.GPSValveHandler gpsvalveHandler;
-    public static MapMHandler mapmhandler;
     public LocationService locationService;
     public static boolean Bluetoo_isClick = false;
     public static List<Db_Name> dbname = new ArrayList<Db_Name>();
-    public static List<Marker> clickMarkers = new ArrayList<Marker>(1);
-    public static List<BitmapDescriptor> clickMarkers_icon = new ArrayList<BitmapDescriptor>(
-            1);
     //public static List<DeviceInfo> deviceInfos;
     public static int MARKERTYPEFARNEAR = 0;//0����� 1����Զ
     public boolean mBound = false;
@@ -41,7 +34,6 @@ public class MyApplication extends Application {
     public static BDLocationModel bdLocationModel;
     public static Lock lock = new ReentrantLock();
     public ServiceConnection mConnection = new ServiceConnection() {//�����������service�Ķ��󣬵���δ����
-
         @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
             // �����Ѿ��󶨵���LocalService����IBinder����ǿ������ת�����һ�ȡLocalServiceʵ����
@@ -58,9 +50,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SDKInitializer.initialize(getApplicationContext());
-        bdLocationModel = new BDLocationModel(getApplicationContext(), null);
-
+        SDKInitializer.initialize(this);// 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
+        //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
+        //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
+        SDKInitializer.setCoordType(CoordType.BD09LL);
     }
 
     public void ShutDownService(){

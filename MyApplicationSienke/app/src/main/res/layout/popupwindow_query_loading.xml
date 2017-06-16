@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical"
-    android:background="@color/white_transparent">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -13,6 +12,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:background="@drawable/loading_shape">
+
         <ImageView
             android:id="@+id/frame_animation"
             android:layout_width="wrap_content"

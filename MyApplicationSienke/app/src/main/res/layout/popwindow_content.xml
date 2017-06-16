@@ -8,6 +8,24 @@
     android:padding="3dp">
 
     <TextView
+        android:id="@+id/map_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/popwindow_mapmeter_bg"
+        android:drawableStart="@mipmap/popwindow_mapmeter_bg"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text=""
+        android:textColor="@color/red"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="120dp"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <TextView
         android:id="@+id/popwindow_content_mapMeter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -16,6 +16,7 @@
 
 package com.example.administrator.thinker_soft.myfirstpro.wheel.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.os.Handler;
@@ -746,6 +747,7 @@ public abstract class TosAdapterView<T extends Adapter> extends ViewGroup {
      * empty view, display it. In all the other cases, make sure that the listview is VISIBLE and
      * that the empty view is GONE (if it's not null).
      */
+    @SuppressLint("WrongCall")
     private void updateEmptyStatus(boolean empty) {
         if (isInFilterMode()) {
             empty = false;

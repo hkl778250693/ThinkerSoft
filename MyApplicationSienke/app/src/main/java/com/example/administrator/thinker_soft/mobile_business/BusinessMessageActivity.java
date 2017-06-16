@@ -34,6 +34,7 @@ public class BusinessMessageActivity extends Activity {
         back.setOnClickListener(clickListener);
         send.setOnClickListener(clickListener);
     }
+
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

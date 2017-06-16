@@ -21,8 +21,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.utils.DistanceUtil;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
 import com.example.administrator.thinker_soft.myfirstpro.lvadapter.OldMissionDataAdapter;
@@ -376,12 +374,12 @@ public class oldMissionFragment extends Fragment implements OnClickListener {
 						.get("C_TASK_Y")));
 				mLon2 = Double.valueOf(Double.parseDouble(localMap
 						.get("C_TASK_X")));
-				double d = DistanceUtil.getDistance(
+				/*double d = DistanceUtil.getDistance(
 						new LatLng(mLat1.doubleValue(), mLon1.doubleValue()),
 						new LatLng(mLat2.doubleValue(), mLon2.doubleValue()));
 				int j = (int) (d / 1000.0D);
 				int k = (int) d % 1000;
-				result[18] = (String.valueOf(j) + "." + String.valueOf(k) + "km");
+				result[18] = (String.valueOf(j) + "." + String.valueOf(k) + "km");*/
 			}
 
 			result[8] = localMap.get("D_TASK_TIME");// �����·�ʱ��

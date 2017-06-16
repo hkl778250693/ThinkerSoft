@@ -13,19 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.navisdk.BNaviPoint;
-import com.baidu.navisdk.BaiduNaviManager;
-import com.baidu.navisdk.BaiduNaviManager.OnStartNavigationListener;
-import com.baidu.navisdk.comapi.routeplan.RoutePlanParams.NE_RoutePlan_Mode;
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
+import com.example.administrator.thinker_soft.myfirstpro.util.Gadget;
 import com.example.administrator.thinker_soft.myfirstpro.util.Mytoast;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
-import com.example.administrator.thinker_soft.myfirstpro.navigation.BNavigatorActivity;
-import com.example.administrator.thinker_soft.myfirstpro.util.Gadget;
 
 /**
  * �����������
@@ -194,10 +188,6 @@ public class oldWorkXiangQing extends Activity implements OnClickListener {
 					} if(endLat==null||"".equals(endLat)){
 						endLat = "0";
 					}
-					launchNavigator(Double.parseDouble(startLon),
-							Double.parseDouble(startLat),
-							Double.parseDouble(endLon),
-							Double.parseDouble(endLat));
 				} else {
 					Mytoast.showToast(oldWorkXiangQing.this,
 							"��⵽����ֻ�ȱ��SD��������ʹ�õ������ܣ�", Toast.LENGTH_SHORT);
@@ -211,34 +201,4 @@ public class oldWorkXiangQing extends Activity implements OnClickListener {
 
 	}
 
-	private void launchNavigator(double latitude1, double longitude1,
-			double latitude2, double longitude2) {
-		BNaviPoint startPoint = new BNaviPoint(latitude1, longitude1, "���",
-				BNaviPoint.CoordinateType.BD09_MC);
-		BNaviPoint endPoint = new BNaviPoint(latitude2, longitude2, "�յ�",
-				BNaviPoint.CoordinateType.BD09_MC);
-		Log.e(TAG, "latitude1=" + latitude1 + "  longitude1=" + longitude1
-				+ "   latitude2=" + latitude2 + "   longitude2=" + longitude2);
-		BaiduNaviManager.getInstance().launchNavigator(this,
-				startPoint, // ��㣨��ָ������ϵ��
-				endPoint, // �յ㣨��ָ������ϵ��
-				NE_RoutePlan_Mode.ROUTE_PLAN_MOD_MIN_TIME,// ��·��ʽ
-				true, // ��ʵ����
-				BaiduNaviManager.STRATEGY_FORCE_ONLINE_PRIORITY,
-				new OnStartNavigationListener() {
-
-					@Override
-					public void onJumpToDownloader() {
-					}
-
-					@Override
-					public void onJumpToNavigator(Bundle configParams) {
-						Intent intent = new Intent(oldWorkXiangQing.this,
-								BNavigatorActivity.class);
-						intent.putExtras(configParams);
-						startActivity(intent);
-					}
-				} // ��ת����
-				);
-	}
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/map_meter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@color/white_transparent">
+        <RadioButton
+            android:id="@+id/open_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:background="@drawable/normal_button_bg_selector"
+            android:padding="7dp"
+            android:drawablePadding="10dp"
+            android:text="开启个性化地图"
+            android:layout_marginBottom="10dp"
+            android:drawableLeft="@drawable/radio_drawable_selector"
+            android:drawableStart="@drawable/radio_drawable_selector"
+            android:textColor="@drawable/radio_text_selector"
+            android:textSize="14sp" />
+        <RadioButton
+            android:id="@+id/close_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:text="关闭个性化地图"
+            android:padding="7dp"
+            android:drawablePadding="10dp"
+            android:background="@drawable/normal_button_bg_selector"
+            android:drawableLeft="@drawable/radio_drawable_selector"
+            android:drawableStart="@drawable/radio_drawable_selector"
+            android:textColor="@drawable/radio_text_selector"
+            android:textSize="14sp"/>
+    </RadioGroup>
+
+</RelativeLayout>

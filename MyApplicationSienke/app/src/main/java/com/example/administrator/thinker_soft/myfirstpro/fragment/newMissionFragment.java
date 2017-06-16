@@ -23,12 +23,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.utils.DistanceUtil;
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.android_cbjactivity.ActualMissionNEW;
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
+import com.example.administrator.thinker_soft.myfirstpro.lvadapter.NewMissionDataAdapter;
 import com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshBase;
+import com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshListView;
+import com.example.administrator.thinker_soft.myfirstpro.threadsocket.SocketInteraction;
 import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
+import com.example.administrator.thinker_soft.myfirstpro.util.JaugeInternetState;
 import com.example.administrator.thinker_soft.myfirstpro.util.JsonAnalyze;
 import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
 import com.example.administrator.thinker_soft.myfirstpro.util.Mytoast;
@@ -40,12 +43,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.example.administrator.thinker_soft.myfirstpro.lvadapter.NewMissionDataAdapter;
-import com.example.administrator.thinker_soft.myfirstpro.refreshListView.RefreshPullToRefreshListView;
-import com.example.administrator.thinker_soft.myfirstpro.threadsocket.SocketInteraction;
-import com.example.administrator.thinker_soft.myfirstpro.util.JaugeInternetState;
-import com.example.administrator.thinker_soft.android_cbjactivity.ActualMissionNEW;
 
 public class newMissionFragment extends Fragment implements OnClickListener {
 	private String TAG = "newMissionFragment";
@@ -402,12 +399,12 @@ public class newMissionFragment extends Fragment implements OnClickListener {
 						.get("C_TASK_Y")));
 				mLon2 = Double.valueOf(Double.parseDouble(localMap
 						.get("C_TASK_X")));
-				double d = DistanceUtil.getDistance(
+				/*double d = DistanceUtil.getDistance(
 						new LatLng(mLat1.doubleValue(), mLon1.doubleValue()),
 						new LatLng(mLat2.doubleValue(), mLon2.doubleValue()));
 				int j = (int) (d / 1000.0D);
 				int k = (int) d % 1000;
-				result[18] = (String.valueOf(j) + "." + String.valueOf(k) + "km");
+				result[18] = (String.valueOf(j) + "." + String.valueOf(k) + "km");*/
 			}
 
 			result[8] = localMap.get("D_TASK_TIME");// �����·�ʱ��

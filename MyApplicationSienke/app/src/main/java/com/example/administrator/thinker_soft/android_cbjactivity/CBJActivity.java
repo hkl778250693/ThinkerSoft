@@ -2,16 +2,20 @@ package com.example.administrator.thinker_soft.android_cbjactivity;
 
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Gravity;
@@ -27,6 +31,7 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.android_cbjactivity.adapter.MobileMeterViewPagerAdapter;
 import com.example.administrator.thinker_soft.android_cbjactivity.fragment.CustomQueryFragment;
@@ -53,6 +58,9 @@ import java.util.List;
 import java.util.Map;
 
 public class CBJActivity extends FragmentActivity{
+    private static final String LTAG = CBJActivity.class.getSimpleName();
+    private TextView mapInfo;
+    private SDKReceiver mReceiver;
     private RelativeLayout rootRelative;
     private ViewPager viewPager;
     private TextView titleName;
@@ -86,7 +94,6 @@ public class CBJActivity extends FragmentActivity{
     private MyActivityManager mam = MyActivityManager.getInstance();
     private boolean popbool;
     private boolean navsignal;
-    private BroadcastReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +104,25 @@ public class CBJActivity extends FragmentActivity{
         setViewPager();
         defaultSetting();
         setViewClickListener();
+    }
+
+    /**
+     * 构造广播监听类，监听 SDK key 验证以及网络异常广播
+     */
+    public class SDKReceiver extends BroadcastReceiver {
+        public void onReceive(Context context, Intent intent) {
+            String s = intent.getAction();
+            Log.i(LTAG, "action: " + s);
+            if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)) {
+                mapInfo.setText("key 验证出错! 错误码 :" + intent.getIntExtra(SDKInitializer.SDK_BROADTCAST_INTENT_EXTRA_INFO_KEY_ERROR_CODE, 0)
+                        +  " ; 请在 AndroidManifest.xml 文件中检查 key 设置");
+            } else if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)) {
+                mapInfo.setText("key 验证成功! 功能可以正常使用");
+                mapInfo.setTextColor(Color.YELLOW);
+            } else if (s.equals(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR)) {
+                mapInfo.setText("网络出错");
+            }
+        }
     }
 
     //绑定控件
@@ -231,10 +257,19 @@ public class CBJActivity extends FragmentActivity{
         popupWindow.setOutsideTouchable(true);
         popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
         popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_page_more_shape));
+        mapInfo = (TextView) contentView.findViewById(R.id.map_info);
         TextView sysSet = (TextView) contentView.findViewById(R.id.popwindow_content_sysSet);
         TextView gpscollector = (TextView) contentView.findViewById(R.id.popwindow_content_gpscollector);
         TextView mapMeter = (TextView) contentView.findViewById(R.id.popwindow_content_mapMeter);
         TextView tasks = (TextView) contentView.findViewById(R.id.popwindow_content_actualtask);
+        // 注册 SDK 广播监听者
+        IntentFilter iFilter = new IntentFilter();
+        iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK);
+        iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);
+        iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
+        mReceiver = new SDKReceiver();
+        LocalBroadcastManager.getInstance(CBJActivity.this).registerReceiver(mReceiver, iFilter);
+
         sysSet.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -274,15 +309,9 @@ public class CBJActivity extends FragmentActivity{
         mapMeter.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBName = sharedPreferences.getString("dbName", "");
-                if (DBName != null && !"".equals(DBName)) {
-                    Intent intent = new Intent(CBJActivity.this, MapMeterActivity.class);
-                    startActivity(intent);
-                    popupWindow.dismiss();
-                } else {
-                    Toast.makeText(getApplicationContext(), "��ѡ�񳭱�", Toast.LENGTH_SHORT).show();
-                    popupWindow.dismiss();
-                }
+                Intent intent = new Intent(CBJActivity.this, MapMeterActivity.class);
+                startActivity(intent);
+                popupWindow.dismiss();
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -307,6 +336,18 @@ public class CBJActivity extends FragmentActivity{
             CBJActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
         }
         CBJActivity.this.getWindow().setAttributes(lp);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 取消监听 SDK 广播
+        LocalBroadcastManager.getInstance(CBJActivity.this).unregisterReceiver(mReceiver);
     }
 
     @Override

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -262,13 +261,13 @@ public class CBJActivity extends FragmentActivity{
         TextView gpscollector = (TextView) contentView.findViewById(R.id.popwindow_content_gpscollector);
         TextView mapMeter = (TextView) contentView.findViewById(R.id.popwindow_content_mapMeter);
         TextView tasks = (TextView) contentView.findViewById(R.id.popwindow_content_actualtask);
-        // 注册 SDK 广播监听者
+        /*// 注册 SDK 广播监听者
         IntentFilter iFilter = new IntentFilter();
         iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK);
         iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);
         iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
         mReceiver = new SDKReceiver();
-        LocalBroadcastManager.getInstance(CBJActivity.this).registerReceiver(mReceiver, iFilter);
+        LocalBroadcastManager.getInstance(CBJActivity.this).registerReceiver(mReceiver, iFilter);*/
 
         sysSet.setOnClickListener(new OnClickListener() {
             @Override

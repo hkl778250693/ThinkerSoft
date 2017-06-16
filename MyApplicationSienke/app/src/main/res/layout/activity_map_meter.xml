@@ -43,4 +43,107 @@
             android:textSize="14sp"/>
     </RadioGroup>
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@color/white_transparent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
+        <RadioButton
+            android:id="@+id/normal_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:background="@drawable/normal_button_bg_selector"
+            android:padding="7dp"
+            android:drawablePadding="5dp"
+            android:text="普通地图"
+            android:layout_marginBottom="10dp"
+            android:drawableLeft="@drawable/radio_drawable_selector"
+            android:drawableStart="@drawable/radio_drawable_selector"
+            android:textColor="@drawable/radio_text_selector"
+            android:textSize="14sp" />
+        <RadioButton
+            android:id="@+id/satellite_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:text="卫星地图"
+            android:padding="7dp"
+            android:drawablePadding="5dp"
+            android:background="@drawable/normal_button_bg_selector"
+            android:drawableLeft="@drawable/radio_drawable_selector"
+            android:drawableStart="@drawable/radio_drawable_selector"
+            android:textColor="@drawable/radio_text_selector"
+            android:layout_marginBottom="10dp"
+            android:textSize="14sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/normal_button_bg_selector"
+            android:padding="7dp"
+            android:layout_marginBottom="10dp">
+            <CheckBox
+                android:id="@+id/traffic_type"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:button="@null"
+                android:background="@drawable/check_box_selector1"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="路况地图"
+                android:textColor="@drawable/radio_text_selector"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/normal_button_bg_selector"
+            android:padding="7dp">
+            <CheckBox
+                android:id="@+id/heat_type"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:button="@null"
+                android:background="@drawable/check_box_selector1"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热力地图"
+                android:textColor="@drawable/radio_text_selector"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+    </RadioGroup>
+
+
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/location"
+        android:background="@drawable/normal_button_bg_selector"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/text_blue"
+        android:textSize="12sp"
+        android:gravity="center_horizontal"
+        android:padding="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"/>
+
 </RelativeLayout>

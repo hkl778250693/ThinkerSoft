@@ -11,11 +11,30 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    signingConfigs {  //签名配置
+        release {  //发布版本签名配置
+            storeFile file("thinkerSoft.jks")  //密钥文件路径
+            storePassword  "111111"  //密钥文件密码
+            keyAlias  "ts"  //key 别名
+            keyPassword  "111111"  //key 密码
         }
+    }
+
+    buildTypes {
+        debug {  //调试
+            signingConfig signingConfigs.release
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig   signingConfigs.release  //设置签名信息
+        }
+    }
+
+    lintOptions {
+        abortOnError   false  // lint 时候终止错误上报，防止编译的时候莫名的失败
     }
 
     sourceSets {

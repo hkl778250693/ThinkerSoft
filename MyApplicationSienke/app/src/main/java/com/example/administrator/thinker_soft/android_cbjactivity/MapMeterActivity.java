@@ -172,9 +172,17 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
         mLocClient = new LocationClient(this);
         mLocClient.registerLocationListener(myListener);
         LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(1000);
+        option.setOpenGps(true); // 打开gps
+        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
+        option.setLocationNotify(true);//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
+        option.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
+        option.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
+        option.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
+        option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
+        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
+        option.setNeedDeviceDirect(true);
         mLocClient.setLocOption(option);
         mLocClient.start();
     }
@@ -261,6 +269,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
 
     }
 
+
     /**
      * 定位SDK监听函数
      */
@@ -270,6 +279,22 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
             // map view 销毁后不在处理新接收的位置
             if (location == null || mMapView == null) {
                 return;
+            }
+            // 定位接口可能返回错误码,要根据结果错误码,来判断是否是正确的地址;
+            int locType = location.getLocType();
+            switch (locType) {
+                case BDLocation.TypeCacheLocation:
+                case BDLocation.TypeOffLineLocation:
+                case BDLocation.TypeGpsLocation:
+                case BDLocation.TypeNetWorkLocation:
+                    /*radius = bdLocation.getRadius();
+                    user_latitude = bdLocation.getLatitude();
+                    user_longitude = bdLocation.getLongitude();
+                    mCurrentX = bdLocation.getDirection();*/
+                    break;
+                default:
+                    String s = location.getLocTypeDescription();
+                    break;
             }
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();

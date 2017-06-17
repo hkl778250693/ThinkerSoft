@@ -291,10 +291,16 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="qeWx9a8xucRxj72AYDeylprGjUB4Xmi5" />
+        <!-- 百度定位SDK  service  BEGIN -->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" />
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
 
     </application>
 

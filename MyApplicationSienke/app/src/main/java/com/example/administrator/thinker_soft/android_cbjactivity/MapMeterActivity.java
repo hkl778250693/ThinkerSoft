@@ -1,18 +1,24 @@
 package com.example.administrator.thinker_soft.android_cbjactivity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -41,8 +47,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
     public MyLocationListenner myListener = new MyLocationListenner();
     private MyLocationConfiguration.LocationMode mCurrentMode;
     BitmapDescriptor mCurrentMarker;
-    private static final int accuracyCircleFillColor = 0xAAFFFF88;
-    private static final int accuracyCircleStrokeColor = 0xAA00FF00;
+    private static final int REQUEST_CODE_ACCESS_COARSE_LOCATION = 1;
     private SensorManager mSensorManager;
     private Double lastX = 0.0;
     private int mCurrentDirection = 0;
@@ -71,11 +76,51 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
         //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         SDKInitializer.setCoordType(CoordType.BD09LL);
+        setMapCustomFile(MapMeterActivity.this,PATH);
         setContentView(R.layout.activity_map_meter);
 
         bindView();
         defaultSetting();
         setViewClickListener();
+        requireLocationPermission();
+    }
+
+    private void requireLocationPermission(){
+        //Android 6.0判断用户是否授予定位权限
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//如果 API level 是大于等于 23(Android 6.0) 时
+            //判断是否具有权限
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                //判断是否需要向用户解释为什么需要申请该权限
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    Toast.makeText(MapMeterActivity.this,"自Android 6.0开始需要打开位置权限",Toast.LENGTH_SHORT).show();
+                }
+                //请求权限
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_ACCESS_COARSE_LOCATION);
+            }else {
+                initLocation();
+            }
+        }else {
+            initLocation();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == REQUEST_CODE_ACCESS_COARSE_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //用户允许改权限，0表示允许，-1表示拒绝 PERMISSION_GRANTED = 0， PERMISSION_DENIED = -1
+                //permission was granted, yay! Do the contacts-related task you need to do.
+                //这里进行授权被允许的处理
+                initLocation();
+            } else {
+                //permission denied, boo! Disable the functionality that depends on this permission.
+                //这里进行权限被拒绝的处理
+                finish();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     //绑定控件
@@ -96,8 +141,10 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
         normalType.setChecked(true);
         mBaiduMap = mMapView.getMap();
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
-        setMapCustomFile(MapMeterActivity.this,PATH);
         MapView.setMapCustomEnable(true);
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);//获取传感器管理服务
+        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
+        location.setText("普通");
     }
 
     //点击事件
@@ -130,54 +177,40 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
                 }
             }
         });
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);//获取传感器管理服务
-        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
-        location.setText("普通");
-        View.OnClickListener btnClickListener = new View.OnClickListener() {
-            public void onClick(View v) {
-                switch (mCurrentMode) {
-                    case NORMAL:
-                        location.setText("跟随");
-                        mCurrentMode = MyLocationConfiguration.LocationMode.FOLLOWING;
-                        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-                                mCurrentMode, true, mCurrentMarker));
-                        MapStatus.Builder builder = new MapStatus.Builder();
-                        builder.overlook(0);
-                        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-                        break;
-                    case COMPASS:
-                        location.setText("普通");
-                        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
-                        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-                                mCurrentMode, true, mCurrentMarker));
-                        MapStatus.Builder builder1 = new MapStatus.Builder();
-                        builder1.overlook(0);
-                        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder1.build()));
-                        break;
-                    case FOLLOWING:
-                        location.setText("罗盘");
-                        mCurrentMode = MyLocationConfiguration.LocationMode.COMPASS;
-                        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-                                mCurrentMode, true, mCurrentMarker));
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
         location.setOnClickListener(btnClickListener);
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-        // 定位初始化
-        mLocClient = new LocationClient(this);
-        mLocClient.registerLocationListener(myListener);
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000);
-        mLocClient.setLocOption(option);
-        mLocClient.start();
     }
+
+    View.OnClickListener btnClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            switch (mCurrentMode) {
+                case NORMAL:
+                    location.setText("跟随");
+                    mCurrentMode = MyLocationConfiguration.LocationMode.FOLLOWING;
+                    mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(mCurrentMode, true, mCurrentMarker));
+                    MapStatus.Builder builder = new MapStatus.Builder();
+                    builder.overlook(0);
+                    mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+                    break;
+                case COMPASS:
+                    location.setText("普通");
+                    mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
+                    mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
+                            mCurrentMode, true, mCurrentMarker));
+                    MapStatus.Builder builder1 = new MapStatus.Builder();
+                    builder1.overlook(0);
+                    mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder1.build()));
+                    break;
+                case FOLLOWING:
+                    location.setText("罗盘");
+                    mCurrentMode = MyLocationConfiguration.LocationMode.COMPASS;
+                    mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
+                            mCurrentMode, true, mCurrentMarker));
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
@@ -204,6 +237,29 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
             }
         }
     };
+
+    //初始化定位
+    private void initLocation() {
+        // 开启定位图层
+        mBaiduMap.setMyLocationEnabled(true);
+        // 定位初始化
+        mLocClient = new LocationClient(getApplicationContext());
+        mLocClient.registerLocationListener(myListener);
+        LocationClientOption option = new LocationClientOption();
+        option.setCoorType("bd09ll"); // 设置坐标类型
+        option.setScanSpan(1000);
+        option.setOpenGps(true); // 打开gps
+        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
+        option.setLocationNotify(true);//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
+        option.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
+        option.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
+        option.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
+        option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
+        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
+        option.setNeedDeviceDirect(true);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+    }
 
     // 设置个性化地图config文件路径
     private void setMapCustomFile(Context context, String PATH) {
@@ -261,6 +317,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
 
     }
 
+
     /**
      * 定位SDK监听函数
      */
@@ -271,6 +328,24 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
             if (location == null || mMapView == null) {
                 return;
             }
+            int code = location.getLocType();
+            Log.i("MyLocationListenner","code是："+code);
+            /*// 定位接口可能返回错误码,要根据结果错误码,来判断是否是正确的地址;
+            int locType = location.getLocType();
+            switch (locType) {
+                case BDLocation.TypeCacheLocation:
+                case BDLocation.TypeOffLineLocation:
+                case BDLocation.TypeGpsLocation:
+                case BDLocation.TypeNetWorkLocation:
+                    *//*radius = bdLocation.getRadius();
+                    user_latitude = bdLocation.getLatitude();
+                    user_longitude = bdLocation.getLongitude();
+                    mCurrentX = bdLocation.getDirection();*//*
+                    break;
+                default:
+                    String s = location.getLocTypeDescription();
+                    break;
+            }*/
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
             mCurrentAccracy = location.getRadius();

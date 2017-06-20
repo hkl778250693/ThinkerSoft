@@ -32,9 +32,9 @@ public class BusinessIntransitEmailActivity extends Activity {
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
+                @Override
+                public void onClick(View v) {
+                    switch (v.getId()){
                 case R.id.back:
                     finish();
                     break;

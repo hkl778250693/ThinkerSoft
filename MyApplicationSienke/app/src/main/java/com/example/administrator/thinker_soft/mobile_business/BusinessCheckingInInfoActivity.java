@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 
@@ -17,41 +18,63 @@ public class BusinessCheckingInInfoActivity extends Activity {
     private ImageView back;
     private LinearLayout adress;
     private RelativeLayout linkman;
+    private TextView dizhi;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         setContentView(R.layout.activity_business_checking_in_info);//考勤详细
+
+        setContentView(R.layout.activity_business_checking_in_info);//考勤详细
 
         bindView();//绑定控件
         setOnClickListener();//点击事件
     }
 
-    public void bindView(){
+
+    public void bindView() {
         back = (ImageView) findViewById(R.id.back);
         adress = (LinearLayout) findViewById(R.id.adress);
         linkman = (RelativeLayout) findViewById(R.id.linkman);
+        dizhi = (TextView) findViewById(R.id.dizhi);
     }
 
-    public void setOnClickListener(){
+    public void setOnClickListener() {
         back.setOnClickListener(clickListener);
         adress.setOnClickListener(clickListener);
         linkman.setOnClickListener(clickListener);
+        dizhi.setOnClickListener(clickListener);
     }
+
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.back:
                     finish();
                     break;
                 case R.id.adress:
+                    Intent intent1 = new Intent(BusinessCheckingInInfoActivity.this, BusinessCheckingIninfoMapActivity.class);
+                    startActivityForResult(intent1, 200);
                     break;
                 case R.id.linkman:
-                    Intent intent = new Intent(BusinessCheckingInInfoActivity.this,BusinessNetPhoneBookActivity.class);
+                    Intent intent = new Intent(BusinessCheckingInInfoActivity.this, BusinessNetPhoneBookActivity.class);
                     startActivity(intent);
                     break;
             }
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 200) {
+                if (data != null) {
+                    dizhi.setText(data.getStringExtra("location"));
+                }
+            }
+        }
+    }
 }

@@ -11,17 +11,14 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
-import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,9 +29,8 @@ import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 import com.example.administrator.thinker_soft.myfirstpro.service.DBService;
 import com.example.administrator.thinker_soft.myfirstpro.util.CloudLed;
-import com.example.administrator.thinker_soft.zxing.camera.CameraManager;
-import com.example.administrator.thinker_soft.zxing.decoding.CaptureActivityHandler;
-import com.example.administrator.thinker_soft.zxing.decoding.InactivityTimer;
+import com.example.administrator.thinker_soft.zxing.android.CaptureActivityHandler;
+import com.example.administrator.thinker_soft.zxing.android.InactivityTimer;
 import com.example.administrator.thinker_soft.zxing.view.ViewfinderView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -44,7 +40,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
 
-//work=��ת���������ҽ������Activity
 public class CaptureActivity extends Activity implements Callback,OnClickListener{
 	private CaptureActivityHandler handler;
 	private RelativeLayout perviw_parent;
@@ -87,7 +82,7 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.orshaomiao);
-		mam = MyActivityManager.getInstance();
+		/*mam = MyActivityManager.getInstance();
 		mam.pushOneActivity(this);
 		Log.v("onCreate:", "onCreate()");
         WindowManager windowManager = CaptureActivity.this.getWindowManager();
@@ -111,7 +106,7 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 		params.width = screenWidth-80;
 		params.height = screenWidth-80;
 		hasSurface = false;
-		inactivityTimer = new InactivityTimer(this);
+		inactivityTimer = new InactivityTimer(this);*/
 	}
 
 	@Override
@@ -161,16 +156,16 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 	@Override
 	protected void onPause() {
 		super.onPause();
-		control_lamp.setEnabled(false);
+		/*control_lamp.setEnabled(false);
 		Log.v("onPause:", "onPause()");
 		if (handler != null) {
 			handler.quitSynchronously();
 			handler = null;
 		}
-/*		CameraManager.get().openDriver(holder);
-		CameraManager.get().startPreview();*/
+*//*		CameraManager.get().openDriver(holder);
+		CameraManager.get().startPreview();*//*
 		isRun = false;
-		CameraManager.get().closeDriver();
+		CameraManager.get().closeDriver();*/
 	}
 
 	@Override
@@ -238,7 +233,7 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 	}
 
 	private void initCamera(SurfaceHolder surfaceHolder) {
-		try {
+		/*try {
 			CameraManager.get().openDriver(surfaceHolder);
 		} catch (IOException ioe) {
 			return;
@@ -248,7 +243,7 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 		if (handler == null) {
 			handler = new CaptureActivityHandler(this, decodeFormats,
 					characterSet);
-		}
+		}*/
 	}
 
 	@Override
@@ -269,7 +264,7 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		hasSurface = false;
-		CameraManager.get().stopPreview();
+		/*CameraManager.stopPreview();*/
 
 	}
 
@@ -331,7 +326,7 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 	};
 	@Override
 	public void onClick(View v) {
-		int key = v.getId();
+		/*int key = v.getId();
 		switch (key) {
 		case R.id.control_lamp:
 			//led = new CloudLed();
@@ -343,12 +338,12 @@ public class CaptureActivity extends Activity implements Callback,OnClickListene
 			    isOpen = false;
 			}else{
 				parameter.setFlashMode(Parameters.FLASH_MODE_OFF);
-			    camera.setParameters(parameter);    
+			    camera.setParameters(parameter);
 			    isOpen = true;
 			}
 			break;
 		default:
 			break;
-		}
+		}*/
 	}
 }

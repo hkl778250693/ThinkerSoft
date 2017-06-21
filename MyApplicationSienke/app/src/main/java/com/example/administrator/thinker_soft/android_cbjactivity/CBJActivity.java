@@ -259,6 +259,7 @@ public class CBJActivity extends FragmentActivity{
         mapInfo = (TextView) contentView.findViewById(R.id.map_info);
         TextView sysSet = (TextView) contentView.findViewById(R.id.popwindow_content_sysSet);
         TextView gpscollector = (TextView) contentView.findViewById(R.id.popwindow_content_gpscollector);
+        TextView tesseractOcr = (TextView) contentView.findViewById(R.id.tesseract_ocr);
         TextView mapMeter = (TextView) contentView.findViewById(R.id.popwindow_content_mapMeter);
         TextView tasks = (TextView) contentView.findViewById(R.id.popwindow_content_actualtask);
         /*// 注册 SDK 广播监听者
@@ -303,6 +304,14 @@ public class CBJActivity extends FragmentActivity{
                     intent.setAction("");
                     startActivity(intent);
                 }
+            }
+        });
+        tesseractOcr.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CBJActivity.this, TesseractOcrActivity.class);
+                startActivity(intent);
+                popupWindow.dismiss();
             }
         });
         mapMeter.setOnClickListener(new OnClickListener() {

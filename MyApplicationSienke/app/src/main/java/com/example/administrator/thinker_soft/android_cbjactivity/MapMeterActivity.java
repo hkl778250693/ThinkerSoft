@@ -81,8 +81,8 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
 
         bindView();
         defaultSetting();
-        setViewClickListener();
         requireLocationPermission();
+        setViewClickListener();
     }
 
     private void requireLocationPermission(){
@@ -356,7 +356,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
                     .longitude(location.getLongitude()).build();
             mBaiduMap.setMyLocationData(locData);
             if (isFirstLoc) {
-                isFirstLoc = false;
+                //isFirstLoc = false;
                 LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(ll).zoom(18.0f);

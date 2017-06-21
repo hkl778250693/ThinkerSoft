@@ -198,6 +198,8 @@
         <activity android:name=".android_cbjactivity.BianHaoCXActivity" android:screenOrientation="portrait"/>
         <activity android:name=".android_cbjactivity.BiaoHaoCXActivity" android:screenOrientation="portrait"/>
         <activity android:name=".android_cbjactivity.CbbCXAction" android:screenOrientation="portrait"/>
+        <activity android:name=".android_cbjactivity.TesseractOcrActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".zxing.android.CaptureActivity" android:screenOrientation="portrait"/>
 
         <activity
             android:name=".android_cbjactivity.ChaoBiaoBenTongjiActivity" android:screenOrientation="portrait"/>
@@ -288,7 +290,7 @@
             </intent-filter>
         </receiver>
 
-        <!--百度地图 验证码  -->
+        <!-- 百度地图 验证码  -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="qeWx9a8xucRxj72AYDeylprGjUB4Xmi5" />
@@ -302,6 +304,12 @@
                 </action>
             </intent-filter>
         </service>
+
+        <!-- uCrop图片裁剪 -->
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
     </application>
 

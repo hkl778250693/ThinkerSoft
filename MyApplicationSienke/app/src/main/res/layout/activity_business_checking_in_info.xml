@@ -59,7 +59,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/normal_button_bg_selector"
                     android:padding="8dp"
                     android:text="2017.03.07 13:32"
                     android:textColor="@color/text_black" />
@@ -67,7 +66,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/adress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
@@ -89,12 +87,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/normal_button_bg_selector"
                     android:padding="8dp"
                     android:text="重庆市江北区星耀天地3栋12楼"
                     android:textColor="@color/text_black" />
 
                 <ImageView
+                    android:id="@+id/adress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

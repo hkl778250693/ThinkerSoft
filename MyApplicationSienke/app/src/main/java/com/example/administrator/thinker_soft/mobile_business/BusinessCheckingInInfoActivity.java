@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,7 +15,7 @@ import com.example.administrator.thinker_soft.R;
  */
 public class BusinessCheckingInInfoActivity extends Activity {
     private ImageView back;
-    private LinearLayout adress;
+    private ImageView adress;
     private RelativeLayout linkman;
     private TextView dizhi;
 
@@ -34,7 +33,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
 
     public void bindView() {
         back = (ImageView) findViewById(R.id.back);
-        adress = (LinearLayout) findViewById(R.id.adress);
+        adress = (ImageView) findViewById(R.id.adress);
         linkman = (RelativeLayout) findViewById(R.id.linkman);
         dizhi = (TextView) findViewById(R.id.dizhi);
     }
@@ -43,7 +42,6 @@ public class BusinessCheckingInInfoActivity extends Activity {
         back.setOnClickListener(clickListener);
         adress.setOnClickListener(clickListener);
         linkman.setOnClickListener(clickListener);
-        dizhi.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {

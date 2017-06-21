@@ -35,4 +35,5 @@
     <color name="viewfinder_laser">#ffff0000</color>
     <color name="possible_result_points">#c0ffff00</color>
     <color name="onceagain">#00000000</color>
+    <color name="status_text">#ffffffff</color>
 </resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <Button
+        android:id="@+id/start_ocr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始识别"/>
+
+    <ImageView
+        android:id="@+id/english"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/meter_example"/>
+
+    <TextView
+        android:id="@+id/english_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/simple_chinese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@mipmap/simplechinese"/>
+
+    <TextView
+        android:id="@+id/simple_chinese_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

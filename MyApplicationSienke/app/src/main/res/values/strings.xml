@@ -51,11 +51,15 @@
     <string name="page_two">扫码抄表</string>
     <string name="page_three">自定义查询</string>
     <string name="page_four">数据传输</string>
-    <string name="ip"></string>
-    <string name="port"></string>
     <string name="title_activity_dialog_by_user_met">自定义查询</string>
     <string name="title_activity_dialog_by_met_num">自定义查询</string>
     <string name="title_activity_dialog_by_user_name">自定义查询</string>
     <string name="title_activity_dialog_by_user_num">自定义查询</string>
     <string name="gps_search_hint">请输入查询信息</string>
+
+    <!-- 扫码 -->
+    <string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
+    <string name="button_ok">OK</string>
+    <string name="viewfinderview_status_text1">将二维码/条码放入取景框内</string>
+    <string name="viewfinderview_status_text2">即可自动扫描</string>
 </resources>

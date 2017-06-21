@@ -18,7 +18,6 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
 
 import com.example.administrator.thinker_soft.R;
 
@@ -27,7 +26,6 @@ import com.example.administrator.thinker_soft.R;
  */
 public class BusinessWebviewActivity extends Activity {
     private WebView webView;
-    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,19 +61,17 @@ public class BusinessWebviewActivity extends Activity {
         // 设置默认字体大小
         //webSettings.setDefaultFontSize(12);
         //webView.loadUrl("http://www.baidu.com/");
-        webView.loadUrl("http://88.88.88.231:8080/x5/UI2/v_/thinksoft/index.w#!main");
+        webView.loadUrl("http://www.thksoft.cc/");
     }
 
     //绑定控件ID
     private void bindView() {
         webView = (WebView) findViewById(R.id.business_webview);
-        back = (ImageView) findViewById(R.id.back);
     }
 
     //点击事件
     private void setOnClickListener() {
-        back.setOnClickListener(clickListener
-        );
+
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {

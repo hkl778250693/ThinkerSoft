@@ -28,11 +28,15 @@ import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.administrator.thinker_soft.R;
 
@@ -57,7 +61,6 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
     boolean isFirstLoc = true; // 是否首次定位
     private MyLocationData locData;
     private TextView location;
-
     private MapView mMapView;
     private BaiduMap mBaiduMap;
     private RadioButton openRb;
@@ -68,6 +71,8 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
     //用于设置个性化地图的样式文件
     // 提供三种样式模板："custom_config_blue.txt"，"custom_config_dark.txt"，"custom_config_midnightblue.txt"
     private static String PATH = "custom_config_dark.txt";
+    private double lat;
+    private double lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,9 +248,10 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
         // 定位初始化
-        mLocClient = new LocationClient(getApplicationContext());
-        mLocClient.registerLocationListener(myListener);
+        mLocClient = new LocationClient(getApplicationContext()); //声明LocationClient类
+        mLocClient.registerLocationListener(myListener);     //注册监听函数
         LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
         option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(1000);
         option.setOpenGps(true); // 打开gps
@@ -317,6 +323,38 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
 
     }
 
+    /**
+     * 添加marker
+     */
+    private void setMarker() {
+        //定义Maker坐标点
+        LatLng point = new LatLng(lat, lon);
+        //构建Marker图标
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.location_marker);
+        //构建MarkerOption，用于在地图上添加Marker
+        OverlayOptions option = new MarkerOptions().position(point).icon(bitmap);
+        //在地图上添加Marker，并显示
+        mBaiduMap.addOverlay(option);
+    }
+
+    /**
+     * 设置中心点
+     */
+    private void setUserMapCenter() {
+        Log.v("pcw","setUserMapCenter : lat : "+ lat+" lon : " + lon);
+        LatLng cenpt = new LatLng(lat,lon);
+        //定义地图状态
+        MapStatus mMapStatus = new MapStatus.Builder()
+                .target(cenpt)
+                .zoom(18)
+                .build();
+        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        //改变地图状态
+        mBaiduMap.setMapStatus(mMapStatusUpdate);
+
+    }
+
 
     /**
      * 定位SDK监听函数
@@ -355,12 +393,12 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
                     .direction(mCurrentDirection).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
             mBaiduMap.setMyLocationData(locData);
+            lat = location.getLatitude();
+            lon = location.getLongitude();
             if (isFirstLoc) {
-                //isFirstLoc = false;
-                LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-                MapStatus.Builder builder = new MapStatus.Builder();
-                builder.target(ll).zoom(18.0f);
-                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+                isFirstLoc = false;  //这个判断是为了防止每次定位都重新设置中心点和marker
+                setMarker();
+                setUserMapCenter();
             }
         }
 

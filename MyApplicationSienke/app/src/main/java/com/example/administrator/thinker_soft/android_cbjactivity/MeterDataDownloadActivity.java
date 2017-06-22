@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnKeyListener;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -38,7 +37,6 @@ import com.example.administrator.thinker_soft.myfirstpro.entity.ProportionInfo;
 import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
 import com.example.administrator.thinker_soft.myfirstpro.lvadapter.AreaDataAdapter;
 import com.example.administrator.thinker_soft.myfirstpro.lvadapter.BookDataAdapter;
-import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 import com.example.administrator.thinker_soft.myfirstpro.service.DBService;
 import com.example.administrator.thinker_soft.myfirstpro.threadsocket.SocketInteraction;
 import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
@@ -51,16 +49,15 @@ import org.json.JSONException;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressLint("NewApi") public class XiaZaiActivity extends Activity {
+@SuppressLint("NewApi") public class MeterDataDownloadActivity extends Activity {
 	private ImageView back;
+	private ListView booklistView;
 	private ListView arealistView;
-	private ListView booklistView;	
-	private AreaDataAdapter areaAdapter;
 	private BookDataAdapter bookAdapter;
+	private AreaDataAdapter areaAdapter;
 	private List<BookInfo>  bookList;
 	private List<AreaInfo> areaList;
 	private List<PropertyInfo> propertyList;
@@ -72,8 +69,6 @@ import java.util.Map;
 	private List<String> bookName;
 	private List<Integer> bookrecord;
 	private List<Integer> arearecord;
-	private TextView booktv;
-	private TextView areatv;
 /*	private TextView booktv ;
 	private TextView areatv ;*/
 	private LinearLayout areahrilayout;
@@ -102,12 +97,17 @@ import java.util.Map;
 	private String filepath = Environment.getDataDirectory().getPath() + "/data/"+"com.example.android_cbjactivity"+"/databases/";
 	private Map<Integer,Boolean> dialogControl;
 	private int clickCount;
+	private ArrayList<String> meterBookList = new ArrayList<>();   //抄表本名称集合
+	private ArrayList<String> meterAreaList = new ArrayList<>();   //抄表分区名称集合
+	private List<BookInfo> bookInfoList = new ArrayList<>();      //抄表本集合
+	private List<AreaInfo> areaInfoList = new ArrayList<>();   //抄表分区集合
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_xiaozai);
+		setContentView(R.layout.activity_meter_data_download);
 
 		bindView();
 		defaultSetting();
@@ -117,12 +117,8 @@ import java.util.Map;
 	//绑定控件ID
 	private void bindView() {
 		back=(ImageView) findViewById(R.id.back);
-		arealistView = (ListView)findViewById(R.id.lv_data_area);
-		booklistView = (ListView)findViewById(R.id.lv_data_book);
-		booktv = (TextView) findViewById(R.id.add_book);
-		areatv = (TextView) findViewById(R.id.add_area);
-		book_scroll_ll = (LinearLayout) findViewById(R.id.book_scroll_ll);
-		area_scroll_ll = (LinearLayout) findViewById(R.id.area_scroll_ll);
+		booklistView = (ListView)findViewById(R.id.meter_book_lv);
+		arealistView = (ListView)findViewById(R.id.meter_area_lv);
 		begianNum = (EditText) findViewById(R.id.begain_num);
 		endNum = (EditText) findViewById(R.id.end_num);
 		downLoadbtn = (Button) findViewById(R.id.downLoadbtn);
@@ -130,43 +126,51 @@ import java.util.Map;
 
 	//初始化设置
 	private void defaultSetting() {
-		MyActivityManager mam = MyActivityManager.getInstance();
-		mam.pushOneActivity(this);
-		bookID = new ArrayList<String>();
-		areaID = new ArrayList<String>();
-		areaName = new ArrayList<String>();
-		bookName = new ArrayList<String>();
-		bookrecord = new ArrayList<Integer>();
-		arearecord = new ArrayList<Integer>();
-		SharedPreferences sharedPreferences = getApplication().getSharedPreferences("IP_PORT_DBNAME", 0);
-		ip = sharedPreferences.getString("ip", "");
-		defaultPort = sharedPreferences.getString("port", "");
-		if("".equals(ip)||ip==null){
-			Toast.makeText(XiaZaiActivity.this, "������IP", Toast.LENGTH_LONG).show();
-		}else if("".equals(defaultPort)||defaultPort==null){
-			Toast.makeText(XiaZaiActivity.this, "�����ö˿�", Toast.LENGTH_LONG).show();
-			finish();
-		}else{
-			Intent intent = getIntent();
-			bookList = (ArrayList<BookInfo>)intent.getSerializableExtra("bookList");
-			areaList = (ArrayList<AreaInfo>)intent.getSerializableExtra("areaList");
-			if(bookList!=null){
-				bookAdapter = new BookDataAdapter(this,bookList);
+		Intent intent = getIntent();
+		if(intent != null){
+			Bundle meterData = intent.getExtras();
+			if(meterData != null){
+				meterBookList = meterData.getStringArrayList("meterBookList");
+				meterAreaList = meterData.getStringArrayList("meterAreaList");
+				//初始化抄表本listview
+				if (meterBookList != null) {
+					for(int i = 0;i<meterBookList.size();i++){
+						BookInfo item = new BookInfo();
+						item.setBOOK(meterBookList.get(i));
+						bookInfoList.add(item);
+					}
+				}
+				bookAdapter = new BookDataAdapter(MeterDataDownloadActivity.this,bookInfoList);
 				booklistView.setAdapter(bookAdapter);
-				booklistView.setOnItemClickListener(new BookLVClickListener());
-			}
-			if(areaList!=null){
-				areaAdapter = new AreaDataAdapter(this,areaList);
+				//初始化抄表分区listview
+				if (meterAreaList != null) {
+					for(int i = 0;i<meterAreaList.size();i++){
+						AreaInfo item = new AreaInfo();
+						item.setArea(meterAreaList.get(i));
+						areaInfoList.add(item);
+                    }
+				}
+				areaAdapter = new AreaDataAdapter(MeterDataDownloadActivity.this,areaInfoList);
 				arealistView.setAdapter(areaAdapter);
-				arealistView.setOnItemClickListener(new AreaLVClickListener());
 			}
 		}
-		dialogControl = new HashMap<Integer, Boolean>();
 	}
 
 	//点击事件
 	private void setViewClickListener() {
 		back.setOnClickListener(onClickListener);
+		booklistView.setOnItemClickListener(new OnItemClickListener() {   //抄表本item点击事件
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+			}
+		});
+		arealistView.setOnItemClickListener(new OnItemClickListener() {   //抄表分区item点击事件
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+			}
+		});
 	}
 
 	View.OnClickListener onClickListener = new OnClickListener() {
@@ -178,14 +182,14 @@ import java.util.Map;
 					break;
 				case R.id.downLoadbtn:
 					if("".equals(begianNum.getText().toString())&&!"".equals(endNum.getText().toString())){
-						Toast.makeText(XiaZaiActivity.this, "����ȷ��д��ѯ��Ϣ", Toast.LENGTH_LONG).show();
+						Toast.makeText(MeterDataDownloadActivity.this, "����ȷ��д��ѯ��Ϣ", Toast.LENGTH_LONG).show();
 						begianNum.setFocusable(true);
 					}else if(!"".equals(begianNum.getText().toString())&&"".equals(endNum.getText().toString())){
-						Toast.makeText(XiaZaiActivity.this, "����ȷ��д��ѯ��Ϣ", Toast.LENGTH_LONG).show();
+						Toast.makeText(MeterDataDownloadActivity.this, "����ȷ��д��ѯ��Ϣ", Toast.LENGTH_LONG).show();
 						endNum.setFocusable(true);
 					}else{
 						if((areaName!=null&&areaName.size()>0)||(bookName!=null&&bookName.size()>0)){
-							Intent intent = new Intent(XiaZaiActivity.this,dialog_loadname_activity.class);
+							Intent intent = new Intent(MeterDataDownloadActivity.this,dialog_loadname_activity.class);
 							if(areaName!=null&&areaName.size()>0){
 								intent.putExtra("areaName", (Serializable)areaName);
 							}
@@ -195,7 +199,7 @@ import java.util.Map;
 							int requestCode = 1;
 							startActivityForResult(intent, requestCode);
 						}else{
-							Toast.makeText(XiaZaiActivity.this, "��ѡ����������", Toast.LENGTH_LONG).show();
+							Toast.makeText(MeterDataDownloadActivity.this, "��ѡ����������", Toast.LENGTH_LONG).show();
 						}
 					}
 					break;
@@ -236,7 +240,7 @@ import java.util.Map;
 				}
 				clickCount ++;
 				dialogControl.put(clickCount, true);
-				DownDialog = MyDialog.createLoadingDialog(XiaZaiActivity.this, "�������� ���Ժ�");
+				DownDialog = MyDialog.createLoadingDialog(MeterDataDownloadActivity.this, "�������� ���Ժ�");
 				DownDialog.setCancelable(true);
 				DownDialog.setCanceledOnTouchOutside(false);
 				DownDialog.setOnKeyListener(new OnKeyListener() {
@@ -261,9 +265,7 @@ import java.util.Map;
 					}
 				});
 				DownDialog.show();
-				//�������ݿ�
 				createDataBase(tempDBName);
-				//��������
 				downLoadData();
 			}
 		}
@@ -289,12 +291,11 @@ import java.util.Map;
 					if(dialogControl.get(loc)==true){
 						if(signal==false){
 								dataHandler.post(new Runnable() {
-									
 									@SuppressLint("NewApi") @Override
 									public void run() {
-										// TODO Auto-generated method stub						
+										// TODO Auto-generated method stub
 										AlertDialog.Builder builder = null;
-										builder = new AlertDialog.Builder(XiaZaiActivity.this);
+										builder = new AlertDialog.Builder(MeterDataDownloadActivity.this);
 										builder.setMessage("��������ʧ��");
 										builder.show();
 										File file = new File(filepath+tempDBName);
@@ -323,23 +324,23 @@ import java.util.Map;
 				}
 			}
 			arearecord.add(position);
-			if(areatvcount==0){//�״δ���
-				areahrilayout = new LinearLayout(XiaZaiActivity.this);
+			if(areatvcount==0){
+				areahrilayout = new LinearLayout(MeterDataDownloadActivity.this);
 				areahrilayout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
 				areahrilayout.setOrientation(LinearLayout.HORIZONTAL);
 				area_scroll_ll.addView(areahrilayout);
 			}
 			
 			if(areatvcount!=0&&areatvcount%3==0){
-				areahrilayout = new LinearLayout(XiaZaiActivity.this);
+				areahrilayout = new LinearLayout(MeterDataDownloadActivity.this);
 				areahrilayout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
 				areahrilayout.setOrientation(LinearLayout.HORIZONTAL);
 				area_scroll_ll.addView(areahrilayout);
 			}		
-			arealayout = new LinearLayout(XiaZaiActivity.this);
+			arealayout = new LinearLayout(MeterDataDownloadActivity.this);
 			arealayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,1));
 			TextView tv = (TextView) view.findViewById(R.id.textViewchaobiao);
-			final TextView textView = new TextView(XiaZaiActivity.this);
+			final TextView textView = new TextView(MeterDataDownloadActivity.this);
 			textView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
 			textView.setText(tv.getText().toString());
 			textView.setGravity(Gravity.CENTER);
@@ -402,22 +403,22 @@ import java.util.Map;
 				}
 			}
 			if(booktvcount==0){//�״δ���
-				bookhrilayout = new LinearLayout(XiaZaiActivity.this);
+				bookhrilayout = new LinearLayout(MeterDataDownloadActivity.this);
 				bookhrilayout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
 				bookhrilayout.setOrientation(LinearLayout.HORIZONTAL);
 				book_scroll_ll.addView(bookhrilayout);
 			}
 			if(booktvcount!=0&&booktvcount%3==0){
-				bookhrilayout = new LinearLayout(XiaZaiActivity.this);
+				bookhrilayout = new LinearLayout(MeterDataDownloadActivity.this);
 				bookhrilayout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
 				bookhrilayout.setOrientation(LinearLayout.HORIZONTAL);
 				book_scroll_ll.addView(bookhrilayout);
 			}
 			bookrecord.add(position);//��¼����λ��,�ж��Ƿ��ظ�
-			booklayout = new LinearLayout(XiaZaiActivity.this);
+			booklayout = new LinearLayout(MeterDataDownloadActivity.this);
 			booklayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,1));
 			TextView tv = (TextView) view.findViewById(R.id.textViewchaobiao);
-			final TextView textView = new TextView(XiaZaiActivity.this);
+			final TextView textView = new TextView(MeterDataDownloadActivity.this);
 			if(booktvcount==1){
 				textView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
 			}
@@ -495,7 +496,7 @@ import java.util.Map;
 								} catch (JSONException e) {
 									DownDialog.dismiss();
 									AlertDialog.Builder builder = null;
-									builder = new AlertDialog.Builder(XiaZaiActivity.this);
+									builder = new AlertDialog.Builder(MeterDataDownloadActivity.this);
 									builder.setMessage("���ݸ�ʽ���⣬�����Ի���ϵ������Ա��");
 									builder.show();
 									DownDialog.dismiss();
@@ -524,7 +525,7 @@ import java.util.Map;
 		    				file.delete();
 		    			}
 		    			AlertDialog.Builder builder = null;
-		    			builder = new AlertDialog.Builder(XiaZaiActivity.this);
+		    			builder = new AlertDialog.Builder(MeterDataDownloadActivity.this);
 		    			builder.setMessage("û�в�ѯ������û����ݣ�");
 		    			builder.show();
 		    			DownDialog.dismiss();
@@ -540,7 +541,7 @@ import java.util.Map;
 							}	
 						}
 						AlertDialog.Builder builder = null;
-						builder = new AlertDialog.Builder(XiaZaiActivity.this);
+						builder = new AlertDialog.Builder(MeterDataDownloadActivity.this);
 						builder.setMessage("�������سɹ�");
 						builder.show();
 					}

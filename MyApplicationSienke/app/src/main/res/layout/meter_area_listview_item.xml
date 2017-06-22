@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/meter_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="目标"
+        android:textColor="@color/text_gray"
+        android:layout_centerVertical="true"
+        android:textSize="16sp" />
+
+    <CheckBox
+        android:id="@+id/check_state"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/check_box_selector"
+        android:button="@null"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true" />
+
+</RelativeLayout>

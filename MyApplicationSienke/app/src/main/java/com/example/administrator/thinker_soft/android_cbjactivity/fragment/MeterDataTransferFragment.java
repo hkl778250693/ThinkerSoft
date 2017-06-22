@@ -136,16 +136,16 @@ public class MeterDataTransferFragment extends Fragment {
                     break;
                 case R.id.download:
                     showPopupwindow();
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     new Thread(){
                         @Override
                         public void run() {
-                            requireMeterBookData("findAllsBook.do","companyId=1");
-                            requireMeterAreaData("qureyAreaAll.do","companyid=1");
+                            try {
+                                Thread.sleep(2000);
+                                requireMeterBookData("findAllsBook.do","companyId=1");
+                                requireMeterAreaData("qureyAreaAll.do","companyid=1");
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }.start();
                     break;
@@ -205,7 +205,7 @@ public class MeterDataTransferFragment extends Fragment {
             if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
                 ip = public_sharedPreferences.getString("security_ip", "");
             } else {
-                ip = "192.168.2.201:";
+                ip = "88.88.88.31:";
             }
             if (!public_sharedPreferences.getString("security_port", "").equals("")) {
                 port = public_sharedPreferences.getString("security_port", "");
@@ -269,7 +269,7 @@ public class MeterDataTransferFragment extends Fragment {
             if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
                 ip = public_sharedPreferences.getString("security_ip", "");
             } else {
-                ip = "192.168.2.201:";
+                ip = "88.88.88.31:";
             }
             if (!public_sharedPreferences.getString("security_port", "").equals("")) {
                 port = public_sharedPreferences.getString("security_port", "");
@@ -352,7 +352,7 @@ public class MeterDataTransferFragment extends Fragment {
                         JSONArray jsonArray = new JSONArray(resultArea);
                         for(int i=0;i<jsonArray.length();i++){
                             JSONObject object = jsonArray.getJSONObject(i);
-                            meterAreaList.add(object.optString("c_area_name",""));
+                            meterAreaList.add(object.optString("areaName",""));
                         }
                         if(meterBookList.size() != 0 || meterAreaList.size() != 0){
                             Intent intent = new Intent(getActivity(),MeterDataDownloadActivity.class);
@@ -361,6 +361,7 @@ public class MeterDataTransferFragment extends Fragment {
                             bundle.putStringArrayList("meterAreaList",meterAreaList);
                             intent.putExtras(bundle);
                             startActivity(intent);
+                            popupWindow.dismiss();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

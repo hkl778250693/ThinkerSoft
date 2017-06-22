@@ -186,7 +186,6 @@ public class MoveLoginActivity extends Activity{
                     os.write(data.getBytes("UTF-8"));
                     os.flush();
                     os.close();
-                    Log.i("getResponseCode====>",""+urlConnection.getResponseCode());
                     Log.i("getResponseCode====>", "" + urlConnection.getResponseCode());
                     if (urlConnection.getResponseCode() == 200) {
                         InputStream inputStream = urlConnection.getInputStream();

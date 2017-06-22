@@ -72,7 +72,7 @@ public class BookDataAdapter extends BaseAdapter {
 		if (convertView == null) {
 			viewHolder = new MeterBookViewHolder();
 			convertView = inflater.inflate(R.layout.meter_area_listview_item, null);
-			viewHolder.bookName = (TextView) convertView.findViewById(R.id.textViewchaobiao);
+			viewHolder.bookName = (TextView) convertView.findViewById(R.id.meter_name);
 			viewHolder.checkedState = (CheckBox) convertView.findViewById(R.id.check_state);
 			convertView.setTag(viewHolder);
 		}else{

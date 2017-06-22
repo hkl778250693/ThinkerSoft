@@ -24,6 +24,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.location.Poi;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
@@ -44,6 +45,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class MapMeterActivity extends Activity implements SensorEventListener {
     // 定位相关
@@ -71,8 +73,6 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
     //用于设置个性化地图的样式文件
     // 提供三种样式模板："custom_config_blue.txt"，"custom_config_dark.txt"，"custom_config_midnightblue.txt"
     private static String PATH = "custom_config_dark.txt";
-    private double lat;
-    private double lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +96,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
             //判断是否具有权限
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 //判断是否需要向用户解释为什么需要申请该权限
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
                     Toast.makeText(MapMeterActivity.this,"自Android 6.0开始需要打开位置权限",Toast.LENGTH_SHORT).show();
                 }
                 //请求权限
@@ -121,7 +120,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
             } else {
                 //permission denied, boo! Disable the functionality that depends on this permission.
                 //这里进行权限被拒绝的处理
-                finish();
+                Toast.makeText(MapMeterActivity.this, "请求权限失败！", Toast.LENGTH_SHORT).show();
             }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -328,7 +327,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
      */
     private void setMarker() {
         //定义Maker坐标点
-        LatLng point = new LatLng(lat, lon);
+        LatLng point = new LatLng(mCurrentLat, mCurrentLon);
         //构建Marker图标
         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.location_marker);
         //构建MarkerOption，用于在地图上添加Marker
@@ -341,8 +340,8 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
      * 设置中心点
      */
     private void setUserMapCenter() {
-        Log.v("pcw","setUserMapCenter : lat : "+ lat+" lon : " + lon);
-        LatLng cenpt = new LatLng(lat,lon);
+        Log.v("pcw","setUserMapCenter : lat : "+ mCurrentLat+" lon : " + mCurrentLon);
+        LatLng cenpt = new LatLng(mCurrentLat,mCurrentLon);
         //定义地图状态
         MapStatus mMapStatus = new MapStatus.Builder()
                 .target(cenpt)
@@ -384,6 +383,64 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
                     String s = location.getLocTypeDescription();
                     break;
             }*/
+            StringBuffer sb = new StringBuffer(256);
+            sb.append("time : ");
+            sb.append(location.getTime());
+            sb.append("\nerror code : ");
+            sb.append(location.getLocType());
+            sb.append("\nlatitude : ");
+            sb.append(location.getLatitude());
+            sb.append("\nlontitude : ");
+            sb.append(location.getLongitude());
+            sb.append("\nradius : ");
+            sb.append(location.getRadius());
+
+            if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
+                sb.append("\nspeed : ");
+                sb.append(location.getSpeed());// 单位：公里每小时
+                sb.append("\nsatellite : ");
+                sb.append(location.getSatelliteNumber());
+                sb.append("\nheight : ");
+                sb.append(location.getAltitude());// 单位：米
+                sb.append("\ndirection : ");
+                sb.append(location.getDirection());// 单位度
+                sb.append("\naddr : ");
+                sb.append(location.getAddrStr());
+                sb.append("\ndescribe : ");
+                sb.append("gps定位成功");
+
+            } else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {// 网络定位结果
+                sb.append("\naddr : ");
+                sb.append(location.getAddrStr());
+                //运营商信息
+                sb.append("\noperationers : ");
+                sb.append(location.getOperators());
+                sb.append("\ndescribe : ");
+                sb.append("网络定位成功");
+            } else if (location.getLocType() == BDLocation.TypeOffLineLocation) {// 离线定位结果
+                sb.append("\ndescribe : ");
+                sb.append("离线定位成功，离线定位结果也是有效的");
+            } else if (location.getLocType() == BDLocation.TypeServerError) {
+                sb.append("\ndescribe : ");
+                sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
+            } else if (location.getLocType() == BDLocation.TypeNetWorkException) {
+                sb.append("\ndescribe : ");
+                sb.append("网络不同导致定位失败，请检查网络是否通畅");
+            } else if (location.getLocType() == BDLocation.TypeCriteriaException) {
+                sb.append("\ndescribe : ");
+                sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
+            }
+            sb.append("\nlocationdescribe : ");
+            sb.append(location.getLocationDescribe());// 位置语义化信息
+            List<Poi> list = location.getPoiList();// POI数据
+            if (list != null) {
+                sb.append("\npoilist size = : ");
+                sb.append(list.size());
+                for (Poi p : list) {
+                    sb.append("\npoi= : ");
+                    sb.append(p.getId() + " " + p.getName() + " " + p.getRank());
+                }
+            }
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
             mCurrentAccracy = location.getRadius();
@@ -393,13 +450,12 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
                     .direction(mCurrentDirection).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
             mBaiduMap.setMyLocationData(locData);
-            lat = location.getLatitude();
-            lon = location.getLongitude();
             if (isFirstLoc) {
                 isFirstLoc = false;  //这个判断是为了防止每次定位都重新设置中心点和marker
                 setMarker();
                 setUserMapCenter();
             }
+            Log.i("MyLocationListenner", sb.toString());
         }
 
         @Override
@@ -408,6 +464,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
         }
 
         public void onReceivePoi(BDLocation poiLocation) {
+
         }
     }
 

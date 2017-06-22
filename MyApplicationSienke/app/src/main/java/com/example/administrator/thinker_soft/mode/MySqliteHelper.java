@@ -11,8 +11,10 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MySqliteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="SiEnKe.db";//数据库名称
-
-    //用户表
+    /**
+     * 移动安检模块表
+     */
+    //安检用户表
     final String CREATE_TABLE_SQL_USER = "CREATE TABLE User" +
             "(user_id integer primary key AUTOINCREMENT,securityNumber varchar(200),userName varchar(200),meterNumber varchar(200),userPhone varchar(200)," +
             "securityType varchar(200),oldUserId varchar(200),newUserId varchar(200),userAddress varchar(200),taskId varchar(200),ifChecked varchar(200)," +
@@ -20,9 +22,10 @@ public class MySqliteHelper extends SQLiteOpenHelper {
             "photoNumber varchar(200),ifUpload varchar(200),currentTime varchar(200),ifPass varchar(200),loginName varchar(200),security_state varchar(200)," +
             "newUserPhone varchar(200),newUserAddress varchar(200),userProperty varchar(200))";
 
-    //任务表
+    //安检任务表
     final String CREATE_TABLE_SQL_TASK = "CREATE TABLE Task " +
-            "(task_id integer primary key AUTOINCREMENT,taskName varchar(200),taskId varchar(200),securityType varchar(200),totalCount varchar(200),endTime varchar(200),loginName varchar(200),restCount varchar(200))";
+            "(task_id integer primary key AUTOINCREMENT,taskName varchar(200),taskId varchar(200),securityType varchar(200),totalCount varchar(200)," +
+            "endTime varchar(200),loginName varchar(200),restCount varchar(200))";
 
     //安检图片表
     final String CREATE_TABLE_SQL_SECURITY_PHOTO_INFO = "CREATE TABLE security_photo " +
@@ -48,6 +51,24 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     final String CREATE_TABLE_SQL_SECURITY_INFO_PHOTO = "CREATE TABLE security_info_photo " +
             "(id integer primary key AUTOINCREMENT,name varchar(200),chengji varchar(200),loginName varchar(200))";
 
+    /**
+     * 移动抄表模块表
+     */
+    //抄表用户表
+    final String CREATE_TABLE_SQL_METER_USER = "CREATE TABLE MeterUser" +
+            "(id integer primary key AUTOINCREMENT,securityNumber varchar(200),userName varchar(200),meterNumber varchar(200),userPhone varchar(200)," +
+            "securityType varchar(200),oldUserId varchar(200),newUserId varchar(200),userAddress varchar(200),taskId varchar(200),ifChecked varchar(200)," +
+            "security_content varchar(200),newMeterNumber varchar(200),remarks varchar(200),security_hidden varchar(200),security_hidden_reason varchar(200)," +
+            "photoNumber varchar(200),ifUpload varchar(200),currentTime varchar(200),ifPass varchar(200),loginName varchar(200),security_state varchar(200)," +
+            "newUserPhone varchar(200),newUserAddress varchar(200),userProperty varchar(200))";
+    //抄表本表
+    final String CREATE_TABLE_SQL_METER_BOOK = "CREATE TABLE MeterBook " +
+            "(id integer primary key AUTOINCREMENT,taskName varchar(200),taskId varchar(200),securityType varchar(200),totalCount varchar(200),endTime varchar(200)," +
+            "loginName varchar(200),restCount varchar(200))";
+    //抄表分区表
+    final String CREATE_TABLE_SQL_METER_AREA = "CREATE TABLE MeterArea " +
+            "(id integer primary key AUTOINCREMENT,taskName varchar(200),taskId varchar(200),securityType varchar(200),totalCount varchar(200),endTime varchar(200)," +
+            "loginName varchar(200),restCount varchar(200))";
 
     //构造器
     public MySqliteHelper(Context context,int version){
@@ -72,14 +93,23 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     //创建表
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_SQL_USER);                           //用户表
-        db.execSQL(CREATE_TABLE_SQL_TASK);                           //任务表
+        /**
+         * 移动安检
+         */
+        db.execSQL(CREATE_TABLE_SQL_USER);                           //安检用户表
+        db.execSQL(CREATE_TABLE_SQL_TASK);                           //安检任务表
         db.execSQL(CREATE_TABLE_SQL_SECURITY_PHOTO_INFO);            //用户安检图片关联表
         db.execSQL(CREATE_TABLE_SQL_SECURITY_STATE);                  //安全状态表
         db.execSQL(CREATE_TABLE_SQL_SECURITY_CONTENT);                //安全情况表
         db.execSQL(CREATE_TABLE_SQL_SECURITY_HIDDEEN);                //安全隐患表
         db.execSQL(CREATE_TABLE_SQL_SECURITY_HIDDEEN_REASON);         //安全隐患原因表
         db.execSQL(CREATE_TABLE_SQL_SECURITY_INFO_PHOTO);            //安全信息与照片关联表
+        /**
+         * 移动抄表
+         */
+        db.execSQL(CREATE_TABLE_SQL_METER_USER);                   //抄表用户表
+        db.execSQL(CREATE_TABLE_SQL_METER_BOOK);                   //抄表本表
+        db.execSQL(CREATE_TABLE_SQL_METER_AREA);                   //抄表分区表
     }
 
     //SQLiteDatabase 数据库操作类

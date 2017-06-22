@@ -91,12 +91,8 @@ public class SocketConnection {
 			}
 			System.out.println("��ǰ���е����ɶ�����"+contentLength);
 			if(buffersize>2048){
-			    // ��ǰ���е����ɶ���   
-			    // ƫ����   
-			     int offset = 0;  
-			    // ÿ�ζ�ȡ���ֽ���   
-			     int len = 0;  
-		  
+			     int offset = 0;
+			     int len = 0;
 			    while(contentLength > 0  && len != -1&&offset<buffersize)  
 			    {  
 			    	byte[] buffer = new byte[2048];

@@ -121,7 +121,7 @@ public class SJCSActivity extends Activity {
             intent.putExtra("bookList", (Serializable)bookList);
 			intent.putExtra("floatRange", floatRange);
 			intent.putExtra("month", month);
-			intent.setClass(SJCSActivity.this, XiaZaiActivity.class);
+			intent.setClass(SJCSActivity.this, MeterDataDownloadActivity.class);
 			startActivity(intent);*/
                     break;
                 case R.id.download:
@@ -353,7 +353,7 @@ public class SJCSActivity extends Activity {
                         Intent intent = new Intent();
                         intent.putExtra("areaList", (Serializable) areaList);
                         intent.putExtra("bookList", (Serializable) bookList);
-                        intent.setClass(SJCSActivity.this, XiaZaiActivity.class);
+                        intent.setClass(SJCSActivity.this, MeterDataDownloadActivity.class);
                         startActivity(intent);
                     } else if (areaList == null && bookList == null) {
                         AlertDialog.Builder builder = null;

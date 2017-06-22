@@ -22,17 +22,24 @@
     <TextView
         android:id="@+id/english_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/text_blue"
+        android:layout_marginTop="10dp"/>
 
     <ImageView
         android:id="@+id/simple_chinese"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@mipmap/simplechinese"/>
+        android:src="@mipmap/simplechinese"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/simple_chinese_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/text_blue"
+        android:layout_marginTop="10dp"/>
 </LinearLayout>

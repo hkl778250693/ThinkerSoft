@@ -193,7 +193,7 @@
         <activity android:name=".android_cbjactivity.CaptureActivity" android:screenOrientation="portrait"/>
         <activity android:name=".android_cbjactivity.ChaXunActivity" android:screenOrientation="portrait"/>
         <activity android:name=".android_cbjactivity.SJCSActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".android_cbjactivity.XiaZaiActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".android_cbjactivity.MeterDataDownloadActivity" android:screenOrientation="portrait"/>
         <activity android:name=".android_cbjactivity.YongHuMingCX" android:screenOrientation="portrait"/>
         <activity android:name=".android_cbjactivity.BianHaoCXActivity" android:screenOrientation="portrait"/>
         <activity android:name=".android_cbjactivity.BiaoHaoCXActivity" android:screenOrientation="portrait"/>

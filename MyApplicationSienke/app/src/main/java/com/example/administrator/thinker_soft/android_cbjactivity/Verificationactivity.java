@@ -41,7 +41,7 @@ public class Verificationactivity extends Activity implements OnClickListener{
 	private FrameLayout vertification_Frame;
 	private String ip;
 	private String port;
-	private XiaZaiActivity.MyHandler dataHandler;
+	private MeterDataDownloadActivity.MyHandler dataHandler;
 	private SharedPreferences sharedPreferences;
 	private SharedPreferences.Editor editor;
 	private Dialog dialog;

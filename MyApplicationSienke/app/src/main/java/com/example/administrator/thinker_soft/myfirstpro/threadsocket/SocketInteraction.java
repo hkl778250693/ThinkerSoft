@@ -8,11 +8,10 @@ import android.os.Message;
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
 import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
 import com.example.administrator.thinker_soft.myfirstpro.util.JsonAnalyze;
+import com.example.administrator.thinker_soft.myfirstpro.util.SocketConnection;
 import com.example.administrator.thinker_soft.myfirstpro.util.UniqueID;
 
 import java.util.Map;
-
-import com.example.administrator.thinker_soft.myfirstpro.util.SocketConnection;
 
 /**
  * Socketͨ���߳�
@@ -54,7 +53,7 @@ public class SocketInteraction{
 					return false;
 				socketConn.UpLoadData("A");
 				socketConn.closeconn();//�رճ�ʼ�˿�
-				int tempPort = Integer.parseInt(downresult);//��ʱ�˿ں�
+				int tempPort = Integer.parseInt(downresult);
 				System.out.println("��ȡ������ʱ�˿ڣ�"+tempPort);
 				socketConn = new SocketConnection(tempPort,ip);
 				signel = socketConn.connect();
@@ -140,7 +139,7 @@ public class SocketInteraction{
 				socketConn.UpLoadData(getProtMsg);
 				downresult = socketConn.DownLoadData(bufferSize).trim();
 				socketConn.UpLoadData("A");
-				socketConn.closeconn();//�رճ�ʼ�˿�
+				socketConn.closeconn();
 				if("".equals(downresult))
 					return "���粻�ȶ������ݻ�ȡʧ��!";
 				int tempPort = Integer.parseInt(downresult);//��ʱ�˿ں�

@@ -1,8 +1,9 @@
 package com.example.administrator.thinker_soft.myfirstpro.entity;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class  AreaInfo implements Serializable{
+public class  AreaInfo implements Parcelable{
 	private String ID;
 	private String Area;
 	private String AreaRemark;
@@ -31,4 +32,31 @@ public class  AreaInfo implements Serializable{
 		this.AreaRemark = AreaRemark;
 	}
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(ID);
+		dest.writeString(Area);
+		dest.writeString(AreaRemark);
+	}
+
+	public static final Parcelable.Creator<AreaInfo>CREATOR = new Parcelable.Creator<AreaInfo>(){
+		@Override
+		public AreaInfo createFromParcel(Parcel parcel) {
+			AreaInfo item = new AreaInfo();
+			item.ID = parcel.readString();
+			item.Area = parcel.readString();
+			item.AreaRemark = parcel.readString();
+			return item;
+		}
+
+		@Override
+		public AreaInfo[] newArray(int i) {
+			return new AreaInfo[i];
+		}
+	};
 }

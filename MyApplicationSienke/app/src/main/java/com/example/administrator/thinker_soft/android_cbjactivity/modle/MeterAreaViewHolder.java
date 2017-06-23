@@ -8,5 +8,6 @@ import android.widget.TextView;
  */
 public class MeterAreaViewHolder {
     public TextView meterAreaName; //抄表分区名称
+    public TextView dataId;   //抄表分区ID
     public CheckBox checkedState;  //选中状态
 }

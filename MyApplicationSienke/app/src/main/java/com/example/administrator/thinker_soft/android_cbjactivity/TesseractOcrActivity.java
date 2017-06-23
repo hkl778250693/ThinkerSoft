@@ -80,6 +80,7 @@ public class TesseractOcrActivity extends Activity {
         //初始化OCR的训练数据路径与语言
         baseApi.init(TESSBASE_PATH, DEFAULT_LANGUAGE);
         //设置识别模式
+        baseApi.setVariable("tessedit_char_whitelist","0123456789");
         baseApi.setPageSegMode(TessBaseAPI.PageSegMode.PSM_SINGLE_LINE);
         //设置要识别的图片
         baseApi.setImage(bmp);

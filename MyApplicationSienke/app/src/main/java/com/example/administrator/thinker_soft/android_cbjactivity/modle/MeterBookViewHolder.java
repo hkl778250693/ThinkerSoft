@@ -8,5 +8,6 @@ import android.widget.TextView;
  */
 public class MeterBookViewHolder {
     public TextView bookName;   //抄表本名称
+    public TextView dataId;   //抄表本ID
     public CheckBox checkedState;  //选中状态
 }

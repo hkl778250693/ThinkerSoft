@@ -4,10 +4,13 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -27,10 +30,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,11 +44,15 @@ import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.activity.MyPhotoGalleryActivity;
 import com.example.administrator.thinker_soft.adapter.GridviewImageAdapter;
 import com.example.administrator.thinker_soft.mode.MyPhotoUtils;
+import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 import com.example.administrator.thinker_soft.mode.Tools;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2017/6/13.
@@ -51,11 +60,16 @@ import java.util.List;
 public class BusinessCheckingInInfoActivity extends Activity {
     private ImageView back;
     private GridView gridView;
-    private ImageView adress;
+    private LinearLayout map;
+    private RadioButton cancelRb, saveRb;
+    private Cursor cursor;
     private RelativeLayout linkman;
-    private TextView dizhi;
+    private TextView dizhi, time;
+    private EditText customerName, contactType;
     private GridviewImageAdapter adapter;
     private String securityId;
+    private SQLiteDatabase db;  //数据库
+    private SharedPreferences sharedPreferences, sharedPreferences_login;
     private int currentPosition = 0;
     private String cropPhotoPath;  //裁剪的图片路径
     private ArrayList<String> cropPathLists = new ArrayList<>();  //裁剪的图片路径集合
@@ -63,7 +77,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
     private List<String> permissionList = new ArrayList<>();  //权限集合
     protected static final int PERMISSION_REQUEST_CODE = 1;  //6.0之后需要动态申请权限，   请求码
     private LayoutInflater inflater;  //转换器
-    private View popupwindowView;
+    private View popupwindowView, saveView;
     private PopupWindow popupWindow;
     protected static final int TAKE_PHOTO = 100;//拍照
     private LinearLayout rootLinearlayout;
@@ -80,22 +94,34 @@ public class BusinessCheckingInInfoActivity extends Activity {
 
         bindView();//绑定控件
         setOnClickListener();//点击事件
+        defaultSetting();
     }
 
 
     public void bindView() {
         back = (ImageView) findViewById(R.id.back);
-        adress = (ImageView) findViewById(R.id.adress);
+        map = (LinearLayout) findViewById(R.id.map);
         linkman = (RelativeLayout) findViewById(R.id.linkman);
         dizhi = (TextView) findViewById(R.id.dizhi);
         gridView = (GridView) findViewById(R.id.gridview);
         rootLinearlayout = (LinearLayout) findViewById(R.id.root_linearlayout);
         saveBtn = (Button) findViewById(R.id.save_btn);
+        time = (TextView) findViewById(R.id.time);
+        customerName = (EditText) findViewById(R.id.customer_name);
+        contactType = (EditText) findViewById(R.id.contact_type);
+    }
+
+    private void defaultSetting() {
+        MySqliteHelper helper = new MySqliteHelper(BusinessCheckingInInfoActivity.this, 1);
+        db = helper.getWritableDatabase();
+        sharedPreferences_login = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        time.setText(dateFormat.format(new Date()));
     }
 
     public void setOnClickListener() {
         back.setOnClickListener(clickListener);
-        adress.setOnClickListener(clickListener);
+        map.setOnClickListener(clickListener);
         linkman.setOnClickListener(clickListener);
         saveBtn.setOnClickListener(clickListener);
 
@@ -139,7 +165,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
                 case R.id.back:
                     finish();
                     break;
-                case R.id.adress:
+                case R.id.map:
                     Intent intent1 = new Intent(BusinessCheckingInInfoActivity.this, BusinessCheckingIninfoMapActivity.class);
                     startActivityForResult(intent1, 200);
                     break;
@@ -148,11 +174,96 @@ public class BusinessCheckingInInfoActivity extends Activity {
                     startActivity(intent);
                     break;
                 case R.id.save_btn:
-                    finish();
+                    createSavePopupwindow();
                     break;
             }
         }
     };
+
+    //弹出是否保存popupwindow
+    public void createSavePopupwindow() {
+        inflater = LayoutInflater.from(BusinessCheckingInInfoActivity.this);
+        saveView = inflater.inflate(R.layout.popupwindow_user_detail_info_save, null);
+        popupWindow = new PopupWindow(saveView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        //绑定控件ID
+        cancelRb = (RadioButton) saveView.findViewById(R.id.cancel_rb);
+        saveRb = (RadioButton) saveView.findViewById(R.id.save_rb);
+        //设置点击事件
+        cancelRb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        saveRb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                queryOaUserOutWork();
+                insertUserInfo();
+                if (cropPathLists.size() != 0) {
+                    for (int i = 0; i < cropPathLists.size(); i++) {
+                        insertOaPhoto(cropPathLists.get(i));
+                    }
+                }
+                Intent intent = new Intent();
+                setResult(Activity.RESULT_OK, intent);
+                popupWindow.dismiss();
+                finish();
+            }
+        });
+        popupWindow.update();
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
+        popupWindow.setAnimationStyle(R.style.camera);
+        popupWindow.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
+        backgroundAlpha(0.6F);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0F);
+                saveBtn.setClickable(true);
+            }
+        });
+    }
+
+    private void insertOaPhoto(String photoPath) {
+        ContentValues values = new ContentValues();
+        values.put("photoPath", photoPath);
+        values.put("userId", sharedPreferences_login.getString("userId", ""));
+        db.insert("oaPhoto", null, values);
+    }
+
+    /**
+     * 将信息保存到本地数据库用户表
+     */
+    private void insertUserInfo() {
+        ContentValues values = new ContentValues();
+        values.put("userId", sharedPreferences_login.getString("userId", ""));
+        values.put("checkTime", time.getText().toString().trim());
+        values.put("checkAddress", dizhi.getText().toString().trim());
+        values.put("contactType", contactType.getText().toString().trim());
+        values.put("customerName", customerName.getText().toString().trim());
+        Log.i("insertUserInfo", "长度为：" + cursor.getCount());
+        if (cursor.getCount() == 0) {
+            values.put("outWork", "1");
+        } else {
+            String outWorkTime = cursor.getString(16);
+            Log.i("queryOaUserOutWork", "查询到的外勤次数为：" + outWorkTime);
+            values.put("outWork", Integer.parseInt(cursor.getString(16)) + 1 + "");
+        }
+        db.insert("OaUser", null, values);
+    }
+
+    /**
+     * 根据用户ID查询用户外勤次数
+     */
+    private void queryOaUserOutWork() {
+        cursor = db.rawQuery("select * from OaUser where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
+        if (cursor.getCount() == 0) {
+            return;
+        }
+        while (cursor.moveToNext()) {
+        }
+    }
 
 
     /**
@@ -534,5 +645,12 @@ public class BusinessCheckingInInfoActivity extends Activity {
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (cursor != null) {
+            cursor.close();
+        }
+        db.close();
+    }
 }

@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Administrator on 2017/3/20 0020.
  */
 public class MySqliteHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME="SiEnKe.db";//数据库名称
+    private static final String DATABASE_NAME = "SiEnKe.db";//数据库名称
     /**
      * 移动安检模块表
      */
@@ -70,8 +70,20 @@ public class MySqliteHelper extends SQLiteOpenHelper {
             "(id integer primary key AUTOINCREMENT,taskName varchar(200),taskId varchar(200),securityType varchar(200),totalCount varchar(200),endTime varchar(200)," +
             "loginName varchar(200),restCount varchar(200))";
 
+    /**
+     * OA模块表
+     */
+    //OA用户表
+    final String CREATE_TABLE_SQL_OA_USER = "CREATE TABLE OaUser" +
+            "(id integer primary key AUTOINCREMENT,userName varchar(200),userId varchar(200),userPhone varchar(200)," +
+            "companyName varchar(200),checkTime varchar(200),checkAddress varchar(200),contactType varchar(200),customerName varchar(200),customerPhoneNumber varchar(200)," +
+            "photoNumber varchar(200),late varchar(200),early varchar(200),noCheckMor varchar(200),noCheckEve varchar(200),outWork varchar(200))";
+    //OA图片表
+    final String CREATE_TABLE_SQL_OA_PHOTO_INFO = "CREATE TABLE oaPhoto " +
+            "(id integer primary key AUTOINCREMENT,photoPath varchar(200),userId varchar(200))";
+
     //构造器
-    public MySqliteHelper(Context context,int version){
+    public MySqliteHelper(Context context, int version) {
         super(context, DATABASE_NAME, null, version);
     }
 
@@ -110,6 +122,11 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_SQL_METER_USER);                   //抄表用户表
         db.execSQL(CREATE_TABLE_SQL_METER_BOOK);                   //抄表本表
         db.execSQL(CREATE_TABLE_SQL_METER_AREA);                   //抄表分区表
+        /**
+         * OA表
+         */
+        db.execSQL(CREATE_TABLE_SQL_OA_USER);                         //OA用户表
+        db.execSQL(CREATE_TABLE_SQL_OA_PHOTO_INFO);                   //OA照片表
     }
 
     //SQLiteDatabase 数据库操作类

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_linearlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_thin"
-    android:orientation="vertical"
-    android:id="@+id/root_linearlayout">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -57,6 +57,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -67,6 +68,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
@@ -89,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    android:text="重庆市江北区星耀天地3栋12楼"
+                    android:text="点击获取当前位置信息"
                     android:textColor="@color/text_black" />
 
                 <ImageView
@@ -122,6 +124,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/contact_type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -151,6 +154,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/customer_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -209,6 +213,7 @@
                     android:stretchMode="columnWidth"
                     android:verticalSpacing="5dp" />
             </LinearLayout>
+
             <Button
                 android:id="@+id/save_btn"
                 android:layout_width="match_parent"

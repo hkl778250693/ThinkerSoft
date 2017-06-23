@@ -205,6 +205,7 @@ public class MoveLoginActivity extends Activity{
                         if (jsonObject.optInt("messg", 0) == 1) {
                             editor.putInt("company_id",jsonObject.optInt("companyid",0));
                             editor.putString("user_name",jsonObject.optString("userName",""));
+                            editor.putString("userId",jsonObject.optInt("systemuserId",0)+"");
                             editor.apply();
                             Log.i("MobileSecurityLogin", "当前用户公司ID是："+sharedPreferences_login.getInt("company_id",0));
                             Log.i("MobileSecurityLogin", "当前用户是："+sharedPreferences_login.getString("user_name",""));

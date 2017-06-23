@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:background="@mipmap/ydkq_yuan"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="0"
                     android:textColor="@color/text_font_color_white" />
 
                 <TextView
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:background="@mipmap/ydkq_yuan"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="0"
                     android:textColor="@color/text_font_color_white" />
 
                 <TextView
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:background="@mipmap/ydkq_yuan"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="0"
                     android:textColor="@color/text_font_color_white" />
 
                 <TextView
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:background="@mipmap/ydkq_yuan"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="0"
                     android:textColor="@color/text_font_color_white" />
 
                 <TextView
@@ -152,11 +152,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/outWork"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/ydkq_yuan"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="0"
                     android:textColor="@color/text_font_color_white" />
 
                 <TextView
@@ -172,73 +173,12 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/text_font_color_white"
-        android:padding="20dp">
+        android:layout_height="130dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="今天：2017年06月13日 13:33"
-                android:textColor="@color/text_black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="外勤次数：1"
-                android:textColor="@color/text_black" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:padding="5dp"
-            android:src="@mipmap/move_go" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/sign_in"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/text_font_color_white"
-        android:padding="20dp">
-
-
-        <ImageView
-            android:id="@+id/dingwei"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/dingwei" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/dingwei"
-            android:paddingLeft="10dp"
-            android:text="重庆市江北区星耀天地3栋12楼"
-            android:textColor="@color/text_black" />
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:padding="5dp"
-            android:src="@mipmap/move_go" />
-
-    </RelativeLayout>
+    </ListView>
 
     <ImageView
         android:id="@+id/out_sign_in"

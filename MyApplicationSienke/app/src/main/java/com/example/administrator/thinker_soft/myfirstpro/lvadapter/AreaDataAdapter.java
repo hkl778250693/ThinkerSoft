@@ -68,6 +68,7 @@ public class AreaDataAdapter extends BaseAdapter {
 			viewHolder = new MeterAreaViewHolder();
 			convertView = inflater.inflate(R.layout.meter_area_listview_item, null);
 			viewHolder.meterAreaName = (TextView) convertView.findViewById(R.id.meter_name);
+			viewHolder.dataId = (TextView) convertView.findViewById(R.id.data_id);
 			viewHolder.checkedState = (CheckBox) convertView.findViewById(R.id.check_state);
 			convertView.setTag(viewHolder);
 		}else{
@@ -75,6 +76,7 @@ public class AreaDataAdapter extends BaseAdapter {
 		}
 		AreaInfo item = list.get(position);
 		viewHolder.meterAreaName.setText(item.getArea());
+		viewHolder.dataId.setText(item.getID());
 		viewHolder.checkedState.setChecked(getIsCheck().get(position));
 		return convertView;
 	}

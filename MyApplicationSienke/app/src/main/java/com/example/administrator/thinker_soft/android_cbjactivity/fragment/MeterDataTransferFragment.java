@@ -50,7 +50,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,12 +81,13 @@ public class MeterDataTransferFragment extends Fragment {
     private ImageView frameAnimation;
     private AnimationDrawable animationDrawable;
     private LinearLayout rootLinearlayout;
-    private SharedPreferences public_sharedPreferences;
+    private SharedPreferences public_sharedPreferences,sharedPreferences_login;
     private String ip, port;  //接口ip地址   端口
     private String resultBook,resultArea; //抄表本结果，抄表分区结果
     public int responseCode = 0;
-    private ArrayList<String> meterBookList = new ArrayList<>();   //抄表本集合
-    private ArrayList<String> meterAreaList = new ArrayList<>();   //抄表分区集合
+    private ArrayList<BookInfo> bookInfoArrayList = new ArrayList<>();   //抄表本集合
+    private ArrayList<AreaInfo> areaInfoArrayList = new ArrayList<>();   //抄表分区集合
+    private TextView tips;  //加载进度的提示
 
     @Nullable
     @Override
@@ -112,7 +112,7 @@ public class MeterDataTransferFragment extends Fragment {
         mam = MyActivityManager.getInstance();
         mam.pushOneActivity(getActivity());
         public_sharedPreferences = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
-        dialogControl = new HashMap<Integer, Boolean>();
+        sharedPreferences_login = getActivity().getSharedPreferences("login_info", Context.MODE_PRIVATE);
     }
 
     //点击事件
@@ -141,8 +141,8 @@ public class MeterDataTransferFragment extends Fragment {
                         public void run() {
                             try {
                                 Thread.sleep(2000);
-                                requireMeterBookData("findAllsBook.do","companyId=1");
-                                requireMeterAreaData("qureyAreaAll.do","companyid=1");
+                                requireMeterBookData("findAllsBook.do","companyId="+sharedPreferences_login.getInt("company_id",0));
+                                requireMeterAreaData("qureyAreaAll.do","companyid="+sharedPreferences_login.getInt("company_id",0));
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -161,6 +161,8 @@ public class MeterDataTransferFragment extends Fragment {
         view = layoutInflater.inflate(R.layout.popupwindow_query_loading, null);
         popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         frameAnimation = (ImageView) view.findViewById(R.id.frame_animation);
+        tips = (TextView) view.findViewById(R.id.tips);
+        tips.setText("数据初始化中......");
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
@@ -331,9 +333,13 @@ public class MeterDataTransferFragment extends Fragment {
                 case 1:
                     try {
                         JSONArray jsonArray = new JSONArray(resultBook);
+                        bookInfoArrayList.clear();
                         for(int i=0;i<jsonArray.length();i++){
                             JSONObject object = jsonArray.getJSONObject(i);
-                            meterBookList.add(object.optString("c_book_name",""));
+                            BookInfo item = new BookInfo();
+                            item.setID(object.optInt("n_book_id",0)+"");
+                            item.setBOOK(object.optString("c_book_name",""));
+                            bookInfoArrayList.add(item);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -350,15 +356,19 @@ public class MeterDataTransferFragment extends Fragment {
                 case 4:
                     try {
                         JSONArray jsonArray = new JSONArray(resultArea);
+                        areaInfoArrayList.clear();
                         for(int i=0;i<jsonArray.length();i++){
                             JSONObject object = jsonArray.getJSONObject(i);
-                            meterAreaList.add(object.optString("areaName",""));
+                            AreaInfo item = new AreaInfo();
+                            item.setArea(object.optString("areaName",""));
+                            item.setID(object.optInt("areaId",0)+"");
+                            areaInfoArrayList.add(item);
                         }
-                        if(meterBookList.size() != 0 || meterAreaList.size() != 0){
+                        if(bookInfoArrayList.size() != 0 || areaInfoArrayList.size() != 0){
                             Intent intent = new Intent(getActivity(),MeterDataDownloadActivity.class);
                             Bundle bundle = new Bundle();
-                            bundle.putStringArrayList("meterBookList",meterBookList);
-                            bundle.putStringArrayList("meterAreaList",meterAreaList);
+                            bundle.putParcelableArrayList("bookInfoArrayList",bookInfoArrayList);
+                            bundle.putParcelableArrayList("areaInfoArrayList",areaInfoArrayList);
                             intent.putExtras(bundle);
                             startActivity(intent);
                             popupWindow.dismiss();

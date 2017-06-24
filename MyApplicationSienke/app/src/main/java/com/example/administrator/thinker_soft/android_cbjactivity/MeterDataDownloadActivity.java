@@ -175,7 +175,7 @@ public class MeterDataDownloadActivity extends Activity {
                     if((!"".equals(begianNum.getText().toString().trim()) && !"".equals(endNum.getText().toString().trim())) || bookIDMap.size() != 0 || areaIDMap.size() != 0){
 
                     }else {
-                        Toast.makeText(MeterDataDownloadActivity.this, "请您选择需要下载的抄表本或者抄表分区~", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MeterDataDownloadActivity.this, "请您选择需要下载的数据再下载", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 default:

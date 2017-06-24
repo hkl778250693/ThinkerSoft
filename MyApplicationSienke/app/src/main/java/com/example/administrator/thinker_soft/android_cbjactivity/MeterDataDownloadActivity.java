@@ -172,10 +172,43 @@ public class MeterDataDownloadActivity extends Activity {
                     areaSelectCancle();
                     break;
                 case R.id.downLoad_btn:
-                    if((!"".equals(begianNum.getText().toString().trim()) && !"".equals(endNum.getText().toString().trim())) || bookIDMap.size() != 0 || areaIDMap.size() != 0){
+                    saveBookInfo();
+                    saveAreaInfo();
+                    if(!"".equals(begianNum.getText().toString().trim()) && !"".equals(endNum.getText().toString().trim())){ //首先判断两个编号都不为空
+                        if(bookIDMap.size() != 0 && areaIDMap.size() != 0){ //两个编号不为空，并且抄表本、抄表分区都已经选择
+                            //此时会下载三个部分的数据
 
-                    }else {
-                        Toast.makeText(MeterDataDownloadActivity.this, "请您选择需要下载的数据再下载", Toast.LENGTH_SHORT).show();
+                        }else {  //要么抄表本、抄表分区其中一个已经选择，要么两个都没选择
+                            if(bookIDMap.size() == 0 && areaIDMap.size() == 0){//两个编号不为空，但是抄表本、抄表分区都未选择
+                                //此时只会下载 编号范围 部分的数据
+                            }else if(bookIDMap.size() == 0){ //两个编号不为空，抄表分区已经选择，但是抄表本未选择
+                                //此时会下载 编号范围、抄表分区 两个部分的数据
+                            }else if(areaIDMap.size() == 0){ //两个编号不为空，抄表本已经选择，但是抄表分区未选择
+                                //此时会下载 编号范围、抄表本 两个部分的数据
+                            }
+                        }
+                    }else {  //要么两个编号都为空，要么其中一个为空
+                        if("".equals(begianNum.getText().toString().trim()) && "".equals(endNum.getText().toString().trim())){ //两个编号都为空
+                            if(bookIDMap.size() != 0 && areaIDMap.size() != 0){  //抄表本、抄表分区都已经选择
+                                //此时会下载 抄表本、抄表分区 两个部分的数据
+                            }else {
+                                if(bookIDMap.size() == 0 && areaIDMap.size() == 0){ //两个编号都为空，并且抄表本、抄表分区都未选择
+                                    //此时提示选择其中之一
+                                    Toast.makeText(MeterDataDownloadActivity.this, "至少选择其中一个区域才能下载哦", Toast.LENGTH_SHORT).show();
+                                }else if(bookIDMap.size() == 0){ //两个编号都为空，抄表分区已经选择，但是抄表本未选择
+                                    //此时只会下载 抄表分区 部分的数据
+                                }else if(areaIDMap.size() == 0){ //两个编号都为空，抄表本已经选择，但是抄表分区未选择
+                                    //此时只会下载 抄表本 部分的数据
+                                }
+                                if(bookIDMap.size() == 0 && areaIDMap.size() == 0){ //两个编号都为空，并且抄表本、抄表分区都未选择
+                                    Toast.makeText(MeterDataDownloadActivity.this, "至少选择其中一个区域才能下载哦", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }else if("".equals(begianNum.getText().toString().trim())){ //开始编号为空
+                            Toast.makeText(MeterDataDownloadActivity.this, "请您将区间填写完整！", Toast.LENGTH_SHORT).show();
+                        }else if("".equals(endNum.getText().toString().trim())){ //结束编号为空
+                            Toast.makeText(MeterDataDownloadActivity.this, "请您将区间填写完整！", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     break;
                 default:
@@ -284,7 +317,7 @@ public class MeterDataDownloadActivity extends Activity {
         for (int i = 0; i < areaInfoList.size(); i++) {
             if (BookDataAdapter.getIsCheck().get(i)) {
                 AreaInfo areaInfo = areaInfoList.get((int) areaAdapter.getItemId(i));
-                bookIDMap.put("areaID" + i, Integer.parseInt(areaInfo.getID()));
+                areaIDMap.put("areaID" + i, Integer.parseInt(areaInfo.getID()));
                 Log.i("areaID=========>", "这次被勾选第" + i + "个，抄表分区ID为：" + areaInfo.getID());
             }
         }

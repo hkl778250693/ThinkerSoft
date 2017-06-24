@@ -56,19 +56,18 @@ public class MySqliteHelper extends SQLiteOpenHelper {
      */
     //抄表用户表
     final String CREATE_TABLE_SQL_METER_USER = "CREATE TABLE MeterUser" +
-            "(id integer primary key AUTOINCREMENT,securityNumber varchar(200),userName varchar(200),meterNumber varchar(200),userPhone varchar(200)," +
-            "securityType varchar(200),oldUserId varchar(200),newUserId varchar(200),userAddress varchar(200),taskId varchar(200),ifChecked varchar(200)," +
+            "(id integer primary key AUTOINCREMENT,meter_reader_id varchar(200),user_amount varchar(200),meter_degrees varchar(200),meter_number varchar(200)," +
+            "arrearage_months varchar(200),mix_state varchar(200),meter_order_number varchar(200),arrearage_amount varchar(200),area_name varchar(200),user_name varchar(200)," +
             "security_content varchar(200),newMeterNumber varchar(200),remarks varchar(200),security_hidden varchar(200),security_hidden_reason varchar(200)," +
-            "photoNumber varchar(200),ifUpload varchar(200),currentTime varchar(200),ifPass varchar(200),loginName varchar(200),security_state varchar(200)," +
-            "newUserPhone varchar(200),newUserAddress varchar(200),userProperty varchar(200))";
+            "dosage varchar(200),property_id varchar(200),property_name varchar(200),user_id varchar(200),book_id varchar(200),float_range varchar(200)," +
+            "dosage_change varchar(200),user_address varchar(200),start_dosage varchar(200),old_user_id varchar(200),book_name varchar(200),meter_model varchar(200)," +
+            "rubbish_cost varchar(200),remission varchar(200))";
     //抄表本表
     final String CREATE_TABLE_SQL_METER_BOOK = "CREATE TABLE MeterBook" +
-            "(id integer primary key AUTOINCREMENT,taskName varchar(200),taskId varchar(200),securityType varchar(200),totalCount varchar(200),endTime varchar(200)," +
-            "loginName varchar(200),restCount varchar(200))";
+            "(id integer primary key AUTOINCREMENT,bookName varchar(200),bookId varchar(200),userId varchar(200),userName varchar(200))";
     //抄表分区表
     final String CREATE_TABLE_SQL_METER_AREA = "CREATE TABLE MeterArea" +
-            "(id integer primary key AUTOINCREMENT,taskName varchar(200),taskId varchar(200),securityType varchar(200),totalCount varchar(200),endTime varchar(200)," +
-            "loginName varchar(200),restCount varchar(200))";
+            "(id integer primary key AUTOINCREMENT,areaName varchar(200),areaId varchar(200),userId varchar(200),userName varchar(200))";
 
     /**
      * OA模块表

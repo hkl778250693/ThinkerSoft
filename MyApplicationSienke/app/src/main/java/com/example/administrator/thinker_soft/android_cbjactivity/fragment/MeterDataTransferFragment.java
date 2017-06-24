@@ -155,7 +155,7 @@ public class MeterDataTransferFragment extends Fragment {
         }
     };
 
-    //show弹出框
+    //show加载动画
     public void showPopupwindow() {
         layoutInflater = LayoutInflater.from(getActivity());
         view = layoutInflater.inflate(R.layout.popupwindow_query_loading, null);

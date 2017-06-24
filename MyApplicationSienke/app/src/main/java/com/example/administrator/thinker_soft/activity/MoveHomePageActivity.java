@@ -41,12 +41,12 @@ public class MoveHomePageActivity extends Activity {
     private GridView gridView;
     private GridviewHomePageAdapter adapter;
     private List<GridHomePageItem> gridHomePageItems = new ArrayList<>();
-    private LinearLayout zsbg,gzl,qwx,ydaj,ydcx;
+    private LinearLayout zsbg, gzl, qwx, ydaj, ydcx;
     private long exitTime = 0;//退出程序
     private LayoutInflater inflater; //转换器
-    private View popupwindowView,quiteView;
-    private Button cancelRb,saveRb;
-    private PopupWindow popupWindow,quitePopup;
+    private View popupwindowView, quiteView;
+    private Button cancelRb, saveRb;
+    private PopupWindow popupWindow, quitePopup;
     private RadioButton settings, quite; //系统设置 退出应用
     private TextView tips;
     private RelativeLayout rootRelative;
@@ -81,8 +81,8 @@ public class MoveHomePageActivity extends Activity {
                 item.setImageZsbg(R.mipmap.gzl);
                 item.setImageName("工作流");
             } else if (i == 2) {
-                item.setImageZsbg(R.mipmap.qwx);
-                item.setImageName("抢维修");
+                item.setImageZsbg(R.mipmap.ydcb);
+                item.setImageName("移动抄表");
             } else if (i == 3) {
                 item.setImageZsbg(R.mipmap.ydaj);
                 item.setImageName("移动安检");
@@ -109,20 +109,20 @@ public class MoveHomePageActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GridHomePageItem item = gridHomePageItems.get((int) parent.getAdapter().getItemId(position));
-                if(item.getImageName().equals("移动安检")){
-                    Intent intent = new Intent(MoveHomePageActivity.this,SecurityChooseActivity.class);
+                if (item.getImageName().equals("移动安检")) {
+                    Intent intent = new Intent(MoveHomePageActivity.this, SecurityChooseActivity.class);
                     startActivity(intent);
-                }else if(item.getImageName().equals("移动查询")){
-                    Intent intent = new Intent(MoveHomePageActivity.this,QueryActivity.class);
+                } else if (item.getImageName().equals("移动查询")) {
+                    Intent intent = new Intent(MoveHomePageActivity.this, QueryActivity.class);
                     startActivity(intent);
-                }else if(item.getImageName().equals("掌上办公")){
-                    Intent intent = new Intent(MoveHomePageActivity.this,CBJActivity.class);
+                } else if (item.getImageName().equals("掌上办公")) {
+                    Intent intent = new Intent(MoveHomePageActivity.this, MobileBusinessActivity.class);
                     startActivity(intent);
-                }else if(item.getImageName().equals("工作流")){
-                    Intent intent = new Intent(MoveHomePageActivity.this,BusinessWebviewActivity.class);
+                } else if (item.getImageName().equals("工作流")) {
+                    Intent intent = new Intent(MoveHomePageActivity.this, BusinessWebviewActivity.class);
                     startActivity(intent);
-                }else if (item.getImageName().equals("抢维修")){
-                    Intent intent= new Intent(MoveHomePageActivity.this, MobileBusinessActivity.class);
+                } else if (item.getImageName().equals("移动抄表")) {
+                    Intent intent = new Intent(MoveHomePageActivity.this, CBJActivity.class);
                     startActivity(intent);
                 }
             }
@@ -174,7 +174,7 @@ public class MoveHomePageActivity extends Activity {
         popupWindow.update();
         popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_page_more_shape));
         popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
-        popupWindow.showAsDropDown(rootRelative,0,0, Gravity.RIGHT);
+        popupWindow.showAsDropDown(rootRelative, 0, 0, Gravity.RIGHT);
         backgroundAlpha(0.6F);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -209,7 +209,7 @@ public class MoveHomePageActivity extends Activity {
                 quitePopup.dismiss();
                 Intent intent = new Intent(MoveHomePageActivity.this, MoveLoginActivity.class);
                 startActivity(intent);
-                sharedPreferences_login.edit().putBoolean("have_logined",false).apply();
+                sharedPreferences_login.edit().putBoolean("have_logined", false).apply();
                 finish();
             }
         });

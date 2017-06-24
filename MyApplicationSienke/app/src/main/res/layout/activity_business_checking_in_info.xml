@@ -27,6 +27,18 @@
             android:text="移动考勤"
             android:textColor="@android:color/white"
             android:textSize="21sp" />
+
+        <TextView
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="清空"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:padding="10dp"/>
     </RelativeLayout>
 
     <ScrollView

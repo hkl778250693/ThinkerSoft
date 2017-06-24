@@ -23,32 +23,32 @@ public class MySqliteHelper extends SQLiteOpenHelper {
             "newUserPhone varchar(200),newUserAddress varchar(200),userProperty varchar(200))";
 
     //安检任务表
-    final String CREATE_TABLE_SQL_TASK = "CREATE TABLE Task " +
+    final String CREATE_TABLE_SQL_TASK = "CREATE TABLE Task" +
             "(task_id integer primary key AUTOINCREMENT,taskName varchar(200),taskId varchar(200),securityType varchar(200),totalCount varchar(200)," +
             "endTime varchar(200),loginName varchar(200),restCount varchar(200))";
 
     //安检图片表
-    final String CREATE_TABLE_SQL_SECURITY_PHOTO_INFO = "CREATE TABLE security_photo " +
+    final String CREATE_TABLE_SQL_SECURITY_PHOTO_INFO = "CREATE TABLE security_photo" +
             "(id integer primary key AUTOINCREMENT,photoPath varchar(200),securityNumber varchar(200),loginName varchar(200))";
 
     //安检状态表（安检类型）
-    final String CREATE_TABLE_SQL_SECURITY_STATE = "CREATE TABLE SecurityState " +
+    final String CREATE_TABLE_SQL_SECURITY_STATE = "CREATE TABLE SecurityState" +
             "(id integer primary key AUTOINCREMENT,securityId varchar(200),securityName varchar(200))";
 
     //安全情况表
-    final String CREATE_TABLE_SQL_SECURITY_CONTENT = "CREATE TABLE security_content " +
+    final String CREATE_TABLE_SQL_SECURITY_CONTENT = "CREATE TABLE security_content" +
             "(id integer primary key AUTOINCREMENT,securityId varchar(200),securityName varchar(200))";
 
     //安全隐患类型表
-    final String CREATE_TABLE_SQL_SECURITY_HIDDEEN = "CREATE TABLE security_hidden " +
+    final String CREATE_TABLE_SQL_SECURITY_HIDDEEN = "CREATE TABLE security_hidden" +
             "(id integer primary key AUTOINCREMENT,n_safety_hidden_id varchar(200),n_safety_hidden_name varchar(200))";
 
     //安全隐患原因表
-    final String CREATE_TABLE_SQL_SECURITY_HIDDEEN_REASON = "CREATE TABLE security_hidden_reason " +
+    final String CREATE_TABLE_SQL_SECURITY_HIDDEEN_REASON = "CREATE TABLE security_hidden_reason" +
             "(id integer primary key AUTOINCREMENT,n_safety_hidden_reason_id varchar(200),n_safety_hidden_id varchar(200),n_safety_hidden_reason_name varchar(200))";
 
     //安全信息与照片关联表
-    final String CREATE_TABLE_SQL_SECURITY_INFO_PHOTO = "CREATE TABLE security_info_photo " +
+    final String CREATE_TABLE_SQL_SECURITY_INFO_PHOTO = "CREATE TABLE security_info_photo" +
             "(id integer primary key AUTOINCREMENT,name varchar(200),chengji varchar(200),loginName varchar(200))";
 
     /**
@@ -62,24 +62,25 @@ public class MySqliteHelper extends SQLiteOpenHelper {
             "photoNumber varchar(200),ifUpload varchar(200),currentTime varchar(200),ifPass varchar(200),loginName varchar(200),security_state varchar(200)," +
             "newUserPhone varchar(200),newUserAddress varchar(200),userProperty varchar(200))";
     //抄表本表
-    final String CREATE_TABLE_SQL_METER_BOOK = "CREATE TABLE MeterBook " +
+    final String CREATE_TABLE_SQL_METER_BOOK = "CREATE TABLE MeterBook" +
             "(id integer primary key AUTOINCREMENT,taskName varchar(200),taskId varchar(200),securityType varchar(200),totalCount varchar(200),endTime varchar(200)," +
             "loginName varchar(200),restCount varchar(200))";
     //抄表分区表
-    final String CREATE_TABLE_SQL_METER_AREA = "CREATE TABLE MeterArea " +
+    final String CREATE_TABLE_SQL_METER_AREA = "CREATE TABLE MeterArea" +
             "(id integer primary key AUTOINCREMENT,taskName varchar(200),taskId varchar(200),securityType varchar(200),totalCount varchar(200),endTime varchar(200)," +
             "loginName varchar(200),restCount varchar(200))";
 
     /**
      * OA模块表
      */
-    //OA用户表
+    //OA用户基础信息表
     final String CREATE_TABLE_SQL_OA_USER = "CREATE TABLE OaUser" +
-            "(id integer primary key AUTOINCREMENT,userName varchar(200),userId varchar(200),userPhone varchar(200)," +
-            "companyName varchar(200),checkTime varchar(200),checkAddress varchar(200),contactType varchar(200),customerName varchar(200),customerPhoneNumber varchar(200)," +
-            "photoNumber varchar(200),late varchar(200),early varchar(200),noCheckMor varchar(200),noCheckEve varchar(200),outWork varchar(200))";
+            "(id integer primary key AUTOINCREMENT,userName varchar(200),userId varchar(200),userPhone varchar(200),late varchar(200),early varchar(200),noCheckMor varchar(200),noCheckEve varchar(200),outWork varchar(200))";
+    //OA用户外勤信息表
+    final String CREATE_TABLE_SQL_OA_USER_OUT_WORK = "CREATE TABLE OaUserOutWork" +
+            "(id integer primary key AUTOINCREMENT,userId varchar(200),checkTime varchar(200),checkAddress varchar(200),contactType varchar(200),customerName varchar(200),customerPhoneNumber varchar(200))";
     //OA图片表
-    final String CREATE_TABLE_SQL_OA_PHOTO_INFO = "CREATE TABLE oaPhoto " +
+    final String CREATE_TABLE_SQL_OA_PHOTO_INFO = "CREATE TABLE oaPhoto" +
             "(id integer primary key AUTOINCREMENT,photoPath varchar(200),userId varchar(200))";
 
     //构造器
@@ -125,7 +126,8 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         /**
          * OA表
          */
-        db.execSQL(CREATE_TABLE_SQL_OA_USER);                         //OA用户表
+        db.execSQL(CREATE_TABLE_SQL_OA_USER);                         //OA用户基础信息表
+        db.execSQL(CREATE_TABLE_SQL_OA_USER_OUT_WORK);                         //OA用户外勤信息表
         db.execSQL(CREATE_TABLE_SQL_OA_PHOTO_INFO);                   //OA照片表
     }
 

@@ -64,7 +64,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
     private RadioButton cancelRb, saveRb;
     private Cursor cursor;
     private RelativeLayout linkman;
-    private TextView dizhi, time;
+    private TextView dizhi, time,clear;
     private EditText customerName, contactType;
     private GridviewImageAdapter adapter;
     private String securityId;
@@ -100,6 +100,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
 
     public void bindView() {
         back = (ImageView) findViewById(R.id.back);
+        clear = (TextView) findViewById(R.id.clear);
         map = (LinearLayout) findViewById(R.id.map);
         linkman = (RelativeLayout) findViewById(R.id.linkman);
         dizhi = (TextView) findViewById(R.id.dizhi);
@@ -121,6 +122,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
 
     public void setOnClickListener() {
         back.setOnClickListener(clickListener);
+        clear.setOnClickListener(clickListener);
         map.setOnClickListener(clickListener);
         linkman.setOnClickListener(clickListener);
         saveBtn.setOnClickListener(clickListener);
@@ -165,6 +167,11 @@ public class BusinessCheckingInInfoActivity extends Activity {
                 case R.id.back:
                     finish();
                     break;
+                case R.id.clear:
+                    db.delete("OaUser", null, null);  //删除OaUser表中所有数据（官方推荐方法）
+                    db.execSQL("update sqlite_sequence set seq=0 where name='User'");
+                    Toast.makeText(BusinessCheckingInInfoActivity.this, "清除数据成功！", Toast.LENGTH_SHORT).show();
+                    break;
                 case R.id.map:
                     Intent intent1 = new Intent(BusinessCheckingInInfoActivity.this, BusinessCheckingIninfoMapActivity.class);
                     startActivityForResult(intent1, 200);
@@ -198,8 +205,8 @@ public class BusinessCheckingInInfoActivity extends Activity {
         saveRb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                queryOaUserOutWork();
-                insertUserInfo();
+                insertOaUserOutWork();
+                insertOaUser();
                 if (cropPathLists.size() != 0) {
                     for (int i = 0; i < cropPathLists.size(); i++) {
                         insertOaPhoto(cropPathLists.get(i));
@@ -233,38 +240,35 @@ public class BusinessCheckingInInfoActivity extends Activity {
     }
 
     /**
-     * 将信息保存到本地数据库用户表
+     * 将信息保存到本地数据库OA用户外勤信息表
      */
-    private void insertUserInfo() {
+    private void insertOaUserOutWork() {
         ContentValues values = new ContentValues();
         values.put("userId", sharedPreferences_login.getString("userId", ""));
         values.put("checkTime", time.getText().toString().trim());
         values.put("checkAddress", dizhi.getText().toString().trim());
         values.put("contactType", contactType.getText().toString().trim());
         values.put("customerName", customerName.getText().toString().trim());
-        Log.i("insertUserInfo", "长度为：" + cursor.getCount());
-        if (cursor.getCount() == 0) {
-            values.put("outWork", "1");
-        } else {
-            String outWorkTime = cursor.getString(16);
-            Log.i("queryOaUserOutWork", "查询到的外勤次数为：" + outWorkTime);
-            values.put("outWork", Integer.parseInt(cursor.getString(16)) + 1 + "");
-        }
-        db.insert("OaUser", null, values);
+        db.insert("OaUserOutWork", null, values);
     }
 
     /**
-     * 根据用户ID查询用户外勤次数
+     * 将信息保存到本地数据库OA用户基础信息表
      */
-    private void queryOaUserOutWork() {
-        cursor = db.rawQuery("select * from OaUser where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
+    private void insertOaUser() {
+        ContentValues values = new ContentValues();
+        cursor = db.rawQuery("select * from OaUser where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});//根据用户ID查询用户外勤次数
         if (cursor.getCount() == 0) {
-            return;
-        }
-        while (cursor.moveToNext()) {
+            values.put("userId", sharedPreferences_login.getString("userId", ""));
+            values.put("outWork", "1");
+            db.insert("OaUser", null, values);
+        } else {
+            while (cursor.moveToNext()) {
+                values.put("outWork", Integer.parseInt(cursor.getString(cursor.getColumnIndex("outWork"))) + 1 + "");
+            }
+            db.update("OaUser", values, "userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
         }
     }
-
 
     /**
      * 动态申请权限，如果6.0以上则弹出需要的权限选择框，以下则直接运行

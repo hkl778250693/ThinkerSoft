@@ -31,7 +31,7 @@ public class BusinessCheckingInActivity extends Activity {
     private List<String> stringList = new ArrayList<>();
     private SharedPreferences sharedPreferences_login;
     private SQLiteDatabase db;  //数据库
-    private Cursor cursor;
+    private Cursor cursorOutWork,cursorOutWorkCount;
     private TextView outWork;
 
     @Override
@@ -73,17 +73,32 @@ public class BusinessCheckingInActivity extends Activity {
     }
 
     /**
-     * 根据用户ID查询用户外勤次数
+     * 根据用户ID查询用户外勤信息并显示listview数据
      */
-    private void queryOaUserInfo() {
+    private void queryOaUserOutWorkInfo() {
         stringList.clear();
-        cursor = db.rawQuery("select * from OaUser where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
-        Log.i("queryOaUserInfo", "集合长度为：" + stringList.size());
-        if (cursor.getCount() == 0) {
+        cursorOutWork = db.rawQuery("select * from OaUserOutWork where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
+        Log.i("queryOaUserInfo", "集合长度为：" + cursorOutWork.getCount());
+        if (cursorOutWork.getCount() == 0) {
             return;
         }
-        while (cursor.moveToNext()) {
-            stringList.add(cursor.getString(16));
+        while (cursorOutWork.moveToNext()) {
+            stringList.add(cursorOutWork.getString(cursorOutWork.getColumnIndex("checkAddress")));
+        }
+    }
+
+    /**
+     * 根据用户ID查询用户外勤次数
+     */
+    private void queryOaUserOutWorkTime() {
+        stringList.clear();
+        cursorOutWorkCount = db.rawQuery("select * from OaUser where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
+        Log.i("queryOaUserInfo", "集合长度为：" + cursorOutWorkCount.getCount());
+        if (cursorOutWorkCount.getCount() == 0) {
+            return;
+        }
+        while (cursorOutWorkCount.moveToNext()) {
+            outWork.setText(cursorOutWorkCount.getString(cursorOutWorkCount.getColumnIndex("outWork")));
         }
     }
 
@@ -109,8 +124,8 @@ public class BusinessCheckingInActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 100) {
-                queryOaUserInfo();
-                outWork.setText(cursor.getString(16));
+                queryOaUserOutWorkTime();
+                queryOaUserOutWorkInfo();
                 Log.i("CheckingInActivity", "返回码为200 进来了 集合长度为：" + stringList.size());
                 adapter = new CheckingInAdapter(BusinessCheckingInActivity.this, stringList);
                 adapter.notifyDataSetChanged();
@@ -122,9 +137,9 @@ public class BusinessCheckingInActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        db.close();
-        if (cursor != null) {
-            cursor.close();
+        if (cursorOutWork != null) {
+            cursorOutWork.close();
         }
+        db.close();
     }
 }

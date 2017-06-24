@@ -2,8 +2,10 @@ package com.example.administrator.thinker_soft.android_cbjactivity;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,6 +13,13 @@ import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 import com.googlecode.tesseract.android.TessBaseAPI;
+
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
 
@@ -30,6 +39,19 @@ public class TesseractOcrActivity extends Activity {
     private TextView englishtext;
     private ImageView simplechinese;
     private TextView simplechinesetext;
+    private ImageView opencvImg;
+    private TextView opencvOriginal,opencvGray;
+    private Bitmap originalBitmap;
+    private Bitmap grayBitmap;
+    private static boolean flag = true;
+    private static boolean isFirst = true;
+    static {
+        if(!OpenCVLoader.initDebug()){
+            Log.i("TesseractOcrActivity", "openCV初始化失败");
+        }else{
+            System.loadLibrary("opencv_java3");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +63,15 @@ public class TesseractOcrActivity extends Activity {
         if (!dir.exists()) {
             dir.mkdirs();
         }
+        defaultSettings();
         setViewClickListener();
     }
 
     //点击事件
     public void setViewClickListener() {
         startOcr.setOnClickListener(clickListener);
+        opencvOriginal.setOnClickListener(clickListener);
+        opencvGray.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
@@ -56,6 +81,12 @@ public class TesseractOcrActivity extends Activity {
                 case R.id.start_ocr:
                     englishOCR();
                     simpleChineseOCR();
+                    break;
+                case R.id.opencv_original:
+                    opencvImg.setImageBitmap(originalBitmap);
+                    break;
+                case R.id.opencv_gray:
+                    opencvImg.setImageBitmap(grayBitmap);
                     break;
             }
         }
@@ -68,6 +99,13 @@ public class TesseractOcrActivity extends Activity {
         englishtext = (TextView) findViewById(R.id.english_text);
         simplechinese = (ImageView) findViewById(R.id.simple_chinese);
         simplechinesetext = (TextView) findViewById(R.id.simple_chinese_text);
+        opencvImg = (ImageView) findViewById(R.id.opencv_img);
+        opencvOriginal = (TextView) findViewById(R.id.opencv_original);
+        opencvGray = (TextView) findViewById(R.id.opencv_gray);
+    }
+
+    private void defaultSettings(){
+        originalToGrayImg();
     }
 
     //英文识别
@@ -113,4 +151,40 @@ public class TesseractOcrActivity extends Activity {
         baseApi.end();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //load OpenCV engine and init OpenCV library
+        mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        //OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_2_0, getApplicationContext(), mLoaderCallback);
+    }
+
+    //OpenCV库加载并初始化成功后的回调函数
+    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            // TODO Auto-generated method stub
+            switch (status){
+                case BaseLoaderCallback.SUCCESS:
+                    Log.i("TesseractOcrActivity", "成功加载");
+                    break;
+                default:
+                    super.onManagerConnected(status);
+                    Log.i("TesseractOcrActivity", "加载失败");
+                    break;
+            }
+        }
+    };
+
+    //原图和绘图之间转换
+    public void originalToGrayImg(){
+        Mat rgbMat = new Mat();
+        Mat grayMat = new Mat();
+        originalBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.opencv_test);
+        grayBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(), Bitmap.Config.RGB_565);
+        Utils.bitmapToMat(originalBitmap, rgbMat);//convert original bitmap to Mat, R G B.
+        Imgproc.cvtColor(rgbMat, grayMat, Imgproc.COLOR_RGB2GRAY);//rgbMat to gray grayMat
+        Utils.matToBitmap(grayMat, grayBitmap); //convert mat to bitmap
+        Log.i("TesseractOcrActivity", "图片转换成功！.");
+    }
 }

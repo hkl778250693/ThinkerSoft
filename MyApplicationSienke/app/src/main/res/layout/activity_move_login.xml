@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/background6"
-    android:orientation="vertical">
+              android:id="@+id/root_linearlayout"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@mipmap/background6"
+              android:orientation="vertical">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="55dp"
-        android:src="@mipmap/thinklogo" />
+        android:src="@mipmap/thinklogo"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,7 +20,7 @@
         android:layout_marginTop="10dp"
         android:text="移动APP"
         android:textColor="@android:color/white"
-        android:textSize="22sp" />
+        android:textSize="22sp"/>
 
     <EditText
         android:id="@+id/edit_user"
@@ -33,7 +34,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="@color/gray"
-        android:textSize="15sp" />
+        android:textSize="15sp"/>
 
     <EditText
         android:id="@+id/edit_psw"
@@ -48,7 +49,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="@color/gray"
-        android:textSize="15sp" />
+        android:textSize="15sp"/>
 
     <RelativeLayout
         android:layout_width="300dp"
@@ -59,42 +60,45 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true">
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <CheckBox
                 android:id="@+id/remind_me"
-                android:background="@drawable/check_box_selector1"
-                android:button="@null"
                 android:layout_width="24dp"
-                android:layout_height="24dp"/>
+                android:layout_height="24dp"
+                android:background="@drawable/check_box_selector1"
+                android:button="@null"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="记住我"
-                android:textColor="@android:color/white"
+                android:paddingBottom="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                android:text="记住我"
+                android:textColor="@android:color/white"
                 android:textSize="12sp"/>
         </LinearLayout>
+
         <TextView
             android:id="@+id/ip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
             android:drawableLeft="@mipmap/ip"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:text="设置"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
             android:textColor="@drawable/mobile_text_selector"
-            android:textSize="12sp"
-            android:layout_alignParentRight="true" />
-        
+            android:textSize="12sp"/>
+
     </RelativeLayout>
 
     <Button
@@ -105,6 +109,6 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/move_login_byt_selector"
         android:text="登录"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"/>
 
 </LinearLayout>

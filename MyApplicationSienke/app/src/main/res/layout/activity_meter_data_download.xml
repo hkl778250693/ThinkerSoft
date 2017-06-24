@@ -115,12 +115,12 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:text="选择表册"
+                android:text="选择分区"
                 android:textColor="@color/text_black"
                 android:textSize="16sp"/>
 
             <TextView
-                android:id="@+id/select_book_number"
+                android:id="@+id/select_area_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -142,12 +142,12 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:text="选择分区"
+                android:text="选择表册"
                 android:textColor="@color/text_black"
                 android:textSize="16sp"/>
 
             <TextView
-                android:id="@+id/select_area_number"
+                android:id="@+id/select_book_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -164,83 +164,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ListView
-                android:id="@+id/meter_book_lv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/listview_corner_bg_shape"
-                android:divider="@color/white_transparent"
-                android:dividerHeight="2dp"
-                android:listSelector="#00000000"
-                android:padding="2dp"
-                android:scrollbarSize="2dp"
-                android:scrollbarStyle="insideInset"
-                android:scrollbarThumbVertical="@color/text_blue"
-                android:transcriptMode="disabled"/>
-
-            <RelativeLayout
-                style="@style/camera"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/select_bg_shape"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/book_select_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:background="@drawable/search_bg_selector"
-                    android:paddingBottom="1dp"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:paddingTop="1dp"
-                    android:text="全选"
-                    android:textColor="@drawable/search_text_color_selector"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/book_reverse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/search_bg_selector"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="1dp"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:paddingTop="1dp"
-                    android:text="反选"
-                    android:textColor="@drawable/search_text_color_selector"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/book_select_cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/search_bg_selector"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="1dp"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:paddingTop="1dp"
-                    android:text="取消"
-                    android:textColor="@drawable/search_text_color_selector"
-                    android:textSize="14sp"/>
-            </RelativeLayout>
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -317,6 +240,84 @@
                     android:textColor="@drawable/search_text_color_selector"
                     android:textSize="14sp"/>
             </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ListView
+                android:id="@+id/meter_book_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/listview_corner_bg_shape"
+                android:divider="@color/white_transparent"
+                android:dividerHeight="2dp"
+                android:listSelector="#00000000"
+                android:padding="2dp"
+                android:scrollbarSize="2dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbarThumbVertical="@color/text_blue"
+                android:transcriptMode="disabled"/>
+
+            <RelativeLayout
+                style="@style/camera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/select_bg_shape"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/book_select_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/search_bg_selector"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="1dp"
+                    android:text="全选"
+                    android:textColor="@drawable/search_text_color_selector"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/book_reverse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/search_bg_selector"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="1dp"
+                    android:text="反选"
+                    android:textColor="@drawable/search_text_color_selector"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/book_select_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/search_bg_selector"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="1dp"
+                    android:text="取消"
+                    android:textColor="@drawable/search_text_color_selector"
+                    android:textSize="14sp"/>
+            </RelativeLayout>
+
         </RelativeLayout>
 
     </LinearLayout>

@@ -153,13 +153,15 @@
         <activity android:name=".mobile_business.BusinessAnswerEmailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessIntransitEmailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessCheckingIninfoMapActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessCheckingInListInfo" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.DataTimePickerActivity" android:screenOrientation="portrait"/>
 
 
         //移动APP
         <activity android:name="com.example.administrator.thinker_soft.activity.MoveLoginActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.example.administrator.thinker_soft.activity.MoveHomePageActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.example.administrator.thinker_soft.activity.BusinessWebviewActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".mobile_business.BusinessDataInfo" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessDataInfoActivity" android:screenOrientation="portrait"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.administrator.thinker_soft.fileprovider"

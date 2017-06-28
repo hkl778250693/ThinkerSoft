@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.mobile_business.adapter.CheckingInAdapter;
+import com.example.administrator.thinker_soft.mobile_business.model.BusinessCheckinginItem;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 
 import java.util.ArrayList;
@@ -30,10 +31,11 @@ public class BusinessCheckingInActivity extends Activity {
     private ImageView back, outSignIn;
     private ListView listView;
     private CheckingInAdapter adapter;
-    private List<String> stringList = new ArrayList<>();
+    private List<BusinessCheckinginItem> itemList = new ArrayList<>();
     private SharedPreferences sharedPreferences_login;
     private SQLiteDatabase db;  //数据库
     private String outWorkCount;
+    private BusinessCheckinginItem item;
     private Cursor cursorOutWork, cursorOutWorkCount;
     private TextView outWork;
     private Handler handler = new Handler() {
@@ -41,7 +43,7 @@ public class BusinessCheckingInActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    adapter = new CheckingInAdapter(BusinessCheckingInActivity.this, stringList);
+                    adapter = new CheckingInAdapter(BusinessCheckingInActivity.this, itemList);
                     adapter.notifyDataSetChanged();
                     listView.setAdapter(adapter);
                     break;
@@ -93,14 +95,17 @@ public class BusinessCheckingInActivity extends Activity {
 
 
     private void setOnClickListener() {
-        adapter = new CheckingInAdapter(BusinessCheckingInActivity.this, stringList);
+        adapter = new CheckingInAdapter(BusinessCheckingInActivity.this, itemList);
         listView.setAdapter(adapter);
         back.setOnClickListener(clickListener);
         outSignIn.setOnClickListener(clickListener);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                item = (BusinessCheckinginItem) adapter.getItem(position);
+                Intent intent = new Intent(BusinessCheckingInActivity.this, BusinessCheckingInListInfo.class);
+                intent.putExtra("time", item.getTime());
+                startActivity(intent);
             }
         });
     }
@@ -109,14 +114,17 @@ public class BusinessCheckingInActivity extends Activity {
      * 根据用户ID查询用户外勤信息并显示listview数据
      */
     private void queryOaUserOutWorkInfo() {
-        stringList.clear();
+        itemList.clear();
         cursorOutWork = db.rawQuery("select * from OaUserOutWork where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
         Log.i("queryOaUserInfo", "集合长度为：" + cursorOutWork.getCount());
         if (cursorOutWork.getCount() == 0) {
             return;
         }
         while (cursorOutWork.moveToNext()) {
-            stringList.add(cursorOutWork.getString(cursorOutWork.getColumnIndex("checkAddress")));
+            BusinessCheckinginItem item = new BusinessCheckinginItem();
+            item.setAddress(cursorOutWork.getString(cursorOutWork.getColumnIndex("checkAddress")));
+            item.setTime(cursorOutWork.getString(cursorOutWork.getColumnIndex("checkTime")));
+            itemList.add(item);
         }
     }
 
@@ -124,7 +132,6 @@ public class BusinessCheckingInActivity extends Activity {
      * 根据用户ID查询用户外勤次数
      */
     private void queryOaUserOutWorkTime() {
-        stringList.clear();
         cursorOutWorkCount = db.rawQuery("select * from OaUser where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
         Log.i("queryOaUserInfo", "集合长度为：" + cursorOutWorkCount.getCount());
         if (cursorOutWorkCount.getCount() == 0) {
@@ -158,9 +165,10 @@ public class BusinessCheckingInActivity extends Activity {
         if (resultCode == RESULT_OK) {
             if (requestCode == 100) {
                 queryOaUserOutWorkTime();
+                outWork.setText(outWorkCount);
                 queryOaUserOutWorkInfo();
-                Log.i("CheckingInActivity", "返回码为200 进来了 集合长度为：" + stringList.size());
-                adapter = new CheckingInAdapter(BusinessCheckingInActivity.this, stringList);
+                Log.i("CheckingInActivity", "返回码为100 进来了 集合长度为：" + itemList.size());
+                adapter = new CheckingInAdapter(BusinessCheckingInActivity.this, itemList);
                 adapter.notifyDataSetChanged();
                 listView.setAdapter(adapter);
             }

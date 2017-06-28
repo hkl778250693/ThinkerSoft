@@ -36,7 +36,7 @@ public class WeiChaoBaoActivity extends Activity {
 				Intent intent = getIntent();
 				meter_sg = 1;
 				intent.putExtra("meter_sg", meter_sg);
-				intent.setClass(WeiChaoBaoActivity.this, ChaoBiaoXuanZeActivity.class);
+				intent.setClass(WeiChaoBaoActivity.this, MeterSelectActivity.class);
 				startActivity(intent);
 				
 				editor = sharedPreferences.edit();

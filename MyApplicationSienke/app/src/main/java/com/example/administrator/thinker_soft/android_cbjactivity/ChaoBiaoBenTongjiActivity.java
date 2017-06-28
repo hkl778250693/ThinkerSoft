@@ -111,7 +111,7 @@ public class ChaoBiaoBenTongjiActivity extends Activity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("signal", 10);
                     editor.commit();
-                    Intent intent = new Intent(ChaoBiaoBenTongjiActivity.this, ChaoBiaoXuanZeActivity.class);
+                    Intent intent = new Intent(ChaoBiaoBenTongjiActivity.this, MeterSelectActivity.class);
                     intent.putExtra("DBName", DBName);
                     int requestCode = 1;
                     startActivityForResult(intent, requestCode);

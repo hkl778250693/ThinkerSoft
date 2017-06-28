@@ -318,6 +318,7 @@ public class MoveLoginActivity extends Activity{
                         editor.putString("login_name",editUser.getText().toString()).apply();
                         Log.i("MobileSecurityLogin", "未记住密码！账号为"+editUser.getText().toString());
                     }
+                    popupWindow.dismiss();
                     Toast.makeText(MoveLoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MoveLoginActivity.this, MoveHomePageActivity.class);
                     startActivity(intent);
@@ -327,10 +328,12 @@ public class MoveLoginActivity extends Activity{
                     finish();
                     break;
                 case 2:
+                    popupWindow.dismiss();
                     loginBtn.setClickable(true);
                     Toast.makeText(MoveLoginActivity.this, "账号或密码错误!", Toast.LENGTH_LONG).show();
                     break;
                 case 3:
+                    popupWindow.dismiss();
                     loginBtn.setClickable(true);
                     Toast.makeText(MoveLoginActivity.this, "网络请求异常!", Toast.LENGTH_LONG).show();
                     break;

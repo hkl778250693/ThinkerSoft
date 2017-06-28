@@ -14,7 +14,7 @@ import android.widget.PopupWindow;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.android_cbjactivity.ChaoBiaoBenTongjiActivity;
-import com.example.administrator.thinker_soft.android_cbjactivity.ChaoBiaoXuanZeActivity;
+import com.example.administrator.thinker_soft.android_cbjactivity.MeterSelectActivity;
 import com.example.administrator.thinker_soft.android_cbjactivity.LoginActivity;
 import com.example.administrator.thinker_soft.android_cbjactivity.ShowListviewActivity;
 import com.example.administrator.thinker_soft.android_cbjactivity.WeiChaoBaoActivity;
@@ -107,7 +107,7 @@ public class MeterHomePageFragment extends Fragment {
                     editor.apply();
                     DBName = sharedPreferences.getString("dbName", "");
                     System.out.println("DBName:" + DBName);
-                    Intent intent1 = new Intent(getActivity(), ChaoBiaoXuanZeActivity.class);
+                    Intent intent1 = new Intent(getActivity(), MeterSelectActivity.class);
                     intent1.putExtra("DBName", DBName);
                     startActivityForResult(intent1, CODE);
                     break;
@@ -143,7 +143,7 @@ public class MeterHomePageFragment extends Fragment {
                     signal = 6;
                     editor.putInt("signal", signal);
                     editor.apply();
-                    Intent intent5 = new Intent(getActivity(), ChaoBiaoXuanZeActivity.class);
+                    Intent intent5 = new Intent(getActivity(), MeterSelectActivity.class);
                     startActivity(intent5);
                     break;
                 default:

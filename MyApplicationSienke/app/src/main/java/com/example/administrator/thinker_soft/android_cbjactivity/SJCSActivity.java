@@ -129,7 +129,7 @@ public class SJCSActivity extends Activity {
                     editor.putInt("signal", 11);
                     editor.commit();
                     Intent intent = new Intent();
-                    intent = intent.setClass(SJCSActivity.this, ChaoBiaoXuanZeActivity.class);
+                    intent = intent.setClass(SJCSActivity.this, MeterSelectActivity.class);
                     int requestCode = 1;
                     startActivityForResult(intent, requestCode);
                     break;

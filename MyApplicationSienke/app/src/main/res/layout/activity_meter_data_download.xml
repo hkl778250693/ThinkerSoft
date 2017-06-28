@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/root_linearlayout"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#FFFFFF"
-              android:orientation="vertical"
-    android:focusableInTouchMode="true"
-    android:focusable="true">
+              android:focusable="true"
+              android:focusableInTouchMode="true"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,6 +32,19 @@
             android:text="数据下载"
             android:textColor="@android:color/white"
             android:textSize="22sp"/>
+
+        <TextView
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="清空"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
     </RelativeLayout>
 
     <LinearLayout

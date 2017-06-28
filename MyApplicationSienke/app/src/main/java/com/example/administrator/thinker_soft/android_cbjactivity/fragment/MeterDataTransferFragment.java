@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
-import com.example.administrator.thinker_soft.android_cbjactivity.ChaoBiaoXuanZeActivity;
+import com.example.administrator.thinker_soft.android_cbjactivity.MeterSelectActivity;
 import com.example.administrator.thinker_soft.android_cbjactivity.MeterDataDownloadActivity;
 import com.example.administrator.thinker_soft.myfirstpro.entity.AreaInfo;
 import com.example.administrator.thinker_soft.myfirstpro.entity.BookInfo;
@@ -130,7 +130,7 @@ public class MeterDataTransferFragment extends Fragment {
                     editor.putInt("signal", 11);
                     editor.apply();
                     Intent intent = new Intent();
-                    intent = intent.setClass(getActivity(), ChaoBiaoXuanZeActivity.class);
+                    intent = intent.setClass(getActivity(), MeterSelectActivity.class);
                     int requestCode = 1;
                     startActivityForResult(intent, requestCode);
                     break;
@@ -167,7 +167,7 @@ public class MeterDataTransferFragment extends Fragment {
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
         popupWindow.setAnimationStyle(R.style.camera);
-        //popupWindow.update();
+        popupWindow.update();
         popupWindow.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
         backgroundAlpha(0.6F);   //背景变暗
         startFrameAnimation();
@@ -207,12 +207,12 @@ public class MeterDataTransferFragment extends Fragment {
             if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
                 ip = public_sharedPreferences.getString("security_ip", "");
             } else {
-                ip = "88.88.88.31:";
+                ip = "88.88.88.66:";
             }
             if (!public_sharedPreferences.getString("security_port", "").equals("")) {
                 port = public_sharedPreferences.getString("security_port", "");
             } else {
-                port = "8080";
+                port = "8088";
             }
             String httpUrl = "http://" + ip + port + "/SMDemo/" + method;
             //有参数传递
@@ -249,15 +249,11 @@ public class MeterDataTransferFragment extends Fragment {
             } else {
                 handler.sendEmptyMessage(3);
             }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        } catch (UnsupportedEncodingException | MalformedURLException | JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
             Log.i("IOException==========>", "网络请求异常!");
             handler.sendEmptyMessage(3);
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -271,12 +267,12 @@ public class MeterDataTransferFragment extends Fragment {
             if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
                 ip = public_sharedPreferences.getString("security_ip", "");
             } else {
-                ip = "88.88.88.31:";
+                ip = "88.88.88.66:";
             }
             if (!public_sharedPreferences.getString("security_port", "").equals("")) {
                 port = public_sharedPreferences.getString("security_port", "");
             } else {
-                port = "8080";
+                port = "8088";
             }
             String httpUrl = "http://" + ip + port + "/SMDemo/" + method;
             //有参数传递
@@ -313,15 +309,11 @@ public class MeterDataTransferFragment extends Fragment {
             } else {
                 handler.sendEmptyMessage(3);
             }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        } catch (UnsupportedEncodingException | MalformedURLException | JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
             Log.i("IOException==========>", "网络请求异常!");
             handler.sendEmptyMessage(3);
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         }
     }

@@ -195,7 +195,7 @@
             android:name=".android_cbjactivity.WeiChaoBaoActivity" android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".android_cbjactivity.ChaoBiaoXuanZeActivity"
+            android:name=".android_cbjactivity.MeterSelectActivity"
             android:screenOrientation="portrait"/>
 
 

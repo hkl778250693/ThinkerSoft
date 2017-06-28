@@ -105,7 +105,7 @@ public class ChaoBiaoActivity extends Activity {
 					DBName = sharedPreferences.getString("dbName", "");
 					System.out.println("DBName:" + DBName);
 					if (DBName != null && !"".equals(DBName)) {
-						Intent intent = new Intent(ChaoBiaoActivity.this, ChaoBiaoXuanZeActivity.class);
+						Intent intent = new Intent(ChaoBiaoActivity.this, MeterSelectActivity.class);
 						intent.putExtra("DBName", DBName);
 						startActivityForResult(intent, CODE);
 					} else {
@@ -155,7 +155,7 @@ public class ChaoBiaoActivity extends Activity {
 					signal = 6;
 					editor.putInt("signal", signal);
 					editor.apply();
-					Intent intent1 = new Intent(ChaoBiaoActivity.this, ChaoBiaoXuanZeActivity.class);
+					Intent intent1 = new Intent(ChaoBiaoActivity.this, MeterSelectActivity.class);
 					startActivity(intent1);
 					break;
 				default:

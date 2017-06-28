@@ -8,22 +8,21 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
-import com.example.administrator.thinker_soft.mobile_business.model.BusinessCheckinginItem;
+import com.example.administrator.thinker_soft.mobile_business.model.DataInfoItem;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/6/22.
+ * Created by Administrator on 2017/6/27.
  */
-public class CheckingInAdapter extends BaseAdapter {
-
+public class BusinessDataInfoAdapter extends BaseAdapter {
     private Context context;
-    private List<BusinessCheckinginItem> itemList;
+    private List<DataInfoItem> dataInfoItemList;
     private LayoutInflater layoutInflater;
 
-    public CheckingInAdapter(Context context, List<BusinessCheckinginItem> itemList) {
+    public BusinessDataInfoAdapter(Context context, List<DataInfoItem> itemList) {
         this.context = context;
-        this.itemList = itemList;
+        this.dataInfoItemList = itemList;
         if (context != null) {
             layoutInflater = LayoutInflater.from(context);
         }
@@ -31,19 +30,19 @@ public class CheckingInAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (itemList == null) {
+        if (dataInfoItemList == null) {
             return 0;
         } else {
-            return itemList.size();
+            return dataInfoItemList.size();
         }
     }
 
     @Override
     public Object getItem(int position) {
-        if (itemList == null) {
+        if (dataInfoItemList == null) {
             return null;
         } else {
-            return itemList.get(position);
+            return dataInfoItemList.get(position);
         }
     }
 
@@ -55,23 +54,23 @@ public class CheckingInAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        if (convertView == null) {
+        if (convertView == null){
             viewHolder = new ViewHolder();
-            convertView = layoutInflater.inflate(R.layout.business_checking_listview_item, null);
-            viewHolder.xianshi = (TextView) convertView.findViewById(R.id.xianshi);
+            convertView = layoutInflater.inflate(R.layout.activity_businessdata_listview_item, null);
+            viewHolder.title = (TextView) convertView.findViewById(R.id.title);
             viewHolder.time = (TextView) convertView.findViewById(R.id.time);
             convertView.setTag(viewHolder);
-        } else {
+        }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        BusinessCheckinginItem item = itemList.get(position);
-        viewHolder.xianshi.setText(item.getAddress());
+        DataInfoItem item = dataInfoItemList.get(position);
+        viewHolder.title.setText(item.getTitle());
         viewHolder.time.setText(item.getTime());
         return convertView;
     }
 
     public class ViewHolder {
-        public TextView xianshi;
+        public TextView title;
         public TextView time;
     }
 }

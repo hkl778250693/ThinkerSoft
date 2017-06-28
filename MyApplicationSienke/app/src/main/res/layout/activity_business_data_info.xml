@@ -37,24 +37,19 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/text_font_color_white"
+                android:hint="请输入标题"
                 android:padding="15dp"
-                android:text="安排日程2"
                 android:textColor="@color/text_black"
                 android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="企业号日志2017-03-08" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:background="@color/text_font_color_white">
 
                 <TextView
@@ -71,18 +66,20 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="10dp"
-                    android:button="@null"
-                    android:background="@drawable/slipselector"/>
+                    android:background="@drawable/slipselector"
+                    android:button="@null" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/text_font_color_white">
+                android:background="@color/text_font_color_white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:text="开始"
@@ -90,23 +87,31 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/start_date"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="15dp"
-                    android:drawableRight="@mipmap/move_go"
-                    android:text="2017-03-08 13:30" />
-            </RelativeLayout>
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/normal_button_bg_selector"
+                    android:drawableRight="@mipmap/down"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="2017-3-13"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
 
-            <RelativeLayout
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/text_font_color_white">
+                android:background="@color/text_font_color_white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:text="结束"
@@ -114,134 +119,108 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/end_date"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="15dp"
-                    android:drawableRight="@mipmap/move_go"
-                    android:text="2017-03-08 13:30" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@color/text_font_color_white">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:text="重复"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/normal_button_bg_selector"
+                    android:drawableRight="@mipmap/down"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="2017-3-13"
                     android:textColor="@color/text_black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
-                <CheckBox
-                    android:id="@+id/slip2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/slipselector"
-                    android:button="@null"/>
-            </RelativeLayout>
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@color/text_font_color_white">
+                android:background="@color/text_font_color_white"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:text="参与人"
                     android:textColor="@color/text_black"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/customer_name"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="15dp"
-                    android:drawableRight="@mipmap/move_go"
-                    android:text="某某某" />
-            </RelativeLayout>
+                    android:layout_weight="1"
+                    android:background="@drawable/normal_button_bg_selector"
+                    android:padding="8dp"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/text_font_color_white">
+                android:background="@color/text_font_color_white"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:text="地点"
                     android:textColor="@color/text_black"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="15dp"
-                    android:drawableRight="@mipmap/move_go"
-                    android:text="添加地点" />
-            </RelativeLayout>
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/normal_button_bg_selector"
+                    android:padding="8dp"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/text_font_color_white">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:text="公开程度"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp" />
+                android:background="@color/text_font_color_white"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="15dp"
-                    android:drawableRight="@mipmap/move_go"
-                    android:text="正常" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@color/text_font_color_white">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:padding="15dp"
-                    android:text="提醒"
+                    android:text="详情"
                     android:textColor="@color/text_black"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/particular"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="15dp"
-                    android:drawableRight="@mipmap/move_go"
-                    android:text="起始时间前10分钟提醒创建人" />
-            </RelativeLayout>
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/normal_button_bg_selector"
+                    android:padding="8dp"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/user_detail_save_btn_selector"
+                android:text="保存"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

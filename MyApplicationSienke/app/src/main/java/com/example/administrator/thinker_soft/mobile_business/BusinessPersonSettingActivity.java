@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.example.administrator.thinker_soft.R;
 
@@ -12,6 +13,8 @@ import com.example.administrator.thinker_soft.R;
  */
 public class BusinessPersonSettingActivity extends Activity {
     private ImageView back;
+    private RelativeLayout personMessage,news,general;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,10 +26,16 @@ public class BusinessPersonSettingActivity extends Activity {
 
     public void bindView(){
         back = (ImageView) findViewById(R.id.back);
+        personMessage = (RelativeLayout) findViewById(R.id.person_message);
+        news = (RelativeLayout) findViewById(R.id.news);
+        general = (RelativeLayout) findViewById(R.id.general);
     }
 
     public void setOnClickListener(){
         back.setOnClickListener(clickListener);
+        personMessage.setOnClickListener(clickListener);
+        news.setOnClickListener(clickListener);
+        general.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {

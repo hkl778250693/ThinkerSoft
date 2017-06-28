@@ -81,6 +81,9 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     //OA图片表
     final String CREATE_TABLE_SQL_OA_PHOTO_INFO = "CREATE TABLE oaPhoto" +
             "(id integer primary key AUTOINCREMENT,photoPath varchar(200),userId varchar(200))";
+    //OA日程安排表
+    final String CREATE_TABLE_SQL_OA_CALENDAR = "CREATE TABLE OaCalendar" +
+            "(id integer primary key AUTOINCREMENT,userId varchar(200),userName varchar(200),title varchar(200),isAllDay varchar(200),beginTime varchar(200),endTime varchar(200),participant varchar(200),address varchar(200),details varchar(200))";
 
     //构造器
     public MySqliteHelper(Context context, int version) {
@@ -119,15 +122,16 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         /**
          * 移动抄表
          */
-        db.execSQL(CREATE_TABLE_SQL_METER_USER);                   //抄表用户表
-        db.execSQL(CREATE_TABLE_SQL_METER_BOOK);                   //抄表本表
-        db.execSQL(CREATE_TABLE_SQL_METER_AREA);                   //抄表分区表
+        db.execSQL(CREATE_TABLE_SQL_METER_USER);                      //抄表用户表
+        db.execSQL(CREATE_TABLE_SQL_METER_BOOK);                      //抄表本表
+        db.execSQL(CREATE_TABLE_SQL_METER_AREA);                      //抄表分区表
         /**
          * OA表
          */
         db.execSQL(CREATE_TABLE_SQL_OA_USER);                         //OA用户基础信息表
-        db.execSQL(CREATE_TABLE_SQL_OA_USER_OUT_WORK);                         //OA用户外勤信息表
+        db.execSQL(CREATE_TABLE_SQL_OA_USER_OUT_WORK);                //OA用户外勤信息表
         db.execSQL(CREATE_TABLE_SQL_OA_PHOTO_INFO);                   //OA照片表
+        db.execSQL(CREATE_TABLE_SQL_OA_CALENDAR);                     //OA日程表
     }
 
     //SQLiteDatabase 数据库操作类

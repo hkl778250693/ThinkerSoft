@@ -41,7 +41,7 @@ public class BusinessScheduleActivity extends Activity {
                     finish();
                     break;
                 case R.id.tj:
-                    Intent intent = new Intent(BusinessScheduleActivity.this,BusinessDataInfo.class);
+                    Intent intent = new Intent(BusinessScheduleActivity.this,BusinessDataInfoActivity.class);
                     startActivity(intent);
                     break;
             }

@@ -64,7 +64,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
     private RadioButton cancelRb, saveRb;
     private Cursor cursor;
     private RelativeLayout linkman;
-    private TextView dizhi, time,clear;
+    private TextView dizhi, time, clear;
     private EditText customerName, contactType;
     private GridviewImageAdapter adapter;
     private String securityId;

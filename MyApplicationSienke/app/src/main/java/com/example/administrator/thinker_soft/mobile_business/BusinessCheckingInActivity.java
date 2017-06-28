@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,8 +33,25 @@ public class BusinessCheckingInActivity extends Activity {
     private List<String> stringList = new ArrayList<>();
     private SharedPreferences sharedPreferences_login;
     private SQLiteDatabase db;  //数据库
-    private Cursor cursorOutWork,cursorOutWorkCount;
+    private String outWorkCount;
+    private Cursor cursorOutWork, cursorOutWorkCount;
     private TextView outWork;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    adapter = new CheckingInAdapter(BusinessCheckingInActivity.this, stringList);
+                    adapter.notifyDataSetChanged();
+                    listView.setAdapter(adapter);
+                    break;
+                case 1:
+                    outWork.setText(outWorkCount);
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +65,22 @@ public class BusinessCheckingInActivity extends Activity {
 
     private void defaultSetting() {
         sharedPreferences_login = getSharedPreferences("login_info", Context.MODE_PRIVATE);
-        MySqliteHelper helper = new MySqliteHelper(BusinessCheckingInActivity.this, 1);
+        final MySqliteHelper helper = new MySqliteHelper(BusinessCheckingInActivity.this, 1);
         db = helper.getWritableDatabase();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                queryOaUserOutWorkInfo();
+                if (cursorOutWork.getCount() != 0) {
+                    handler.sendEmptyMessage(0);
+                }
+                queryOaUserOutWorkTime();
+                if (cursorOutWorkCount.getCount() != 0) {
+                    handler.sendEmptyMessage(1);
+                }
+            }
+        }.start();
 
     }
 
@@ -98,7 +131,7 @@ public class BusinessCheckingInActivity extends Activity {
             return;
         }
         while (cursorOutWorkCount.moveToNext()) {
-            outWork.setText(cursorOutWorkCount.getString(cursorOutWorkCount.getColumnIndex("outWork")));
+            outWorkCount = cursorOutWorkCount.getString(cursorOutWorkCount.getColumnIndex("outWork"));
         }
     }
 

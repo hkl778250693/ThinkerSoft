@@ -64,8 +64,8 @@ public class BusinessCheckingInInfoActivity extends Activity {
     private RadioButton cancelRb, saveRb;
     private Cursor cursor;
     private RelativeLayout linkman;
-    private TextView dizhi, time, clear;
-    private EditText customerName, contactType;
+    private TextView dizhi, time, clear, securityType;
+    private EditText customerName;
     private GridviewImageAdapter adapter;
     private String securityId;
     private SQLiteDatabase db;  //数据库
@@ -79,6 +79,8 @@ public class BusinessCheckingInInfoActivity extends Activity {
     private LayoutInflater inflater;  //转换器
     private View popupwindowView, saveView;
     private PopupWindow popupWindow;
+    private TextView keHu, shangJi, xiangMu, riCheng, renWu;
+    private PopupWindow window;
     protected static final int TAKE_PHOTO = 100;//拍照
     private LinearLayout rootLinearlayout;
     protected static final int CROP_SMALL_PICTURE = 300;  //裁剪成小图片
@@ -109,7 +111,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
         saveBtn = (Button) findViewById(R.id.save_btn);
         time = (TextView) findViewById(R.id.time);
         customerName = (EditText) findViewById(R.id.customer_name);
-        contactType = (EditText) findViewById(R.id.contact_type);
+        securityType = (TextView) findViewById(R.id.security_type);
     }
 
     private void defaultSetting() {
@@ -157,6 +159,38 @@ public class BusinessCheckingInInfoActivity extends Activity {
                 }
             }
         });
+
+        securityType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View popupView = BusinessCheckingInInfoActivity.this.getLayoutInflater().inflate(R.layout.popupwindow_business_checkinginfo, null);
+                window = new PopupWindow(popupView, 600, 400);
+                window.setAnimationStyle(R.style.Popupwindow);
+                window.setFocusable(true);
+                backgroundAlpha(0.6F);   //背景变暗
+                window.setOutsideTouchable(true);
+                window.update();
+                window.showAsDropDown(securityType, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        backgroundAlpha(1.0F);
+                        securityType.setClickable(true);
+                    }
+                });
+                keHu = (TextView) popupView.findViewById(R.id.kehu);
+                shangJi = (TextView) popupView.findViewById(R.id.shangji);
+                renWu = (TextView) popupView.findViewById(R.id.renwu);
+                riCheng = (TextView) popupView.findViewById(R.id.richeng);
+                xiangMu = (TextView) popupView.findViewById(R.id.xiangmu);
+
+                keHu.setOnClickListener(clickListener);
+                shangJi.setOnClickListener(clickListener);
+                renWu.setOnClickListener(clickListener);
+                riCheng.setOnClickListener(clickListener);
+                xiangMu.setOnClickListener(clickListener);
+            }
+        });
     }
 
 
@@ -169,7 +203,9 @@ public class BusinessCheckingInInfoActivity extends Activity {
                     break;
                 case R.id.clear:
                     db.delete("OaUser", null, null);  //删除OaUser表中所有数据（官方推荐方法）
-                    db.execSQL("update sqlite_sequence set seq=0 where name='User'");
+                    db.delete("OaUserOutWork", null, null);
+                    db.execSQL("update sqlite_sequence set seq=0 where name='OaUser'");
+                    db.execSQL("update sqlite_sequence set seq=0 where name='OaUserOutWork'");
                     Toast.makeText(BusinessCheckingInInfoActivity.this, "清除数据成功！", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.map:
@@ -182,6 +218,26 @@ public class BusinessCheckingInInfoActivity extends Activity {
                     break;
                 case R.id.save_btn:
                     createSavePopupwindow();
+                    break;
+                case R.id.kehu:
+                    securityType.setText("客户");
+                    window.dismiss();
+                    break;
+                case R.id.xiangmu:
+                    securityType.setText("项目");
+                    window.dismiss();
+                    break;
+                case R.id.renwu:
+                    securityType.setText("任务");
+                    window.dismiss();
+                    break;
+                case R.id.richeng:
+                    securityType.setText("日程");
+                    window.dismiss();
+                    break;
+                case R.id.shangji:
+                    securityType.setText("商机");
+                    window.dismiss();
                     break;
             }
         }
@@ -247,7 +303,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
         values.put("userId", sharedPreferences_login.getString("userId", ""));
         values.put("checkTime", time.getText().toString().trim());
         values.put("checkAddress", dizhi.getText().toString().trim());
-        values.put("contactType", contactType.getText().toString().trim());
+        values.put("contactType", securityType.getText().toString().trim());
         values.put("customerName", customerName.getText().toString().trim());
         db.insert("OaUserOutWork", null, values);
     }

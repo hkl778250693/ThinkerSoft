@@ -19,8 +19,8 @@ import java.util.List;
 
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
 import com.example.administrator.thinker_soft.myfirstpro.entity.DeviceInfo;
-import com.example.administrator.thinker_soft.android_cbjactivity.DeviceDetailActivity;
-import com.example.administrator.thinker_soft.android_cbjactivity.GpsMapCollectorActivity;
+import com.example.administrator.thinker_soft.meter_code.DeviceDetailActivity;
+import com.example.administrator.thinker_soft.meter_code.GpsMapCollectorActivity;
 import com.example.administrator.thinker_soft.viewbadger.BadgeView;
 
 public class GPSValveAdapter extends BaseAdapter {

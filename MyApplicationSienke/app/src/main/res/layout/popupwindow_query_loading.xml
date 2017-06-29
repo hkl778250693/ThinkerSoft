@@ -12,6 +12,14 @@
         android:gravity="center"
         android:padding="10dp"
         android:background="@drawable/loading_shape">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_black"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/frame_animation"

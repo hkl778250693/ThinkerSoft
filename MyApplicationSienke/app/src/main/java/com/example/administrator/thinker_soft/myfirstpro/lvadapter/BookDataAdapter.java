@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
-import com.example.administrator.thinker_soft.android_cbjactivity.modle.MeterBookViewHolder;
+import com.example.administrator.thinker_soft.meter_code.model.MeterBookViewHolder;
 import com.example.administrator.thinker_soft.myfirstpro.entity.BookInfo;
 
 import java.util.HashMap;

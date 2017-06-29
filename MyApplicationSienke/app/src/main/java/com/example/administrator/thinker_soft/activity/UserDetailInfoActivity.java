@@ -919,7 +919,7 @@ public class UserDetailInfoActivity extends AppCompatActivity {
                     startCropPhoto();
                     break;
                 case CROP_SMALL_PICTURE:
-                    Log.i("UserDetailActivity", "图片裁剪回调进来了！ ");
+                    Log.i("MeterUserDetailActivity", "图片裁剪回调进来了！ ");
                     File file = new MyPhotoUtils(UserDetailInfoActivity.this, securityId).createTempFile();
                     Uri tempUri;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -931,7 +931,7 @@ public class UserDetailInfoActivity extends AppCompatActivity {
                     if (tempUri != null) {
                         File file1 = new File(tempUri.getPath());
                         if (file1.exists()) {
-                            Log.i("UserDetailActivity", "删除原图！ ");
+                            Log.i("MeterUserDetailActivity", "删除原图！ ");
                             file1.delete();
                         }
                     }
@@ -957,7 +957,7 @@ public class UserDetailInfoActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    Log.i("UserDetailActivity", "显示图片进来了！ ");
+                    Log.i("MeterUserDetailActivity", "显示图片进来了！ ");
                     adapter = new GridviewImageAdapter(UserDetailInfoActivity.this, cropPathLists);
                     adapter.notifyDataSetChanged();
                     gridView.setAdapter(adapter);

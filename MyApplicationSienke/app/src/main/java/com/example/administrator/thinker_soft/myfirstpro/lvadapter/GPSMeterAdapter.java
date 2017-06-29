@@ -18,10 +18,10 @@ import com.example.administrator.thinker_soft.R;
 
 import java.util.List;
 
+import com.example.administrator.thinker_soft.meter_code.MeterUserDetailActivity;
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
 import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
-import com.example.administrator.thinker_soft.android_cbjactivity.GpsMapCollectorActivity;
-import com.example.administrator.thinker_soft.android_cbjactivity.UserDetailActivity;
+import com.example.administrator.thinker_soft.meter_code.GpsMapCollectorActivity;
 import com.example.administrator.thinker_soft.viewbadger.BadgeView;
 
 public class GPSMeterAdapter extends BaseAdapter {
@@ -111,7 +111,7 @@ public class GPSMeterAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(context,
-						UserDetailActivity.class);
+						MeterUserDetailActivity.class);
 				intent.putExtra("action", "GPSCollectorActivity");
 				intent.putExtra("usInfo", data.get(position));	
 				context.startActivity(intent);

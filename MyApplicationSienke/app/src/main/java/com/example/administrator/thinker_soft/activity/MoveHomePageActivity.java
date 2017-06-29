@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.adapter.GridviewHomePageAdapter;
-import com.example.administrator.thinker_soft.android_cbjactivity.CBJActivity;
+import com.example.administrator.thinker_soft.meter_code.CBJActivity;
 import com.example.administrator.thinker_soft.mobile_business.MobileBusinessActivity;
 import com.example.administrator.thinker_soft.model.GridHomePageItem;
 

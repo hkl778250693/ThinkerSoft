@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
-import com.example.administrator.thinker_soft.android_cbjactivity.ActualMissionNEW;
+import com.example.administrator.thinker_soft.meter_code.ActualMissionNEW;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 import com.example.administrator.thinker_soft.myfirstpro.threadsocket.SocketInteraction;
 import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;

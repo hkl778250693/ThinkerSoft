@@ -37,12 +37,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <EditText
+            <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/text_font_color_white"
-                android:hint="请输入标题"
                 android:padding="15dp"
                 android:textColor="@color/text_black"
                 android:textSize="16sp" />
@@ -68,6 +67,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/slipselector"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:button="@null" />
             </RelativeLayout>
 
@@ -91,15 +93,9 @@
                     android:id="@+id/start_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/normal_button_bg_selector"
-                    android:drawableRight="@mipmap/down"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="2017-3-13"
-                    android:textColor="@color/text_black"
-                    android:textSize="14sp" />
+                    android:padding="8dp"
+                    android:textColor="@color/text_black" />
 
             </LinearLayout>
 
@@ -123,15 +119,9 @@
                     android:id="@+id/end_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/normal_button_bg_selector"
-                    android:drawableRight="@mipmap/down"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="2017-3-13"
-                    android:textColor="@color/text_black"
-                    android:textSize="14sp" />
+                    android:padding="8dp"
+                    android:textColor="@color/text_black" />
 
             </LinearLayout>
 
@@ -150,14 +140,13 @@
                     android:textColor="@color/text_black"
                     android:textSize="16sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/customer_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/normal_button_bg_selector"
                     android:padding="8dp"
-                    android:textSize="14sp" />
+                    android:textColor="@color/text_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -175,15 +164,14 @@
                     android:textColor="@color/text_black"
                     android:textSize="16sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/normal_button_bg_selector"
                     android:padding="8dp"
-                    android:textSize="14sp" />
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/text_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -201,27 +189,14 @@
                     android:textColor="@color/text_black"
                     android:textSize="16sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/normal_button_bg_selector"
                     android:padding="8dp"
-                    android:textSize="14sp" />
+                    android:textColor="@color/text_black" />
             </LinearLayout>
-
-            <Button
-                android:id="@+id/save_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/user_detail_save_btn_selector"
-                android:text="保存"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

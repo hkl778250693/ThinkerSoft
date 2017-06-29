@@ -61,12 +61,12 @@
             android:orientation="vertical">
 
 
-            <DatePicker
+            <!--<DatePicker
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:calendarViewShown="false">
 
-            </DatePicker>
+            </DatePicker>-->
 
             <View
                 android:layout_width="match_parent"

@@ -155,6 +155,12 @@
         <activity android:name=".mobile_business.BusinessCheckingIninfoMapActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessCheckingInListInfo" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.DataTimePickerActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.ScheduleListviewInfo" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessSettingGeneralActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessSettingIdInfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessSettingNewsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessSettingIdinfoPhoneActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.BusinessSettingIdinfoEmailActivity" android:screenOrientation="portrait"/>
 
 
         //移动APP

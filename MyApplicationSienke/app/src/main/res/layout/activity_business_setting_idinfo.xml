@@ -19,7 +19,6 @@
             android:src="@drawable/back_selector" />
 
         <TextView
-            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -28,11 +27,39 @@
             android:textSize="21sp" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/id"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/text_font_color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:drawablePadding="15dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="姓名"
+            android:textColor="@color/text_black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:background="@color/text_font_color_white">
 
         <TextView
@@ -42,7 +69,7 @@
             android:drawablePadding="15dp"
             android:gravity="center"
             android:padding="10dp"
-            android:text="账号"
+            android:text="手机"
             android:textColor="@color/text_black"
             android:textSize="16sp" />
 
@@ -57,10 +84,10 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/news"
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="3dp"
         android:background="@color/text_font_color_white">
 
         <TextView
@@ -70,35 +97,7 @@
             android:drawablePadding="15dp"
             android:gravity="center"
             android:padding="10dp"
-            android:text="新消息通知"
-            android:textColor="@color/text_black"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:src="@mipmap/move_go" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/general"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@color/text_font_color_white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:drawablePadding="15dp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="隐私"
+            android:text="邮件"
             android:textColor="@color/text_black"
             android:textSize="16sp" />
 

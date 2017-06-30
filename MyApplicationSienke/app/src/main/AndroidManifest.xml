@@ -161,6 +161,8 @@
         <activity android:name=".mobile_business.BusinessSettingNewsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessSettingIdinfoPhoneActivity" android:screenOrientation="portrait"/>
         <activity android:name=".mobile_business.BusinessSettingIdinfoEmailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.WorkReportInfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".mobile_business.ReportInfoInfoActivity" android:screenOrientation="portrait"/>
 
 
         //移动APP

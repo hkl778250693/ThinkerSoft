@@ -49,6 +49,7 @@ public class BusinessCheckingInActivity extends Activity {
                     break;
                 case 1:
                     outWork.setText(outWorkCount);
+                    Log.i("queryOaUserOutWorkTime", "outWorkCount:" + outWorkCount);
                     break;
             }
             super.handleMessage(msg);
@@ -80,6 +81,7 @@ public class BusinessCheckingInActivity extends Activity {
                 queryOaUserOutWorkTime();
                 if (cursorOutWorkCount.getCount() != 0) {
                     handler.sendEmptyMessage(1);
+                    Log.i("queryOaUserOutWorkTime", "发送成功");
                 }
             }
         }.start();

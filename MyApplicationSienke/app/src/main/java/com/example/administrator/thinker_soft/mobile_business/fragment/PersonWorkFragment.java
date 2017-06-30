@@ -62,6 +62,7 @@ public class PersonWorkFragment extends Fragment {
                     startActivity(intent);
                     break;
                 case R.id.person_set:
+
                     Intent intent1 = new Intent(getActivity(), BusinessPersonSettingActivity.class);
                     startActivity(intent1);
                     break;

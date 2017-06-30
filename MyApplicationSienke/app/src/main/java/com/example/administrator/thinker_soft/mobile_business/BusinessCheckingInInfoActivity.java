@@ -321,6 +321,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
         } else {
             while (cursor.moveToNext()) {
                 values.put("outWork", Integer.parseInt(cursor.getString(cursor.getColumnIndex("outWork"))) + 1 + "");
+                Log.i("insertOaUser", "签到次数" + Integer.parseInt(cursor.getString(cursor.getColumnIndex("outWork"))) + 1);
             }
             db.update("OaUser", values, "userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
         }

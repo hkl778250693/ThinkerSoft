@@ -10,10 +10,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
@@ -30,13 +37,20 @@ import java.util.List;
 public class WorkReportInfoActivity extends Activity {
 
     private ImageView back;
+    private LinearLayout rootLinearlayout;
     private ListView listView;
+    private RadioButton cancelRb, saveRb;
+    private TextView tips;
     private ReportInfoItem item;
     private SharedPreferences sharedPreferences_login;
+    private View surePopup;
+    private int currentPosition;
+    private PopupWindow popupWindow;
     private SQLiteDatabase db;  //数据库
     private List<ReportInfoItem> itemList = new ArrayList<>();
     private Cursor cursor;
     private ReportInfoAdapter adapter;
+    private LayoutInflater layoutInflater;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -82,6 +96,7 @@ public class WorkReportInfoActivity extends Activity {
     private void bindView() {
         back = (ImageView) findViewById(R.id.back);
         listView = (ListView) findViewById(R.id.listview);
+        rootLinearlayout = (LinearLayout) findViewById(R.id.root_linearlayout);
     }
 
     private void setOnClickListener() {
@@ -98,12 +113,9 @@ public class WorkReportInfoActivity extends Activity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                currentPosition = position;
                 item = (ReportInfoItem) adapter.getItem(position);
-                db.delete("oaReport", "time=?", new String[]{item.getTime()});  //删除OaUser表中所有数据（官方推荐方法）
-                db.execSQL("update sqlite_sequence set seq=0 where name='oaReport'");
-                itemList.remove(position);
-                adapter.notifyDataSetChanged();
-                Toast.makeText(WorkReportInfoActivity.this, "清除数据成功！", Toast.LENGTH_SHORT).show();
+                showSurePopup();
                 return true;
             }
         });
@@ -139,6 +151,46 @@ public class WorkReportInfoActivity extends Activity {
         }
     };
 
+    private void showSurePopup() {
+        layoutInflater = LayoutInflater.from(WorkReportInfoActivity.this);
+        surePopup = layoutInflater.inflate(R.layout.popupwindow_user_detail_info_save, null);
+        popupWindow = new PopupWindow(surePopup, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        cancelRb = (RadioButton) surePopup.findViewById(R.id.cancel_rb);
+        saveRb = (RadioButton) surePopup.findViewById(R.id.save_rb);
+        tips = (TextView) surePopup.findViewById(R.id.tips);
+        tips.setText("确定删除本条数据");
+        saveRb.setText("确定");
+        //设置点击事件
+        cancelRb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        saveRb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.delete("oaReport", "time=?", new String[]{item.getTime()});  //删除OaUser表中所有数据（官方推荐方法）
+                db.execSQL("update sqlite_sequence set seq=0 where name='oaReport'");
+                itemList.remove(currentPosition);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(WorkReportInfoActivity.this, "清除数据成功！", Toast.LENGTH_SHORT).show();
+                popupWindow.dismiss();
+            }
+        });
+        popupWindow.update();
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
+        popupWindow.setAnimationStyle(R.style.camera);
+        popupWindow.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
+        backgroundAlpha(0.6F);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0F);
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -150,6 +202,18 @@ public class WorkReportInfoActivity extends Activity {
                 listView.setAdapter(adapter);
             }
         }
+    }
+
+    //设置背景透明度
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = WorkReportInfoActivity.this.getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        if (bgAlpha == 1) {
+            WorkReportInfoActivity.this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+        } else {
+            WorkReportInfoActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+        }
+        WorkReportInfoActivity.this.getWindow().setAttributes(lp);
     }
 
     @Override

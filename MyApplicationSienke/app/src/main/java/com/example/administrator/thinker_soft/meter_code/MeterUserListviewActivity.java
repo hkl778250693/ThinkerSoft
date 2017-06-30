@@ -39,6 +39,8 @@ public class MeterUserListviewActivity extends Activity {
     private int currentPage = 1;  //当前页数
     private int totalPage;    //总页数
     private MeterUserListviewAdapter adapter;
+    private MeterUserListviewItem item;
+    private int currentPosition;  //点击当前抄表用户的item位置
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +87,11 @@ public class MeterUserListviewActivity extends Activity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                currentPosition = position;
+                item = (MeterUserListviewItem) adapter.getItem(position);
                 Intent intent = new Intent(MeterUserListviewActivity.this, MeterUserDetailActivity.class);
-                startActivity(intent);
+                intent.putExtra("user_id",item.getUserID());
+                startActivityForResult(intent,currentPosition);
             }
         });
     }
@@ -173,7 +178,8 @@ public class MeterUserListviewActivity extends Activity {
         userLists.clear();
         totalCountCursor = db.rawQuery("select * from MeterUser where login_user_id=?", new String[]{sharedPreferences_login.getString("userId", "")});//查询并获得游标
         areaLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", "")});//查询并获得游标
-        Log.i("MeterUserLVActivity", "查询到" + areaLimitCursor.getCount() + "条数据！");
+        Log.i("MeterUserLVActivity", "总的查询到" + totalCountCursor.getCount() + "条数据！");
+        Log.i("MeterUserLVActivity", "分页查询到" + areaLimitCursor.getCount() + "条数据！");
         //如果游标为空，则显示没有数据图片
         if (areaLimitCursor.getCount() == 0) {
             if (noData.getVisibility() == View.GONE) {
@@ -191,11 +197,32 @@ public class MeterUserListviewActivity extends Activity {
             item.setMeterID(areaLimitCursor.getString(areaLimitCursor.getColumnIndex("meter_order_number")));
             item.setUserName(areaLimitCursor.getString(areaLimitCursor.getColumnIndex("user_name")));
             item.setUserID(areaLimitCursor.getString(areaLimitCursor.getColumnIndex("user_id")));
-            item.setMeterNumber(areaLimitCursor.getString(areaLimitCursor.getColumnIndex("meter_number")));
+            if(!areaLimitCursor.getString(areaLimitCursor.getColumnIndex("meter_number")).equals("null")){
+                item.setMeterNumber(areaLimitCursor.getString(areaLimitCursor.getColumnIndex("meter_number")));
+            }else {
+                item.setMeterNumber("无");
+            }
             item.setLastMonth(areaLimitCursor.getString(areaLimitCursor.getColumnIndex("last_month_dosage")));
             item.setThisMonth(areaLimitCursor.getString(areaLimitCursor.getColumnIndex("this_month_dosage")));
             item.setAddress(areaLimitCursor.getString(areaLimitCursor.getColumnIndex("user_address")));
+            item.setMeterState("未抄");
+            item.setIfEdit(R.mipmap.userlist_red);
             userLists.add(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if(requestCode == currentPosition){
+                if(data != null){
+                    item.setThisMonth(data.getStringExtra("this_month_en_degree"));
+                    item.setIfEdit(R.mipmap.userlist_gray);
+                    item.setMeterState("已抄");
+                    adapter.notifyDataSetChanged();
+                }
+            }
         }
     }
 

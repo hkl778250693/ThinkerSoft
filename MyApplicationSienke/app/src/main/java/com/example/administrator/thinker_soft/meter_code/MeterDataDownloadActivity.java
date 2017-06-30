@@ -571,6 +571,7 @@ public class MeterDataDownloadActivity extends Activity {
         values.put("user_id", userObject.optString("c_user_id", ""));                          //用户ID
         values.put("book_id", userObject.optInt("n_book_id", 0) + "");                         //抄表本ID
         values.put("float_range", userObject.optString("floatOver", ""));                      //浮动范围
+        values.put("meterState", "false");                                                     //抄表状态
         values.put("dosage_change", userObject.optInt("n_change_meter", 0) + "");              //更换量
         values.put("user_address", userObject.optString("c_user_address", ""));                //用户地址
         values.put("start_dosage", userObject.optInt("n_minimum", 0) + "");                    //启用量
@@ -580,8 +581,8 @@ public class MeterDataDownloadActivity extends Activity {
         values.put("rubbish_cost", userObject.optInt("rubbishCost", 0) + "");                  //垃圾费
         values.put("remission", userObject.optInt("n_remission", 0) + "");                     //加减量
         //下面这五个字段待定
-        values.put("this_month_dosage", "");
-        values.put("this_month_end_degree", "");
+        values.put("this_month_dosage", "无记录");                                             //本月用量
+        values.put("this_month_end_degree", "");                                               //本月止度
         values.put("n_jw_x", "");
         values.put("n_jw_y", "");
         values.put("d_jw_time", "");

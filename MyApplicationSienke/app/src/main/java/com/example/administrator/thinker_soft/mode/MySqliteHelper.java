@@ -84,6 +84,10 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     final String CREATE_TABLE_SQL_OA_CALENDAR = "CREATE TABLE OaCalendar" +
             "(id integer primary key AUTOINCREMENT,userId varchar(200),userName varchar(200),title varchar(200),isAllDay varchar(200),beginTime varchar(200),endTime varchar(200),participant varchar(200),address varchar(200),details varchar(200))";
 
+    //OA工作汇报表
+    final String CREATE_TABLE_SQL_OA_REPORT = "CREATE TABLE oaReport" +
+            "(id integer primary key AUTOINCREMENT,userPhoto varchar(200),userName varchar(200),userId varchar(200),time varchar(200),createReport varchar(200),summarizeReport varchar(200),nextReport varchar(200))";
+
     //构造器
     public MySqliteHelper(Context context, int version) {
         super(context, DATABASE_NAME, null, version);
@@ -131,6 +135,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_SQL_OA_USER_OUT_WORK);                //OA用户外勤信息表
         db.execSQL(CREATE_TABLE_SQL_OA_PHOTO_INFO);                   //OA照片表
         db.execSQL(CREATE_TABLE_SQL_OA_CALENDAR);                     //OA日程表
+        db.execSQL(CREATE_TABLE_SQL_OA_REPORT);                       //OA工作汇报表
     }
 
     //SQLiteDatabase 数据库操作类

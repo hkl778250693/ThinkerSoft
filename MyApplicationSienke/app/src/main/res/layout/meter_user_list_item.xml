@@ -236,7 +236,7 @@
             android:scaleType="centerCrop"
             android:src="@mipmap/userlist_red" />
         <TextView
-            android:id="@+id/if_checked"
+            android:id="@+id/meter_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未抄"

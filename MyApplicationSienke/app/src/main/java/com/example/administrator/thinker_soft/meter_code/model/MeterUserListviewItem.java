@@ -11,6 +11,8 @@ public class MeterUserListviewItem {
     private String lastMonth;
     private String thisMonth;
     private String address;
+    private String meterState;  //抄表状态（文字）
+    private int ifEdit;    //图片
 
     public String getMeterID() {
         return meterID;
@@ -66,5 +68,21 @@ public class MeterUserListviewItem {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getMeterState() {
+        return meterState;
+    }
+
+    public void setMeterState(String meterState) {
+        this.meterState = meterState;
+    }
+
+    public int getIfEdit() {
+        return ifEdit;
+    }
+
+    public void setIfEdit(int ifEdit) {
+        this.ifEdit = ifEdit;
     }
 }

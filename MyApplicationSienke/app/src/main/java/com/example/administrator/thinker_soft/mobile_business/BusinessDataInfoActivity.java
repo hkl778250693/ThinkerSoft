@@ -150,9 +150,8 @@ public class BusinessDataInfoActivity extends Activity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case 100:
-                    SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     try {
-                        startDate.setText(dateFormat2.format(dateFormat2.parse(data.getStringExtra("date") + data.getStringExtra("time"))));
+                        startDate.setText(dateFormat1.format(dateFormat1.parse(data.getStringExtra("date") + data.getStringExtra("time"))));
                         Log.i("onActivityResult","获取的日期为："+data.getStringExtra("date"));
                         Log.i("onActivityResult","获取的时间为："+data.getStringExtra("time"));
                     } catch (ParseException e) {

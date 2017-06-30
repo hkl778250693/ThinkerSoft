@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
@@ -64,6 +65,8 @@ public class MeterUserListviewAdapter extends BaseAdapter {
             viewHolder.lastMonth = (TextView) convertView.findViewById(R.id.last_month);
             viewHolder.thisMonth = (TextView) convertView.findViewById(R.id.this_month);
             viewHolder.address = (TextView) convertView.findViewById(R.id.address);
+            viewHolder.meterState = (TextView) convertView.findViewById(R.id.meter_state);
+            viewHolder.ifEdit = (ImageView) convertView.findViewById(R.id.if_edit);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -76,6 +79,8 @@ public class MeterUserListviewAdapter extends BaseAdapter {
         viewHolder.lastMonth.setText(item.getLastMonth());
         viewHolder.thisMonth.setText(item.getThisMonth());
         viewHolder.address.setText(item.getAddress());
+        viewHolder.meterState.setText(item.getMeterState());
+        viewHolder.ifEdit.setImageResource(item.getIfEdit());
         return convertView;
     }
 
@@ -87,5 +92,7 @@ public class MeterUserListviewAdapter extends BaseAdapter {
         TextView lastMonth;
         TextView thisMonth;
         TextView address;
+        TextView meterState;
+        ImageView ifEdit;
     }
 }

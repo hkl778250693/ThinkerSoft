@@ -9,6 +9,8 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterSelectActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterUserListviewActivity;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 
 public class WeiChaoBaoActivity extends Activity {

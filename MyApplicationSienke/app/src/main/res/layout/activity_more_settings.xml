@@ -20,6 +20,7 @@
             android:drawablePadding="3dp"
             android:textColor="@android:color/white"
             android:padding="16dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="IP："
             android:textColor="@android:color/white"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/user_detail_save_btn_selector"
             android:padding="8dp"
             android:textSize="15sp"/>
         <EditText
@@ -69,7 +70,7 @@
             android:layout_height="wrap_content"
             android:text="服务电话："
             android:textColor="@android:color/white"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/user_detail_save_btn_selector"
             android:padding="8dp"
             android:textSize="15sp"/>
         <EditText
@@ -103,7 +104,7 @@
             android:layout_height="30dp"
             android:text="编辑"
             android:textSize="15sp"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/user_detail_save_btn_selector"
             android:textColor="@android:color/white"
             android:layout_alignParentLeft="true"/>
         <Button
@@ -112,7 +113,7 @@
             android:layout_height="30dp"
             android:text="保存"
             android:textSize="15sp"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/user_detail_save_btn_selector"
             android:textColor="@android:color/white"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>

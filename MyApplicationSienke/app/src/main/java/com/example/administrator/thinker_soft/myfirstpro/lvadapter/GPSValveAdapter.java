@@ -14,14 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
-
-import java.util.List;
-
+import com.example.administrator.thinker_soft.meter_code.GpsMapCollectorActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterUserDetailActivity;
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
 import com.example.administrator.thinker_soft.myfirstpro.entity.DeviceInfo;
-import com.example.administrator.thinker_soft.meter_code.DeviceDetailActivity;
-import com.example.administrator.thinker_soft.meter_code.GpsMapCollectorActivity;
 import com.example.administrator.thinker_soft.viewbadger.BadgeView;
+
+import java.util.List;
 
 public class GPSValveAdapter extends BaseAdapter {
 	private List<DeviceInfo> data;
@@ -87,7 +86,7 @@ public class GPSValveAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent();
-				intent.setClass(context, DeviceDetailActivity.class);
+				intent.setClass(context, MeterUserDetailActivity.class);
 				intent.putExtra("devInfo", data.get(position));
 				context.startActivity(intent);
 			}

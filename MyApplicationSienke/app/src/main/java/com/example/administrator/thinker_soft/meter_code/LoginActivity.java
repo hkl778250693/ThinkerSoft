@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterHomePageActivity;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 import com.example.administrator.thinker_soft.myfirstpro.threadsocket.QucklySocketInteraction;
 import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
@@ -190,7 +191,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 					editor.putString("password", password);
 					editor.commit();
 				    intent = new Intent(LoginActivity.this,
-							CBJActivity.class);
+							MeterHomePageActivity.class);
 					startActivity(intent);
 					finish();*/
 				}
@@ -233,7 +234,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 									editor.putString("password", password);
 									editor.commit();
 									intent = new Intent(LoginActivity.this,
-											CBJActivity.class);
+											MeterHomePageActivity.class);
 									startActivity(intent);
 									finish();
 */
@@ -302,7 +303,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 						editor.putString("password", password);
 						editor.commit();
 						intent = new Intent(LoginActivity.this,
-								CBJActivity.class);
+								MeterHomePageActivity.class);
 						startActivity(intent);
 						finish();
 

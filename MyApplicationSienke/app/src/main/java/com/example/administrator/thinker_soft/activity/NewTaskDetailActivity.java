@@ -448,7 +448,7 @@ public class NewTaskDetailActivity extends Activity {
     //全选
     public void selectAll() {
         for (int i = 0; i < newTaskListviewItemList.size(); i++) {
-            newTaskListviewAdapter.getIsCheck().put(i, true);
+            NewTaskListviewAdapter.getIsCheck().put(i, true);
         }
         newTaskListviewAdapter.notifyDataSetChanged();
     }
@@ -456,10 +456,10 @@ public class NewTaskDetailActivity extends Activity {
     //反选
     public void reverse() {
         for (int i = 0; i < newTaskListviewItemList.size(); i++) {
-            if (newTaskListviewAdapter.getIsCheck().get(i)) {
-                newTaskListviewAdapter.getIsCheck().put(i, false);
+            if (NewTaskListviewAdapter.getIsCheck().get(i)) {
+                NewTaskListviewAdapter.getIsCheck().put(i, false);
             } else {
-                newTaskListviewAdapter.getIsCheck().put(i, true);
+                NewTaskListviewAdapter.getIsCheck().put(i, true);
             }
         }
         newTaskListviewAdapter.notifyDataSetChanged();
@@ -468,8 +468,8 @@ public class NewTaskDetailActivity extends Activity {
     //取消选择
     public void selectCancle() {
         for (int i = 0; i < newTaskListviewItemList.size(); i++) {
-            if (newTaskListviewAdapter.getIsCheck().get(i)) {
-                newTaskListviewAdapter.getIsCheck().put(i, false);
+            if (NewTaskListviewAdapter.getIsCheck().get(i)) {
+                NewTaskListviewAdapter.getIsCheck().put(i, false);
             }
         }
         newTaskListviewAdapter.notifyDataSetChanged();
@@ -480,7 +480,7 @@ public class NewTaskDetailActivity extends Activity {
         int count = newTaskListviewAdapter.getCount();
         Log.i("count====>", "长度为：" + count);
         for (int i = 0; i < count; i++) {
-            if (newTaskListviewAdapter.getIsCheck().get(i)) {
+            if (NewTaskListviewAdapter.getIsCheck().get(i)) {
                 Log.i("NewTaskDetailActivity", "点击的位置是：" + i);
                 NewTaskListviewItem item = newTaskListviewItemList.get((int) newTaskListviewAdapter.getItemId(i));
                 if(userOldIdLists.size() != 0){     //继续添加用户的时候

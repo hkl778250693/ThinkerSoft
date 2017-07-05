@@ -384,7 +384,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:drawableLeft="@mipmap/detail_icon_yl"
+                    android:drawableLeft="@mipmap/meter_dosage"
                     android:gravity="center_vertical"
                     android:text="   归档时间"
                     android:textColor="#7B7B7B"

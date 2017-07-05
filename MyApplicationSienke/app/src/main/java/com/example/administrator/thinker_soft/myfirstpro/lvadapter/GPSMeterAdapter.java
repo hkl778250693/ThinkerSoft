@@ -18,7 +18,7 @@ import com.example.administrator.thinker_soft.R;
 
 import java.util.List;
 
-import com.example.administrator.thinker_soft.meter_code.MeterUserDetailActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterUserDetailActivity;
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
 import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
 import com.example.administrator.thinker_soft.meter_code.GpsMapCollectorActivity;

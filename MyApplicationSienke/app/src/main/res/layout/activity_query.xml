@@ -78,7 +78,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:maxLength="13"
+                android:maxLength="18"
                 android:padding="10dp"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -119,7 +119,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:maxLength="13"
+                android:maxLength="18"
                 android:padding="10dp"
                 android:textSize="14sp" />
         </LinearLayout>

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterHomePageActivity;
 import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
 import com.example.administrator.thinker_soft.myfirstpro.util.Gadget;
 import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
@@ -70,7 +71,7 @@ public class Verificationactivity extends Activity implements OnClickListener{
 				editor.putString("code", Code);
 				editor.commit();
 				//��ת
-				Intent intent = new Intent(Verificationactivity.this,CBJActivity.class);
+				Intent intent = new Intent(Verificationactivity.this,MeterHomePageActivity.class);
 				startActivity(intent);
 				dialog.dismiss();
 				finish();

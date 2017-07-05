@@ -12,7 +12,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -217,29 +216,29 @@ public class QueryActivity extends Activity {
             Toast.makeText(QueryActivity.this, "请输入表编号", Toast.LENGTH_SHORT).show();
         }
         if (!editText1.getText().toString().equals("")) {
+            showPopupwindow();
             new Thread() {
                 @Override
                 public void run() {
-                    handler.sendEmptyMessage(2);
                     try {
                         Thread.sleep(1000);
+                        requireMyWorks("getUser.do", "userid=" + editText1.getText().toString());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    requireMyWorks("getUser.do", "userid=" + editText1.getText().toString());
                 }
             }.start();
         } else if (!editText2.getText().toString().equals("")) {
+            showPopupwindow();
             new Thread() {
                 @Override
                 public void run() {
-                    handler.sendEmptyMessage(3);
                     try {
                         Thread.sleep(1000);
+                        requireMyWorks("getUser.do", "meterNumber=" + editText2.getText().toString());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    requireMyWorks("getUser.do", "meterNumber=" + editText2.getText().toString());
                 }
             }.start();
         }
@@ -296,7 +295,7 @@ public class QueryActivity extends Activity {
                         } else {
                             try {
                                 Thread.sleep(3000);
-                                handler.sendEmptyMessage(4);
+                                handler.sendEmptyMessage(1);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -304,7 +303,7 @@ public class QueryActivity extends Activity {
                     } else {
                         try {
                             Thread.sleep(1000);
-                            handler.sendEmptyMessage(1);
+                            handler.sendEmptyMessage(2);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -314,8 +313,8 @@ public class QueryActivity extends Activity {
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
-                    Log.i("IOException==========>", "网络请求异常!");
-                    handler.sendEmptyMessage(4);
+                    Log.i("IOException==========>", "网络请求超时!");
+                    handler.sendEmptyMessage(3);
                     e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -327,47 +326,31 @@ public class QueryActivity extends Activity {
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == 0) {   //验证成功，进行网络请求，弹出框消失
-                Intent intent = new Intent(QueryActivity.this, CostListviewActivity.class);
-                if (radioButton1.isChecked()) {
-                    intent.putExtra("userid", editText1.getText().toString());
-                    Log.i("userid_QueryActivity==>", editText1.getText().toString());
-                } else if (radioButton2.isChecked()) {
-                    intent.putExtra("meterNumber", editText2.getText().toString());
-                    Log.i("meterNumberQueryActivit", editText2.getText().toString());
-                }
-                startActivityForResult(intent, 100);
-                popupWindow.dismiss();
-                editText1.setEnabled(false);
-                editText2.setEnabled(false);
-            } else if (msg.what == 1) {   //返回码不是200,账号错误，弹出框消失
-                popupWindow.dismiss();
-                Toast.makeText(QueryActivity.this, "编号不正确，请重新输入！", Toast.LENGTH_SHORT).show();
-                if (radioButton1.isChecked()) {
-                    editText1.setEnabled(true);
-                    editText2.setEnabled(false);
-                } else {
-                    editText1.setEnabled(false);
-                    editText2.setEnabled(true);
-                }
-            } else if (msg.what == 2) {   //show弹出框
-                editText1.setEnabled(false);
-                editText2.setEnabled(false);
-                showPopupwindow();
-            } else if (msg.what == 3) {   //show弹出框
-                editText1.setEnabled(false);
-                editText2.setEnabled(false);
-                showPopupwindow();
-            } else if (msg.what == 4) {   //返回码是200,但是数据为空
-                popupWindow.dismiss();
-                Toast.makeText(QueryActivity.this, "网络请求超时！", Toast.LENGTH_SHORT).show();
-                if (radioButton1.isChecked()) {
-                    editText1.setEnabled(true);
-                    editText2.setEnabled(false);
-                } else {
-                    editText1.setEnabled(false);
-                    editText2.setEnabled(true);
-                }
+            switch (msg.what){
+                case 0:    //有数据
+                    popupWindow.dismiss();
+                    Intent intent = new Intent(QueryActivity.this, CostListviewActivity.class);
+                    if (radioButton1.isChecked()) {
+                        intent.putExtra("userid", editText1.getText().toString());
+                    } else if (radioButton2.isChecked()) {
+                        intent.putExtra("meterNumber", editText2.getText().toString());
+                    }
+                    startActivityForResult(intent, 100);
+                    break;
+                case 1:    //没有数据
+                    popupWindow.dismiss();
+                    Toast.makeText(QueryActivity.this, "没有相应用户数据！", Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:   //返回码不是200，网络异常
+                    popupWindow.dismiss();
+                    Toast.makeText(QueryActivity.this, "编号不正确，请重新输入！", Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:    //请求超时
+                    popupWindow.dismiss();
+                    Toast.makeText(QueryActivity.this, "网络请求超时！", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
             }
             super.handleMessage(msg);
         }
@@ -385,7 +368,7 @@ public class QueryActivity extends Activity {
         if (resultCode == 100) {
             editText1.setText("");
             editText2.setText("");
-            if (radioButton1.isChecked()) {
+            /*if (radioButton1.isChecked()) {
                 editText1.setFocusable(true);
                 editText1.setFocusableInTouchMode(true);
                 editText1.setCursorVisible(true);
@@ -397,14 +380,14 @@ public class QueryActivity extends Activity {
                 editText2.setCursorVisible(true);
                 editText1.setEnabled(false);
                 editText2.setEnabled(true);
-            }
+            }*/
         }
         if (resultCode == 200) {
             //more.startAnimation(AnimationUtils.loadAnimation(QueryActivity.this,R.anim.more_rotate_back));
             backAnimation();
             editText1.setText("");
             editText2.setText("");
-            if (radioButton1.isChecked()) {
+            /*if (radioButton1.isChecked()) {
                 editText1.setFocusable(true);
                 editText1.setFocusableInTouchMode(true);
                 editText1.setCursorVisible(true);
@@ -416,7 +399,7 @@ public class QueryActivity extends Activity {
                 editText2.setCursorVisible(true);
                 editText1.setEnabled(false);
                 editText2.setEnabled(true);
-            }
+            }*/
         }
     }
 }

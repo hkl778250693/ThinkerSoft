@@ -10,6 +10,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterHomePageActivity;
 import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
 import com.example.administrator.thinker_soft.myfirstpro.util.JsonAnalyze;
 
@@ -57,7 +58,7 @@ public class WelcomeActivity extends Activity {
 		}
 		dialogControl = new HashMap<Integer, Boolean>();
 
-		// intent = new Intent(WelcomeActivity.this, CBJActivity.class);
+		// intent = new Intent(WelcomeActivity.this, MeterHomePageActivity.class);
 		// startActivity(intent);
 		// finish();
 		// myThread();
@@ -175,7 +176,7 @@ public class WelcomeActivity extends Activity {
 						editor.commit();
 						
 						intent = new Intent(WelcomeActivity.this,
-								CBJActivity.class);
+								MeterHomePageActivity.class);
 						startActivity(intent);
 						finish();
 					}

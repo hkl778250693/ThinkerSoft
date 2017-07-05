@@ -153,63 +153,6 @@
                     android:text="没有数据哦"
                     android:textColor="@color/text_blue"
                     android:textSize="14sp" />
-
-                <RelativeLayout
-                    android:id="@+id/area_select_relative"
-                    style="@style/camera"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/select_bg_shape"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:id="@+id/area_select_all"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:background="@drawable/search_bg_selector"
-                        android:paddingBottom="1dp"
-                        android:paddingLeft="3dp"
-                        android:paddingRight="3dp"
-                        android:paddingTop="1dp"
-                        android:text="全选"
-                        android:textColor="@drawable/search_text_color_selector"
-                        android:textSize="14sp"/>
-
-                    <TextView
-                        android:id="@+id/area_reverse"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/search_bg_selector"
-                        android:gravity="center_vertical"
-                        android:paddingBottom="1dp"
-                        android:paddingLeft="3dp"
-                        android:paddingRight="3dp"
-                        android:paddingTop="1dp"
-                        android:text="反选"
-                        android:textColor="@drawable/search_text_color_selector"
-                        android:textSize="14sp"/>
-
-                    <TextView
-                        android:id="@+id/area_select_cancel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:background="@drawable/search_bg_selector"
-                        android:gravity="center_vertical"
-                        android:paddingBottom="1dp"
-                        android:paddingLeft="3dp"
-                        android:paddingRight="3dp"
-                        android:paddingTop="1dp"
-                        android:text="取消"
-                        android:textColor="@drawable/search_text_color_selector"
-                        android:textSize="14sp"/>
-                </RelativeLayout>
             </RelativeLayout>
 
             <RelativeLayout
@@ -242,65 +185,127 @@
                     android:text="没有数据哦"
                     android:textColor="@color/text_blue"
                     android:textSize="14sp" />
+            </RelativeLayout>
+        </LinearLayout>
 
-                <RelativeLayout
-                    android:id="@+id/book_select_relative"
-                    style="@style/camera"
-                    android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:id="@+id/area_select_relative"
+                style="@style/camera"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/select_bg_shape"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/area_select_all"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/select_bg_shape"
-                    android:padding="5dp">
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/search_bg_selector"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="1dp"
+                    android:text="全选"
+                    android:textColor="@drawable/search_text_color_selector"
+                    android:textSize="14sp"/>
 
-                    <TextView
-                        android:id="@+id/book_select_all"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:background="@drawable/search_bg_selector"
-                        android:paddingBottom="1dp"
-                        android:paddingLeft="3dp"
-                        android:paddingRight="3dp"
-                        android:paddingTop="1dp"
-                        android:text="全选"
-                        android:textColor="@drawable/search_text_color_selector"
-                        android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/area_reverse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/search_bg_selector"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="1dp"
+                    android:text="反选"
+                    android:textColor="@drawable/search_text_color_selector"
+                    android:textSize="14sp"/>
 
-                    <TextView
-                        android:id="@+id/book_reverse"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/search_bg_selector"
-                        android:gravity="center_vertical"
-                        android:paddingBottom="1dp"
-                        android:paddingLeft="3dp"
-                        android:paddingRight="3dp"
-                        android:paddingTop="1dp"
-                        android:text="反选"
-                        android:textColor="@drawable/search_text_color_selector"
-                        android:textSize="14sp"/>
-
-                    <TextView
-                        android:id="@+id/book_select_cancel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:background="@drawable/search_bg_selector"
-                        android:gravity="center_vertical"
-                        android:paddingBottom="1dp"
-                        android:paddingLeft="3dp"
-                        android:paddingRight="3dp"
-                        android:paddingTop="1dp"
-                        android:text="取消"
-                        android:textColor="@drawable/search_text_color_selector"
-                        android:textSize="14sp"/>
-                </RelativeLayout>
-
+                <TextView
+                    android:id="@+id/area_select_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/search_bg_selector"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="1dp"
+                    android:text="取消"
+                    android:textColor="@drawable/search_text_color_selector"
+                    android:textSize="14sp"/>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/book_select_relative"
+                style="@style/camera"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/select_bg_shape"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/book_select_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/search_bg_selector"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="1dp"
+                    android:text="全选"
+                    android:textColor="@drawable/search_text_color_selector"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/book_reverse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/search_bg_selector"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="1dp"
+                    android:text="反选"
+                    android:textColor="@drawable/search_text_color_selector"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/book_select_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/search_bg_selector"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="1dp"
+                    android:text="取消"
+                    android:textColor="@drawable/search_text_color_selector"
+                    android:textSize="14sp"/>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 

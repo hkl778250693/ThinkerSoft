@@ -4,14 +4,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,19 +50,19 @@ public class CostListviewActivity extends Activity {
     public int responseCode = 0;
     private String result; //网络请求结果
     private String result1; //网络请求结果listview
-    private TextView userNumber;
-    private TextView userName;
-    private TextView meterNumberTextview;
-    private TextView waterType;
-    private TextView meterModelNumber;
-    private TextView meterType;
-    private TextView address;
+    private TextView userNumber,userName,meterNumberTextview,waterType,meterModelNumber,meterType,address,tips;
     private String meterNumber;
     private String userid;
     private Intent intent;
     QueryAdapter adapter=null;
-    private String ip;  //接口ip地址
-    private SharedPreferences sharedPreferences;
+    private String ip,port;  //接口ip地址   端口
+    private SharedPreferences public_sharedPreferences;
+    private LinearLayout rootLinearlayout;
+    private ImageView frameAnimation;
+    private AnimationDrawable animationDrawable;
+    private LayoutInflater layoutInflater;
+    private PopupWindow popupWindow;
+    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,7 @@ public class CostListviewActivity extends Activity {
 
         bindView();//绑定控件
         defaultSetting();//初始化设置
-
+        showPopupwindow();
         new Thread(){//开起一个支线程进行网络请求
             @Override
             public void run() {
@@ -104,6 +110,7 @@ public class CostListviewActivity extends Activity {
         meterType = (TextView) findViewById(R.id.meter_type);
         address = (TextView) findViewById(R.id.address);
         listView = (ListView) findViewById(R.id.listview);
+        rootLinearlayout = (LinearLayout) findViewById(R.id.root_linearlayout);
     }
 
     //点击事件
@@ -142,7 +149,45 @@ public class CostListviewActivity extends Activity {
 
     //初始化设置
     private void defaultSetting() {
-        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+        public_sharedPreferences = this.getSharedPreferences("data", Context.MODE_PRIVATE);
+    }
+
+    //show弹出框
+    public void showPopupwindow() {
+        layoutInflater = LayoutInflater.from(CostListviewActivity.this);
+        view = layoutInflater.inflate(R.layout.popupwindow_query_loading, null);
+        popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        frameAnimation = (ImageView) view.findViewById(R.id.frame_animation);
+        tips = (TextView) view.findViewById(R.id.tips);
+        tips.setText("正在解析数据，请稍后...");
+        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
+        popupWindow.setAnimationStyle(R.style.camera);
+        popupWindow.update();
+        popupWindow.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
+        backgroundAlpha(0.6F);   //背景变暗
+        startFrameAnimation();
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0F);
+            }
+        });
+    }
+
+    //开始帧动画
+    public void startFrameAnimation() {
+        frameAnimation.setBackgroundResource(R.drawable.frame_animation_list);
+        animationDrawable = (AnimationDrawable) frameAnimation.getDrawable();
+        animationDrawable.start();
+    }
+
+    //设置背景透明度
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getWindow().setAttributes(lp);
     }
 
     //请求网络数据
@@ -152,9 +197,18 @@ public class CostListviewActivity extends Activity {
             public void run() {
                 try {
                     URL url;
-                    ip = sharedPreferences.getString("IP","");
                     HttpURLConnection httpURLConnection;
-                    String httpUrl = "http://"+ip+"/SMDemo/" + method;
+                    if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
+                        ip = public_sharedPreferences.getString("security_ip", "");
+                    } else {
+                        ip = "192.168.2.201:";
+                    }
+                    if (!public_sharedPreferences.getString("security_port", "").equals("")) {
+                        port = public_sharedPreferences.getString("security_port", "");
+                    } else {
+                        port = "8080";
+                    }
+                    String httpUrl = "http://"+ ip + port +"/SMDemo/" + method;
                     //有参数传递
                     if (!keyAndValue.equals("") ) {
                         url = new URL(httpUrl + "?" + keyAndValue);
@@ -200,9 +254,18 @@ public class CostListviewActivity extends Activity {
             public void run() {
                 try {
                     URL url;
-                    ip = sharedPreferences.getString("IP","");
                     HttpURLConnection httpURLConnection;
-                    String httpUrl = "http://"+ip+"/SMDemo/" + method;
+                    if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
+                        ip = public_sharedPreferences.getString("security_ip", "");
+                    } else {
+                        ip = "192.168.2.201:";
+                    }
+                    if (!public_sharedPreferences.getString("security_port", "").equals("")) {
+                        port = public_sharedPreferences.getString("security_port", "");
+                    } else {
+                        port = "8080";
+                    }
+                    String httpUrl = "http://"+ ip + port +"/SMDemo/" + method;
                     //有参数传递
                     if (!keyAndValue.equals("") ) {
                         url = new URL(httpUrl + "?" + keyAndValue);
@@ -244,6 +307,7 @@ public class CostListviewActivity extends Activity {
         public void handleMessage(Message msg) {
             if(msg.what == 0){
                 try {
+                    popupWindow.dismiss();
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray jsonArray = jsonObject.getJSONArray("rows");
                     JSONObject object = jsonArray.getJSONObject(0);

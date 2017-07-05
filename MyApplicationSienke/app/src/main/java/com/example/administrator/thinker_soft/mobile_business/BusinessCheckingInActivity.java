@@ -68,7 +68,7 @@ public class BusinessCheckingInActivity extends Activity {
 
     private void defaultSetting() {
         sharedPreferences_login = getSharedPreferences("login_info", Context.MODE_PRIVATE);
-        final MySqliteHelper helper = new MySqliteHelper(BusinessCheckingInActivity.this, 1);
+        MySqliteHelper helper = new MySqliteHelper(BusinessCheckingInActivity.this, 1);
         db = helper.getWritableDatabase();
         new Thread() {
             @Override

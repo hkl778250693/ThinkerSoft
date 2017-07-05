@@ -12,6 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterBookQueryActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterNumberQueryActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterUserIDQueryActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterUserListviewActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterUserNameQueryActivity;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 
 public class ChaXunActivity extends Activity {
@@ -42,7 +47,7 @@ public class ChaXunActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cx);
+        setContentView(R.layout.fragment_meter_query);
 
         bindView();
         defaultSetting();
@@ -81,19 +86,19 @@ public class ChaXunActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.by_met_book:
-                    Intent intent1 = new Intent(ChaXunActivity.this, CbbCXAction.class);
+                    Intent intent1 = new Intent(ChaXunActivity.this, MeterBookQueryActivity.class);
                     startActivity(intent1);
                     break;
                 case R.id.by_user_name:
-                    Intent intent2 = new Intent(ChaXunActivity.this, YongHuMingCX.class);
+                    Intent intent2 = new Intent(ChaXunActivity.this, MeterUserNameQueryActivity.class);
                     startActivity(intent2);
                     break;
                 case R.id.by_user_num:
-                    Intent intent3 = new Intent(ChaXunActivity.this, BianHaoCXActivity.class);
+                    Intent intent3 = new Intent(ChaXunActivity.this, MeterUserIDQueryActivity.class);
                     startActivity(intent3);
                     break;
                 case R.id.by_user_met:
-                    Intent intent4 = new Intent(ChaXunActivity.this, BiaoHaoCXActivity.class);
+                    Intent intent4 = new Intent(ChaXunActivity.this, MeterNumberQueryActivity.class);
                     startActivity(intent4);
                     break;
                 case R.id.by_user_minus:

@@ -50,9 +50,9 @@ public class CostDetailActivity extends Activity {
     private String month;    //月份
     public int responseCode = 0;  //返回码
     private String result; //网络请求结果
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences public_sharedPreferences,sharedPreferences,sharedPreferences_login;
     private SharedPreferences.Editor editor;
-    private String ip;  //接口ip地址
+    private String ip,port;  //接口ip地址   端口
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +115,9 @@ public class CostDetailActivity extends Activity {
     };
 
     private void defaultSetting() {
-        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        public_sharedPreferences = this.getSharedPreferences("data", Context.MODE_PRIVATE);
+        sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences(sharedPreferences_login.getString("login_name","")+"data", Context.MODE_PRIVATE);
     }
 
 
@@ -127,9 +128,18 @@ public class CostDetailActivity extends Activity {
             public void run() {
                 try {
                     URL url;
-                    ip = sharedPreferences.getString("IP","");
                     HttpURLConnection httpURLConnection;
-                    String httpUrl = "http://"+ip+"/SMDemo/" + method;
+                    if (!public_sharedPreferences.getString("security_ip", "").equals("")) {
+                        ip = public_sharedPreferences.getString("security_ip", "");
+                    } else {
+                        ip = "192.168.2.201:";
+                    }
+                    if (!public_sharedPreferences.getString("security_port", "").equals("")) {
+                        port = public_sharedPreferences.getString("security_port", "");
+                    } else {
+                        port = "8080";
+                    }
+                    String httpUrl = "http://"+ ip + port +"/SMDemo/" + method;
                     //有参数传递
                     if (!keyAndValue.equals("") ) {
                         url = new URL(httpUrl + "?" + keyAndValue);

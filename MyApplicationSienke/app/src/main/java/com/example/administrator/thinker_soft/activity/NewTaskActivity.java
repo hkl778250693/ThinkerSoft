@@ -193,7 +193,7 @@ public class NewTaskActivity extends Activity {
                         if (!taskName.getText().toString().equals("")) {
                             String str1 = startDate.getText().toString();
                             String str2 = endDate.getText().toString();
-                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                             String currentTime = formatter.format(new Date());
                             current_res = str2.compareTo(currentTime);
                             if (current_res >= 0) {

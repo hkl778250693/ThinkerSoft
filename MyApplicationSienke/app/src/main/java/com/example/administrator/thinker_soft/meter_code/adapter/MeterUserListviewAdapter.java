@@ -11,16 +11,16 @@ import android.widget.TextView;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.model.MeterUserListviewItem;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2017/6/28 0028.
  */
 public class MeterUserListviewAdapter extends BaseAdapter {
     private Context context;
-    private List<MeterUserListviewItem> itemList;  //传递过来的数据源
+    private ArrayList<MeterUserListviewItem> itemList;  //传递过来的数据源
 
-    public MeterUserListviewAdapter(Context context, List<MeterUserListviewItem> itemList) {
+    public MeterUserListviewAdapter(Context context, ArrayList<MeterUserListviewItem> itemList) {
         this.context = context;
         this.itemList = itemList;
         if (context != null) {

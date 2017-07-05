@@ -10,10 +10,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.administrator.thinker_soft.R;
-import com.example.administrator.thinker_soft.meter_code.MeterStatisticsActivity;
-import com.example.administrator.thinker_soft.meter_code.MeterSelectActivity;
-import com.example.administrator.thinker_soft.meter_code.MeterUserListviewActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterSelectActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterStatisticsActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterUserListviewActivity;
 import com.example.administrator.thinker_soft.meter_code.WeiChaoBaoActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterUserContinueActivity;
 
 /**
  * Created by Administrator on 2017/6/12 0012.
@@ -64,7 +65,7 @@ public class MeterHomePageFragment extends Fragment {
             Intent intent;
             switch (v.getId()){
                 case R.id.first_layout:
-                    intent = new Intent(getActivity(), MeterUserListviewActivity.class);
+                    intent = new Intent(getActivity(), MeterUserContinueActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.second_layout:

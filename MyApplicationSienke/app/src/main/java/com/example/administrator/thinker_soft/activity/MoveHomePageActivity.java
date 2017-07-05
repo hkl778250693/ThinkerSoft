@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.adapter.GridviewHomePageAdapter;
-import com.example.administrator.thinker_soft.meter_code.CBJActivity;
+import com.example.administrator.thinker_soft.meter_code.activity.MeterHomePageActivity;
 import com.example.administrator.thinker_soft.mobile_business.MobileBusinessActivity;
 import com.example.administrator.thinker_soft.model.GridHomePageItem;
 
@@ -122,7 +122,7 @@ public class MoveHomePageActivity extends Activity {
                     Intent intent = new Intent(MoveHomePageActivity.this, BusinessWebviewActivity.class);
                     startActivity(intent);
                 } else if (item.getImageName().equals("移动抄表")) {
-                    Intent intent = new Intent(MoveHomePageActivity.this, CBJActivity.class);
+                    Intent intent = new Intent(MoveHomePageActivity.this, MeterHomePageActivity.class);
                     startActivity(intent);
                 }
             }

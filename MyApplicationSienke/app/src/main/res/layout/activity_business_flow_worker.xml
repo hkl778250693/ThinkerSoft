@@ -22,16 +22,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="发布公告"
+            android:text="转正流程"
             android:textColor="@android:color/white"
             android:textSize="21sp" />
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/text_font_color_white"
+        android:padding="10dp"
+        android:text="转正申请单"
+        android:textColor="@color/text_black"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,113 +54,112 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="15dp"
+                android:gravity="center"
                 android:padding="10dp"
-                android:text="报告类型："
+                android:text="申请人："
                 android:textColor="@color/text_black"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/leixing"
+                android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/normal_button_bg_selector"
-                android:drawableRight="@mipmap/down"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="会议纪要"
-                android:textSize="14sp" />
+                android:gravity="right"
+                android:padding="8dp"
+                android:text="郑杰"
+                android:textColor="@color/text_black" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="10dp"
             android:background="@color/text_font_color_white"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="15dp"
+                android:gravity="center"
                 android:padding="10dp"
-                android:text="报告时间："
+                android:text="部    门："
                 android:textColor="@color/text_black"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/section"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/normal_button_bg_selector"
-                android:drawableRight="@mipmap/down"
+                android:gravity="right"
+                android:padding="8dp"
+                android:text=""
+                android:textColor="@color/text_black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/text_font_color_white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="15dp"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="2017-3-13"
-                android:textSize="14sp" />
+                android:text="日    期："
+                android:textColor="@color/text_black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/data"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:padding="8dp"
+                android:text="郑杰"
+                android:textColor="@color/text_black" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawablePadding="15dp"
             android:padding="10dp"
-            android:text="通知内容"
+            android:text="转正详情："
             android:textColor="@color/text_black"
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/content"
+            android:id="@+id/send_name"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
             android:background="@drawable/normal_button_bg_selector"
-            android:hint="请输入通知内容"
-            android:padding="8dp"
-            android:gravity="top"
-            android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:background="@color/text_font_color_white"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="上传附件："
-                android:textColor="@color/text_black"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:src="@mipmap/tj" />
-        </LinearLayout>
+            android:gravity="left"
+            android:hint="请填写请假原因"
+            android:padding="11dp"
+            android:textSize="12sp" />
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/send"
+    <TextView
+        android:id="@+id/save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/text_font_color_white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:drawablePadding="5dp"
-            android:padding="10dp"
-            android:text="发布"
-            android:textColor="@drawable/business_text_selector"
-            android:textSize="16sp" />
-
-    </RelativeLayout>
-
+        android:background="@color/text_font_color_white"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="确定"
+        android:textColor="@drawable/business_text_selector"
+        android:textSize="16sp" />
 </LinearLayout>

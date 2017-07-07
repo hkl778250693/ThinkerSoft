@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
@@ -72,13 +73,13 @@ public class BusinessCommunityActivity extends Activity {
             @Override
             public void onClick(View v) {
                 View popupView = BusinessCommunityActivity.this.getLayoutInflater().inflate(R.layout.popupwidow_business_community, null);
-                window = new PopupWindow(popupView, 400, 600);
+                window = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 window.setAnimationStyle(R.mipmap.pop_banner);
                 window.setFocusable(true);
                 backgroundAlpha(0.6F);   //背景变暗
                 window.setOutsideTouchable(true);
                 window.update();
-                window.showAsDropDown(more, 0, 20);
+                window.showAsDropDown(more, 0, 0);
                 window.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {

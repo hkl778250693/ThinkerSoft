@@ -8,26 +8,8 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
-
-        <!--<RadioButton
-            android:id="@+id/file"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/security_popupwindow"
-            android:button="@null"
-            android:drawableLeft="@drawable/security_popupwindow_pic"
-            android:drawablePadding="10dp"
-            android:padding="10dp"
-            android:text="文件管理"
-            android:textColor="@drawable/security_popupwindow_text"
-            android:textSize="16sp" />
-
-        <View
-            android:layout_width="120dp"
-            android:layout_height="5dp"
-            android:background="@color/gray_thin" />-->
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <RadioButton
             android:id="@+id/settings"

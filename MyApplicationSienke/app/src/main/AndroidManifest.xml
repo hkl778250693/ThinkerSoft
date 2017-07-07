@@ -177,8 +177,29 @@
 
         //掌上办公
         <activity
+            android:name=".mobile_business.BusinessFlowInfoOneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mobile_business.BusinessFlowOvertimeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mobile_business.BusinessFlowEvectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mobile_business.BusinessFlowWorkerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mobile_business.BusinessFlowDismissionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mobile_business.BusinessFlowLeaveActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".mobile_business.MobileBusinessActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".mobile_business.BusinessSentActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".mobile_business.BusinessNewsActivity"
             android:screenOrientation="portrait"/>
@@ -266,6 +287,10 @@
         <activity
             android:name=".mobile_business.ReportInfoInfoActivity"
             android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mobile_business.BusinessNewsInfoActivity"
+            android:screenOrientation="portrait" />
 
 
         //移动APP

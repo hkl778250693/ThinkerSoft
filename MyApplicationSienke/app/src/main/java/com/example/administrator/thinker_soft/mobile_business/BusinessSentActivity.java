@@ -9,40 +9,41 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.administrator.thinker_soft.R;
-import com.example.administrator.thinker_soft.mobile_business.adapter.NewsAdapter;
-import com.example.administrator.thinker_soft.mobile_business.model.NewsItem;
+import com.example.administrator.thinker_soft.mobile_business.adapter.EmailInfoAdapter;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/7/4.
+ * Created by Administrator on 2017/7/5.
  */
-public class BusinessNewsActivity extends Activity {
-
+public class BusinessSentActivity extends Activity {
     private ImageView back;
-    private ListView listView;
-    private NewsAdapter adapter;
-    private List<NewsItem> itemList = new ArrayList<>();
+    private Button checked,delete;
+    private ListView listViewEmail;
+    private BusinessEmailListviewItem item;
+    private EmailInfoAdapter adapter;
+    private List<BusinessEmailListviewItem> businessEmailListviewItemList = new ArrayList<>();
     private SharedPreferences sharedPreferences_login;
     private SQLiteDatabase db;  //数据库
-    private NewsItem item;
     private Cursor cursor;
     private Handler handler= new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 0:
-                    adapter = new NewsAdapter(BusinessNewsActivity.this, itemList);
+                    adapter = new EmailInfoAdapter(BusinessSentActivity.this, businessEmailListviewItemList);
                     adapter.notifyDataSetChanged();
-                    listView.setAdapter(adapter);
+                    listViewEmail.setAdapter(adapter);
                     break;
             }
             super.handleMessage(msg);
@@ -52,22 +53,22 @@ public class BusinessNewsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+        setContentView(R.layout.activity_sent_email);
 
-        bindView();
+        bindView();//绑定控件
         defaultSetting();
-        setViewClickListener();
+        setViewClickListener();//点击事件
     }
 
-    private void defaultSetting(){
+    private void defaultSetting() {
         sharedPreferences_login = getSharedPreferences("login_info", Context.MODE_PRIVATE);
-        final MySqliteHelper helper = new MySqliteHelper(BusinessNewsActivity.this, 1);
+        final MySqliteHelper helper = new MySqliteHelper(BusinessSentActivity.this, 1);
         db = helper.getWritableDatabase();
         new Thread(){
             @Override
             public void run(){
                 super.run();
-                queryOaAnnounce();
+                queryOaEmail();
                 if (cursor.getCount() != 0) {
                     handler.sendEmptyMessage(0);
                 }
@@ -75,61 +76,71 @@ public class BusinessNewsActivity extends Activity {
         }.start();
     }
 
-    private void bindView(){
+
+    public void bindView(){
+        listViewEmail = (ListView) findViewById(R.id.listview_email);
+        delete = (Button) findViewById(R.id.delete);
         back = (ImageView) findViewById(R.id.back);
-        listView = (ListView) findViewById(R.id.listview);
+        checked = (Button) findViewById(R.id.checked);
+
     }
 
-    private void setViewClickListener() {
-        adapter = new NewsAdapter(BusinessNewsActivity.this, itemList);
-        listView.setAdapter(adapter);
+    public void setViewClickListener(){
+        adapter= new EmailInfoAdapter(BusinessSentActivity.this,businessEmailListviewItemList);
+        listViewEmail.setAdapter(adapter);
         back.setOnClickListener(clickListener);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewEmail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                item = (NewsItem) adapter.getItem(position);
-                Intent intent = new Intent(BusinessNewsActivity.this, BusinessNewsInfoActivity.class);
+                item = (BusinessEmailListviewItem) adapter.getItem(position);
+                Intent intent = new Intent(BusinessSentActivity.this, BusinessEmailInfoActivity.class);
                 intent.putExtra("time", item.getTime());
                 startActivity(intent);
             }
         });
-
     }
 
     /**
      * 根据用户ID查询日程安排并显示listview数据*/
-    private void queryOaAnnounce() {
-        itemList.clear();
-        cursor = db.rawQuery("select * from OaAnnounce where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
+    private void queryOaEmail() {
+        businessEmailListviewItemList.clear();
+        cursor = db.rawQuery("select * from OaEmail where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
+        Log.i("queryOaUserInfo", "集合长度为：" + cursor.getCount());
         if (cursor.getCount() == 0) {
             return;
         }
         while (cursor.moveToNext()) {
-            NewsItem item = new NewsItem();
+            BusinessEmailListviewItem item = new BusinessEmailListviewItem();
+            item.setEmailAdress(cursor.getString(cursor.getColumnIndex("inboxAddress")));
+            item.setContent(cursor.getString(cursor.getColumnIndex("content")));
             item.setTime(cursor.getString(cursor.getColumnIndex("time")));
-            item.setType(cursor.getString(cursor.getColumnIndex("type")));
-            itemList.add(item);
+            item.setTitle(cursor.getString(cursor.getColumnIndex("type")));
+            businessEmailListviewItemList.add(item);
         }
     }
+
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
+            switch (v.getId()){
                 case R.id.back:
                     finish();
+                    break;
+                case R.id.check:
                     break;
             }
         }
     };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode ==RESULT_OK){
             if (requestCode ==100){
-                queryOaAnnounce();
-                adapter = new NewsAdapter(BusinessNewsActivity.this, itemList);
+                queryOaEmail();
+                adapter = new EmailInfoAdapter(BusinessSentActivity.this, businessEmailListviewItemList);
                 adapter.notifyDataSetChanged();
-                listView.setAdapter(adapter);
+                listViewEmail.setAdapter(adapter);
             }
         }
     }

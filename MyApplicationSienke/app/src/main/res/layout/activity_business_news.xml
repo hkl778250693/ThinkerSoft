@@ -35,15 +35,26 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/text_font_color_white"
             android:padding="10dp"
-            android:text="六月五日会议纪要："
+            android:text="2017-08-20"
             android:textColor="@color/text_black"
             android:textSize="20sp" />
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_font_color_white"
+            android:padding="10dp"
+            android:text="会议纪要："
+            android:textColor="@color/text_black"
+            android:textSize="20sp"/>
 
         <TextView
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_weight="1"

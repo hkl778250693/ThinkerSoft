@@ -28,6 +28,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/email_selector"
@@ -40,6 +41,7 @@
                 android:text="thksoft@163.com" />
 
             <TextView
+                android:id="@+id/content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="邮件内容预览.邮件内容预览.邮件内容预览。" />
@@ -54,16 +56,17 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="04/22/2017" />
+                android:text="04/22/2017" /><!--
 
             <CheckBox
                 android:id="@+id/start_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/email_info_star_selector"
-                android:button="@null" />
+                android:button="@null" />-->
         </LinearLayout>
 
     </LinearLayout>

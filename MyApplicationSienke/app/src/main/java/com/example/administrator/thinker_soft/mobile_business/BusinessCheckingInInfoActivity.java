@@ -95,8 +95,9 @@ public class BusinessCheckingInInfoActivity extends Activity {
         setContentView(R.layout.activity_business_checking_in_info);//考勤详细
 
         bindView();//绑定控件
-        setOnClickListener();//点击事件
         defaultSetting();
+        setOnClickListener();//点击事件
+
     }
 
 

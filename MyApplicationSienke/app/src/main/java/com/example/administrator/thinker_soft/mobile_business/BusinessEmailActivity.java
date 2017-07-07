@@ -14,7 +14,7 @@ import com.example.administrator.thinker_soft.R;
  */
 public class BusinessEmailActivity extends Activity {
     private ImageView back;
-    private RelativeLayout inbox, send;
+    private RelativeLayout inbox, send,sent;
 
 
     @Override
@@ -30,12 +30,14 @@ public class BusinessEmailActivity extends Activity {
         back = (ImageView) findViewById(R.id.back);
         inbox = (RelativeLayout) findViewById(R.id.inbox);
         send = (RelativeLayout) findViewById(R.id.send);
+        sent = (RelativeLayout) findViewById(R.id.sent);
     }
 
     public void setOnClickListener() {
         back.setOnClickListener(clickListener);
         inbox.setOnClickListener(clickListener);
         send.setOnClickListener(clickListener);
+        sent.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
@@ -52,6 +54,10 @@ public class BusinessEmailActivity extends Activity {
                 case R.id.send:
                     Intent intent1 = new Intent(BusinessEmailActivity.this, BusinessSendEmailActivity.class);
                     startActivity(intent1);
+                    break;
+                case R.id.sent:
+                    Intent intent2 = new Intent(BusinessEmailActivity.this,BusinessSentActivity.class);
+                    startActivity(intent2);
                     break;
             }
         }

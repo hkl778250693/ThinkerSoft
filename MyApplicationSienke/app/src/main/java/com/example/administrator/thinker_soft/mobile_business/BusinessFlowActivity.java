@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.mobile_business.adapter.BusinessFlowAdapter;
@@ -21,6 +22,7 @@ public class BusinessFlowActivity extends Activity {
 
     private ImageView back;
     private ListView listView;
+    private RelativeLayout add;
     private BusinessFlowAdapter adapter;
     private List<BusinessFlowListviewItem> businessFlowListviewItemList = new ArrayList<>();
 
@@ -36,6 +38,7 @@ public class BusinessFlowActivity extends Activity {
     public void bindView() {
         back = (ImageView) findViewById(R.id.back);
         listView = (ListView) findViewById(R.id.listview);
+        add = (RelativeLayout) findViewById(R.id.add);
     }
 
     //假数据
@@ -52,6 +55,7 @@ public class BusinessFlowActivity extends Activity {
         adapter = new BusinessFlowAdapter(BusinessFlowActivity.this, businessFlowListviewItemList);
         listView.setAdapter(adapter);
         back.setOnClickListener(clickListener);
+        add.setOnClickListener(clickListener);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -67,6 +71,10 @@ public class BusinessFlowActivity extends Activity {
             switch (v.getId()) {
                 case R.id.back:
                     finish();
+                    break;
+                case R.id.add:
+                    Intent intent = new Intent(BusinessFlowActivity.this,BusinessFlowInfoOneActivity.class);
+                    startActivity(intent);
                     break;
             }
         }

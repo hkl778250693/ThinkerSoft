@@ -61,22 +61,29 @@ public class EmailInfoAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.email_info_item, null);
             viewHolder.check = (CheckBox) convertView.findViewById(R.id.check);
             viewHolder.email_adress = (TextView) convertView.findViewById(R.id.email_adress);
-            viewHolder.start_check = (CheckBox) convertView.findViewById(R.id.start_check);
             viewHolder.check1 = (CheckBox) convertView.findViewById(R.id.check1);
+            viewHolder.time = (TextView) convertView.findViewById(R.id.time);
+            viewHolder.title = (TextView) convertView.findViewById(R.id.title);
+            viewHolder.content = (TextView) convertView.findViewById(R.id.content);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        BusinessEmailListviewItem item = businessEmailListviewItems.get(position);
+        viewHolder.email_adress.setText(item.getEmailAdress());
+        viewHolder.title.setText(item.getTitle());
+        viewHolder.content.setText(item.getContent());
+        viewHolder.time.setText(item.getTime());
         return convertView;
     }
-
 
 
     public class ViewHolder {
         public CheckBox check;
         public TextView email_adress;
-        public CheckBox start_check;
         public CheckBox check1;
-
+        public TextView title;
+        public TextView time;
+        public TextView content;
     }
 }

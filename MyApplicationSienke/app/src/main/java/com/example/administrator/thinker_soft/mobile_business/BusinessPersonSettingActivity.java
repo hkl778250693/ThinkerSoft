@@ -16,6 +16,7 @@ public class BusinessPersonSettingActivity extends Activity {
     private ImageView back;
     private RelativeLayout id,news,general;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

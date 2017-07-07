@@ -88,6 +88,14 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     final String CREATE_TABLE_SQL_OA_REPORT = "CREATE TABLE oaReport" +
             "(id integer primary key AUTOINCREMENT,userPhoto varchar(200),userName varchar(200),userId varchar(200),time varchar(200),createReport varchar(200),summarizeReport varchar(200),nextReport varchar(200))";
 
+    //OA日程安排表
+    final String CREATE_TABLE_SQL_OA_ANNOUNCE = "CREATE TABLE OaAnnounce" +
+            "(id integer primary key AUTOINCREMENT,userId varchar(200),userName varchar(200),type varchar(200),time varchar(200),content varchar(200))";
+
+    //OA邮件表
+    final String CREATE_TABLE_SQL_OA_EMAIL = "CREATE TABLE OaEmail" +
+            "(id integer primary key AUTOINCREMENT,userId varchar(200),sendName varchar(200),recipients varchar(200),copyTo varchar(200),type varchar(200),content varchar(200),inboxTitle varchar(200),inboxAddress varchar(200),time varchar(200))";
+
     //构造器
     public MySqliteHelper(Context context, int version) {
         super(context, DATABASE_NAME, null, version);
@@ -117,10 +125,10 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_SQL_USER);                           //安检用户表
         db.execSQL(CREATE_TABLE_SQL_TASK);                           //安检任务表
         db.execSQL(CREATE_TABLE_SQL_SECURITY_PHOTO_INFO);            //用户安检图片关联表
-        db.execSQL(CREATE_TABLE_SQL_SECURITY_STATE);                  //安全状态表
-        db.execSQL(CREATE_TABLE_SQL_SECURITY_CONTENT);                //安全情况表
-        db.execSQL(CREATE_TABLE_SQL_SECURITY_HIDDEEN);                //安全隐患表
-        db.execSQL(CREATE_TABLE_SQL_SECURITY_HIDDEEN_REASON);         //安全隐患原因表
+        db.execSQL(CREATE_TABLE_SQL_SECURITY_STATE);                 //安全状态表
+        db.execSQL(CREATE_TABLE_SQL_SECURITY_CONTENT);               //安全情况表
+        db.execSQL(CREATE_TABLE_SQL_SECURITY_HIDDEEN);               //安全隐患表
+        db.execSQL(CREATE_TABLE_SQL_SECURITY_HIDDEEN_REASON);        //安全隐患原因表
         db.execSQL(CREATE_TABLE_SQL_SECURITY_INFO_PHOTO);            //安全信息与照片关联表
         /**
          * 移动抄表
@@ -131,11 +139,13 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         /**
          * OA表
          */
-        db.execSQL(CREATE_TABLE_SQL_OA_USER);                         //OA用户基础信息表
-        db.execSQL(CREATE_TABLE_SQL_OA_USER_OUT_WORK);                //OA用户外勤信息表
-        db.execSQL(CREATE_TABLE_SQL_OA_PHOTO_INFO);                   //OA照片表
-        db.execSQL(CREATE_TABLE_SQL_OA_CALENDAR);                     //OA日程表
-        db.execSQL(CREATE_TABLE_SQL_OA_REPORT);                       //OA工作汇报表
+        db.execSQL(CREATE_TABLE_SQL_OA_USER);                        //OA用户基础信息表
+        db.execSQL(CREATE_TABLE_SQL_OA_USER_OUT_WORK);               //OA用户外勤信息表
+        db.execSQL(CREATE_TABLE_SQL_OA_PHOTO_INFO);                  //OA照片表
+        db.execSQL(CREATE_TABLE_SQL_OA_CALENDAR);                    //OA日程表
+        db.execSQL(CREATE_TABLE_SQL_OA_REPORT);                      //OA工作汇报表
+        db.execSQL(CREATE_TABLE_SQL_OA_ANNOUNCE);                    //OA发布公告
+        db.execSQL(CREATE_TABLE_SQL_OA_EMAIL);                       //OA发布公告
     }
 
     //SQLiteDatabase 数据库操作类

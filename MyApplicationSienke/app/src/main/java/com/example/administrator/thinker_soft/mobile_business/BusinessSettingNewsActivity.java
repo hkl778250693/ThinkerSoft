@@ -7,11 +7,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import com.example.administrator.thinker_soft.R;
@@ -28,6 +31,8 @@ public class BusinessSettingNewsActivity extends Activity {
     private SQLiteDatabase db;  //数据库
     private SharedPreferences sharedPreferences_login;
     private Cursor cursor;
+    private int totalCount;
+    private int changed = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +61,47 @@ public class BusinessSettingNewsActivity extends Activity {
 
     private void setOnClickListener() {
         back.setOnClickListener(clickListener);
-        slip.setOnClickListener(clickListener);
-        slip1.setOnClickListener(clickListener);
-        slip2.setOnClickListener(clickListener);
+        slip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
+        slip1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (slip1.isChecked()) {
+                    MediaPlayer mp = new MediaPlayer();
+                    try {
+                        mp.setDataSource(BusinessSettingNewsActivity.this, RingtoneManager
+                                .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+                        mp.prepare();
+                        mp.start();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        slip2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (slip2.isChecked()) {
+                    if (changed != 0) {
+                        Log.i("onCheckedChanged", "震动开始");
+                        vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
+                        long[] pattern = {0, 500};
+                        vibrator.vibrate(pattern, -1);
+                    } else {
+                        changed++;
+                    }
+                } else {
+                    if (vibrator != null) {
+                        vibrator.cancel();
+                    }
+                }
+            }
+        });
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
@@ -66,33 +109,22 @@ public class BusinessSettingNewsActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.back:
-                    if (cursor.getCount() != 0) {
+                    if (totalCount != 0) {
                         upDateOaUser();
                     } else {
                         insertOaUser();
                     }
                     finish();
-                    break;
-                case R.id.slip:
-                    break;
-                case R.id.slip1:
-                    if (slip1.isChecked()) {
-                        slip2.setChecked(false);
-                    }
-                    break;
-                case R.id.slip2:
-                    if (slip2.isChecked()) {
-                        slip1.setChecked(false);
-                        vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
-                        long[] pattern = {0, 500};
-                        vibrator.vibrate(pattern, -1);
-                    } else {
-                        vibrator.cancel();
-                    }
-                    break;
             }
         }
     };
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        vibrator.cancel();
+    }
+
 
     /**
      * 更新用户基础信息表
@@ -125,11 +157,12 @@ public class BusinessSettingNewsActivity extends Activity {
      */
     private void queryOaUser() {
         cursor = db.rawQuery("select * from OaUser where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});
+        totalCount = cursor.getCount();
         if (cursor.getCount() == 0) {
             return;
         }
         while (cursor.moveToNext()) {
-            Log.i("insertOaUser", "查询到：");
+            Log.i("insertOaUser", "查询到：" + totalCount);
             slip.setChecked(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("isNewMessage"))));
             slip1.setChecked(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("isRing"))));
             slip2.setChecked(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("isShake"))));
@@ -143,5 +176,6 @@ public class BusinessSettingNewsActivity extends Activity {
             cursor.close();
         }
         db.close();
+        vibrator.cancel();
     }
 }

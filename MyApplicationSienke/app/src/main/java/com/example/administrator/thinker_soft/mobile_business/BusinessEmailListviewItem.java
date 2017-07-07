@@ -7,6 +7,9 @@ public class BusinessEmailListviewItem {
     private String check;//打钩
     private String emailAdress;//
     private String startCheck;
+    private String time;
+    private String title;
+    private String content;
 
     public String getCheck() {
         return check;
@@ -30,5 +33,29 @@ public class BusinessEmailListviewItem {
 
     public void setStartCheck(String startCheck) {
         this.startCheck = startCheck;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

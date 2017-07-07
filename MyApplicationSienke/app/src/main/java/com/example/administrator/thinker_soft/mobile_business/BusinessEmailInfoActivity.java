@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 
@@ -20,6 +21,7 @@ public class BusinessEmailInfoActivity extends Activity {
     private ImageView back, more;
     private PopupWindow window;
     private RadioButton huifu, zhuanfa, detail;
+    private TextView type,sendName,addressee,time,fujian,content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,12 @@ public class BusinessEmailInfoActivity extends Activity {
     public void bindView() {
         back = (ImageView) findViewById(R.id.back);
         more = (ImageView) findViewById(R.id.more);
+        type = (TextView) findViewById(R.id.type);
+        sendName = (TextView) findViewById(R.id.send_name);
+        addressee = (TextView) findViewById(R.id.addressee);
+        time = (TextView) findViewById(R.id.time);
+        fujian = (TextView) findViewById(R.id.fujian);
+        content = (TextView) findViewById(R.id.content);
     }
 
     public void setOnClickListener() {

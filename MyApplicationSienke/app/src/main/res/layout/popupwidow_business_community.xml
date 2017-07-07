@@ -1,48 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/moreview"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="3dp">
 
     <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/gray_thin">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <RadioButton
             android:id="@+id/message"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/security_popupwindow"
             android:button="@null"
             android:drawableLeft="@mipmap/community_message"
-            android:gravity="center"
-            android:padding="15dp"
+            android:drawablePadding="10dp"
+            android:padding="8dp"
             android:text="栏目信息"
-            android:textColor="@color/text_black"
-            android:textSize="16sp" />
+            android:textColor="@drawable/security_popupwindow_text"
+            android:textSize="14sp" />
 
         <View
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
             android:layout_height="1dp"
-            android:background="@color/text_font_color_white" />
+            android:background="@color/gray" />
 
         <RadioButton
             android:id="@+id/send"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/security_popupwindow"
             android:button="@null"
             android:drawableLeft="@mipmap/send_message"
-            android:gravity="center"
-            android:padding="15dp"
+            android:drawablePadding="10dp"
+            android:padding="8dp"
             android:text="发布文章"
-            android:textColor="@color/text_black"
-            android:textSize="16sp" />
+            android:textColor="@drawable/security_popupwindow_text"
+            android:textSize="14sp" />
     </RadioGroup>
-
 
 </LinearLayout>

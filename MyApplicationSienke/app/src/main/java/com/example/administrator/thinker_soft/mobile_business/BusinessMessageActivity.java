@@ -2,17 +2,25 @@ package com.example.administrator.thinker_soft.mobile_business;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,10 +33,14 @@ import java.util.Locale;
 public class BusinessMessageActivity extends Activity {
 
     private ImageView back;
+    private EditText content;
     private TextView leixing, time;
     private Calendar c; //日历
+    private RelativeLayout send;
     private PopupWindow window;
     private TextView huiyi, tongzhi;
+    private SQLiteDatabase db;  //数据库
+    private SharedPreferences sharedPreferences_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +48,26 @@ public class BusinessMessageActivity extends Activity {
         setContentView(R.layout.activity_business_fbgg);//发布公告
 
         bindView();//绑定控件
-        setViewClickListener();//点击事件
         defaultSetting();//初始化设置
+        setViewClickListener();//点击事件
+
     }
 
     private void defaultSetting() {
         c = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         time.setText(dateFormat.format(new Date()));
+        MySqliteHelper helper = new MySqliteHelper(BusinessMessageActivity.this, 1);
+        db = helper.getWritableDatabase();
+        sharedPreferences_login = getSharedPreferences("login_info", Context.MODE_PRIVATE);
     }
 
     public void bindView() {
         back = (ImageView) findViewById(R.id.back);
         leixing = (TextView) findViewById(R.id.leixing);
         time = (TextView) findViewById(R.id.time);
+        send = (RelativeLayout) findViewById(R.id.send);
+        content = (EditText) findViewById(R.id.content);
     }
 
     public void setViewClickListener() {
@@ -76,9 +94,9 @@ public class BusinessMessageActivity extends Activity {
 
                 huiyi = (TextView) popupView.findViewById(R.id.huiyi);
                 tongzhi = (TextView) popupView.findViewById(R.id.tongzhi);
-
                 huiyi.setOnClickListener(clickListener);
                 tongzhi.setOnClickListener(clickListener);
+                send.setOnClickListener(clickListener);
             }
         });
     }
@@ -112,16 +130,31 @@ public class BusinessMessageActivity extends Activity {
                     break;
                 case R.id.huiyi:
                     window.dismiss();
-                    leixing.setText("会议通告");
+                    leixing.setText("会议纪要");
                     break;
                 case R.id.tongzhi:
                     window.dismiss();
                     leixing.setText("通知公告");
                     break;
+                case R.id.send:
+                    insertOaAnnounce();
+                    Toast.makeText(BusinessMessageActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                    content.setText("");
+                    break;
 
             }
         }
     };
+
+    private void insertOaAnnounce() {
+        ContentValues values = new ContentValues();
+        values.put("userId", sharedPreferences_login.getString("userId", ""));
+        values.put("userName", sharedPreferences_login.getString("user_name", ""));
+        values.put("type", leixing.getText().toString().trim());
+        values.put("time", time.getText().toString().trim());
+        values.put("content", content.getText().toString().trim());
+        db.insert("OaAnnounce", null, values);
+    }
 
     //设置背景透明度
     public void backgroundAlpha(float bgAlpha) {
@@ -133,5 +166,11 @@ public class BusinessMessageActivity extends Activity {
             BusinessMessageActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
         }
         BusinessMessageActivity.this.getWindow().setAttributes(lp);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
     }
 }

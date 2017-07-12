@@ -60,13 +60,13 @@ public class MySqliteHelper extends SQLiteOpenHelper {
             "arrearage_months varchar(200),mix_state varchar(200),meter_order_number varchar(200),arrearage_amount varchar(200),area_id varchar(200),area_name varchar(200),user_name varchar(200),user_phone varchar(200)," +
             "last_month_dosage varchar(200),property_id varchar(200),property_name varchar(200),user_id varchar(200) UNIQUE,book_id varchar(200),float_range varchar(200),meterState varchar(200)," +
             "dosage_change varchar(200),user_address varchar(200),start_dosage varchar(200),old_user_id varchar(200),book_name varchar(200),meter_model varchar(200)," +
-            "rubbish_cost varchar(200),remission varchar(200),this_month_dosage varchar(200),this_month_end_degree varchar(200),n_jw_x varchar(200),n_jw_y varchar(200),d_jw_time varchar(200))";
-    //抄表分区表
-    final String CREATE_TABLE_SQL_METER_AREA = "CREATE TABLE MeterArea" +
-            "(id integer primary key AUTOINCREMENT,areaName varchar(200),areaId varchar(200),login_user_id varchar(200),login_user_name varchar(200))";
-    //抄表本表
+            "rubbish_cost varchar(200),remission varchar(200),this_month_dosage varchar(200),this_month_end_degree varchar(200),n_jw_x varchar(200),n_jw_y varchar(200),d_jw_time varchar(200),file_name varchar(200))";
+    //抄表文件表
+    final String CREATE_TABLE_SQL_METER_FILE = "CREATE TABLE MeterFile" +
+            "(id integer primary key AUTOINCREMENT,fileName varchar(200),login_user_id varchar(200),login_user_name varchar(200))";
+    //文件和抄表本表
     final String CREATE_TABLE_SQL_METER_BOOK = "CREATE TABLE MeterBook" +
-            "(id integer primary key AUTOINCREMENT,bookName varchar(200),bookId varchar(200),login_user_id varchar(200),login_user_name varchar(200))";
+            "(id integer primary key AUTOINCREMENT,bookName varchar(200),bookId varchar(200),fileName varchar(200),login_user_id varchar(200),login_user_name varchar(200))";
 
     /**
      * OA模块表
@@ -135,7 +135,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
          */
         db.execSQL(CREATE_TABLE_SQL_METER_USER);                      //抄表用户表
         db.execSQL(CREATE_TABLE_SQL_METER_BOOK);                      //抄表本表
-        db.execSQL(CREATE_TABLE_SQL_METER_AREA);                      //抄表分区表
+        db.execSQL(CREATE_TABLE_SQL_METER_FILE);                      //抄表文件表
         /**
          * OA表
          */

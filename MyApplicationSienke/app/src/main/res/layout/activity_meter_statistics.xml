@@ -27,298 +27,316 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="抄表统计"
-            android:textColor="#FFECEC"
+            android:textColor="@android:color/white"
             android:textSize="22sp" />
     </RelativeLayout>
     <!-- 中间部分 -->
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <!-- 户数 -->
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/user_tag"
-                android:padding="10dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/file"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="当前文件："
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/file_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_blue"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="总户数："
-                android:textColor="@color/text_black"
-                android:textSize="14sp"
-                android:layout_marginLeft="5dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/meter_book"
+                    android:padding="10dp"/>
 
-            <TextView
-                android:id="@+id/all_user_number"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="当前抄表本："
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/book_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_blue"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"/>
+            </LinearLayout>
+
+            <!-- 户数 -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_blue"
-                android:textSize="16sp"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"
-                android:text="0"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/meter_user"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="总户数："
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"/>
+
+
+                <TextView
+                    android:id="@+id/all_user_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_blue"
+                    android:textSize="16sp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="户"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp" />
+            </LinearLayout>
+            <!-- 已抄 字段（CSSZ抄表标志） -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="户"
-                android:textColor="@color/text_gray"
-                android:textSize="14sp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp" />
-        </LinearLayout>
-        <!-- 已抄 字段（CSSZ抄表标志） -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/meter_done"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="已抄表："
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"/>
+
+
+                <TextView
+                    android:id="@+id/done_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_blue"
+                    android:textSize="16sp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="户"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp" />
+            </LinearLayout>
+
+            <!-- 未抄 (用户数减已抄) -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/user_done"
-                android:padding="10dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/meter_undone"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="未抄表："
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"/>
+
+                <TextView
+                    android:id="@+id/undone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_blue"
+                    android:textSize="16sp"
+                    android:text="0"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="户"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp" />
+            </LinearLayout>
+
+            <!-- 抄表量-->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="已抄表："
-                android:textColor="@color/text_black"
-                android:textSize="14sp"
-                android:layout_marginLeft="5dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/meter_dosage"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="抄表量："
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"/>
 
 
-            <TextView
-                android:id="@+id/done_number"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/meter_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_blue"
+                    android:textSize="16sp"
+                    android:text="0"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="吨"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp" />
+            </LinearLayout>
+
+            <!-- 完成率 (已抄表除以用户数) -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_blue"
-                android:textSize="16sp"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"
-                android:text="0"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="户"
-                android:textColor="@color/text_gray"
-                android:textSize="14sp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp" />
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/meter_finish_rate"
+                    android:padding="10dp"/>
 
-        <!-- 未抄 (用户数减已抄) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/user_done"
-                android:padding="10dp"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="未抄表："
-                android:textColor="@color/text_black"
-                android:textSize="14sp"
-                android:layout_marginLeft="5dp"/>
-
-            <TextView
-                android:id="@+id/undone_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_blue"
-                android:textSize="16sp"
-                android:text="0"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="户"
-                android:textColor="@color/text_gray"
-                android:textSize="14sp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp" />
-        </LinearLayout>
-
-        <!-- 抄表量-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/user_done"
-                android:padding="10dp"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="抄表量："
-                android:textColor="@color/text_black"
-                android:textSize="14sp"
-                android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="完成率："
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="5dp"/>
 
 
-            <TextView
-                android:id="@+id/meter_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_blue"
-                android:textSize="16sp"
-                android:text="0"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"/>
+                <TextView
+                    android:id="@+id/finish_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_blue"
+                    android:textSize="16sp"
+                    android:text="0.0"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="吨"
-                android:textColor="@color/text_gray"
-                android:textSize="14sp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp" />
+            </LinearLayout>
 
-        <!-- 完成率 (已抄表除以用户数) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/user_done"
-                android:padding="10dp"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="完成率："
-                android:textColor="@color/text_black"
-                android:textSize="14sp"
-                android:layout_marginLeft="5dp"/>
-
-
-            <TextView
-                android:id="@+id/finish_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_blue"
-                android:textSize="16sp"
-                android:text="0.0"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="%"
-                android:textColor="@color/text_gray"
-                android:textSize="14sp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp" />
-        </LinearLayout>
-
-        <RadioGroup
-            android:id="@+id/radio_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal">
-            <RadioButton
-                android:id="@+id/area_rb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:background="@drawable/normal_button_bg_selector"
-                android:padding="7dp"
-                android:drawablePadding="10dp"
-                android:text="抄表分区"
-                android:layout_marginRight="10dp"
-                android:drawableLeft="@drawable/radio_drawable_selector"
-                android:textColor="@drawable/radio_text_selector"
-                android:textSize="14sp" />
-            <RadioButton
-                android:id="@+id/book_rb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:text="抄表表册"
-                android:padding="7dp"
-                android:layout_marginLeft="10dp"
-                android:drawablePadding="10dp"
-                android:background="@drawable/normal_button_bg_selector"
-                android:drawableLeft="@drawable/radio_drawable_selector"
-                android:textColor="@drawable/radio_text_selector"
-                android:textSize="14sp"/>
-
-        </RadioGroup>
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp">
-            <RadioButton
+            <Button
                 android:id="@+id/all_user_statistics"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:layout_marginLeft="11dp"
-                android:layout_marginRight="11dp"
-                android:button="@null"
-                android:gravity="center"
-                android:background="@drawable/button_selector"
-                android:text="统计分区所有用户"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/user_detail_save_btn_selector"
+                android:text="统计所有用户"
+                android:layout_marginTop="30dp"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
-            <RadioButton
+            <Button
                 android:id="@+id/single_statistics"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:layout_marginLeft="11dp"
-                android:layout_marginRight="11dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/user_detail_save_btn_selector"
+                android:text="按抄表本统计"
                 android:layout_marginTop="20dp"
-                android:button="@null"
-                android:background="@drawable/button_selector"
-                android:text="按单个分区统计"
-                android:gravity="center"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
-        </RadioGroup>
-    </LinearLayout>
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

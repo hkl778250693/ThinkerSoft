@@ -110,7 +110,7 @@
 
                 <!-- 查看还水用户 -->
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:id="@+id/by_user_minus"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -127,7 +127,7 @@
                         android:text="查看特殊用户"
                         android:textColor="@android:color/white"
                         android:textSize="16sp" />
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

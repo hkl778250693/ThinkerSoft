@@ -11,7 +11,7 @@
         <shape>
             <corners android:bottomRightRadius="8dp"
                 android:bottomLeftRadius="8dp"/>
-            <solid android:color="@color/gray"/>
+            <solid android:color="@color/gray_little_thin"/>
         </shape>
     </item>
 </selector>

@@ -78,19 +78,21 @@ public class MeterDataDownloadActivity extends Activity {
     public int responseCode = 0;
     private String userResult;  //请求抄表用户数据结果
     private LayoutInflater layoutInflater;
-    private PopupWindow loadingPopup, progressPopup;
+    private PopupWindow loadingPopup, fileNamePopup;
     private ImageView frameAnimation;
     private AnimationDrawable animationDrawable;
     private LinearLayout rootLinearlayout;
-    private View view;
-    private TextView title,tips;  //加载进度的提示
+    private View view, fileNameView,line;
+    private TextView title, tips, confirm,ensure;  //加载进度的提示
+    private EditText fileNameEdit;
     private String bookParams = "";  //抄表本参数
     private String areaParams = "";  //抄表分区参数
     private JSONObject userObject;     //用户object对象
     private JSONArray userJsonArray;   //用户JsonArray对象
     private SQLiteDatabase db;  //数据库
-    private Map<String,String> bookMap = new HashMap<>();
-    private Map<String,String> areaMap = new HashMap<>();
+    private Map<String, String> bookMap = new HashMap<>();
+    private Map<String, String> bookAndAreaMap = new HashMap<>();
+    private Map<String, String> areaMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,11 +211,11 @@ public class MeterDataDownloadActivity extends Activity {
                     break;
                 case R.id.clear:
                     db.delete("MeterUser", null, null);  //删除User表中当前用户的所有数据（官方推荐方法）
-                    db.delete("MeterArea", null, null);
+                    db.delete("MeterFile", null, null);
                     db.delete("MeterBook", null, null);
                     //设置id从1开始（sqlite默认id从1开始），若没有这一句，id将会延续删除之前的id
                     db.execSQL("update sqlite_sequence set seq=0 where name='MeterUser'");
-                    db.execSQL("update sqlite_sequence set seq=0 where name='MeterArea'");
+                    db.execSQL("update sqlite_sequence set seq=0 where name='MeterFile'");
                     db.execSQL("update sqlite_sequence set seq=0 where name='MeterBook'");
                     Toast.makeText(MeterDataDownloadActivity.this, "清除数据成功！", Toast.LENGTH_SHORT).show();
                     break;
@@ -236,20 +238,19 @@ public class MeterDataDownloadActivity extends Activity {
                     areaSelectCancle();
                     break;
                 case R.id.downLoad_btn:
-                    showPopupwindow();  //数据加载
-                    tips.setText("正在获取抄表数据...");
+                    showLoadingPopup();
+                    tips.setText("正在获取用户数据，请稍后...");
                     saveBookInfo();  //保存选中的抄表本ID信息
                     saveAreaInfo();  //保存选中的抄表分区ID信息
                     new Thread() {
                         @Override
                         public void run() {
                             try {
-                                Thread.sleep(2000);
+                                Thread.sleep(1500);
                                 getMeterUserData();   //获取抄表用户数据
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            super.run();
                         }
                     }.start();
                     break;
@@ -355,8 +356,8 @@ public class MeterDataDownloadActivity extends Activity {
                     //此时会下载 抄表本、抄表分区 两个部分的数据
                     getBookParams();  //获取抄表本参数
                     getAreaParams();  //获取抄表分区参数
-                    Log.i("getMeterUserData","抄表本参数为："+bookParams);
-                    String params = "b.n_book_id in("+bookParams+") and a.n_area_id in(" + areaParams + ")";
+                    Log.i("getMeterUserData", "抄表本参数为：" + bookParams);
+                    String params = "b.n_book_id in(" + bookParams + ") and a.n_area_id in(" + areaParams + ")";
                     try {
                         params = URLEncoder.encode(params, "UTF-8").replaceAll("\\+", "%20");
                         requireMeterUserData("findUserMeter.do", params);
@@ -366,7 +367,7 @@ public class MeterDataDownloadActivity extends Activity {
                 } else {
                     if (bookIDMap.size() == 0 && areaIDMap.size() == 0) { //两个编号都为空，并且抄表本、抄表分区都未选择
                         //此时提示选择其中之一
-                        Toast.makeText(MeterDataDownloadActivity.this, "至少选择其中一个区域才能下载哦", Toast.LENGTH_SHORT).show();
+                        handler.sendEmptyMessage(6);
                     } else if (bookIDMap.size() == 0) { //两个编号都为空，抄表分区已经选择，但是抄表本未选择
                         //此时只会下载 抄表分区 部分的数据
                         getAreaParams();  //获取抄表分区参数
@@ -396,13 +397,21 @@ public class MeterDataDownloadActivity extends Activity {
     }
 
     //show加载动画
-    public void showPopupwindow() {
+    public void showLoadingPopup() {
         layoutInflater = LayoutInflater.from(MeterDataDownloadActivity.this);
         view = layoutInflater.inflate(R.layout.popupwindow_query_loading, null);
         loadingPopup = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         frameAnimation = (ImageView) view.findViewById(R.id.frame_animation);
         title = (TextView) view.findViewById(R.id.title);
         tips = (TextView) view.findViewById(R.id.tips);
+        line = view.findViewById(R.id.line);
+        ensure = (TextView) view.findViewById(R.id.ensure);
+        ensure.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadingPopup.dismiss();
+            }
+        });
         loadingPopup.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         loadingPopup.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         loadingPopup.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
@@ -412,6 +421,71 @@ public class MeterDataDownloadActivity extends Activity {
         backgroundAlpha(0.6F);   //背景变暗
         startFrameAnimation();
         loadingPopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0F);
+            }
+        });
+    }
+
+    //show文件命名窗口
+    public void showNameFilePopup() {
+        layoutInflater = LayoutInflater.from(MeterDataDownloadActivity.this);
+        fileNameView = layoutInflater.inflate(R.layout.popupwindow_meter_name_the_file, null);
+        fileNamePopup = new PopupWindow(fileNameView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        frameAnimation = (ImageView) fileNameView.findViewById(R.id.frame_animation);
+        fileNameEdit = (EditText) fileNameView.findViewById(R.id.file_name_edit);
+        confirm = (TextView) fileNameView.findViewById(R.id.confirm);
+        confirm.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fileNamePopup.dismiss();
+                showLoadingPopup();
+                tips.setText("正在配置数据库文件，请稍后...");
+                new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            bookMap.clear();
+                            for (int i = 0; i < userJsonArray.length(); i++) {
+                                try {
+                                    userObject = userJsonArray.getJSONObject(i);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                insertMeterUserData();   //将抄表用户数据插入本地数据库
+                                bookMap.put(userObject.optInt("n_book_id", 0) + "", userObject.optString("c_book_name", ""));
+                            }
+                            insertMeterFile();                                 //将抄表文件名保存至本地 MeterFile 表
+                            for (String bookID : bookMap.keySet()) {
+                                insertMeterBook(bookID, bookMap.get(bookID));   //将抄表本数据保存至本地 MeterBook 表
+                                Log.i("bookMap", "保存的表册ID为：" + bookID + "表册名为：" + bookMap.get(bookID) + "抄表文件名称为：" + fileNameEdit.getText().toString());
+                            }
+                            /**
+                             * 更新下载进度
+                             */
+                            for (int j = 0; j < 21; j++) {
+                                Thread.sleep(250);
+                                Message message = new Message();
+                                message.what = 4;
+                                message.arg1 = 5 * j;
+                                handler.sendMessage(message);
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
+            }
+        });
+        fileNamePopup.update();
+        fileNamePopup.setFocusable(true);
+        fileNamePopup.setOutsideTouchable(true);
+        fileNamePopup.setBackgroundDrawable(getResources().getDrawable(R.drawable.business_check_shape));
+        fileNamePopup.setAnimationStyle(R.style.camera);
+        fileNamePopup.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
+        backgroundAlpha(0.6F);   //背景变暗
+        fileNamePopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 backgroundAlpha(1.0F);
@@ -482,34 +556,7 @@ public class MeterDataDownloadActivity extends Activity {
                 Log.i("MeterDataDownloadAct", userResult);
                 userJsonArray = new JSONArray(userResult);
                 if (userJsonArray.length() != 0) {
-                    bookMap.clear();
-                    areaMap.clear();
-                    for (int i = 0; i < userJsonArray.length(); i++) {
-                        userObject = userJsonArray.getJSONObject(i);
-                        insertMeterUserData();   //将抄表用户数据插入本地数据库
-                        bookMap.put(userObject.optInt("n_book_id", 0) + "",userObject.optString("c_book_name", ""));
-                        areaMap.put(userObject.optInt("n_area_id", 0) + "",userObject.optString("c_area_name", ""));
-                    }
-                    for (String bookID : bookMap.keySet()) {
-                        insertMeterBookData(bookID,bookMap.get(bookID));   //将抄表本数据保存至本地 MeterBook 表
-                    }
-                    for (String areaID : areaMap.keySet()) {
-                        insertMeterAreaData(areaID,areaMap.get(areaID));   //将抄表分区数据保存至本地 MeterArea 表
-                    }
-                    /**
-                     * 更新下载进度
-                     */
-                    for(int i=0;i<21;i++){
-                        if(i == 0){
-                            handler.sendEmptyMessage(0);
-                            Thread.sleep(500);
-                        }
-                        Thread.sleep(250);
-                        Message message = new Message();
-                        message.what = 4;
-                        message.arg1 = 5*i;
-                        handler.sendMessage(message);
-                    }
+                    handler.sendEmptyMessage(5);
                 } else {
                     handler.sendEmptyMessage(1);
                 }
@@ -522,8 +569,6 @@ public class MeterDataDownloadActivity extends Activity {
         } catch (IOException e) {
             Log.i("IOException==========>", "网络请求超时!");
             handler.sendEmptyMessage(3);
-            e.printStackTrace();
-        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -548,16 +593,29 @@ public class MeterDataDownloadActivity extends Activity {
                     Toast.makeText(MeterDataDownloadActivity.this, "网络请求超时！", Toast.LENGTH_SHORT).show();
                     break;
                 case 4:
-                    if(msg.arg1 == 0){
+                    if (msg.arg1 == 0) {
                         title.setVisibility(View.VISIBLE);
                         title.setText("正在下载" + userJsonArray.length() + "条数据，请稍后...");
                     }
-                    tips.setText("下载进度为："+msg.arg1+"%");
-                    if(msg.arg1 == 100){
+                    tips.setText("下载进度为：" + msg.arg1 + "%");
+                    tips.setTextColor(getResources().getColor(R.color.blue));
+                    if (msg.arg1 == 100) {
                         title.setText("数据下载成功！");
-                        Toast.makeText(MeterDataDownloadActivity.this, "数据下载成功！", Toast.LENGTH_SHORT).show();
-                        loadingPopup.dismiss();
+                        frameAnimation.setVisibility(View.GONE);
+                        tips.setVisibility(View.GONE);
+                        line.setVisibility(View.VISIBLE);
+                        ensure.setVisibility(View.VISIBLE);
+                        //Toast.makeText(MeterDataDownloadActivity.this, "数据下载成功！", Toast.LENGTH_SHORT).show();
                     }
+                    break;
+                case 5:
+                    loadingPopup.dismiss();
+                    showNameFilePopup();  //用户给下载文件命名
+                    break;
+                case 6:
+                    Toast.makeText(MeterDataDownloadActivity.this, "至少选择其中一个区域才能下载哦", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
                     break;
             }
             super.handleMessage(msg);
@@ -569,11 +627,11 @@ public class MeterDataDownloadActivity extends Activity {
      */
     private void insertMeterUserData() {
         ContentValues values = new ContentValues();
-        values.put("login_user_id",sharedPreferences_login.getString("userId",""));
+        values.put("login_user_id", sharedPreferences_login.getString("userId", ""));
         values.put("meter_reader_id", userObject.optInt("n_user_meter_reader_id", 0) + "");    //抄表员ID
-        values.put("meter_reader_name",userObject.optString("c_meter_user_name",""));          //抄表员名称
-        values.put("meter_date","暂无");                                                       //抄表时间
-        values.put("user_phone",userObject.optString("c_user_phone",""));                      //用户电话
+        values.put("meter_reader_name", userObject.optString("c_meter_user_name", ""));          //抄表员名称
+        values.put("meter_date", "暂无");                                                       //抄表时间
+        values.put("user_phone", userObject.optString("c_user_phone", ""));                      //用户电话
         values.put("user_amount", userObject.optInt("n_amount", 0) + "");                      //用户余额
         values.put("meter_degrees", userObject.optInt("n_meter_degrees", 0) + "");             //上月读数
         values.put("meter_number", userObject.optString("c_meter_number", ""));                //表编号
@@ -605,32 +663,42 @@ public class MeterDataDownloadActivity extends Activity {
         values.put("n_jw_x", "");
         values.put("n_jw_y", "");
         values.put("d_jw_time", "");
+        values.put("file_name", fileNameEdit.getText().toString());
         db.insert("MeterUser", null, values);
-        Log.i("insertMeterUserData","用户数据插入成功");
+        Log.i("insertMeterUserData", "用户数据插入成功");
     }
 
     /**
      * 将抄表本数据保存至本地 MeterBook 表
      */
-    private void insertMeterBookData(String bookID,String bookName) {
+    private void insertMeterBook(String bookID, String bookName) {
         ContentValues values = new ContentValues();
         values.put("bookId", bookID);                                                             //抄表本ID
         values.put("bookName", bookName);                                                         //抄表本名称
+        values.put("fileName", fileNameEdit.getText().toString());                                //抄表文件名称
         values.put("login_user_id", sharedPreferences_login.getString("userId", ""));             //当前登录人的ID
         values.put("login_user_name", sharedPreferences_login.getString("user_name", ""));        //当前登录人的名称
         db.insert("MeterBook", null, values);
     }
 
     /**
+     * 将抄表分区ID更新到 MeterBook 表
+     */
+    public void updateMeterBook(String bookID, String areaID) {
+        ContentValues values = new ContentValues();
+        values.put("areaId", areaID);                                                          //抄表分区ID
+        db.update("MeterBook", values, "login_user_id=? and bookId=?", new String[]{sharedPreferences_login.getString("userId", ""), bookID});
+    }
+
+    /**
      * 将抄表分区数据保存至本地 MeterArea 表
      */
-    private void insertMeterAreaData(String areaID,String areaName) {
+    private void insertMeterFile() {
         ContentValues values = new ContentValues();
-        values.put("areaId", areaID);                                                             //抄表分区ID
-        values.put("areaName", areaName);                                                         //抄表分区名称
+        values.put("fileName", fileNameEdit.getText().toString());                                //抄表文件名称
         values.put("login_user_id", sharedPreferences_login.getString("userId", ""));             //当前登录人的ID
         values.put("login_user_name", sharedPreferences_login.getString("user_name", ""));        //当前登录人的名称
-        db.insert("MeterArea", null, values);
+        db.insert("MeterFile", null, values);
     }
 
     // 刷新抄表本listview和TextView的显示
@@ -749,8 +817,10 @@ public class MeterDataDownloadActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         db.close();
-        if (loadingPopup.isShowing()) {
-            loadingPopup.dismiss();
+        if (loadingPopup != null) {
+            if (loadingPopup.isShowing()) {
+                loadingPopup.dismiss();
+            }
         }
     }
 }

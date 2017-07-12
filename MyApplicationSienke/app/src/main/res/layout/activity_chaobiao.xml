@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical">
+              android:id="@+id/root_linearlayout"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/white"
+              android:orientation="vertical">
 
     <!-- 中间部分 -->
     <LinearLayout
@@ -17,17 +18,17 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/security_choose_item_selector"
             android:gravity="center"
-            android:orientation="vertical"
-            android:background="@drawable/security_choose_item_selector">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="继续抄表"
-                android:gravity="center_horizontal"
-                android:drawableTop="@drawable/select_icon_5"
                 android:drawablePadding="5dp"
+                android:drawableTop="@drawable/select_icon_5"
+                android:gravity="center_horizontal"
+                android:text="继续抄表"
                 android:textColor="@color/text_color_blue"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -37,17 +38,17 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/security_choose_item_selector"
             android:gravity="center"
-            android:orientation="vertical"
-            android:background="@drawable/security_choose_item_selector">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="抄表本抄表"
-                android:gravity="center_horizontal"
-                android:drawableTop="@drawable/select_icon_6"
                 android:drawablePadding="5dp"
+                android:drawableTop="@drawable/select_icon_6"
+                android:gravity="center_horizontal"
+                android:text="抄表本抄表"
                 android:textColor="@color/text_color_blue"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -65,19 +66,19 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/security_choose_item_selector"
             android:gravity="center"
-            android:orientation="vertical"
-            android:background="@drawable/security_choose_item_selector">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="首页抄表"
-                android:gravity="center_horizontal"
-                android:drawableTop="@drawable/select_icon_7"
                 android:drawablePadding="5dp"
+                android:drawableTop="@drawable/select_icon_7"
+                android:gravity="center_horizontal"
+                android:text="首页抄表"
                 android:textColor="@color/text_color_blue"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
         </LinearLayout>
 
@@ -86,20 +87,20 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/security_choose_item_selector"
             android:gravity="center"
-            android:orientation="vertical"
-            android:background="@drawable/security_choose_item_selector">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="未抄抄表"
-                android:gravity="center_horizontal"
-                android:drawableTop="@drawable/select_icon_8"
                 android:drawablePadding="5dp"
+                android:drawableTop="@drawable/select_icon_8"
+                android:gravity="center_horizontal"
+                android:text="未抄抄表"
                 android:textColor="@color/text_color_blue"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -115,18 +116,18 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/security_choose_item_selector"
             android:gravity="center"
-            android:orientation="vertical"
-            android:background="@drawable/security_choose_item_selector">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="抄表统计"
-                android:gravity="center_horizontal"
-                android:drawableTop="@drawable/select_icon_9"
                 android:drawablePadding="5dp"
+                android:drawableTop="@drawable/select_icon_9"
+                android:gravity="center_horizontal"
+                android:text="抄表统计"
                 android:textColor="@color/text_color_blue"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -136,20 +137,20 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/security_choose_item_selector"
             android:gravity="center"
-            android:orientation="vertical"
-            android:background="@drawable/security_choose_item_selector">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="文件选择"
-                android:gravity="center_horizontal"
-                android:drawableTop="@drawable/select_icon_10"
                 android:drawablePadding="5dp"
+                android:drawableTop="@drawable/select_icon_10"
+                android:gravity="center_horizontal"
+                android:text="文件选择"
                 android:textColor="@color/text_color_blue"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 

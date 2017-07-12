@@ -20,7 +20,7 @@ import com.example.administrator.thinker_soft.meter_code.activity.MeterUserNameQ
  */
 public class CustomQueryFragment extends Fragment {
     private View view;
-    private LinearLayout by_met_book, by_user_name, by_user_num, by_user_met, by_user_minus;
+    private LinearLayout by_met_book, by_user_name, by_user_num, by_user_met;
 
     @Nullable
     @Override
@@ -39,7 +39,6 @@ public class CustomQueryFragment extends Fragment {
         by_user_name = (LinearLayout) view.findViewById(R.id.by_user_name);
         by_user_num = (LinearLayout) view.findViewById(R.id.by_user_num);
         by_user_met = (LinearLayout) view.findViewById(R.id.by_user_met);
-        by_user_minus = (LinearLayout) view.findViewById(R.id.by_user_minus);
     }
 
     //初始化设置
@@ -53,7 +52,6 @@ public class CustomQueryFragment extends Fragment {
         by_user_name.setOnClickListener(onClickListener);
         by_user_num.setOnClickListener(onClickListener);
         by_user_met.setOnClickListener(onClickListener);
-        by_user_minus.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -76,9 +74,6 @@ public class CustomQueryFragment extends Fragment {
                 case R.id.by_user_met:
                     intent = new Intent(getActivity(), MeterNumberQueryActivity.class);
                     startActivity(intent);
-                    break;
-                case R.id.by_user_minus:
-
                     break;
                 default:
                     break;

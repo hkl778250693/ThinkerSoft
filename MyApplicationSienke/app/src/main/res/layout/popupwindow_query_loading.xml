@@ -9,32 +9,56 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:padding="10dp"
-        android:background="@drawable/loading_shape">
-        <TextView
-            android:id="@+id/title"
+        android:background="@drawable/loading_shape"
+        android:gravity="center">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:textSize="12sp"
-            android:textColor="@color/text_black"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/text_black"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/frame_animation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/frame_animation_list"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="正在查询，请稍后..."
+                android:textSize="12sp"
+                android:textColor="@color/text_black" />
+
+        </LinearLayout>
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:background="@color/gray"
+            android:layout_height="0.5dp"
             android:visibility="gone"/>
-
-        <ImageView
-            android:id="@+id/frame_animation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/frame_animation_list" />
-
         <TextView
-            android:id="@+id/tips"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="正在查询，请稍后..."
-            android:textSize="12sp"
-            android:textColor="@color/text_black" />
+            android:id="@+id/ensure"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:button="@null"
+            android:background="@drawable/popupwindow_no_task"
+            android:gravity="center"
+            android:text="确定"
+            android:textSize="14sp"
+            android:textColor="@color/text_blue"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </LinearLayout>

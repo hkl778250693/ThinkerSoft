@@ -26,9 +26,9 @@ import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 import java.util.ArrayList;
 
 /**
- * Created by Administrator on 2017/6/30 0030.
+ * Created by Administrator on 2017/7/12 0012.
  */
-public class MeterUserContinueActivity extends Activity {
+public class MeterUserUndoneActivity extends Activity {
     private ImageView back;
     private LinearLayout selectPage;
     private ListView listview;
@@ -44,7 +44,7 @@ public class MeterUserContinueActivity extends Activity {
     private MeterUserListviewItem item;
     private int currentPosition;  //点击当前抄表用户的item位置
     private int continuePosition = 0;  //继续抄表位置
-    private String bookID,book_name,fileName;
+    private String bookID,book_name,fileName,type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,24 +71,34 @@ public class MeterUserContinueActivity extends Activity {
 
     //初始化设置
     private void defaultSetting() {
-        MySqliteHelper helper = new MySqliteHelper(MeterUserContinueActivity.this, 1);
+        MySqliteHelper helper = new MySqliteHelper(MeterUserUndoneActivity.this, 1);
         db = helper.getWritableDatabase();
         sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         if(intent != null){
+            type = intent.getStringExtra("type");
             fileName = intent.getStringExtra("fileName");
-            bookID = intent.getStringExtra("bookID");
-            book_name = intent.getStringExtra("bookName");
-            bookName.setText("当前："+book_name);
-            if(!"".equals(bookID) && !"".equals(fileName)){
-                Log.i("meter_user","");
+            if("单个".equals(type)){
+                bookID = intent.getStringExtra("bookID");
+                book_name = intent.getStringExtra("bookName");
+                bookName.setText("当前："+book_name);
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        getTotalUserCount();
+                        getMeterUserData();   //查询单个抄表本未抄表用户
+                        handler.sendEmptyMessage(0);
+                    }
+                }.start();
+            }else {
+                bookName.setText("当前：所有");
                 new Thread() {
                     @Override
                     public void run() {
                         super.run();
                         getTotalUserCount();
-                        getMeterUserData(fileName, bookID, dataStartCount);   //默认读取本地的抄表分区用户数据
-                        getContinueMeterPosition(fileName, bookID);
+                        getMeterUserData();   //查询所有未抄表用户
                         handler.sendEmptyMessage(0);
                     }
                 }.start();
@@ -106,7 +116,7 @@ public class MeterUserContinueActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 currentPosition = position;
                 item = (MeterUserListviewItem) adapter.getItem(position);
-                Intent intent = new Intent(MeterUserContinueActivity.this, MeterUserDetailActivity.class);
+                Intent intent = new Intent(MeterUserUndoneActivity.this, MeterUserDetailActivity.class);
                 intent.putExtra("user_id",item.getUserID());
                 startActivityForResult(intent,currentPosition);
             }
@@ -118,12 +128,12 @@ public class MeterUserContinueActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.back:
-                    MeterUserContinueActivity.this.finish();
+                    MeterUserUndoneActivity.this.finish();
                     break;
                 case R.id.last_page:
                     lastPage.setClickable(false);
                     if (currentPageTv.getText().equals("1")) {
-                        Toast.makeText(MeterUserContinueActivity.this, "已经是第一页哦！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MeterUserUndoneActivity.this, "已经是第一页哦！", Toast.LENGTH_SHORT).show();
                     } else {
                         currentPageTv.setText(String.valueOf(Integer.parseInt(currentPageTv.getText().toString())-1));
                         dataStartCount -= 50;
@@ -132,7 +142,7 @@ public class MeterUserContinueActivity extends Activity {
                             public void run() {
                                 super.run();
                                 lastPage.setClickable(false);
-                                getMeterUserData(fileName, bookID, dataStartCount); //读取本地的抄表分区用户数据
+                                getMeterUserData(); //读取本地的抄表分区用户数据
                                 handler.sendEmptyMessage(1);
                             }
                         }.start();
@@ -140,10 +150,10 @@ public class MeterUserContinueActivity extends Activity {
                     break;
                 case R.id.next_page:
                     nextPage.setClickable(false);
-                    Log.i("MeterUserLVActivity", "总页数为：" + totalCountCursor.getCount() / 50);
-                    Log.i("MeterUserLVActivity", "开始行数是：" + dataStartCount);
+                    Log.i("MeterUserUndoneActivity", "总页数为：" + totalCountCursor.getCount() / 50);
+                    Log.i("MeterUserUndoneActivity", "开始行数是：" + dataStartCount);
                     if (currentPageTv.getText().equals(totalPageTv.getText())) {
-                        Toast.makeText(MeterUserContinueActivity.this, "已经是最后一页哦！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MeterUserUndoneActivity.this, "已经是最后一页哦！", Toast.LENGTH_SHORT).show();
                     } else {
                         currentPageTv.setText(String.valueOf(Integer.parseInt(currentPageTv.getText().toString())+1));
                         dataStartCount += 50;
@@ -152,7 +162,7 @@ public class MeterUserContinueActivity extends Activity {
                             public void run() {
                                 super.run();
                                 nextPage.setClickable(false);
-                                getMeterUserData(fileName, bookID, dataStartCount); //读取本地的抄表分区用户数据
+                                getMeterUserData(); //读取本地的抄表分区用户数据
                                 handler.sendEmptyMessage(1);
                             }
                         }.start();
@@ -167,7 +177,7 @@ public class MeterUserContinueActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    adapter = new MeterUserListviewAdapter(MeterUserContinueActivity.this, userLists);
+                    adapter = new MeterUserListviewAdapter(MeterUserUndoneActivity.this, userLists);
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
                     listview.setSelection(continuePosition);
@@ -180,7 +190,7 @@ public class MeterUserContinueActivity extends Activity {
                     totalPageTv.setText(String.valueOf(totalPage));
                     break;
                 case 1:
-                    adapter = new MeterUserListviewAdapter(MeterUserContinueActivity.this, userLists);
+                    adapter = new MeterUserListviewAdapter(MeterUserUndoneActivity.this, userLists);
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
                     lastPage.setClickable(true);
@@ -193,9 +203,13 @@ public class MeterUserContinueActivity extends Activity {
 
     //查询抄表用户总数
     public void getTotalUserCount() {
-        totalCountCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=?", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID});//查询并获得游标
+        if("单个".equals(type)){
+            totalCountCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? and meterState=?", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID,"false"});//查询并获得游标
+        }else {
+            totalCountCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and meterState=?", new String[]{sharedPreferences_login.getString("userId", ""), fileName,"false"});//查询并获得游标
+        }
         //如果游标为空，则显示没有数据图片
-        Log.i("MeterUserLVActivity", "总的查询到" + totalCountCursor.getCount() + "条数据！");
+        Log.i("MeterUserUndoneActivity", "总的查询到" + totalCountCursor.getCount() + "条数据！");
         if (totalCountCursor.getCount() == 0) {
             return;
         }
@@ -206,9 +220,13 @@ public class MeterUserContinueActivity extends Activity {
     }
 
     //读取本地的抄表分区用户数据
-    public void getMeterUserData(String fileName,String bookID,int dataStartCount) {
+    public void getMeterUserData() {
         userLists.clear();
-        userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID});//查询并获得游标
+        if("单个".equals(type)){
+            userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? and meterState=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID,"false"});//查询并获得游标
+        }else {
+            userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and meterState=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,"false"});//查询并获得游标
+        }
         Log.i("MeterUserLVActivity", "分页查询到" + userLimitCursor.getCount() + "条数据！");
         //如果游标为空，则显示没有数据图片
         if (userLimitCursor.getCount() == 0) {
@@ -240,23 +258,6 @@ public class MeterUserContinueActivity extends Activity {
         }
     }
 
-    //获取继续抄表的item位置
-    public void getContinueMeterPosition(String fileName,String bookID) {
-        Log.i("ContinueCheckPosition", "获取继续安检位置进来了！");
-        Cursor cursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=?", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID});//查询并获得游标
-        //在页面finish之前，从上到下查询本地数据库没有安检的用户，相对应的item位置，查询到一个就break
-        if (cursor.getCount() == 0) {
-            return;
-        }
-        while (cursor.moveToNext()) {
-            if (cursor.getString(cursor.getColumnIndex("meterState")).equals("false")) {
-                continuePosition = cursor.getPosition();  //查询未安检的用户位置
-                break;
-            }
-        }
-        cursor.close(); //游标关闭
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -267,12 +268,6 @@ public class MeterUserContinueActivity extends Activity {
                     item.setIfEdit(R.mipmap.userlist_gray);
                     item.setMeterState("已抄");
                     adapter.notifyDataSetChanged();
-                    listview.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            listview.setSelection(currentPosition+1);
-                        }
-                    });
                 }
             }
         }

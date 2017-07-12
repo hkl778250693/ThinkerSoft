@@ -268,7 +268,7 @@
             android:screenOrientation="portrait"/>
 
 
-        //移动APP
+        //智慧平台
         <activity
             android:name="com.example.administrator.thinker_soft.activity.MoveLoginActivity"
             android:screenOrientation="portrait"/>
@@ -337,10 +337,6 @@
 
         <activity
             android:name=".meter_code.activity.MeterUserListviewActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".meter_code.WeiChaoBaoActivity"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -425,6 +421,9 @@
 
         <activity
             android:name=".meter_code.activity.MeterUserQueryResultActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".meter_code.activity.MeterUserUndoneActivity"
             android:screenOrientation="portrait"/>
 
         <receiver android:name=".myfirstpro.broadcast.MyBroadcast">

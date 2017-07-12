@@ -39,6 +39,6 @@ public class MoveGuideActivity extends Activity {
                 }
                 super.handleMessage(msg);
             }
-        }.sendEmptyMessageDelayed(0, 5000);
+        }.sendEmptyMessageDelayed(0, 4000);
     }
 }

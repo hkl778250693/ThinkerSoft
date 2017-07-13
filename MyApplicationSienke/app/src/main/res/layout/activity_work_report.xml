@@ -54,10 +54,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             android:id="@+id/user_name"
                             android:layout_width="wrap_content"
@@ -66,16 +68,15 @@
                             android:text="某某某"
                             android:textColor="@color/text_black"
                             android:textSize="18dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="的工作汇报"
                             android:layout_marginTop="10dp"
-                            android:textSize="18sp"
-                            android:textColor="@color/text_black"/>
+                            android:text="的工作汇报"
+                            android:textColor="@color/text_black"
+                            android:textSize="18sp" />
                     </LinearLayout>
-
-
 
 
                     <RelativeLayout
@@ -91,10 +92,11 @@
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/text_font_color_white"/>
+                android:background="@color/text_font_color_white" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -127,17 +129,18 @@
             <EditText
                 android:id="@+id/create_report"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:background="@drawable/normal_button_bg_selector"
                 android:hint="创建报告"
                 android:padding="10dp"
-                android:textSize="20sp" />
+                android:textColorHint="@color/gray_little_thin"
+                android:textSize="14sp"
+                android:gravity="top"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@color/gray_thin">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -155,17 +158,18 @@
             <EditText
                 android:id="@+id/summarize"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:background="@drawable/normal_button_bg_selector"
                 android:hint="创建报告心得"
+                android:textColorHint="@color/gray_little_thin"
                 android:padding="10dp"
-                android:textSize="20sp" />
+                android:textSize="14sp"
+                android:gravity="top"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@color/gray_thin">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -183,20 +187,25 @@
             <EditText
                 android:id="@+id/next_plant"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:background="@drawable/normal_button_bg_selector"
                 android:hint="创建下周工作计划"
                 android:padding="10dp"
-                android:textSize="20sp" />
+                android:textColorHint="@color/gray_thin"
+                android:textSize="14sp"
+                android:gravity="top"/>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:background="@color/text_font_color_white"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     android:text="附件："
                     android:textColor="@color/text_black"
                     android:textSize="16sp" />
@@ -204,18 +213,17 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="5dp"
-                    android:padding="15dp"
-                    android:paddingRight="10dp"
-                    android:src="@mipmap/move_go" />
-            </RelativeLayout>
+                    android:padding="10dp"
+                    android:src="@mipmap/tj" />
+            </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/user_detail_save_btn_selector"
                 android:padding="5dp"
-                android:background="@color/text_font_color_white">
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"

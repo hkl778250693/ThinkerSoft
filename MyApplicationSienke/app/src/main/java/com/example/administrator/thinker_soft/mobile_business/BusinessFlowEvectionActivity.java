@@ -2,17 +2,21 @@ package com.example.administrator.thinker_soft.mobile_business;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,17 +27,19 @@ import java.util.Locale;
  * Created by Administrator on 2017/7/7.
  */
 public class BusinessFlowEvectionActivity extends Activity {
-    private TextView name,section,data,startDate,endDate,save;
+    private TextView name,section,data,startDate,endDate,save, id;
     private ImageView back;
+    private EditText content;
     private SimpleDateFormat dateFormat,dateFormat1;
     private SharedPreferences sharedPreferences_login;
     private Calendar c; //日历
+    private SQLiteDatabase db;  //数据库
     private int res, current_res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_flowevection);
+        setContentView(R.layout.activity_business_flowevection);//出差
 
         bindView();//绑定控件
         defaultSetting();
@@ -46,14 +52,17 @@ public class BusinessFlowEvectionActivity extends Activity {
         data = (TextView) findViewById(R.id.data);
         startDate = (TextView) findViewById(R.id.start_date);
         endDate = (TextView) findViewById(R.id.end_date);
-        section = (TextView) findViewById(R.id.section);
         save = (TextView) findViewById(R.id.save);
         name = (TextView) findViewById(R.id.name);
+        id = (TextView) findViewById(R.id.id);
+        content = (EditText) findViewById(R.id.content);
     }
     private void defaultSetting() {
         c = Calendar.getInstance();
         sharedPreferences_login = getSharedPreferences("login_info", Context.MODE_PRIVATE);
         name.setText(sharedPreferences_login.getString("user_name", ""));
+        MySqliteHelper helper = new MySqliteHelper(BusinessFlowEvectionActivity.this, 1);
+        db = helper.getWritableDatabase();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         dateFormat1 =new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault());
         data.setText(dateFormat.format(new Date()));
@@ -130,8 +139,29 @@ public class BusinessFlowEvectionActivity extends Activity {
                         save.setClickable(true);
                         Toast.makeText(BusinessFlowEvectionActivity.this, "结束时间不能小于当天时间哦！", Toast.LENGTH_SHORT).show();
                     }
+                    insertFlow();
                     break;
             }
         }
     };
+    /**
+     * 将信息保存到本地数据库OA工作汇报表
+     */
+    private void insertFlow() {
+        ContentValues values = new ContentValues();
+        values.put("userId", sharedPreferences_login.getString("userId", ""));
+        values.put("userName", sharedPreferences_login.getString("user_name", ""));
+        values.put("type", id.getText().toString().trim());
+        values.put("section", section.getText().toString().trim());
+        values.put("date", data.getText().toString().trim());
+        values.put("content", content.getText().toString().trim());
+        values.put("startDate", startDate.getText().toString().trim());
+        values.put("endDate", endDate.getText().toString().trim());
+        db.insert("Flow", null, values);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
+    }
 }

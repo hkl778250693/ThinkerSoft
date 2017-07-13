@@ -77,11 +77,15 @@ public class BusinessWorkReportActivity extends Activity {
                     finish();
                     break;
                 case R.id.save:
-                    insertoaReport();
-                    Toast.makeText(BusinessWorkReportActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
-                    createReport.setText("");
-                    summarize.setText("");
-                    nextPlant.setText("");
+                    if (!"".equals(createReport.getText().toString()) && !"".equals(summarize.getText().toString()) && !"".equals(nextPlant.getText().toString())) {
+                        insertoaReport();
+                        Toast.makeText(BusinessWorkReportActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                        createReport.setText("");
+                        summarize.setText("");
+                        nextPlant.setText("");
+                    }else {
+                        Toast.makeText(BusinessWorkReportActivity.this,"请完成本页内容",Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case R.id.week_report:
                     Intent intent = new Intent(BusinessWorkReportActivity.this, WorkReportInfoActivity.class);

@@ -4,18 +4,18 @@ package com.example.administrator.thinker_soft.mobile_business;
  * Created by Administrator on 2017/6/9.
  */
 public class BusinessEmailListviewItem {
-    private String check;//打钩
+    private boolean check;//打钩
     private String emailAdress;//
-    private String startCheck;
+    private boolean startCheck;
     private String time;
     private String title;
     private String content;
 
-    public String getCheck() {
+    public boolean getCheck() {
         return check;
     }
 
-    public void setCheck(String check) {
+    public void setCheck(boolean check) {
         this.check = check;
     }
 
@@ -27,11 +27,11 @@ public class BusinessEmailListviewItem {
         this.emailAdress = emailAdress;
     }
 
-    public String getStartCheck() {
+    public boolean getStartCheck() {
         return startCheck;
     }
 
-    public void setStartCheck(String startCheck) {
+    public void setStartCheck(boolean startCheck) {
         this.startCheck = startCheck;
     }
 

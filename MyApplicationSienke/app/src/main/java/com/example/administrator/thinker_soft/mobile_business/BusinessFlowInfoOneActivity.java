@@ -56,20 +56,25 @@ public class BusinessFlowInfoOneActivity extends Activity {
                     break;
                 case R.id.save:
                     if (leave.isChecked()) {
-                        Intent intent = new Intent(BusinessFlowInfoOneActivity.this, BusinessFlowLeaveActivity.class);
+                        Intent intent = new Intent(BusinessFlowInfoOneActivity.this, BusinessFlowLeaveActivity.class);//请假
                         startActivity(intent);
+                        finish();
                     } else if (overtime.isChecked()) {
-                        Intent intent1 = new Intent(BusinessFlowInfoOneActivity.this, BusinessFlowOvertimeActivity.class);
+                        Intent intent1 = new Intent(BusinessFlowInfoOneActivity.this, BusinessFlowOvertimeActivity.class);//加班
                         startActivity(intent1);
+                        finish();
                     } else if (evection.isChecked()) {
-                        Intent intent2 = new Intent(BusinessFlowInfoOneActivity.this, BusinessFlowEvectionActivity.class);
+                        Intent intent2 = new Intent(BusinessFlowInfoOneActivity.this, BusinessFlowEvectionActivity.class);//出差
                         startActivity(intent2);
+                        finish();
                     } else if (worker.isChecked()) {
-                        Intent intent3 = new Intent(BusinessFlowInfoOneActivity.this, BusinessFlowWorkerActivity.class);
+                        Intent intent3 = new Intent(BusinessFlowInfoOneActivity.this, BusinessFlowWorkerActivity.class);//转正
                         startActivity(intent3);
+                        finish();
                     } else if (dimission.isChecked()) {
                         Intent intent4 = new Intent(BusinessFlowInfoOneActivity.this, BusinessFlowDismissionActivity.class);
                         startActivity(intent4);
+                        finish();
                     }
                     break;
             }

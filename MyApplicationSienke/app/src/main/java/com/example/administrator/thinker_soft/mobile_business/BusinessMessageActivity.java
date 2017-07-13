@@ -78,11 +78,17 @@ public class BusinessMessageActivity extends Activity {
             public void onClick(View v) {
                 View popupView = BusinessMessageActivity.this.getLayoutInflater().inflate(R.layout.popupwindow_business_fbgg, null);
                 window = new PopupWindow(popupView, 600, 400);
+                huiyi = (TextView) popupView.findViewById(R.id.huiyi);
+                tongzhi = (TextView) popupView.findViewById(R.id.tongzhi);
+                huiyi.setOnClickListener(clickListener);
+                tongzhi.setOnClickListener(clickListener);
+                send.setOnClickListener(clickListener);
                 window.setAnimationStyle(R.style.Popupwindow);
                 window.setFocusable(true);
                 backgroundAlpha(0.6F);   //背景变暗
                 window.setOutsideTouchable(true);
                 window.update();
+                window.setTouchable(true);
                 window.showAsDropDown(leixing, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 window.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
@@ -92,11 +98,7 @@ public class BusinessMessageActivity extends Activity {
                     }
                 });
 
-                huiyi = (TextView) popupView.findViewById(R.id.huiyi);
-                tongzhi = (TextView) popupView.findViewById(R.id.tongzhi);
-                huiyi.setOnClickListener(clickListener);
-                tongzhi.setOnClickListener(clickListener);
-                send.setOnClickListener(clickListener);
+
             }
         });
     }

@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:layout_marginTop="5dp"
     android:background="@color/text_font_color_white"
-    android:orientation="vertical"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/check1"
+            android:id="@+id/check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -27,12 +27,26 @@
             android:layout_weight="8"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/email_selector"
-                android:text="邮件标题" />
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/email_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/email_selector"
+                    android:button="@null"/>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="标题" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/email_adress"

@@ -287,7 +287,6 @@
         <activity
             android:name=".mobile_business.ReportInfoInfoActivity"
             android:screenOrientation="portrait"/>
-            android:screenOrientation="portrait" />
         <activity
             android:name=".mobile_business.BusinessNewsInfoActivity"
             android:screenOrientation="portrait" />

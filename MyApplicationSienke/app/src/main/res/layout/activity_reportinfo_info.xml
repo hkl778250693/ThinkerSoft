@@ -53,28 +53,51 @@
     </LinearLayout>
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="工作内容:"
+        android:textColor="@color/text_black" />
+
+    <TextView
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="工作内容"
-        android:padding="10dp"
+        android:layout_marginTop="5dp"
         android:background="@color/text_font_color_white"
-        android:layout_marginTop="5dp"/>
+        android:padding="10dp"
+        android:text="工作内容" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="心得:"
+        android:textColor="@color/text_black" />
+
     <TextView
         android:id="@+id/summarize"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="心得"
-        android:padding="10dp"
+        android:layout_marginTop="5dp"
         android:background="@color/text_font_color_white"
-        android:layout_marginTop="5dp"/>
+        android:padding="10dp"
+        android:text="心得" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="计划:"
+        android:textColor="@color/text_black" />
+
     <TextView
         android:id="@+id/plant"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="计划"
-        android:padding="10dp"
+        android:layout_marginTop="5dp"
         android:background="@color/text_font_color_white"
-        android:layout_marginTop="5dp"/>
+        android:padding="10dp"
+        android:text="计划" />
 
 </LinearLayout>

@@ -64,7 +64,7 @@ public class BusinessEmailInboxActivity extends Activity {
 
     public void setOnClickListener(){
         getData();
-        adapter= new EmailInfoAdapter(BusinessEmailInboxActivity.this,businessEmailListviewItemList);
+        adapter= new EmailInfoAdapter(BusinessEmailInboxActivity.this,businessEmailListviewItemList,1);
         listViewEmail.setAdapter(adapter);
         back.setOnClickListener(clickListener);
         listViewEmail.setOnItemClickListener(new AdapterView.OnItemClickListener() {

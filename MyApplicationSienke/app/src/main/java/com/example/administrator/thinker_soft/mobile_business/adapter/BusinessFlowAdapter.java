@@ -66,6 +66,10 @@ public class BusinessFlowAdapter extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        BusinessFlowListviewItem item = businessFlowListviewItems.get(position);
+        viewHolder.name.setText(item.getName());
+        viewHolder.time.setText(item.getTime());
+        viewHolder.title.setText(item.getTitle());
         return convertView;
     }
 

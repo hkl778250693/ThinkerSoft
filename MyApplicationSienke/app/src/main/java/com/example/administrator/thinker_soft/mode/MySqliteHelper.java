@@ -96,6 +96,10 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     final String CREATE_TABLE_SQL_OA_EMAIL = "CREATE TABLE OaEmail" +
             "(id integer primary key AUTOINCREMENT,userId varchar(200),sendName varchar(200),recipients varchar(200),copyTo varchar(200),type varchar(200),content varchar(200),inboxTitle varchar(200),inboxAddress varchar(200),time varchar(200))";
 
+    //OA邮件表
+    final String CREATE_TABLE_SQL_FLOW = "CREATE TABLE Flow" +
+            "(id integer primary key AUTOINCREMENT,userId varchar(200),userName varchar(200),type varchar(200),section varchar(200),date varchar(200),content varchar(200),startDate varchar(200),endDate varchar(200))";
+
     //构造器
     public MySqliteHelper(Context context, int version) {
         super(context, DATABASE_NAME, null, version);
@@ -145,7 +149,8 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_SQL_OA_CALENDAR);                    //OA日程表
         db.execSQL(CREATE_TABLE_SQL_OA_REPORT);                      //OA工作汇报表
         db.execSQL(CREATE_TABLE_SQL_OA_ANNOUNCE);                    //OA发布公告
-        db.execSQL(CREATE_TABLE_SQL_OA_EMAIL);                       //OA发布公告
+        db.execSQL(CREATE_TABLE_SQL_OA_EMAIL);                       //OA邮件
+        db.execSQL(CREATE_TABLE_SQL_FLOW);                           //OA审批流程
     }
 
     //SQLiteDatabase 数据库操作类

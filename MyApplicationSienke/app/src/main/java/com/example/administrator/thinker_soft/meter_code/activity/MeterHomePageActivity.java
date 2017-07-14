@@ -34,8 +34,6 @@ import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.ActualMissionNEW;
 import com.example.administrator.thinker_soft.meter_code.GPSCollectorActivity;
-import com.example.administrator.thinker_soft.meter_code.SheZiActivity;
-import com.example.administrator.thinker_soft.meter_code.TesseractOcrActivity;
 import com.example.administrator.thinker_soft.meter_code.adapter.MeterHomePageViewPagerAdapter;
 import com.example.administrator.thinker_soft.meter_code.fragment.CustomQueryFragment;
 import com.example.administrator.thinker_soft.meter_code.fragment.MeterDataTransferFragment;
@@ -143,11 +141,6 @@ public class MeterHomePageActivity extends FragmentActivity{
 
     //初始化设置
     private void defaultSetting() {
-        sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
-        SystemUserId = sharedPreferences.getString("SystemUserId", "");
-        sharedPreferences = getApplication().getSharedPreferences("IP_PORT_DBNAME", 0);
-        editor = sharedPreferences.edit();
-        DBName = sharedPreferences.getString("dbName", "");
         radio_button0.setChecked(true);
         titleName.setText("移动抄表");
     }
@@ -230,7 +223,7 @@ public class MeterHomePageActivity extends FragmentActivity{
                     finish();
                     break;
                 case R.id.more:
-                    AddPopWindowenu();
+                    showMoreWindow();
                     break;
                 case R.id.radio_button0:
                     titleName.setText("移动抄表");
@@ -248,13 +241,14 @@ public class MeterHomePageActivity extends FragmentActivity{
                     titleName.setText("数据传输");
                     viewPager.setCurrentItem(3);
                     break;
+                default:
+                    break;
             }
         }
     };
 
-    private void AddPopWindowenu() {
-        Log.i("MeterHomePageActivity","为空弹窗点击事件进来了");
-        View contentView = getLayoutInflater().inflate(R.layout.popwindow_content, null);
+    private void showMoreWindow() {
+        View contentView = getLayoutInflater().inflate(R.layout.popwindow_meter_more_content, null);
         popupWindow = new PopupWindow(contentView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
@@ -273,27 +267,30 @@ public class MeterHomePageActivity extends FragmentActivity{
         iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
         mReceiver = new SDKReceiver();
         LocalBroadcastManager.getInstance(MeterHomePageActivity.this).registerReceiver(mReceiver, iFilter);*/
-
         sysSet.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MeterHomePageActivity.this, SheZiActivity.class);
-                startActivityForResult(intent, 1);
                 popupWindow.dismiss();
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(MeterHomePageActivity.this, MeterSettingsActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
         gpscollector.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBName = sharedPreferences.getString("dbName", "");
-                if (DBName != null && !"".equals(DBName)) {
-                    Intent intent = new Intent(MeterHomePageActivity.this, GPSCollectorActivity.class);
-                    startActivity(intent);
-                    popupWindow.dismiss();
-                } else {
-                    Toast.makeText(getApplicationContext(), "��ѡ�񳭱�", Toast.LENGTH_SHORT).show();
-                    popupWindow.dismiss();
+                popupWindow.dismiss();
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+                Intent intent = new Intent(MeterHomePageActivity.this, GPSCollectorActivity.class);
+                startActivity(intent);
             }
         });
         tasks.setOnClickListener(new OnClickListener() {// ��������
@@ -304,6 +301,11 @@ public class MeterHomePageActivity extends FragmentActivity{
                     requestWork();
                 } else if (myapp.getNewWorkList() != null && myapp.getNewWorkList().size() != 0 && !badgeViewTwo.isShown()) {
                     popupWindow.dismiss();
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     Intent intent = new Intent(MeterHomePageActivity.this, ActualMissionNEW.class);
                     intent.setAction("");
                     startActivity(intent);
@@ -313,17 +315,28 @@ public class MeterHomePageActivity extends FragmentActivity{
         tesseractOcr.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                popupWindow.dismiss();
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(MeterHomePageActivity.this, TesseractOcrActivity.class);
                 startActivity(intent);
-                popupWindow.dismiss();
+
             }
         });
         mapMeter.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                popupWindow.dismiss();
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(MeterHomePageActivity.this, MapMeterActivity.class);
                 startActivity(intent);
-                popupWindow.dismiss();
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

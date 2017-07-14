@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.adapter.MeterUserListviewAdapter;
 import com.example.administrator.thinker_soft.meter_code.model.MeterUserListviewItem;
+import com.example.administrator.thinker_soft.mode.MyAnimationUtils;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class MeterUserContinueActivity extends Activity {
     private ArrayList<MeterUserListviewItem> userLists = new ArrayList<>();
     private SQLiteDatabase db;  //数据库
     private Cursor totalCountCursor, userLimitCursor;
-    private SharedPreferences sharedPreferences_login;
+    private SharedPreferences sharedPreferences_login,sharedPreferences;
     private int dataStartCount = 0;   //用于分页查询，表示从第几行开始
     private int currentPage = 1;  //当前页数
     private int totalPage;    //总页数
@@ -74,6 +75,7 @@ public class MeterUserContinueActivity extends Activity {
         MySqliteHelper helper = new MySqliteHelper(MeterUserContinueActivity.this, 1);
         db = helper.getWritableDatabase();
         sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        sharedPreferences = MeterUserContinueActivity.this.getSharedPreferences(sharedPreferences_login.getString("login_name","")+"data", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         if(intent != null){
             fileName = intent.getStringExtra("fileName");
@@ -171,6 +173,7 @@ public class MeterUserContinueActivity extends Activity {
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
                     listview.setSelection(continuePosition);
+                    MyAnimationUtils.viewGroupOutAnimation(MeterUserContinueActivity.this,listview,0.1F);
                     currentPageTv.setText(String.valueOf(currentPage));
                     if (totalCountCursor.getCount() % 50 != 0) {
                         totalPage = totalCountCursor.getCount() / 50 + 1;
@@ -208,7 +211,11 @@ public class MeterUserContinueActivity extends Activity {
     //读取本地的抄表分区用户数据
     public void getMeterUserData(String fileName,String bookID,int dataStartCount) {
         userLists.clear();
-        userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID});//查询并获得游标
+        if(!sharedPreferences.getString("page_count","").equals("")){
+            userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? limit " + dataStartCount + ","+Integer.parseInt(sharedPreferences.getString("page_count","")), new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID});//查询并获得游标
+        }else {
+            userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID});//查询并获得游
+        }
         Log.i("MeterUserLVActivity", "分页查询到" + userLimitCursor.getCount() + "条数据！");
         //如果游标为空，则显示没有数据图片
         if (userLimitCursor.getCount() == 0) {

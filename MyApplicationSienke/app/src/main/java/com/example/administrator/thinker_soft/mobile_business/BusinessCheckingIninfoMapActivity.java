@@ -148,7 +148,7 @@ public class BusinessCheckingIninfoMapActivity extends Activity implements Senso
     public class MyLocationListenner implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
-            // map view 销毁后不在处理新接收的位置
+            // map_meter_icon view 销毁后不在处理新接收的位置
             if (location == null || mMapView == null) {
                 return;
             }

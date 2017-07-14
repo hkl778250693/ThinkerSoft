@@ -30,7 +30,7 @@
                 android:gravity="center"
                 android:text="继续安检"
                 android:textColor="@color/text_blue"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,7 +51,7 @@
                 android:gravity="center"
                 android:text="用户列表"
                 android:textColor="@color/text_blue"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
 
@@ -81,7 +81,7 @@
                 android:gravity="center"
                 android:text="未检用户"
                 android:textColor="@color/text_blue"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -102,7 +102,7 @@
                 android:gravity="center"
                 android:text="新增任务"
                 android:textColor="@color/text_blue"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
 
@@ -132,7 +132,7 @@
                 android:gravity="center"
                 android:text="安检统计"
                 android:textColor="@color/text_blue"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -153,7 +153,7 @@
                 android:gravity="center"
                 android:text="任务选择"
                 android:textColor="@color/text_blue"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
 

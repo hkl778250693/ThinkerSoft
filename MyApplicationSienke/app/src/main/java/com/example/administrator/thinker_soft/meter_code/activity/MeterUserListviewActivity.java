@@ -14,12 +14,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,6 +29,7 @@ import com.example.administrator.thinker_soft.meter_code.adapter.MeterTypeListvi
 import com.example.administrator.thinker_soft.meter_code.adapter.MeterUserListviewAdapter;
 import com.example.administrator.thinker_soft.meter_code.model.MeterTypeListviewItem;
 import com.example.administrator.thinker_soft.meter_code.model.MeterUserListviewItem;
+import com.example.administrator.thinker_soft.mode.MyAnimationUtils;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 
 import java.util.ArrayList;
@@ -48,7 +44,7 @@ public class MeterUserListviewActivity extends Activity {
     private ArrayList<MeterUserListviewItem> userLists = new ArrayList<>();
     private SQLiteDatabase db;  //数据库
     private Cursor totalCountCursor, userLimitCursor;
-    private SharedPreferences sharedPreferences_login;
+    private SharedPreferences sharedPreferences_login,sharedPreferences;
     private int dataStartCount = 0;   //用于分页查询，表示从第几行开始
     private int currentPage = 1;  //当前页数
     private int totalPage;    //总页数
@@ -99,6 +95,7 @@ public class MeterUserListviewActivity extends Activity {
         MySqliteHelper helper = new MySqliteHelper(MeterUserListviewActivity.this, 1);
         db = helper.getWritableDatabase();
         sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        sharedPreferences = MeterUserListviewActivity.this.getSharedPreferences(sharedPreferences_login.getString("login_name","")+"data", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         if(intent != null){
             fileName = intent.getStringExtra("fileName");
@@ -199,6 +196,7 @@ public class MeterUserListviewActivity extends Activity {
                     adapter = new MeterUserListviewAdapter(MeterUserListviewActivity.this, userLists);
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
+                    MyAnimationUtils.viewGroupOutAnimation(MeterUserListviewActivity.this,listview,0.1F);
                     currentPageTv.setText(String.valueOf(currentPage));
                     if (totalCountCursor.getCount() % 50 != 0) {
                         totalPage = totalCountCursor.getCount() / 50 + 1;
@@ -215,6 +213,7 @@ public class MeterUserListviewActivity extends Activity {
                     adapter = new MeterUserListviewAdapter(MeterUserListviewActivity.this, userLists);
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
+                    MyAnimationUtils.viewGroupOutAnimation(MeterUserListviewActivity.this,listview,0.1F);
                     lastPage.setClickable(true);
                     nextPage.setClickable(true);
                     break;
@@ -246,30 +245,6 @@ public class MeterUserListviewActivity extends Activity {
             super.handleMessage(msg);
         }
     };
-
-    /**
-     * viewGroup出来动画
-     */
-    public void viewGroupOutAnimation(ViewGroup viewGroup) {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.list_out_anim);
-        LayoutAnimationController controller = new LayoutAnimationController(animation);
-        controller.setInterpolator(new AccelerateInterpolator());
-        controller.setDelay(0.1f);
-        controller.setOrder(LayoutAnimationController.ORDER_RANDOM);
-        viewGroup.setLayoutAnimation(controller);
-    }
-
-    /**
-     * viewGroup返回动画
-     */
-    public void viewGroupBackAnimation(ViewGroup viewGroup) {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.out_anim);
-        LayoutAnimationController controller = new LayoutAnimationController(animation);
-        controller.setInterpolator(new AccelerateInterpolator());
-        controller.setDelay(0.1f);
-        controller.setOrder(LayoutAnimationController.ORDER_RANDOM);
-        viewGroup.setLayoutAnimation(controller);
-    }
 
     //选择分区和表册 Popup
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -382,7 +357,11 @@ public class MeterUserListviewActivity extends Activity {
     //读取本地的抄表分区用户数据
     public void getMeterUserData(String fileName,String bookID,int dataStartCount) {
         userLists.clear();
-        userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID});//查询并获得游标
+        if(!"".equals(sharedPreferences.getString("page_count",""))){
+            userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? limit " + dataStartCount + ","+Integer.parseInt(sharedPreferences.getString("page_count","")), new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID});//查询并获得游标
+        }else {
+            userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID});//查询并获得游
+        }
         Log.i("MeterUserLVActivity", "分页查询到" + userLimitCursor.getCount() + "条数据！");
         //如果游标为空，则显示没有数据图片
         if (userLimitCursor.getCount() == 0) {

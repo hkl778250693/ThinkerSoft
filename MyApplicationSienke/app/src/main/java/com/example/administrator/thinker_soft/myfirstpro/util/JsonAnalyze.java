@@ -397,9 +397,9 @@ public class JsonAnalyze {
 				map.put(key, value);
 			}
 /*			String result = jsonObject.getString("status");
-			map.put("status", jsonObject.getString("status"));
+			map_meter_icon.put("status", jsonObject.getString("status"));
 			
-			map.put("error",jsonObject.getString("error"));*/	
+			map_meter_icon.put("error",jsonObject.getString("error"));*/
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

@@ -23,7 +23,9 @@ import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.adapter.MeterBookSingleQueryAdapter;
 import com.example.administrator.thinker_soft.meter_code.model.MeterBookSingleQueryLvItem;
 import com.example.administrator.thinker_soft.meter_code.model.MeterUserListviewItem;
+import com.example.administrator.thinker_soft.mode.MyAnimationUtils;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
+import com.example.administrator.thinker_soft.mode.Tools;
 import com.example.administrator.thinker_soft.myfirstpro.util.Gadget;
 
 import java.util.ArrayList;
@@ -35,13 +37,13 @@ public class MeterBookQueryActivity extends Activity {
     private TextView selectMeterBook;
     private EditText editMeterNum;
     private TextView clear, query;
-    private List<String> bookIDList = new ArrayList<>();  //存放表册ID的集合
     private List<MeterBookSingleQueryLvItem> bookLists = new ArrayList<>();
     private ArrayList<MeterUserListviewItem> userLists = new ArrayList<>();
     private MeterBookSingleQueryAdapter adapter;
     private MeterBookSingleQueryLvItem item;
     private SQLiteDatabase db;  //数据库
-    private SharedPreferences sharedPreferences_login;
+    private SharedPreferences sharedPreferences_login,sharedPreferences;
+    private String bookID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class MeterBookQueryActivity extends Activity {
         MySqliteHelper helper = new MySqliteHelper(MeterBookQueryActivity.this, 1);
         db = helper.getWritableDatabase();
         sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        sharedPreferences = MeterBookQueryActivity.this.getSharedPreferences(sharedPreferences_login.getString("login_name","")+"data", Context.MODE_PRIVATE);
     }
 
     //点击事件
@@ -80,6 +83,7 @@ public class MeterBookQueryActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 item = (MeterBookSingleQueryLvItem) adapter.getItem(position);
+                bookID = item.getBookId();
                 selectMeterBook.setText(item.getBookName());
             }
         });
@@ -108,11 +112,12 @@ public class MeterBookQueryActivity extends Activity {
                 case R.id.query:
                     if(!selectMeterBook.getText().toString().equals("单击选择")){
                         if(!editMeterNum.getText().toString().equals("")){
+                            Tools.hideSoftInput(MeterBookQueryActivity.this,editMeterNum);
                             new Thread(){
                                 @Override
                                 public void run() {
                                     super.run();
-                                    queryMeterUserInfo(editMeterNum.getText().toString());  //根据抄表序号查询用户信息
+                                    queryMeterUserInfo(bookID,editMeterNum.getText().toString());  //根据抄表序号查询用户信息
                                 }
                             }.start();
                         }else {
@@ -130,16 +135,14 @@ public class MeterBookQueryActivity extends Activity {
 
     //查询所有表册信息
     public void getBookInfo() {
-        bookIDList.clear();
         bookLists.clear();
-        Cursor cursor = db.rawQuery("select * from MeterBook where login_user_id=? order by bookId", new String[]{sharedPreferences_login.getString("userId", "")});//查询并获得游标
+        Cursor cursor = db.rawQuery("select * from MeterBook where login_user_id=? and fileName=?", new String[]{sharedPreferences_login.getString("userId", ""),sharedPreferences.getString("currentFileName","")});//查询并获得游标
         Log.i("MeterBookQueryActivity", "所有表册ID个数为：" + cursor.getCount());
         //如果游标为空，则显示没有数据图片
         if (cursor.getCount() == 0) {
             return;
         }
         while (cursor.moveToNext()) {
-            bookIDList.add(cursor.getString(cursor.getColumnIndex("bookId")));
             MeterBookSingleQueryLvItem item = new MeterBookSingleQueryLvItem();
             item.setBookName(cursor.getString(cursor.getColumnIndex("bookName")));
             item.setBookId(cursor.getString(cursor.getColumnIndex("bookId")));
@@ -152,8 +155,9 @@ public class MeterBookQueryActivity extends Activity {
     /**
      * 查询抄表用户信息
      */
-    public void queryMeterUserInfo(String orderNumb) {
-        Cursor cursor = db.rawQuery("select * from MeterUser where login_user_id=? and meter_order_number=?", new String[]{sharedPreferences_login.getString("userId", ""),orderNumb});//查询并获得游标
+    public void queryMeterUserInfo(String booID,String orderNumb) {
+        userLists.clear();
+        Cursor cursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? and meter_order_number=?", new String[]{sharedPreferences_login.getString("userId", ""),sharedPreferences.getString("currentFileName",""),booID,orderNumb});//查询并获得游标
         //如果游标为空，则显示没有数据图片
         if (cursor.getCount() == 0) {
             handler.sendEmptyMessage(1);
@@ -192,6 +196,7 @@ public class MeterBookQueryActivity extends Activity {
                 case 0:
                     adapter = new MeterBookSingleQueryAdapter(MeterBookQueryActivity.this,bookLists);
                     listView.setAdapter(adapter);
+                    MyAnimationUtils.viewGroupOutAnimation(MeterBookQueryActivity.this,listView,0.1F);
                     break;
                 case 1:
                     Toast.makeText(MeterBookQueryActivity.this,"未查到用户信息，请您核对序号是否正确！",Toast.LENGTH_SHORT).show();

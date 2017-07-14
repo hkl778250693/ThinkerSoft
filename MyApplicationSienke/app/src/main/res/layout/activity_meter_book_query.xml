@@ -53,8 +53,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="抄  表  本"
-                android:textSize="16sp" />
+                android:text="抄  表  本："
+                android:textSize="16sp"
+                android:textColor="@color/text_black"/>
 
             <TextView
                 android:id="@+id/select_meter_book"
@@ -83,8 +84,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="抄表序号"
-                android:textSize="16sp" />
+                android:text="抄表序号："
+                android:textSize="16sp"
+                android:textColor="@color/text_black"/>
 
             <EditText
                 android:id="@+id/edit_meter_num"
@@ -95,10 +97,11 @@
                 android:digits="1234567890"
                 android:gravity="center"
                 android:hint="请输入抄表序号"
+                android:textColorHint="@color/text_gray"
                 android:inputType="number"
                 android:padding="10dp"
                 android:singleLine="true"
-                android:textColor="@color/text_gray"
+                android:textColor="@color/text_black"
                 android:textSize="14sp" />
         </LinearLayout>
 

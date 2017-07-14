@@ -127,7 +127,7 @@ public class HttpUtils {
             connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);// 设置请求数据类型并设置boundary部分；
             connection.connect();//开启连接
             DataOutputStream ds = new DataOutputStream(connection.getOutputStream());//获得输出流的对象
-//            Iterator paramIterator = map.keySet().iterator();//set集合的迭代器
+//            Iterator paramIterator = map_meter_icon.keySet().iterator();//set集合的迭代器
             Set<Map.Entry<String, Object>> paramEntrySet = map.entrySet();
             Iterator paramIterator = paramEntrySet.iterator();
             while (paramIterator.hasNext()) {
@@ -140,8 +140,8 @@ public class HttpUtils {
                 ds.writeBytes("Content-Disposition: form-data;accept-charset=\"utf-8\"; " + "name=\"" + key + "\"" + end + end +  URLEncoder.encode(value.toString(), "UTF-8"));//Content-Disposition: form-data; name="key"
                 ds.writeBytes(end);
             }
-            /*for (String str : map.keySet()) {//循环取出key和value
-                Object value = map.get(str);//取得value值
+            /*for (String str : map_meter_icon.keySet()) {//循环取出key和value
+                Object value = map_meter_icon.get(str);//取得value值
                 ds.writeBytes(twoHyphens + boundary + end);//--SJDASJODAODASSD
                 ds.writeBytes("Content-Disposition: form-data; " + "name=\"" + URLEncoder.encode(str, "UTF-8") + "\"" + end + end +  value.toString());//Content-Disposition: form-data; name="key"
                 Log.i("postData", "上传的key值为：" + str);

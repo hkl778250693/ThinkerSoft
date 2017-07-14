@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.adapter.MeterFileSelectListAdapter;
 import com.example.administrator.thinker_soft.meter_code.model.MeterSingleSelectItem;
+import com.example.administrator.thinker_soft.mode.MyAnimationUtils;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 
 import java.text.DecimalFormat;
@@ -81,6 +82,7 @@ public class MeterStatisticsActivity extends Activity {
         sharedPreferences = MeterStatisticsActivity.this.getSharedPreferences(sharedPreferences_login.getString("login_name", "") + "data", Context.MODE_PRIVATE);
         if (!"".equals(sharedPreferences.getString("currentFileName", ""))) {
             fileName.setText(sharedPreferences.getString("currentFileName", ""));
+            bookName.setText("所有抄表本");
             new Thread() {
                 @Override
                 public void run() {
@@ -90,9 +92,9 @@ public class MeterStatisticsActivity extends Activity {
             }.start();
         } else {
             fileName.setText("无");
+            bookName.setText("无");
             Toast.makeText(MeterStatisticsActivity.this, "请先完成文件选择！", Toast.LENGTH_SHORT).show();
         }
-        bookName.setText("所有抄表本");
     }
 
     //点击事件
@@ -300,6 +302,7 @@ public class MeterStatisticsActivity extends Activity {
                 case 1:
                     bookAdapter = new MeterFileSelectListAdapter(MeterStatisticsActivity.this, bookList, 0);
                     bookListview.setAdapter(bookAdapter);
+                    MyAnimationUtils.viewGroupOutAnimation(MeterStatisticsActivity.this,bookListview,0.1F);
                     break;
             }
             super.handleMessage(msg);
@@ -316,8 +319,6 @@ public class MeterStatisticsActivity extends Activity {
         meterCountTv.setText(String.valueOf(meterCount));
         finishRateTv.setText(String.valueOf(finishRate));
     }
-
-
 
     @Override
     protected void onDestroy() {

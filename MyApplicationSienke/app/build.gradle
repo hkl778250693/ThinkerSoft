@@ -72,4 +72,5 @@ dependencies {
     compile 'com.rmtheis:tess-two:7.0.0'
     compile 'com.github.yalantis:ucrop:2.2.1-native'
     compile project(':openCVLibrary320')
+    compile 'com.baoyz.swipemenulistview:library:1.3.0'
 }

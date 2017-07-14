@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.model.MeterUserListviewItem;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
+import com.example.administrator.thinker_soft.mode.Tools;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class MeterNumberQueryActivity extends Activity {
     private TextView clear,query;
     private ImageView back;
     private SQLiteDatabase db;  //数据库
-    private SharedPreferences sharedPreferences_login;
+    private SharedPreferences sharedPreferences_login,sharedPreferences;
     private ArrayList<MeterUserListviewItem> userLists = new ArrayList<>();
 
     @Override
@@ -53,6 +54,7 @@ public class MeterNumberQueryActivity extends Activity {
         MySqliteHelper helper = new MySqliteHelper(MeterNumberQueryActivity.this, 1);
         db = helper.getWritableDatabase();
         sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        sharedPreferences = MeterNumberQueryActivity.this.getSharedPreferences(sharedPreferences_login.getString("login_name","")+"data", Context.MODE_PRIVATE);
     }
 
     //点击事件
@@ -74,6 +76,7 @@ public class MeterNumberQueryActivity extends Activity {
                     break;
                 case R.id.query:
                     if(!editUserMeter.getText().toString().equals("")){
+                        Tools.hideSoftInput(MeterNumberQueryActivity.this,editUserMeter);
                         new Thread(){
                             @Override
                             public void run() {
@@ -95,7 +98,8 @@ public class MeterNumberQueryActivity extends Activity {
      * 查询抄表用户信息
      */
     public void queryMeterUserInfo(String meterNumb) {
-        Cursor cursor = db.rawQuery("select * from MeterUser where login_user_id=? and meter_number=?", new String[]{sharedPreferences_login.getString("userId", ""),meterNumb});//查询并获得游标
+        userLists.clear();
+        Cursor cursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and meter_number=?", new String[]{sharedPreferences_login.getString("userId", ""),sharedPreferences.getString("currentFileName",""),meterNumb});//查询并获得游标
         //如果游标为空，则显示没有数据图片
         if (cursor.getCount() == 0) {
             handler.sendEmptyMessage(0);

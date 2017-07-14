@@ -1,128 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/statistics_bg"
-    android:orientation="vertical">
+              android:id="@+id/root_linearlayout"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <!-- 标题 -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/theme_colors"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:background="@color/theme_colors">
 
-        <LinearLayout
-            android:id="@+id/set_del_database_back_Btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:onClick="onAction">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="@drawable/mune_btn_selector" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/textviewshezi"
-                android:layout_width="wrap_content"
-                android:layout_height="51dp"
-                android:gravity="center"
-                android:text="文删件除"
-                android:textColor="#FFECEC"
-                android:textSize="22sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"></LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="15dp"
-        android:layout_weight="9"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_centerVertical="true"
+            android:padding="16dp"
+            android:src="@drawable/back_selector"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:background="@mipmap/delete_file_head" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="文件删除"
+            android:textColor="@android:color/white"
+            android:textSize="21sp"/>
+    </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:text="下载文件列表"
-                android:textColor="#BE000000"
-                android:textSize="15sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@mipmap/delete_file_head"/>
 
-                <TextView
-                    android:id="@+id/deletdata_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="5dp"
-                    android:text="共8个"
-                    android:textColor="#BE000000"
-                    android:textSize="15sp" />
-            </LinearLayout>
-        </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="下载文件列表"
+            android:textColor="@color/text_black"
+            android:textSize="14sp"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@mipmap/grey_line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="5"
-            android:orientation="vertical">
-
-            <com.baoyz.swipemenulistview.SwipeMenuListView
-                android:id="@+id/lv_set_del"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="#999999"
-                android:dividerHeight="1dp">
-
-            </com.baoyz.swipemenulistview.SwipeMenuListView>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@mipmap/grey_line" />
+        <TextView
+            android:id="@+id/total_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="共0个"
+            android:textColor="@color/text_blue"
+            android:textSize="14sp"/>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@mipmap/grey_line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/swipe_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/gray"
+            android:dividerHeight="0.5dp"/>
+        <TextView
+            android:id="@+id/no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="10dp"
+            android:drawableTop="@mipmap/no_data"
+            android:gravity="center_horizontal"
+            android:text="哎呀，没有文件哦~"
+            android:textSize="14sp"
+            android:textColor="@color/text_blue"
+            android:visibility="gone" />
+    </RelativeLayout>
 </LinearLayout>

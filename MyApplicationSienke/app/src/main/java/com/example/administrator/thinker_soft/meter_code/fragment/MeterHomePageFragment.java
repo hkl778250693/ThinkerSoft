@@ -30,6 +30,7 @@ import com.example.administrator.thinker_soft.meter_code.activity.MeterUserListv
 import com.example.administrator.thinker_soft.meter_code.activity.MeterUserUndoneActivity;
 import com.example.administrator.thinker_soft.meter_code.adapter.MeterFileSelectListAdapter;
 import com.example.administrator.thinker_soft.meter_code.model.MeterSingleSelectItem;
+import com.example.administrator.thinker_soft.mode.MyAnimationUtils;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class MeterHomePageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_chaobiao, null);
+        view = inflater.inflate(R.layout.fragment_meter_home_page, null);
 
         bindView();
         defaultSetting();
@@ -254,8 +255,10 @@ public class MeterHomePageFragment extends Fragment {
         TextView tips = (TextView) undoneView.findViewById(R.id.tips);
         TextView singleBook = (TextView) undoneView.findViewById(R.id.single_book);
         TextView allBook = (TextView) undoneView.findViewById(R.id.all_book);
+        LinearLayout containerLayout = (LinearLayout) undoneView.findViewById(R.id.container_layout);
         //设置点击事件
         tips.setText("请选择方式");
+        MyAnimationUtils.viewGroupOutAnimation(getActivity(),containerLayout,0.1F);
         singleBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -372,6 +375,7 @@ public class MeterHomePageFragment extends Fragment {
                 case 0:
                     fileAdapter = new MeterFileSelectListAdapter(getActivity(),fileList,1);
                     fileListView.setAdapter(fileAdapter);
+                    MyAnimationUtils.viewGroupOutAnimation(getActivity(),fileListView,0.1F);
                     break;
                 case 1:
                     noData.setVisibility(View.VISIBLE);
@@ -379,6 +383,7 @@ public class MeterHomePageFragment extends Fragment {
                 case 2:
                     bookAdapter = new MeterFileSelectListAdapter(getActivity(),bookList,0);
                     bookListview.setAdapter(bookAdapter);
+                    MyAnimationUtils.viewGroupOutAnimation(getActivity(),bookListview,0.1F);
                     break;
                 default:
                     break;
@@ -429,5 +434,8 @@ public class MeterHomePageFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         db.close();
+        if(bookWindow != null){
+            bookWindow = null;
+        }
     }
 }

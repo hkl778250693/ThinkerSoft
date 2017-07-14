@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_linearlayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="3dp">
+
+    <TextView
+        android:id="@+id/map_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text=""
+        android:textColor="@color/red"
+        android:textSize="12sp"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/tesseract_ocr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/icon_picture"
+        android:drawableStart="@mipmap/icon_picture"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="图像识别"
+        android:textColor="@color/text_black"
+        android:textSize="12sp"/>
+    <View
+        android:layout_width="100dp"
+        android:layout_height="0.5dp"
+        android:background="@color/gray" />
+
+    <TextView
+        android:id="@+id/popwindow_content_mapMeter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/map_meter_icon"
+        android:drawableStart="@mipmap/map_meter_icon"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="地图抄表"
+        android:textColor="@color/text_black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="0.5dp"
+        android:background="@color/gray" />
+
+    <TextView
+        android:id="@+id/popwindow_content_gpscollector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/map_manager"
+        android:drawableStart="@mipmap/map_manager"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="坐标管理"
+        android:textColor="@color/text_black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="0.5dp"
+        android:background="@color/gray" />
+
+
+    <TextView
+        android:id="@+id/popwindow_content_actualtask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/task_manager"
+        android:drawableStart="@mipmap/task_manager"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:text="任务管理"
+        android:textColor="@color/text_black"
+        android:textSize="12sp"
+        android:padding="8dp"/>
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="0.5dp"
+        android:background="@color/gray" />
+
+    <TextView
+        android:id="@+id/popwindow_content_sysSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/system_settings"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="系统设置"
+        android:textColor="@color/text_black"
+        android:textSize="12sp" />
+</LinearLayout>

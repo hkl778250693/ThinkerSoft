@@ -9,7 +9,7 @@
     <item android:state_pressed="true">
         <shape>
             <corners android:bottomRightRadius="8dp"/>
-            <solid android:color="@color/gray"/>
+            <solid android:color="@color/gray_little_thin"/>
         </shape>
     </item>
 </selector>

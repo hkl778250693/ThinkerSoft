@@ -23,9 +23,13 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.administrator.thinker_soft.R;
+import com.example.administrator.thinker_soft.mode.Tools;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -138,12 +142,13 @@ public class MoveLoginActivity extends Activity{
                         loginBtn.setClickable(true);
                     }
                     if (!editUser.getText().toString().equals("") && !editPsw.getText().toString().equals("")) {
+                        Tools.hideSoftInput(MoveLoginActivity.this,editPsw);
                         showPopupwindow();
                         //开启子线程
                         new Thread() {
                             public void run() {
                                 try {
-                                    Thread.sleep(2000);
+                                    Thread.sleep(1500);
                                     loginByPost(editUser.getText().toString(), editPsw.getText().toString());
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
@@ -163,7 +168,7 @@ public class MoveLoginActivity extends Activity{
         popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         frameAnimation = (ImageView) view.findViewById(R.id.frame_animation);
         tips = (TextView) view.findViewById(R.id.tips);
-        tips.setText("登录中......");
+        tips.setText("登录中...请稍后");
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));

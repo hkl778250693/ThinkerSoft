@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.model.MeterAreaViewHolder;
 import com.example.administrator.thinker_soft.meter_code.model.MeterBookViewHolder;
+import com.example.administrator.thinker_soft.mode.MyAnimationUtils;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 import com.example.administrator.thinker_soft.myfirstpro.entity.AreaInfo;
 import com.example.administrator.thinker_soft.myfirstpro.entity.BookInfo;
@@ -145,6 +146,7 @@ public class MeterDataDownloadActivity extends Activity {
                     }
                     bookAdapter = new BookDataAdapter(MeterDataDownloadActivity.this, bookInfoList);
                     booklistView.setAdapter(bookAdapter);
+                    MyAnimationUtils.viewGroupOutAnimation(MeterDataDownloadActivity.this,booklistView,0.1F);
                 }
                 //初始化抄表分区listview
                 if (areaInfoArrayList != null) {
@@ -153,6 +155,7 @@ public class MeterDataDownloadActivity extends Activity {
                     }
                     areaAdapter = new AreaDataAdapter(MeterDataDownloadActivity.this, areaInfoList);
                     arealistView.setAdapter(areaAdapter);
+                    MyAnimationUtils.viewGroupOutAnimation(MeterDataDownloadActivity.this,arealistView,0.1F);
                 }
             }
         }
@@ -446,6 +449,7 @@ public class MeterDataDownloadActivity extends Activity {
                     @Override
                     public void run() {
                         try {
+                            insertMeterFile();                                 //将抄表文件名保存至本地 MeterFile 表
                             bookMap.clear();
                             for (int i = 0; i < userJsonArray.length(); i++) {
                                 try {
@@ -456,7 +460,6 @@ public class MeterDataDownloadActivity extends Activity {
                                 insertMeterUserData();   //将抄表用户数据插入本地数据库
                                 bookMap.put(userObject.optInt("n_book_id", 0) + "", userObject.optString("c_book_name", ""));
                             }
-                            insertMeterFile();                                 //将抄表文件名保存至本地 MeterFile 表
                             for (String bookID : bookMap.keySet()) {
                                 insertMeterBook(bookID, bookMap.get(bookID));   //将抄表本数据保存至本地 MeterBook 表
                                 Log.i("bookMap", "保存的表册ID为：" + bookID + "表册名为：" + bookMap.get(bookID) + "抄表文件名称为：" + fileNameEdit.getText().toString());
@@ -598,7 +601,6 @@ public class MeterDataDownloadActivity extends Activity {
                         title.setText("正在下载" + userJsonArray.length() + "条数据，请稍后...");
                     }
                     tips.setText("下载进度为：" + msg.arg1 + "%");
-                    tips.setTextColor(getResources().getColor(R.color.blue));
                     if (msg.arg1 == 100) {
                         title.setText("数据下载成功！");
                         frameAnimation.setVisibility(View.GONE);
@@ -627,11 +629,11 @@ public class MeterDataDownloadActivity extends Activity {
      */
     private void insertMeterUserData() {
         ContentValues values = new ContentValues();
-        values.put("login_user_id", sharedPreferences_login.getString("userId", ""));
+        values.put("login_user_id", sharedPreferences_login.getString("userId", ""));          //登录人ID
         values.put("meter_reader_id", userObject.optInt("n_user_meter_reader_id", 0) + "");    //抄表员ID
-        values.put("meter_reader_name", userObject.optString("c_meter_user_name", ""));          //抄表员名称
-        values.put("meter_date", "暂无");                                                       //抄表时间
-        values.put("user_phone", userObject.optString("c_user_phone", ""));                      //用户电话
+        values.put("meter_reader_name", userObject.optString("c_meter_user_name", ""));        //抄表员名称
+        values.put("meter_date", "暂无");                                                      //抄表时间
+        values.put("user_phone", userObject.optString("c_user_phone", ""));                    //用户电话
         values.put("user_amount", userObject.optInt("n_amount", 0) + "");                      //用户余额
         values.put("meter_degrees", userObject.optInt("n_meter_degrees", 0) + "");             //上月读数
         values.put("meter_number", userObject.optString("c_meter_number", ""));                //表编号

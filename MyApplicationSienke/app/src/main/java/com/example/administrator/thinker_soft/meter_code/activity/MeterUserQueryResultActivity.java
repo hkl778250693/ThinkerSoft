@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.adapter.MeterUserListviewAdapter;
 import com.example.administrator.thinker_soft.meter_code.model.MeterUserListviewItem;
+import com.example.administrator.thinker_soft.mode.MyAnimationUtils;
 
 import java.util.ArrayList;
 
@@ -47,8 +48,8 @@ public class MeterUserQueryResultActivity extends Activity {
         if(intent != null){
             userLists = intent.getParcelableArrayListExtra("meter_user_info");
             adapter = new MeterUserListviewAdapter(MeterUserQueryResultActivity.this, userLists);
-            adapter.notifyDataSetChanged();
             listView.setAdapter(adapter);
+            MyAnimationUtils.viewGroupOutAnimation(MeterUserQueryResultActivity.this,listView,0.1F);
         }
     }
 

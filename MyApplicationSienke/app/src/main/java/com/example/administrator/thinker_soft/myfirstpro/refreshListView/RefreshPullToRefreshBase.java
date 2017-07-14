@@ -1185,7 +1185,7 @@ public abstract class RefreshPullToRefreshBase<T extends View> extends LinearLay
      * Maps an int to a specific mode. This is needed when saving state, or inflating the view from
      * XML where the mode is given through a attr int.
      * 
-     * @param modeInt - int to map a Mode to
+     * @param modeInt - int to map_meter_icon a Mode to
      * @return Mode that modeInt maps to, or ROTATE by default.
      */
     static AnimationStyle mapIntToValue(int modeInt) {
@@ -1254,7 +1254,7 @@ public abstract class RefreshPullToRefreshBase<T extends View> extends LinearLay
      * Maps an int to a specific mode. This is needed when saving state, or inflating the view from
      * XML where the mode is given through a attr int.
      * 
-     * @param modeInt - int to map a Mode to
+     * @param modeInt - int to map_meter_icon a Mode to
      * @return Mode that modeInt maps to, or PULL_FROM_START by default.
      */
     static Mode mapIntToValue(final int modeInt) {
@@ -1418,7 +1418,7 @@ public abstract class RefreshPullToRefreshBase<T extends View> extends LinearLay
     /**
      * Maps an int to a specific state. This is needed when saving state.
      * 
-     * @param stateInt - int to map a State to
+     * @param stateInt - int to map_meter_icon a State to
      * @return State that stateInt maps to
      */
     static State mapIntToValue(final int stateInt) {

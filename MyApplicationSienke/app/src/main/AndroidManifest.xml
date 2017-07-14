@@ -328,12 +328,6 @@
             android:name=".meter_code.CaptureActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".meter_code.ChaXunActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".meter_code.SJCSActivity"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".meter_code.activity.MeterDataDownloadActivity"
             android:screenOrientation="portrait"/>
         <activity
@@ -349,7 +343,7 @@
             android:name=".meter_code.activity.MeterBookQueryActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".meter_code.TesseractOcrActivity"
+            android:name=".meter_code.activity.TesseractOcrActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".zxing.android.CaptureActivity"
@@ -369,7 +363,7 @@
 
 
         <activity
-            android:name=".meter_code.SheZiActivity"
+            android:name=".meter_code.activity.MeterSettingsActivity"
             android:screenOrientation="portrait"/>
 
 
@@ -378,18 +372,11 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".meter_code.Ip_Port_activity"
+            android:name=".meter_code.activity.MeterDeleteFileActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".meter_code.DelDataBasesActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".meter_code.ChooseCountActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".meter_code.dialog_loadname_activity"
+            android:name=".meter_code.activity.MeterPageCountSettingsActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".meter_code.activity.MapMeterActivity"
@@ -397,9 +384,6 @@
         <activity
             android:name=".myfirstpro.navigation.BNavigatorActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"/>
-        <activity
-            android:name=".meter_code.LoginActivity"
-            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".meter_code.ActualMissionNEW"
@@ -413,16 +397,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <activity
-            android:name=".meter_code.MapXiazhaiActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-
-        <activity
-            android:name=".meter_code.printNoteActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name=".meter_code.BaseMapDemo"
+            android:name=".meter_code.activity.MeterPrintNoteActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 

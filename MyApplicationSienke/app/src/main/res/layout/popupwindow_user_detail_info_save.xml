@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingLeft="50dp"
@@ -28,7 +27,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:layout_marginTop="10dp"
             android:background="@color/gray_little_thin" />
 
@@ -53,7 +52,7 @@
                 android:textSize="16sp" />
 
             <View
-                android:layout_width="1dp"
+                android:layout_width="0.5dp"
                 android:layout_height="match_parent"
                 android:background="@color/gray_little_thin" />
 
@@ -68,6 +67,7 @@
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:text="确认保存"
+                android:textStyle="bold"
                 android:textColor="@color/text_blue"
                 android:textSize="16sp" />
         </RadioGroup>

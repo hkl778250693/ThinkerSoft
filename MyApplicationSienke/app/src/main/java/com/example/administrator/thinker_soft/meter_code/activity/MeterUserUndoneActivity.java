@@ -36,7 +36,7 @@ public class MeterUserUndoneActivity extends Activity {
     private ArrayList<MeterUserListviewItem> userLists = new ArrayList<>();
     private SQLiteDatabase db;  //数据库
     private Cursor totalCountCursor, userLimitCursor;
-    private SharedPreferences sharedPreferences_login;
+    private SharedPreferences sharedPreferences_login,sharedPreferences;
     private int dataStartCount = 0;   //用于分页查询，表示从第几行开始
     private int currentPage = 1;  //当前页数
     private int totalPage;    //总页数
@@ -74,6 +74,7 @@ public class MeterUserUndoneActivity extends Activity {
         MySqliteHelper helper = new MySqliteHelper(MeterUserUndoneActivity.this, 1);
         db = helper.getWritableDatabase();
         sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        sharedPreferences = MeterUserUndoneActivity.this.getSharedPreferences(sharedPreferences_login.getString("login_name","")+"data", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         if(intent != null){
             type = intent.getStringExtra("type");
@@ -223,9 +224,17 @@ public class MeterUserUndoneActivity extends Activity {
     public void getMeterUserData() {
         userLists.clear();
         if("单个".equals(type)){
-            userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? and meterState=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID,"false"});//查询并获得游标
+            if(!"".equals(sharedPreferences.getString("page_count",""))){
+                userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? and meterState=? limit " + dataStartCount + ","+Integer.parseInt(sharedPreferences.getString("page_count","")), new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID,"false"});//查询并获得游标
+            }else {
+                userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and book_id=? and meterState=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,bookID,"false"});//查询并获得游标
+            }
         }else {
-            userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and meterState=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,"false"});//查询并获得游标
+            if(!"".equals(sharedPreferences.getString("page_count",""))){
+                userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and meterState=? limit " + dataStartCount + ","+Integer.parseInt(sharedPreferences.getString("page_count","")), new String[]{sharedPreferences_login.getString("userId", ""), fileName,"false"});//查询并获得游标
+            }else {
+                userLimitCursor = db.rawQuery("select * from MeterUser where login_user_id=? and file_name=? and meterState=? limit " + dataStartCount + ",50", new String[]{sharedPreferences_login.getString("userId", ""), fileName,"false"});//查询并获得游标
+            }
         }
         Log.i("MeterUserLVActivity", "分页查询到" + userLimitCursor.getCount() + "条数据！");
         //如果游标为空，则显示没有数据图片

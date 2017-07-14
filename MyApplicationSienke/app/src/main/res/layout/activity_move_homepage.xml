@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="13dp"
-            android:text="移动APP"
+            android:text="ThinkerSoft ☛ 智慧平台"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 

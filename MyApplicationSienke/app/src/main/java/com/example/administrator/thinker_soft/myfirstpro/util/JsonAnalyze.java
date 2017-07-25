@@ -13,8 +13,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.example.administrator.thinker_soft.myfirstpro.entity.AreaInfo;
-import com.example.administrator.thinker_soft.myfirstpro.entity.BookInfo;
+import com.example.administrator.thinker_soft.meter_code.model.AreaInfo;
+import com.example.administrator.thinker_soft.meter_code.model.BookInfo;
 import com.example.administrator.thinker_soft.myfirstpro.entity.DeviceInfo;
 import com.example.administrator.thinker_soft.myfirstpro.entity.PropertyInfo;
 import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;

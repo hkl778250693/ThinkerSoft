@@ -2,12 +2,16 @@ package com.example.administrator.thinker_soft.meter_code.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -16,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +30,6 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
-import com.baidu.mapapi.CoordType;
-import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -39,6 +42,8 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.navi.BaiduMapAppNotSupportNaviException;
+import com.baidu.mapapi.utils.OpenClientUtil;
 import com.example.administrator.thinker_soft.R;
 
 import java.io.File;
@@ -48,6 +53,7 @@ import java.io.InputStream;
 import java.util.List;
 
 public class MapMeterActivity extends Activity implements SensorEventListener {
+    private ImageView back;
     // 定位相关
     LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
@@ -62,9 +68,10 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
     private float mCurrentAccracy;
     boolean isFirstLoc = true; // 是否首次定位
     private MyLocationData locData;
-    private TextView location;
+    private ImageView location,route;
     private MapView mMapView;
     private BaiduMap mBaiduMap;
+    private TextView title;
     private RadioButton openRb;
     private RadioButton closeRb;
     private RadioButton normalType,satelliteType;
@@ -77,11 +84,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SDKInitializer.initialize(getApplicationContext());// 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
-        //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
-        //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
-        SDKInitializer.setCoordType(CoordType.BD09LL);
-        setMapCustomFile(MapMeterActivity.this,PATH);
+        //setMapCustomFile(MapMeterActivity.this,PATH);
         setContentView(R.layout.activity_map_meter);
 
         bindView();
@@ -129,6 +132,8 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
 
     //绑定控件
     private void bindView() {
+        back = (ImageView) findViewById(R.id.back);
+        title = (TextView) findViewById(R.id.title);
         mMapView = (MapView) findViewById(R.id.map_meter);
         openRb = (RadioButton) findViewById(R.id.open_rb);
         closeRb = (RadioButton) findViewById(R.id.close_rb);
@@ -136,11 +141,13 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
         satelliteType = (RadioButton) findViewById(R.id.satellite_type);
         trafficType = (CheckBox) findViewById(R.id.traffic_type);
         heatType = (CheckBox) findViewById(R.id.heat_type);
-        location = (TextView) findViewById(R.id.location);
+        route = (ImageView) findViewById(R.id.route);
+        location = (ImageView) findViewById(R.id.location);
     }
 
     //初始化设置
     private void defaultSetting() {
+        title.setText("抄表地图导航");
         openRb.setChecked(true);
         normalType.setChecked(true);
         mBaiduMap = mMapView.getMap();
@@ -148,11 +155,11 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
         MapView.setMapCustomEnable(true);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);//获取传感器管理服务
         mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
-        location.setText("普通");
     }
 
     //点击事件
     public void setViewClickListener() {
+        back.setOnClickListener(clickListener);
         openRb.setOnClickListener(clickListener);
         closeRb.setOnClickListener(clickListener);
         normalType.setOnClickListener(clickListener);
@@ -181,14 +188,21 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
                 }
             }
         });
+        route.setOnClickListener(clickListener);
         location.setOnClickListener(btnClickListener);
+        mBaiduMap.setOnMapLongClickListener(new BaiduMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+
+            }
+        });
     }
 
     View.OnClickListener btnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             switch (mCurrentMode) {
                 case NORMAL:
-                    location.setText("跟随");
+                    location.setImageResource(R.mipmap.follow);
                     mCurrentMode = MyLocationConfiguration.LocationMode.FOLLOWING;
                     mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(mCurrentMode, true, mCurrentMarker));
                     MapStatus.Builder builder = new MapStatus.Builder();
@@ -196,7 +210,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
                     mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
                     break;
                 case COMPASS:
-                    location.setText("普通");
+                    location.setImageResource(R.mipmap.location);
                     mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
                     mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
                             mCurrentMode, true, mCurrentMarker));
@@ -205,7 +219,7 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
                     mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder1.build()));
                     break;
                 case FOLLOWING:
-                    location.setText("罗盘");
+                    location.setImageResource(R.mipmap.compass);
                     mCurrentMode = MyLocationConfiguration.LocationMode.COMPASS;
                     mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
                             mCurrentMode, true, mCurrentMarker));
@@ -220,6 +234,9 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
+                case R.id.back:
+                    MapMeterActivity.this.finish();
+                    break;
                 case R.id.open_rb:
                     MapView.setMapCustomEnable(true);
                     Log.i("MapMeterActivity","开启个性");
@@ -238,14 +255,56 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
                     mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
                     Log.i("MapMeterActivity","卫星地图显示了");
                     break;
+                case R.id.route:
+                    startNavi();
+                    break;
+                default:
+                    break;
             }
         }
     };
 
+    /**
+     * 启动百度地图导航(Native)
+     */
+    public void startNavi() {
+        try {
+            Intent mapIntent = new Intent();
+            mapIntent.setData(Uri.parse("baidumap://map?"));
+            startActivity(mapIntent);
+            //BaiduMapNavigation.openBaiduMapNavi(para, this);
+        } catch (BaiduMapAppNotSupportNaviException e) {
+            e.printStackTrace();
+            showTipDialog();
+        }
+    }
+
+    /**
+     * 提示未安装百度地图app或app版本过低
+     */
+    public void showTipDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("您尚未安装百度地图app或app版本过低，点击确认安装？");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                OpenClientUtil.getLatestBaiduMapApp(MapMeterActivity.this);
+            }
+        });
+
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
     //初始化定位
     private void initLocation() {
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
         // 定位初始化
         mLocClient = new LocationClient(getApplicationContext()); //声明LocationClient类
         mLocClient.registerLocationListener(myListener);     //注册监听函数
@@ -351,7 +410,6 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
         //改变地图状态
         mBaiduMap.setMapStatus(mMapStatusUpdate);
-
     }
 
 
@@ -455,6 +513,8 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
                 setMarker();
                 setUserMapCenter();
             }
+            // 开启定位图层
+            mBaiduMap.setMyLocationEnabled(true);
             Log.i("MyLocationListenner", sb.toString());
         }
 
@@ -504,5 +564,4 @@ public class MapMeterActivity extends Activity implements SensorEventListener {
         mMapView = null;
         super.onDestroy();
     }
-
 }

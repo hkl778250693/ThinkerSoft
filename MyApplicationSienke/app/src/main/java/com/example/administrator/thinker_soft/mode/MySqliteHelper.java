@@ -63,7 +63,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
             "rubbish_cost varchar(200),remission varchar(200),this_month_dosage varchar(200),this_month_end_degree varchar(200),n_jw_x varchar(200),n_jw_y varchar(200),d_jw_time varchar(200),file_name varchar(200))";
     //抄表文件表
     final String CREATE_TABLE_SQL_METER_FILE = "CREATE TABLE MeterFile" +
-            "(id integer primary key AUTOINCREMENT,fileName varchar(200) UNIQUE,login_user_id varchar(200),login_user_name varchar(200))";
+            "(id integer primary key AUTOINCREMENT,fileName varchar(200),login_user_id varchar(200),login_user_name varchar(200))";
     //文件和抄表本表
     final String CREATE_TABLE_SQL_METER_BOOK = "CREATE TABLE MeterBook" +
             "(id integer primary key AUTOINCREMENT,bookName varchar(200),bookId varchar(200),fileName varchar(200),login_user_id varchar(200),login_user_name varchar(200))";

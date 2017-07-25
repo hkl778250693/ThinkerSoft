@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/theme_colors">
 
         <ImageView
@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="16dp"
+            android:padding="12dp"
             android:src="@drawable/back_selector" />
 
         <TextView
@@ -25,16 +25,17 @@
             android:layout_centerInParent="true"
             android:text="公司社区"
             android:textColor="@android:color/white"
-            android:textSize="21sp" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:padding="16dp"
-            android:src="@drawable/selecter_main_option" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="12dp"
+            android:src="@drawable/more_settings_selector" />
     </RelativeLayout>
 
     <RelativeLayout

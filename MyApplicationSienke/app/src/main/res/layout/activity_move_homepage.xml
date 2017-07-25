@@ -16,19 +16,19 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="13dp"
-            android:text="ThinkerSoft ☛ 智慧平台"
+            android:text="☛ 智慧平台"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/circle_selector"
-            android:padding="15dp"
-            android:src="@mipmap/set" />
+            android:padding="12dp"
+            android:src="@drawable/system_settings_icon_selector" />
 
     </RelativeLayout>
 

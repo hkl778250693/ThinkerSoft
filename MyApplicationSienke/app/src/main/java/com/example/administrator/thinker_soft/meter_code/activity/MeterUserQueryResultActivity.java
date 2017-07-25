@@ -49,7 +49,7 @@ public class MeterUserQueryResultActivity extends Activity {
             userLists = intent.getParcelableArrayListExtra("meter_user_info");
             adapter = new MeterUserListviewAdapter(MeterUserQueryResultActivity.this, userLists);
             listView.setAdapter(adapter);
-            MyAnimationUtils.viewGroupOutAnimation(MeterUserQueryResultActivity.this,listView,0.1F);
+            MyAnimationUtils.viewGroupOutAlphaAnimation(MeterUserQueryResultActivity.this,listView,0.1F);
         }
     }
 

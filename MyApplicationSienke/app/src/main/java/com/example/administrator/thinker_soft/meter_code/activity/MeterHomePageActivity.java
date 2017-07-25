@@ -1,17 +1,12 @@
 package com.example.administrator.thinker_soft.meter_code.activity;
 
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
@@ -26,37 +21,19 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.example.administrator.thinker_soft.R;
-import com.example.administrator.thinker_soft.meter_code.ActualMissionNEW;
-import com.example.administrator.thinker_soft.meter_code.GPSCollectorActivity;
 import com.example.administrator.thinker_soft.meter_code.adapter.MeterHomePageViewPagerAdapter;
 import com.example.administrator.thinker_soft.meter_code.fragment.CustomQueryFragment;
 import com.example.administrator.thinker_soft.meter_code.fragment.MeterDataTransferFragment;
 import com.example.administrator.thinker_soft.meter_code.fragment.MeterHomePageFragment;
 import com.example.administrator.thinker_soft.meter_code.fragment.ScanCodeMeterFragment;
-import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
-import com.example.administrator.thinker_soft.myfirstpro.entity.AreaInfo;
-import com.example.administrator.thinker_soft.myfirstpro.entity.BookInfo;
-import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
-import com.example.administrator.thinker_soft.myfirstpro.service.LocationService;
-import com.example.administrator.thinker_soft.myfirstpro.threadsocket.SocketInteraction;
-import com.example.administrator.thinker_soft.myfirstpro.util.AssembleUpmes;
-import com.example.administrator.thinker_soft.myfirstpro.util.JaugeInternetState;
-import com.example.administrator.thinker_soft.myfirstpro.util.JsonAnalyze;
-import com.example.administrator.thinker_soft.myfirstpro.util.MyDialog;
-import com.example.administrator.thinker_soft.myfirstpro.util.Mytoast;
-import com.example.administrator.thinker_soft.viewbadger.BadgeView;
-
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MeterHomePageActivity extends FragmentActivity{
     private static final String LTAG = MeterHomePageActivity.class.getSimpleName();
@@ -69,32 +46,8 @@ public class MeterHomePageActivity extends FragmentActivity{
     private ImageView back,more;
     private List<Fragment> fragmentList;
     private MeterHomePageViewPagerAdapter adapter;
-    private TabWidget mTabWidget;
     private RadioButton radio_button0, radio_button1, radio_button2, radio_button3;
-    private List<BookInfo> bookList;
-    private List<AreaInfo> areaList;
-    private String DBName;
-    private String filepath;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    private LocationService mService;
-    private boolean mBound = false;
-    private MyApplication myapp;
-    private String ip = "";
-    private String port = "";
-    private int clickCount;
-    private Map<Integer, Boolean> dialogControl;
-    private Dialog downDialog;
-    private String operName = "NANBU";
-    private String requestWorkJson;
-    private List<Map<String, String>> ALLworkList_before = null;
-    private String SystemUserId;
-    private BadgeView badgeViewone;
-    private BadgeView badgeViewTwo;
-    private MyHandler dataHandler = new MyHandler();
-    private MyActivityManager mam = MyActivityManager.getInstance();
-    private boolean popbool;
-    private boolean navsignal;
+    private SharedPreferences sharedPreferences_login,sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +94,8 @@ public class MeterHomePageActivity extends FragmentActivity{
 
     //初始化设置
     private void defaultSetting() {
+        sharedPreferences_login = this.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        sharedPreferences = MeterHomePageActivity.this.getSharedPreferences(sharedPreferences_login.getString("login_name","")+"data", Context.MODE_PRIVATE);
         radio_button0.setChecked(true);
         titleName.setText("移动抄表");
     }
@@ -255,10 +210,10 @@ public class MeterHomePageActivity extends FragmentActivity{
         popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
         popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_page_more_shape));
         mapInfo = (TextView) contentView.findViewById(R.id.map_info);
-        TextView sysSet = (TextView) contentView.findViewById(R.id.popwindow_content_sysSet);
-        TextView gpscollector = (TextView) contentView.findViewById(R.id.popwindow_content_gpscollector);
         TextView tesseractOcr = (TextView) contentView.findViewById(R.id.tesseract_ocr);
-        TextView mapMeter = (TextView) contentView.findViewById(R.id.popwindow_content_mapMeter);
+        TextView mapMeter = (TextView) contentView.findViewById(R.id.map_meter);
+        TextView coordinateManage = (TextView) contentView.findViewById(R.id.coordinate_manage);
+        TextView systemSettings = (TextView) contentView.findViewById(R.id.system_settings);
         TextView tasks = (TextView) contentView.findViewById(R.id.popwindow_content_actualtask);
         /*// 注册 SDK 广播监听者
         IntentFilter iFilter = new IntentFilter();
@@ -267,7 +222,44 @@ public class MeterHomePageActivity extends FragmentActivity{
         iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
         mReceiver = new SDKReceiver();
         LocalBroadcastManager.getInstance(MeterHomePageActivity.this).registerReceiver(mReceiver, iFilter);*/
-        sysSet.setOnClickListener(new OnClickListener() {
+        mapMeter.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(MeterHomePageActivity.this, MapMeterActivity.class);
+                startActivity(intent);
+            }
+        });
+        coordinateManage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(!"".equals(sharedPreferences.getString("currentFileName",""))){
+                    if(!"".equals(sharedPreferences.getString("currentBookName",""))){
+                        Intent intent = new Intent(MeterHomePageActivity.this, MeterUserCoordinateManageActivity.class);
+                        intent.putExtra("fileName",sharedPreferences.getString("currentFileName",""));
+                        intent.putExtra("bookName",sharedPreferences.getString("currentBookName",""));
+                        intent.putExtra("bookID",sharedPreferences.getString("currentBookID",""));
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(MeterHomePageActivity.this,"请先选择抄表本！",Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(MeterHomePageActivity.this,"请先完成文件选择！",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        systemSettings.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
@@ -280,36 +272,10 @@ public class MeterHomePageActivity extends FragmentActivity{
                 startActivityForResult(intent, 1);
             }
         });
-        gpscollector.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Intent intent = new Intent(MeterHomePageActivity.this, GPSCollectorActivity.class);
-                startActivity(intent);
-            }
-        });
         tasks.setOnClickListener(new OnClickListener() {// ��������
-
             @Override
             public void onClick(View v) {
-                if (myapp.getNewWorkList() == null || myapp.getNewWorkList().size() == 0 || badgeViewTwo.isShown()) {
-                    requestWork();
-                } else if (myapp.getNewWorkList() != null && myapp.getNewWorkList().size() != 0 && !badgeViewTwo.isShown()) {
-                    popupWindow.dismiss();
-                    try {
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Intent intent = new Intent(MeterHomePageActivity.this, ActualMissionNEW.class);
-                    intent.setAction("");
-                    startActivity(intent);
-                }
+
             }
         });
         tesseractOcr.setOnClickListener(new OnClickListener() {
@@ -324,19 +290,6 @@ public class MeterHomePageActivity extends FragmentActivity{
                 Intent intent = new Intent(MeterHomePageActivity.this, TesseractOcrActivity.class);
                 startActivity(intent);
 
-            }
-        });
-        mapMeter.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Intent intent = new Intent(MeterHomePageActivity.this, MapMeterActivity.class);
-                startActivity(intent);
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -374,158 +327,4 @@ public class MeterHomePageActivity extends FragmentActivity{
         // 取消监听 SDK 广播
         LocalBroadcastManager.getInstance(MeterHomePageActivity.this).unregisterReceiver(mReceiver);
     }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.v("onSaveInstanceState", "onSaveInstanceState");
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle state) {
-        super.onRestoreInstanceState(state);
-        Log.v("onRestoreInstanceState", "onSaveInstanceState");
-    }
-
-    public void requestWork() {
-        popupWindow.dismiss();
-        if (!JaugeInternetState.isNetworkAvailable(getApplicationContext())) {
-            Toast.makeText(this, "WIFI", Toast.LENGTH_SHORT).show();
-            return;
-        } else {
-            SharedPreferences sharedPreferences = getApplication()
-                    .getSharedPreferences("IP_PORT_DBNAME", 0);
-            if (sharedPreferences.contains("ip")) {
-                ip = sharedPreferences.getString("ip", "");
-            }
-            if (sharedPreferences.contains("port")) {
-                port = sharedPreferences.getString("port", "");
-            }
-            clickCount++;
-            dialogControl.put(clickCount, true);
-            Log.e("xxq", "MyDialog--------------");
-            downDialog = MyDialog.createLoadingDialog(MeterHomePageActivity.this,
-                    "������������...");
-            downDialog.setCancelable(true);
-            downDialog.setCanceledOnTouchOutside(false);
-            downDialog.setOnDismissListener(new OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    dialogControl.put(clickCount, false);
-                }
-            });
-
-            if (downDialog != null)
-                downDialog.show();
-            new Thread() {
-                @Override
-                public void run() {
-                    super.run();
-                    int loc = clickCount;
-                    boolean singal = false;// �ж���;�Ƿ����
-                    String parameter = AssembleUpmes
-                            .reqtTasksParameter(SystemUserId);
-                    Log.e("xxq", "parameter=" + parameter);
-                    SocketInteraction areaSocket = new SocketInteraction(
-                            getApplicationContext(), Integer.parseInt(port),
-                            ip, operName, parameter, dataHandler);
-                    singal = areaSocket.DataDownLoadConn();// ����
-                    areaSocket.closeConn();// �Ͽ�����
-                    if (dialogControl.size() > 0) {
-                        if (dialogControl.get(loc) == true) {
-                            if (singal == true) {// �ɹ�
-                                dataHandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        downDialog.dismiss();
-                                    }
-                                });
-                            } else {// ʧ��
-                                dataHandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        downDialog.dismiss();
-                                        Mytoast.showToast(MeterHomePageActivity.this, "������δ��Ӧ������֤IP�Ͷ˿��Ƿ�����", 1000);
-                                    }
-                                });
-                            }
-                        }
-                    }
-                }
-            }.start();
-        }
-    }
-
-    class MyHandler extends Handler {
-        /**
-         * ��ȡsocket�߳�����
-         */
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            int loc = clickCount;// ��ǰ�̵߳����
-            Bundle bundle = msg.getData();
-            int key = bundle.getInt("key");
-            if (key == 1) {
-                if (badgeViewone != null) {
-                    badgeViewone.show();
-                }
-                return;
-            }
-            String data = bundle.getString("data");
-            if (data != null && "û������".equals(data)) {
-                myapp.setNewWorkList(null);
-                Intent intent = new Intent(MeterHomePageActivity.this,
-                        ActualMissionNEW.class);
-                if (badgeViewone.isShown() == true || badgeViewTwo.isShown() == true) {
-                    intent.setAction("show");
-                } else {
-                    intent.setAction("");
-                }
-                startActivity(intent);
-                return;
-            }
-            if (dialogControl.size() > 0) {
-                Log.v("ZHOUTAO", "��ǰ�߳���ţ�" + loc);
-                if (dialogControl.get(loc) == true) {
-                    requestWorkJson = JsonAnalyze.analyzeData(data);// ����������Ľ��
-                    // Log.v("xxq", "login_json=" + login_json);
-                    // TODO
-                    if ("�û�������".equals(requestWorkJson)
-                            || "�������".equals(requestWorkJson)) {
-                        Mytoast.showToast(MeterHomePageActivity.this,
-                                requestWorkJson + "", 1000);
-                    } else {
-                        try {
-                            ALLworkList_before = JsonAnalyze
-                                    .jsonTaskData(requestWorkJson);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        ;
-                        myapp.setNewWorkList(ALLworkList_before);
-                        // ȡ�����ݳɹ�����ֵ����һ��Activity
-                        Intent intent = new Intent(MeterHomePageActivity.this,
-                                ActualMissionNEW.class);
-                        if (badgeViewone.isShown() == true || badgeViewTwo.isShown() == true) {
-                            intent.setAction("show");
-                        } else {
-                            intent.setAction("");
-                        }
-                        // intent.putExtra("ALLworkList_before",
-                        // (Serializable) ALLworkList_before);
-                        startActivity(intent);
-                        if (badgeViewone != null) {
-                            badgeViewone.hide();
-                        }
-                        if (badgeViewTwo != null) {
-                            badgeViewTwo.hide();
-                        }
-                    }
-
-                }
-            }
-        }
-    }
-
 }

@@ -173,7 +173,7 @@ public class MeterUserContinueActivity extends Activity {
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
                     listview.setSelection(continuePosition);
-                    MyAnimationUtils.viewGroupOutAnimation(MeterUserContinueActivity.this,listview,0.1F);
+                    MyAnimationUtils.viewGroupOutAlphaAnimation(MeterUserContinueActivity.this,listview,0.1F);
                     currentPageTv.setText(String.valueOf(currentPage));
                     if (totalCountCursor.getCount() % 50 != 0) {
                         totalPage = totalCountCursor.getCount() / 50 + 1;
@@ -186,6 +186,7 @@ public class MeterUserContinueActivity extends Activity {
                     adapter = new MeterUserListviewAdapter(MeterUserContinueActivity.this, userLists);
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
+                    MyAnimationUtils.viewGroupOutAlphaAnimation(MeterUserContinueActivity.this,listview,0.1F);
                     lastPage.setClickable(true);
                     nextPage.setClickable(true);
                     break;

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
@@ -51,6 +52,7 @@ public class MeterFileSelectListAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = layoutInflater.inflate(R.layout.popupwindow_meter_file_select_list_item, null);
+            viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.id = (TextView) convertView.findViewById(R.id.id);
             convertView.setTag(viewHolder);
@@ -60,12 +62,16 @@ public class MeterFileSelectListAdapter extends BaseAdapter {
         MeterSingleSelectItem item = itemList.get(position);
         viewHolder.name.setText(item.getName());
         if(flag == 0){
+            viewHolder.icon.setBackgroundResource(R.mipmap.meter_book);
             viewHolder.id.setText(item.getID());
+        }else {
+            viewHolder.icon.setBackgroundResource(R.mipmap.files);
         }
         return convertView;
     }
 
     class ViewHolder {
+        ImageView icon;
         TextView name;
         TextView id;
     }

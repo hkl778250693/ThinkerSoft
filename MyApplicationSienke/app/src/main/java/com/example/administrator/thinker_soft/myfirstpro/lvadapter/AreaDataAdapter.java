@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.model.MeterAreaViewHolder;
-import com.example.administrator.thinker_soft.myfirstpro.entity.AreaInfo;
+import com.example.administrator.thinker_soft.meter_code.model.AreaInfo;
 
 import java.util.HashMap;
 import java.util.List;

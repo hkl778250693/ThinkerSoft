@@ -62,7 +62,7 @@ public class MeterSettingsActivity extends Activity {
                     startActivity(intent);
                     break;
                 case R.id.map_donload:
-                    intent = new Intent(MeterSettingsActivity.this, MeterPageCountSettingsActivity.class);
+                    intent = new Intent(MeterSettingsActivity.this, MeterMapDownloadActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.print_note:

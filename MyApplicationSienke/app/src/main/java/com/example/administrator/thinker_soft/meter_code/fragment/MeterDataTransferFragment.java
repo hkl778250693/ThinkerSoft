@@ -3,6 +3,8 @@ package com.example.administrator.thinker_soft.meter_code.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,17 +17,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.activity.MeterDataDownloadActivity;
-import com.example.administrator.thinker_soft.meter_code.activity.MeterSelectActivity;
-import com.example.administrator.thinker_soft.myfirstpro.entity.AreaInfo;
-import com.example.administrator.thinker_soft.myfirstpro.entity.BookInfo;
+import com.example.administrator.thinker_soft.meter_code.adapter.MeterFileSelectListAdapter;
+import com.example.administrator.thinker_soft.meter_code.model.MeterSingleSelectItem;
+import com.example.administrator.thinker_soft.mode.MyAnimationUtils;
+import com.example.administrator.thinker_soft.mode.MySqliteHelper;
+import com.example.administrator.thinker_soft.meter_code.model.AreaInfo;
+import com.example.administrator.thinker_soft.meter_code.model.BookInfo;
 import com.example.administrator.thinker_soft.myfirstpro.myactivitymanager.MyActivityManager;
 
 import org.json.JSONArray;
@@ -41,22 +49,28 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/12 0012.
  */
 public class MeterDataTransferFragment extends Fragment {
-    private View view;
+    private View view,fileSelectView, uploadView,loadingView;
     private TextView upload, download;
     private MyActivityManager mam;
     private LayoutInflater layoutInflater;
-    private PopupWindow popupWindow;
+    private PopupWindow fileWindow, uploadWindow,loadingWindow;
+    private ListView fileListView;
     private ImageView frameAnimation;
     private AnimationDrawable animationDrawable;
-    private LinearLayout rootLinearlayout;
-    private SharedPreferences public_sharedPreferences,sharedPreferences_login;
+    private LinearLayout rootLinearlayout, noData;
+    private MeterSingleSelectItem fileItem;
+    private MeterFileSelectListAdapter fileAdapter;
+    private List<MeterSingleSelectItem> fileList = new ArrayList<>();
+    private SQLiteDatabase db;  //数据库
+    private SharedPreferences public_sharedPreferences, sharedPreferences_login;
     private String ip, port;  //接口ip地址   端口
-    private String resultBook,resultArea; //抄表本结果，抄表分区结果
+    private String resultBook, resultArea; //抄表本结果，抄表分区结果
     public int responseCode = 0;
     private ArrayList<BookInfo> bookInfoArrayList = new ArrayList<>();   //抄表本集合
     private ArrayList<AreaInfo> areaInfoArrayList = new ArrayList<>();   //抄表分区集合
@@ -82,8 +96,8 @@ public class MeterDataTransferFragment extends Fragment {
 
     //初始化设置
     private void defaultSetting() {
-        mam = MyActivityManager.getInstance();
-        mam.pushOneActivity(getActivity());
+        MySqliteHelper helper = new MySqliteHelper(getActivity(), 1);
+        db = helper.getWritableDatabase();
         public_sharedPreferences = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
         sharedPreferences_login = getActivity().getSharedPreferences("login_info", Context.MODE_PRIVATE);
     }
@@ -99,23 +113,24 @@ public class MeterDataTransferFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.upload:
-                    SharedPreferences.Editor editor = public_sharedPreferences.edit();
-                    editor.putInt("signal", 11);
-                    editor.apply();
-                    Intent intent = new Intent();
-                    intent = intent.setClass(getActivity(), MeterSelectActivity.class);
-                    int requestCode = 1;
-                    startActivityForResult(intent, requestCode);
+                    showFileSelectWindow();
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            super.run();
+                            getFileInfo();
+                        }
+                    }.start();
                     break;
                 case R.id.download:
                     showPopupwindow();
-                    new Thread(){
+                    new Thread() {
                         @Override
                         public void run() {
                             try {
                                 Thread.sleep(2000);
-                                requireMeterBookData("findAllsBook.do","companyId="+sharedPreferences_login.getInt("company_id",0));
-                                requireMeterAreaData("qureyAreaAll.do","companyid="+sharedPreferences_login.getInt("company_id",0));
+                                requireMeterBookData("findAllsBook.do", "companyId=" + sharedPreferences_login.getInt("company_id", 0));
+                                requireMeterAreaData("qureyAreaAll.do", "companyid=" + sharedPreferences_login.getInt("company_id", 0));
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -128,23 +143,128 @@ public class MeterDataTransferFragment extends Fragment {
         }
     };
 
+    /**
+     * 文件选择窗口
+     */
+    public void showFileSelectWindow() {
+        layoutInflater = LayoutInflater.from(getActivity());
+        fileSelectView = layoutInflater.inflate(R.layout.popupwindow_meter_single_select, null);
+        fileWindow = new PopupWindow(fileSelectView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        //绑定控件ID
+        TextView back = (TextView) fileSelectView.findViewById(R.id.back);
+        fileListView = (ListView) fileSelectView.findViewById(R.id.list_view);
+        TextView tips = (TextView) fileSelectView.findViewById(R.id.tips);
+        noData = (LinearLayout) fileSelectView.findViewById(R.id.no_data);
+        //设置点击事件
+        tips.setText("请选择文件夹");
+        fileListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //获取选中的参数
+                fileItem = (MeterSingleSelectItem) fileAdapter.getItem(position);
+                Log.i("meterHomePage", "当前点击的item为：" + fileItem.getName());
+                fileWindow.dismiss();
+                showUploadTipsWindow(fileItem.getName());
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fileWindow.dismiss();
+            }
+        });
+        fileWindow.update();
+        fileWindow.setFocusable(true);
+        fileWindow.setTouchable(true);
+        fileWindow.setOutsideTouchable(true);
+        fileWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
+        fileWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+        backgroundAlpha(0.6F);   //背景变暗
+        fileWindow.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
+        fileWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0F);
+            }
+        });
+    }
+
+    //弹出上传数据前提示窗口
+    public void showUploadTipsWindow(String fileName) {
+        layoutInflater = LayoutInflater.from(getActivity());
+        uploadView = layoutInflater.inflate(R.layout.popupwindow_user_detail_info_save, null);
+        uploadWindow = new PopupWindow(uploadView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        //绑定控件ID
+        TextView tips = (TextView) uploadView.findViewById(R.id.tips);
+        RadioButton cancelRb = (RadioButton) uploadView.findViewById(R.id.cancel_rb);
+        RadioButton saveRb = (RadioButton) uploadView.findViewById(R.id.save_rb);
+        //设置点击事件
+        tips.setText("确定要上传名为 '" + fileName + "' 的文件吗？");
+        saveRb.setText("确定");
+        cancelRb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadWindow.dismiss();
+            }
+        });
+        saveRb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadWindow.dismiss();
+            }
+        });
+        uploadWindow.update();
+        uploadWindow.setFocusable(true);
+        uploadWindow.setTouchable(true);
+        uploadWindow.setOutsideTouchable(true);
+        uploadWindow.setBackgroundDrawable(getResources().getDrawable(R.color.transparent));
+        uploadWindow.setAnimationStyle(R.style.camera);
+        backgroundAlpha(0.6F);   //背景变暗
+        uploadWindow.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
+        uploadWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1.0F);
+            }
+        });
+    }
+
+    //查询抄表文件信息
+    public void getFileInfo() {
+        fileList.clear();
+        Cursor cursor = db.rawQuery("select * from MeterFile where login_user_id=?", new String[]{sharedPreferences_login.getString("userId", "")});//查询并获得游标
+        Log.i("meterHomePage", "所有表册ID个数为：" + cursor.getCount());
+        //如果游标为空，则显示没有数据图片
+        if (cursor.getCount() == 0) {
+            handler.sendEmptyMessage(6);
+            return;
+        }
+        while (cursor.moveToNext()) {
+            MeterSingleSelectItem item = new MeterSingleSelectItem();
+            item.setName(cursor.getString(cursor.getColumnIndex("fileName")));
+            fileList.add(item);
+        }
+        handler.sendEmptyMessage(0);
+        cursor.close();
+    }
+
     //show加载动画
     public void showPopupwindow() {
         layoutInflater = LayoutInflater.from(getActivity());
-        view = layoutInflater.inflate(R.layout.popupwindow_query_loading, null);
-        popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        frameAnimation = (ImageView) view.findViewById(R.id.frame_animation);
-        tips = (TextView) view.findViewById(R.id.tips);
+        loadingView = layoutInflater.inflate(R.layout.popupwindow_query_loading, null);
+        loadingWindow = new PopupWindow(loadingView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        frameAnimation = (ImageView) loadingView.findViewById(R.id.frame_animation);
+        tips = (TextView) loadingView.findViewById(R.id.tips);
         tips.setText("数据初始化中......");
-        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
-        popupWindow.setAnimationStyle(R.style.camera);
-        popupWindow.update();
-        popupWindow.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
+        loadingWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+        loadingWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        loadingWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
+        loadingWindow.setAnimationStyle(R.style.camera);
+        loadingWindow.update();
+        loadingWindow.showAtLocation(rootLinearlayout, Gravity.CENTER, 0, 0);
         backgroundAlpha(0.6F);   //背景变暗
         startFrameAnimation();
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+        loadingWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 backgroundAlpha(1.0F);
@@ -291,19 +411,24 @@ public class MeterDataTransferFragment extends Fragment {
         }
     }
 
-    Handler handler = new Handler(){
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
+                case 0:
+                    fileAdapter = new MeterFileSelectListAdapter(getActivity(),fileList,1);
+                    fileListView.setAdapter(fileAdapter);
+                    MyAnimationUtils.viewGroupOutAnimation(getActivity(),fileListView,0.1F);
+                    break;
                 case 1:
                     try {
                         JSONArray jsonArray = new JSONArray(resultBook);
                         bookInfoArrayList.clear();
-                        for(int i=0;i<jsonArray.length();i++){
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
                             BookInfo item = new BookInfo();
-                            item.setID(object.optInt("n_book_id",0)+"");
-                            item.setBOOK(object.optString("c_book_name",""));
+                            item.setID(object.optInt("n_book_id", 0) + "");
+                            item.setBOOK(object.optString("c_book_name", ""));
                             bookInfoArrayList.add(item);
                         }
                     } catch (JSONException e) {
@@ -311,40 +436,45 @@ public class MeterDataTransferFragment extends Fragment {
                     }
                     break;
                 case 2:
-                    popupWindow.dismiss();
+                    loadingWindow.dismiss();
                     Toast.makeText(getActivity(), "没有抄表本数据哦！", Toast.LENGTH_SHORT).show();
                     break;
                 case 3:
-                    popupWindow.dismiss();
+                    loadingWindow.dismiss();
                     Toast.makeText(getActivity(), "网络请求超时！", Toast.LENGTH_SHORT).show();
                     break;
                 case 4:
                     try {
                         JSONArray jsonArray = new JSONArray(resultArea);
                         areaInfoArrayList.clear();
-                        for(int i=0;i<jsonArray.length();i++){
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
                             AreaInfo item = new AreaInfo();
-                            item.setArea(object.optString("areaName",""));
-                            item.setID(object.optInt("areaId",0)+"");
+                            item.setArea(object.optString("areaName", ""));
+                            item.setID(object.optInt("areaId", 0) + "");
                             areaInfoArrayList.add(item);
                         }
-                        if(bookInfoArrayList.size() != 0 || areaInfoArrayList.size() != 0){
-                            Intent intent = new Intent(getActivity(),MeterDataDownloadActivity.class);
+                        if (bookInfoArrayList.size() != 0 || areaInfoArrayList.size() != 0) {
+                            Intent intent = new Intent(getActivity(), MeterDataDownloadActivity.class);
                             Bundle bundle = new Bundle();
-                            bundle.putParcelableArrayList("bookInfoArrayList",bookInfoArrayList);
-                            bundle.putParcelableArrayList("areaInfoArrayList",areaInfoArrayList);
+                            bundle.putParcelableArrayList("bookInfoArrayList", bookInfoArrayList);
+                            bundle.putParcelableArrayList("areaInfoArrayList", areaInfoArrayList);
                             intent.putExtras(bundle);
                             startActivity(intent);
-                            popupWindow.dismiss();
+                            loadingWindow.dismiss();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     break;
                 case 5:
-                    popupWindow.dismiss();
+                    loadingWindow.dismiss();
                     Toast.makeText(getActivity(), "没有抄表分区数据哦！", Toast.LENGTH_SHORT).show();
+                    break;
+                case 6:
+                    noData.setVisibility(View.VISIBLE);
+                    break;
+                default:
                     break;
             }
             super.handleMessage(msg);

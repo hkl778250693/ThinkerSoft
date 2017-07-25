@@ -8,15 +8,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/theme_colors">
         <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:background="@drawable/circle_selector"
+            android:padding="12dp"
             android:src="@drawable/back_selector" />
 
         <TextView
@@ -25,15 +24,17 @@
             android:layout_centerInParent="true"
             android:text="信息查询"
             android:textColor="@android:color/white"
-            android:textSize="21sp" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:padding="15dp"
-            android:src="@mipmap/more" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="12dp"
+            android:src="@drawable/more_settings_selector" />
     </RelativeLayout>
 
     <RadioGroup

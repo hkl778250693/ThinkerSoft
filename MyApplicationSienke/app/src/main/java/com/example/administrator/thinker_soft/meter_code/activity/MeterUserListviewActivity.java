@@ -152,13 +152,7 @@ public class MeterUserListviewActivity extends Activity {
                             @Override
                             public void run() {
                                 super.run();
-                                if (!"".equals(areaCurrentID)) {
-                                    getMeterUserData(fileName, bookID, dataStartCount);  //读取抄表分区用户数据
-                                } else {
-                                    if (!"".equals(bookCurrentID)) {
-                                        getMeterUserData(fileName, bookID, dataStartCount);  //读取抄表本用户数据
-                                    }
-                                }
+                                getMeterUserData(fileName, bookID, dataStartCount);  //读取抄表本用户数据
                                 handler.sendEmptyMessage(1);
                             }
                         }.start();
@@ -184,6 +178,8 @@ public class MeterUserListviewActivity extends Activity {
                     Log.i("MeterUserLVActivity", "开始行数是：" + dataStartCount);
                     Log.i("MeterUserLVActivity", "当前页数是：" + currentPageTv.getText());
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -196,7 +192,7 @@ public class MeterUserListviewActivity extends Activity {
                     adapter = new MeterUserListviewAdapter(MeterUserListviewActivity.this, userLists);
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
-                    MyAnimationUtils.viewGroupOutAnimation(MeterUserListviewActivity.this,listview,0.1F);
+                    MyAnimationUtils.viewGroupOutAlphaAnimation(MeterUserListviewActivity.this,listview,0.1F);
                     currentPageTv.setText(String.valueOf(currentPage));
                     if (totalCountCursor.getCount() % 50 != 0) {
                         totalPage = totalCountCursor.getCount() / 50 + 1;
@@ -213,7 +209,7 @@ public class MeterUserListviewActivity extends Activity {
                     adapter = new MeterUserListviewAdapter(MeterUserListviewActivity.this, userLists);
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
-                    MyAnimationUtils.viewGroupOutAnimation(MeterUserListviewActivity.this,listview,0.1F);
+                    MyAnimationUtils.viewGroupOutAlphaAnimation(MeterUserListviewActivity.this,listview,0.1F);
                     lastPage.setClickable(true);
                     nextPage.setClickable(true);
                     break;

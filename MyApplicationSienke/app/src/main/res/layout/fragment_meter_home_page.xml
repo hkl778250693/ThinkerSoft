@@ -48,7 +48,7 @@
                 android:drawablePadding="5dp"
                 android:drawableTop="@drawable/select_icon_6"
                 android:gravity="center_horizontal"
-                android:text="抄表本抄表"
+                android:text="表册抄表"
                 android:textColor="@color/text_color_blue"
                 android:textSize="14sp"/>
         </LinearLayout>

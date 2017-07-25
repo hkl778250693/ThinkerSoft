@@ -173,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:src="@drawable/btn_gps_selector" />
+                android:src="@drawable/meter_user_coordinate_manage_go_selector" />
         </LinearLayout>
         <!-- 		            android:focusable="false" -->
     </LinearLayout>

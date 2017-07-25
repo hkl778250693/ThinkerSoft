@@ -59,7 +59,7 @@ public class MeterDeleteFileActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deletedatabase);
+        setContentView(R.layout.activity_delete_meter_file);
 
         bindView();
         defaultSetting();
@@ -177,7 +177,7 @@ public class MeterDeleteFileActivity extends Activity {
             deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
                     0x3F, 0x25)));
             // set item width
-            deleteItem.setWidth(dp2px(90));
+            deleteItem.setWidth(dp2px(70));
             // set item title
             deleteItem.setTitle("删除");
             // set item title fontsize

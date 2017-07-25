@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.model.MeterBookViewHolder;
-import com.example.administrator.thinker_soft.myfirstpro.entity.BookInfo;
+import com.example.administrator.thinker_soft.meter_code.model.BookInfo;
 
 import java.util.HashMap;
 import java.util.List;

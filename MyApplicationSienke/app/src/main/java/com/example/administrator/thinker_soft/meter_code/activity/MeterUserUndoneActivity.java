@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.meter_code.adapter.MeterUserListviewAdapter;
 import com.example.administrator.thinker_soft.meter_code.model.MeterUserListviewItem;
+import com.example.administrator.thinker_soft.mode.MyAnimationUtils;
 import com.example.administrator.thinker_soft.mode.MySqliteHelper;
 
 import java.util.ArrayList;
@@ -182,6 +183,7 @@ public class MeterUserUndoneActivity extends Activity {
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
                     listview.setSelection(continuePosition);
+                    MyAnimationUtils.viewGroupOutAlphaAnimation(MeterUserUndoneActivity.this,listview,0.1F);
                     currentPageTv.setText(String.valueOf(currentPage));
                     if (totalCountCursor.getCount() % 50 != 0) {
                         totalPage = totalCountCursor.getCount() / 50 + 1;
@@ -194,6 +196,7 @@ public class MeterUserUndoneActivity extends Activity {
                     adapter = new MeterUserListviewAdapter(MeterUserUndoneActivity.this, userLists);
                     adapter.notifyDataSetChanged();
                     listview.setAdapter(adapter);
+                    MyAnimationUtils.viewGroupOutAlphaAnimation(MeterUserUndoneActivity.this,listview,0.1F);
                     lastPage.setClickable(true);
                     nextPage.setClickable(true);
                     break;

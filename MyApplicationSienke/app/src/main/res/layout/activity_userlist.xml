@@ -9,16 +9,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/theme_colors"
-        android:paddingLeft="5dp">
+        android:background="@color/theme_colors">
 
         <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:background="@drawable/circle_selector"
+            android:padding="12dp"
             android:src="@drawable/back_selector" />
 
         <TextView

@@ -15,8 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:background="@drawable/circle_selector"
-            android:padding="10dp"
+            android:padding="12dp"
             android:src="@drawable/back_selector" />
 
         <TextView
@@ -25,7 +24,7 @@
             android:layout_centerInParent="true"
             android:text="任务管理"
             android:textColor="@android:color/white"
-            android:textSize="21sp" />
+            android:textSize="22sp" />
     </RelativeLayout>
 
     <LinearLayout

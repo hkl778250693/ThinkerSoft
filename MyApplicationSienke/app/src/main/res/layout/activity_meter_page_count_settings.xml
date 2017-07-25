@@ -11,7 +11,7 @@
     <!-- 标题 -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/theme_colors">
 
         <ImageView
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="16dp"
+            android:padding="12dp"
             android:src="@drawable/back_selector"/>
 
         <TextView

@@ -15,14 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
-
-import java.util.List;
-
+import com.example.administrator.thinker_soft.meter_code.GpsMapCollectorActivity;
 import com.example.administrator.thinker_soft.meter_code.activity.MeterUserDetailActivity;
 import com.example.administrator.thinker_soft.myfirstpro.appcation.MyApplication;
 import com.example.administrator.thinker_soft.myfirstpro.entity.UsersInfo;
-import com.example.administrator.thinker_soft.meter_code.GpsMapCollectorActivity;
 import com.example.administrator.thinker_soft.viewbadger.BadgeView;
+
+import java.util.List;
 
 public class GPSMeterAdapter extends BaseAdapter {
 	private Context context;
@@ -112,7 +111,7 @@ public class GPSMeterAdapter extends BaseAdapter {
 				Intent intent = new Intent();
 				intent.setClass(context,
 						MeterUserDetailActivity.class);
-				intent.putExtra("action", "GPSCollectorActivity");
+				intent.putExtra("action", "MeterUserCoordinateManageActivity");
 				intent.putExtra("usInfo", data.get(position));	
 				context.startActivity(intent);
 			}

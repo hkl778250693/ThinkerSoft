@@ -228,7 +228,6 @@ public class SecurityChooseActivity extends FragmentActivity {
                 }
             }
         }
-        checkIpAndPort();
         userName.setText(sharedPreferences_login.getString("user_name", "")); //设置登录用户的名称
         if (sharedPreferences_login.getBoolean("user_exchanged", false)) {
             Log.i("user_exchanged", "用户改变了" );

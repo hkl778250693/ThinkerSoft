@@ -7,20 +7,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/theme_colors">
         <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/back1"
-            android:padding="10dp"/>
+            android:src="@drawable/back_selector"
+            android:padding="12dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/business_check"
             android:textColor="@android:color/white"
-            android:textSize="23sp"
+            android:textSize="22sp"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 

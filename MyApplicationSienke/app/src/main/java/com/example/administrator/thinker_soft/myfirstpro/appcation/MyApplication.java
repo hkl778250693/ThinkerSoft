@@ -33,10 +33,9 @@ public class MyApplication extends Application {
     public List<Map<String, String>> oldWorkList = new ArrayList<Map<String, String>>(); // ��ʷ����ļ���
     public static BDLocationModel bdLocationModel;
     public static Lock lock = new ReentrantLock();
-    public ServiceConnection mConnection = new ServiceConnection() {//�����������service�Ķ��󣬵���δ����
+    public ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
-            // �����Ѿ��󶨵���LocalService����IBinder����ǿ������ת�����һ�ȡLocalServiceʵ����
             LocationBinder binder = (LocationBinder) service;
             locationService = binder.getService();
             mBound = true;
@@ -50,7 +49,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SDKInitializer.initialize(this);// 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
+        // 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
+        SDKInitializer.initialize(this);
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
         //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         SDKInitializer.setCoordType(CoordType.BD09LL);

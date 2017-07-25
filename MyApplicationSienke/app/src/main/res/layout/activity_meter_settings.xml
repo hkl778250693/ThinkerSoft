@@ -2,13 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:orientation="vertical">
 
     <!-- 标题 -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/theme_colors">
 
         <ImageView
@@ -16,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="16dp"
+            android:padding="12dp"
             android:src="@drawable/back_selector" />
 
         <TextView
@@ -26,17 +25,24 @@
             android:layout_centerInParent="true"
             android:text="系统设置"
             android:textColor="@android:color/white"
-            android:textSize="21sp" />
+            android:textSize="22sp" />
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/gray_thin">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/gray_little_thin" />
 
             <LinearLayout
                 android:id="@+id/bluetooth"
@@ -80,7 +86,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray" />
+                android:layout_marginBottom="15dp"
+                android:background="@color/gray_little_thin" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_little_thin" />
 
             <LinearLayout
                 android:id="@+id/file_delete"
@@ -116,7 +128,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray" />
+                android:layout_marginBottom="15dp"
+                android:background="@color/gray_little_thin" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_little_thin" />
 
             <LinearLayout
                 android:id="@+id/set_page_count"
@@ -153,7 +171,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray" />
+                android:layout_marginBottom="15dp"
+                android:background="@color/gray_little_thin" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_little_thin" />
 
             <LinearLayout
                 android:id="@+id/map_donload"
@@ -190,7 +214,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray" />
+                android:layout_marginBottom="15dp"
+                android:background="@color/gray_little_thin" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_little_thin" />
 
             <LinearLayout
                 android:id="@+id/print_note"
@@ -228,7 +258,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray" />
+                android:background="@color/gray_little_thin" />
 
         </LinearLayout>
     </ScrollView>

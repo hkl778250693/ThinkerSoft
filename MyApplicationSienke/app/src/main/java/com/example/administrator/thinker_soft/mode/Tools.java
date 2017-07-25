@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import java.io.File;
+
 public class Tools {
 
     public static boolean hasSdcard() {
@@ -72,5 +74,12 @@ public class Tools {
         InputMethodManager inputMethodManager = (InputMethodManager) context.getApplicationContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         return inputMethodManager.isActive();
+    }
+
+    /**
+     *  判断手机是否安装某软件
+     */
+    private boolean isInstallByread(String packageName) {
+        return new File("/data/data/" + packageName).exists();
     }
 }

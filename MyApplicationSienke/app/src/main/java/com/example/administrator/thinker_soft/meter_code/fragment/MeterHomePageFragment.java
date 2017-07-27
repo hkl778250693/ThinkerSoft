@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -41,7 +42,8 @@ import java.util.List;
  */
 public class MeterHomePageFragment extends Fragment {
     private View view;
-    private LinearLayout first_layout,second_layout,third_layout,fourth_layout,fifth_layout,sixth_layout,rootLinearlayout,noData;
+    private CardView firstCardview,secondCardview,thirdCardview,fourthCardview,fifthCardview,sixthCardview;
+    private LinearLayout rootLinearlayout,noData;
     private LayoutInflater layoutInflater;
     private PopupWindow fileWindow,bookWindow,undoneWindow;
     private View fileSelectView,bookView,undoneView;
@@ -74,12 +76,12 @@ public class MeterHomePageFragment extends Fragment {
 
     //绑定控件
     private void bindView() {
-        first_layout  = (LinearLayout) view.findViewById(R.id.first_layout);
-        second_layout = (LinearLayout) view.findViewById(R.id.second_layout);
-        third_layout  = (LinearLayout) view.findViewById(R.id.third_layout);
-        fourth_layout = (LinearLayout) view.findViewById(R.id.fourth_layout);
-        fifth_layout  = (LinearLayout) view.findViewById(R.id.fifth_layout);
-        sixth_layout = (LinearLayout) view.findViewById(R.id.sixth_layout);
+        firstCardview  = (CardView) view.findViewById(R.id.first_cardview);
+        secondCardview = (CardView) view.findViewById(R.id.second_cardview);
+        thirdCardview  = (CardView) view.findViewById(R.id.third_cardview);
+        fourthCardview = (CardView) view.findViewById(R.id.fourth_cardview);
+        fifthCardview  = (CardView) view.findViewById(R.id.fifth_cardview);
+        sixthCardview = (CardView) view.findViewById(R.id.sixth_cardview);
         rootLinearlayout = (LinearLayout) view.findViewById(R.id.root_linearlayout);
     }
 
@@ -93,12 +95,12 @@ public class MeterHomePageFragment extends Fragment {
 
     //点击事件
     public void setViewClickListener() {
-        first_layout.setOnClickListener(clickListener);
-        second_layout.setOnClickListener(clickListener);
-        third_layout.setOnClickListener(clickListener);
-        fourth_layout.setOnClickListener(clickListener);
-        fifth_layout.setOnClickListener(clickListener);
-        sixth_layout.setOnClickListener(clickListener);
+        firstCardview.setOnClickListener(clickListener);
+        secondCardview.setOnClickListener(clickListener);
+        thirdCardview.setOnClickListener(clickListener);
+        fourthCardview.setOnClickListener(clickListener);
+        fifthCardview.setOnClickListener(clickListener);
+        sixthCardview.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
@@ -106,7 +108,7 @@ public class MeterHomePageFragment extends Fragment {
         public void onClick(View v) {
             Intent intent;
             switch (v.getId()){
-                case R.id.first_layout:
+                case R.id.first_cardview:
                     if(!"".equals(sharedPreferences.getString("currentFileName",""))){
                         if(!"".equals(sharedPreferences.getString("currentBookName",""))){
                             intent = new Intent(getActivity(), MeterUserContinueActivity.class);
@@ -121,7 +123,7 @@ public class MeterHomePageFragment extends Fragment {
                         Toast.makeText(getActivity(),"请先完成文件选择！",Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.second_layout:
+                case R.id.second_cardview:
                     if(!"".equals(sharedPreferences.getString("currentFileName",""))){
                         bookMeterState = true;
                         showBookSelectWindow();
@@ -136,7 +138,7 @@ public class MeterHomePageFragment extends Fragment {
                         Toast.makeText(getActivity(),"请先完成文件选择！",Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.third_layout:
+                case R.id.third_cardview:
                     if(!"".equals(sharedPreferences.getString("currentFileName",""))){
                         if(!"".equals(sharedPreferences.getString("currentBookName",""))){
                             intent = new Intent(getActivity(), MeterUserListviewActivity.class);
@@ -151,7 +153,7 @@ public class MeterHomePageFragment extends Fragment {
                         Toast.makeText(getActivity(),"请先完成文件选择！",Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.fourth_layout:
+                case R.id.fourth_cardview:
                     if(!"".equals(sharedPreferences.getString("currentFileName",""))){
                         undoneMeterState = true;
                         meterUndoneWindow();
@@ -159,11 +161,11 @@ public class MeterHomePageFragment extends Fragment {
                         Toast.makeText(getActivity(),"请先完成文件选择！",Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.fifth_layout:
+                case R.id.fifth_cardview:
                     intent = new Intent(getActivity(), MeterStatisticsActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.sixth_layout:
+                case R.id.sixth_cardview:
                     showFileSelectWindow();
                     new Thread(){
                         @Override

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:id="@+id/root_linearlayout"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -13,45 +15,135 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/first_layout"
+        <android.support.v7.widget.CardView
+            android:id="@+id/first_cardview"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/security_choose_item_selector"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="5dp"
+            app:contentPadding="8dp"
+            tools:targetApi="lollipop">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="5dp"
-                android:drawableTop="@drawable/select_icon_5"
-                android:gravity="center_horizontal"
-                android:text="继续抄表"
-                android:textColor="@color/text_color_blue"
-                android:textSize="14sp"/>
-        </LinearLayout>
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/second_layout"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/select_icon_5"
+                    android:gravity="center_horizontal"
+                    android:text="继续抄表"
+                    android:textColor="@color/theme_colors"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/second_cardview"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/security_choose_item_selector"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="5dp"
+            app:contentPadding="8dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="5dp"
-                android:drawableTop="@drawable/select_icon_6"
-                android:gravity="center_horizontal"
-                android:text="表册抄表"
-                android:textColor="@color/text_color_blue"
-                android:textSize="14sp"/>
-        </LinearLayout>
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/select_icon_6"
+                    android:gravity="center_horizontal"
+                    android:text="表册抄表"
+                    android:textColor="@color/theme_colors"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/third_cardview"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="5dp"
+            app:contentPadding="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/select_icon_7"
+                    android:gravity="center_horizontal"
+                    android:text="首页抄表"
+                    android:textColor="@color/theme_colors"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/fourth_cardview"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="5dp"
+            app:contentPadding="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/select_icon_8"
+                    android:gravity="center_horizontal"
+                    android:text="未抄抄表"
+                    android:textColor="@color/theme_colors"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 
@@ -61,97 +153,68 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/third_layout"
+        <android.support.v7.widget.CardView
+            android:id="@+id/fifth_cardview"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/security_choose_item_selector"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="5dp"
+            app:contentPadding="8dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="5dp"
-                android:drawableTop="@drawable/select_icon_7"
-                android:gravity="center_horizontal"
-                android:text="首页抄表"
-                android:textColor="@color/text_color_blue"
-                android:textSize="14sp"/>
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/select_icon_9"
+                    android:gravity="center_horizontal"
+                    android:text="抄表统计"
+                    android:textColor="@color/theme_colors"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/fourth_layout"
+        <android.support.v7.widget.CardView
+            android:id="@+id/sixth_cardview"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/security_choose_item_selector"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="5dp"
+            app:contentPadding="8dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="5dp"
-                android:drawableTop="@drawable/select_icon_8"
-                android:gravity="center_horizontal"
-                android:text="未抄抄表"
-                android:textColor="@color/text_color_blue"
-                android:textSize="14sp"/>
-        </LinearLayout>
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/select_icon_10"
+                    android:gravity="center_horizontal"
+                    android:text="文件选择"
+                    android:textColor="@color/theme_colors"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/fifth_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/security_choose_item_selector"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="5dp"
-                android:drawableTop="@drawable/select_icon_9"
-                android:gravity="center_horizontal"
-                android:text="抄表统计"
-                android:textColor="@color/text_color_blue"
-                android:textSize="14sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/sixth_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/security_choose_item_selector"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="5dp"
-                android:drawableTop="@drawable/select_icon_10"
-                android:gravity="center_horizontal"
-                android:text="文件选择"
-                android:textColor="@color/text_color_blue"
-                android:textSize="14sp"/>
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

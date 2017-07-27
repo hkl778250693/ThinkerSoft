@@ -20,7 +20,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
@@ -34,7 +33,7 @@ import java.util.List;
  */
 public class ScanCodeMeterFragment extends Fragment {
     private View view;
-    private Button scanBtn;
+    private TextView scanCode;
     private TextView resultTv;
     private static final String DECODED_CONTENT_KEY = "codedContent";
     private static final String DECODED_BITMAP_KEY = "codedBitmap";
@@ -56,20 +55,20 @@ public class ScanCodeMeterFragment extends Fragment {
     }
 
     public void bindView() {
-        scanBtn = (Button) view.findViewById(R.id.scanBtn);
+        scanCode = (TextView) view.findViewById(R.id.scan_code);
         resultTv = (TextView) view.findViewById(R.id.resultTv);
     }
 
     //点击事件
     private void setViewClickListener() {
-        scanBtn.setOnClickListener(clickListener);
+        scanCode.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.scanBtn:
+                case R.id.scan_code:
                     checkPermissions();
                     break;
             }

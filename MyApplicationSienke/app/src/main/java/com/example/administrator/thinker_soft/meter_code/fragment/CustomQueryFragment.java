@@ -6,10 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.administrator.thinker_soft.R;
@@ -23,7 +23,7 @@ import com.example.administrator.thinker_soft.meter_code.activity.MeterUserNameQ
  */
 public class CustomQueryFragment extends Fragment {
     private View view;
-    private LinearLayout by_met_book, by_user_name, by_user_num, by_user_met;
+    private CardView bookCardView, userNameCardview, userIdCardview, meterNumberCardview;
     private SharedPreferences sharedPreferences_login,sharedPreferences;
 
     @Nullable
@@ -39,10 +39,10 @@ public class CustomQueryFragment extends Fragment {
 
     //绑定控件
     private void bindView() {
-        by_met_book = (LinearLayout) view.findViewById(R.id.by_met_book);
-        by_user_name = (LinearLayout) view.findViewById(R.id.by_user_name);
-        by_user_num = (LinearLayout) view.findViewById(R.id.by_user_num);
-        by_user_met = (LinearLayout) view.findViewById(R.id.by_user_met);
+        bookCardView = (CardView) view.findViewById(R.id.book_cardview);
+        userNameCardview = (CardView) view.findViewById(R.id.user_name_cardview);
+        userIdCardview = (CardView) view.findViewById(R.id.user_id_cardview);
+        meterNumberCardview = (CardView) view.findViewById(R.id.meter_number_cardview);
     }
 
     //初始化设置
@@ -53,10 +53,10 @@ public class CustomQueryFragment extends Fragment {
 
     //点击事件
     public void setViewClickListener() {
-        by_met_book.setOnClickListener(onClickListener);
-        by_user_name.setOnClickListener(onClickListener);
-        by_user_num.setOnClickListener(onClickListener);
-        by_user_met.setOnClickListener(onClickListener);
+        bookCardView.setOnClickListener(onClickListener);
+        userNameCardview.setOnClickListener(onClickListener);
+        userIdCardview.setOnClickListener(onClickListener);
+        meterNumberCardview.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -64,7 +64,7 @@ public class CustomQueryFragment extends Fragment {
         public void onClick(View v) {
             Intent intent;
             switch (v.getId()) {
-                case R.id.by_met_book:
+                case R.id.book_cardview:
                     if(!"".equals(sharedPreferences.getString("currentFileName",""))){
                         intent = new Intent(getActivity(), MeterBookQueryActivity.class);
                         startActivity(intent);
@@ -72,7 +72,7 @@ public class CustomQueryFragment extends Fragment {
                         Toast.makeText(getActivity(),"请先完成文件选择！",Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.by_user_name:
+                case R.id.user_name_cardview:
                     if(!"".equals(sharedPreferences.getString("currentFileName",""))){
                         intent = new Intent(getActivity(), MeterUserNameQueryActivity.class);
                         startActivity(intent);
@@ -80,7 +80,7 @@ public class CustomQueryFragment extends Fragment {
                         Toast.makeText(getActivity(),"请先完成文件选择！",Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.by_user_num:
+                case R.id.user_id_cardview:
                     if(!"".equals(sharedPreferences.getString("currentFileName",""))){
                         intent = new Intent(getActivity(), MeterUserIDQueryActivity.class);
                         startActivity(intent);
@@ -88,7 +88,7 @@ public class CustomQueryFragment extends Fragment {
                         Toast.makeText(getActivity(),"请先完成文件选择！",Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.by_user_met:
+                case R.id.meter_number_cardview:
                     if(!"".equals(sharedPreferences.getString("currentFileName",""))){
                         intent = new Intent(getActivity(), MeterNumberQueryActivity.class);
                         startActivity(intent);

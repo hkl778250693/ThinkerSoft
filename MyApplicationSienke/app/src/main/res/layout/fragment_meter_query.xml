@@ -1,135 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/tabhost"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:orientation="vertical">
 
     <!-- 中间部分 -->
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fadingEdge="vertical"
-            android:scrollbars="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
+                android:id="@+id/book_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="22dp"
-                android:layout_marginRight="22dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:contentPadding="8dp"
+                tools:targetApi="lollipop">
 
-                <!-- 按抄表号查询 -->
-
-                <LinearLayout
-                    android:id="@+id/by_met_book"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:background="@drawable/btn_1"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:text="转到指定抄表本"
+                    android:textColor="@color/theme_colors"
+                    android:textSize="16sp"/>
+            </android.support.v7.widget.CardView>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center"
-                        android:text="转到指定抄表本"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp" />
-                </LinearLayout>
+            <android.support.v7.widget.CardView
+                android:id="@+id/user_name_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:contentPadding="8dp">
 
-                <!-- 按用户名称查询 -->
-
-                <LinearLayout
-                    android:id="@+id/by_user_name"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/btn_1"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:text="按用户名称查询"
+                    android:textColor="@color/theme_colors"
+                    android:textSize="16sp"/>
+            </android.support.v7.widget.CardView>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center"
-                        android:text="按用户名称查询"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp" />
-                </LinearLayout>
-                <!-- 按用户编号查询 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/user_id_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:contentPadding="8dp">
 
-                <LinearLayout
-                    android:id="@+id/by_user_num"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/btn_1"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:text="按用户编号查询"
+                    android:textColor="@color/theme_colors"
+                    android:textSize="16sp"/>
+            </android.support.v7.widget.CardView>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center"
-                        android:text="按用户编号查询"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp" />
-                </LinearLayout>
-                <!-- 按用户表号查询 -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/meter_number_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:contentPadding="8dp">
 
-                <LinearLayout
-                    android:id="@+id/by_user_met"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/btn_1"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center"
-                        android:text="按用户表号查询"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <!-- 查看还水用户 -->
-
-                <!--<LinearLayout
-                    android:id="@+id/by_user_minus"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/btn_1"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center"
-                        android:text="查看特殊用户"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp" />
-                </LinearLayout>-->
-            </LinearLayout>
-        </ScrollView>
+                    android:gravity="center"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:text="按用户表号查询"
+                    android:textColor="@color/theme_colors"
+                    android:textSize="16sp"/>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

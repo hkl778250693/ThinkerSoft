@@ -1,27 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:background="@drawable/security_choose_item_selector"
-    android:padding="10dp">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:background="@android:color/white">
 
-    <ImageView
-        android:id="@+id/image_zsbg"
+    <android.support.v7.widget.CardView
+        android:id="@+id/book_cardview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/zsbg"
-        android:scaleType="centerCrop"/>
+        android:layout_margin="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        tools:targetApi="lollipop"
+        app:contentPadding="15dp">
 
-    <TextView
-        android:id="@+id/image_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="掌上办公"
-        android:textStyle="italic"
-        android:textSize="14sp"
-        android:padding="8dp"
-        android:textColor="@color/text_black"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/image_zsbg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/zsbg"/>
+
+            <TextView
+                android:id="@+id/image_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:text="掌上办公"
+                android:textColor="@color/theme_colors"
+                android:textSize="14sp"
+                android:textStyle="italic"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
 </LinearLayout>

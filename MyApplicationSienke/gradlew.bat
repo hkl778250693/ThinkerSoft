@@ -60,11 +60,10 @@ set _SKIP=2
 if "x%~1" == "x" goto execute
 
 set CMD_LINE_ARGS=%*
+
 goto execute
 
-:4NT_args
-@rem Get arguments from the 4NT Shell from JP Software
-set CMD_LINE_ARGS=%$
+:4NT_argset CMD_LINE_ARGS=%$
 
 :execute
 @rem Setup the command line
@@ -77,14 +76,12 @@ set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
 :end
 @rem End local scope for the variables with windows NT shell
 if "%ERRORLEVEL%"=="0" goto mainEnd
-
-:fail
-rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
-rem the _cmd.exe /c_ return code!
+t
+g
+rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead484
 if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
 exit /b 1
 
 :mainEnd
 if "%OS%"=="Windows_NT" endlocal
 
-:omega

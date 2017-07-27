@@ -76,7 +76,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
             "(id integer primary key AUTOINCREMENT,userName varchar(200),userId varchar(200),userPhone varchar(200),late varchar(200),early varchar(200),noCheckMor varchar(200),isShake varchar(200),isRing varchar(200),isNewMessage varchar(200),noCheckEve varchar(200),outWork varchar(200))";
     //OA用户外勤信息表
     final String CREATE_TABLE_SQL_OA_USER_OUT_WORK = "CREATE TABLE OaUserOutWork" +
-            "(id integer primary key AUTOINCREMENT,userId varchar(200),checkTime varchar(200),checkAddress varchar(200),contactType varchar(200),customerName varchar(200),customerPhoneNumber varchar(200))";
+            "(id integer primary key AUTOINCREMENT,userId varchar(200),checkTime varchar(200),checkAddress varchar(200),contactType varchar(200),customerName varchar(200),photo varchar(200),customerPhoneNumber varchar(200))";
     //OA图片表
     final String CREATE_TABLE_SQL_OA_PHOTO_INFO = "CREATE TABLE oaPhoto" +
             "(id integer primary key AUTOINCREMENT,photoPath varchar(200),userId varchar(200))";

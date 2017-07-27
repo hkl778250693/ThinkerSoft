@@ -311,7 +311,7 @@ public class BusinessCheckingInInfoActivity extends Activity {
 
     /**
      * 将信息保存到本地数据库OA用户基础信息表
-     */
+     */  
     private void insertOaUser() {
         ContentValues values = new ContentValues();
         cursor = db.rawQuery("select * from OaUser where userId=?", new String[]{sharedPreferences_login.getString("userId", "")});//根据用户ID查询用户外勤次数

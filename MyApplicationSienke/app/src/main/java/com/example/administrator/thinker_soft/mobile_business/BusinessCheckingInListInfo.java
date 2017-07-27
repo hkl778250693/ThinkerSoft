@@ -17,7 +17,7 @@ import com.example.administrator.thinker_soft.mode.MySqliteHelper;
  */
 public class BusinessCheckingInListInfo extends Activity {
 
-    private ImageView back;
+    private ImageView back, photo;
     private TextView time1, dizhi, leixin, kehu, lxr;
     private String time;
     private SQLiteDatabase db;  //数据库
@@ -42,6 +42,7 @@ public class BusinessCheckingInListInfo extends Activity {
         leixin = (TextView) findViewById(R.id.leixin);
         kehu = (TextView) findViewById(R.id.kehu);
         lxr = (TextView) findViewById(R.id.lxr);
+        photo = (ImageView) findViewById(R.id.photo);
     }
 
     private void setOnClickListener() {
@@ -75,6 +76,7 @@ public class BusinessCheckingInListInfo extends Activity {
             leixin.setText(cursorOutWork.getString(cursorOutWork.getColumnIndex("contactType")));
             kehu.setText(cursorOutWork.getString(cursorOutWork.getColumnIndex("customerName")));
             lxr.setText(cursorOutWork.getString(cursorOutWork.getColumnIndex("customerPhoneNumber")));
+            photo.setImageResource(cursorOutWork.getInt(cursorOutWork.getColumnIndex("photo")));
         }
     }
 

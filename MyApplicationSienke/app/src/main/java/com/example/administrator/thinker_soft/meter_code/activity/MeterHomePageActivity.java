@@ -5,14 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -208,7 +206,7 @@ public class MeterHomePageActivity extends FragmentActivity{
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
-        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.home_page_more_shape));
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
         mapInfo = (TextView) contentView.findViewById(R.id.map_info);
         TextView tesseractOcr = (TextView) contentView.findViewById(R.id.tesseract_ocr);
         TextView mapMeter = (TextView) contentView.findViewById(R.id.map_meter);
@@ -292,9 +290,7 @@ public class MeterHomePageActivity extends FragmentActivity{
 
             }
         });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            popupWindow.showAsDropDown(rootRelative, 0, 0, Gravity.END);
-        }
+        popupWindow.showAsDropDown(more, -180, 10);
         backgroundAlpha(0.6F);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override

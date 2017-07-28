@@ -26,20 +26,20 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@android:color/white"
+                app:cardBackgroundColor="@color/theme_colors"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
-                app:contentPadding="8dp"
+                app:contentPadding="4dp"
                 tools:targetApi="lollipop">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
                     android:text="转到指定抄表本"
-                    android:textColor="@color/theme_colors"
+                    android:textColor="@android:color/white"
                     android:textSize="16sp"/>
             </android.support.v7.widget.CardView>
 
@@ -49,19 +49,19 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@android:color/white"
+                app:cardBackgroundColor="@color/theme_colors"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
-                app:contentPadding="8dp">
+                app:contentPadding="4dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
                     android:text="按用户名称查询"
-                    android:textColor="@color/theme_colors"
+                    android:textColor="@android:color/white"
                     android:textSize="16sp"/>
             </android.support.v7.widget.CardView>
 
@@ -71,19 +71,19 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@android:color/white"
+                app:cardBackgroundColor="@color/theme_colors"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
-                app:contentPadding="8dp">
+                app:contentPadding="4dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
                     android:text="按用户编号查询"
-                    android:textColor="@color/theme_colors"
+                    android:textColor="@android:color/white"
                     android:textSize="16sp"/>
             </android.support.v7.widget.CardView>
 
@@ -93,19 +93,19 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@android:color/white"
+                app:cardBackgroundColor="@color/theme_colors"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
-                app:contentPadding="8dp">
+                app:contentPadding="4dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
                     android:text="按用户表号查询"
-                    android:textColor="@color/theme_colors"
+                    android:textColor="@android:color/white"
                     android:textSize="16sp"/>
             </android.support.v7.widget.CardView>
         </LinearLayout>

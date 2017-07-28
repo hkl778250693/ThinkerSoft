@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@android:color/white"
-            app:cardCornerRadius="30dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
             app:contentPadding="8dp"
             tools:targetApi="lollipop">
@@ -38,10 +38,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/select_icon_5"
+                    android:drawableTop="@mipmap/main_btn_continue_n"
                     android:gravity="center_horizontal"
                     android:text="继续抄表"
-                    android:textColor="@color/theme_colors"
+                    android:textColor="@drawable/radiogroup_text_selector"
                     android:textSize="14sp"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@android:color/white"
-            app:cardCornerRadius="30dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
             app:contentPadding="8dp">
 
@@ -68,10 +68,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/select_icon_6"
+                    android:drawableTop="@mipmap/main_btn_fromcbb_n"
                     android:gravity="center_horizontal"
                     android:text="表册抄表"
-                    android:textColor="@color/theme_colors"
+                    android:textColor="@drawable/radiogroup_text_selector"
                     android:textSize="14sp"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -91,7 +91,7 @@
             android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@android:color/white"
-            app:cardCornerRadius="30dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
             app:contentPadding="8dp">
 
@@ -105,10 +105,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/select_icon_7"
+                    android:drawableTop="@mipmap/main_btn_fromfirst_n"
                     android:gravity="center_horizontal"
                     android:text="首页抄表"
-                    android:textColor="@color/theme_colors"
+                    android:textColor="@drawable/radiogroup_text_selector"
                     android:textSize="14sp"/>
 
             </LinearLayout>
@@ -122,7 +122,7 @@
             android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@android:color/white"
-            app:cardCornerRadius="30dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
             app:contentPadding="8dp">
 
@@ -137,10 +137,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/select_icon_8"
+                    android:drawableTop="@mipmap/main_btn_fromnotdone_n"
                     android:gravity="center_horizontal"
                     android:text="未抄抄表"
-                    android:textColor="@color/theme_colors"
+                    android:textColor="@drawable/radiogroup_text_selector"
                     android:textSize="14sp"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -161,7 +161,7 @@
             android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@android:color/white"
-            app:cardCornerRadius="30dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
             app:contentPadding="8dp">
 
@@ -176,10 +176,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/select_icon_9"
+                    android:drawableTop="@mipmap/main_btn_statistics_n"
                     android:gravity="center_horizontal"
                     android:text="抄表统计"
-                    android:textColor="@color/theme_colors"
+                    android:textColor="@drawable/radiogroup_text_selector"
                     android:textSize="14sp"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -192,7 +192,7 @@
             android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@android:color/white"
-            app:cardCornerRadius="30dp"
+            app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
             app:contentPadding="8dp">
 
@@ -207,10 +207,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
-                    android:drawableTop="@drawable/select_icon_10"
+                    android:drawableTop="@mipmap/meter_file_icon"
                     android:gravity="center_horizontal"
                     android:text="文件选择"
-                    android:textColor="@color/theme_colors"
+                    android:textColor="@drawable/radiogroup_text_selector"
                     android:textSize="14sp"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>

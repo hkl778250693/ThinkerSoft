@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white_transparent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/home_page_more_shape">
+        android:background="@mipmap/window_bg"
+        android:paddingTop="4dp">
         <TextView
             android:id="@+id/map_info"
             android:layout_width="wrap_content"
@@ -24,7 +26,7 @@
             android:visibility="gone"/>
         <TextView
             android:id="@+id/tesseract_ocr"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/icon_picture"
             android:drawableStart="@mipmap/icon_picture"
@@ -36,13 +38,13 @@
             android:textColor="@color/text_black"
             android:textSize="12sp"/>
         <View
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="0.5dp"
             android:background="@color/gray_thin" />
 
         <TextView
             android:id="@+id/map_meter"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/map_meter_icon"
             android:drawableStart="@mipmap/map_meter_icon"
@@ -55,13 +57,13 @@
             android:textSize="12sp" />
 
         <View
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="0.5dp"
             android:background="@color/gray_thin" />
 
         <TextView
             android:id="@+id/coordinate_manage"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/map_manager"
             android:drawableStart="@mipmap/map_manager"
@@ -74,14 +76,14 @@
             android:textSize="12sp" />
 
         <View
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="0.5dp"
             android:background="@color/gray_thin" />
 
 
         <TextView
             android:id="@+id/popwindow_content_actualtask"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/task_manager"
             android:drawableStart="@mipmap/task_manager"
@@ -94,17 +96,17 @@
             android:padding="8dp"/>
 
         <View
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="0.5dp"
             android:background="@color/gray_thin" />
 
         <TextView
             android:id="@+id/system_settings"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/system_settings"
             android:drawablePadding="8dp"
-            android:background="@drawable/more_settings_last_one_selector"
+            android:background="@drawable/meter_settings_layout_selector"
             android:gravity="center"
             android:padding="8dp"
             android:text="系统设置"

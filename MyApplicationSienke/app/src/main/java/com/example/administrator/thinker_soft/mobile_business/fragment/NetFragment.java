@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.mobile_business.BusinessEmailActivity;
@@ -19,8 +19,7 @@ import com.example.administrator.thinker_soft.mobile_business.BusinessNetPhoneBo
  */
 public class NetFragment extends Fragment {
     private View view;
-    private TextView email;
-    private TextView phoneBook;
+    private CardView email, phoneBook;
 
     @Nullable
     @Override
@@ -34,23 +33,21 @@ public class NetFragment extends Fragment {
     }
 
     //绑定控件ID
-    public void bindView(){
-        email = (TextView) view.findViewById(R.id.email);
-        phoneBook = (TextView) view.findViewById(R.id.phone_book);
-
-
-
+    public void bindView() {
+        email = (CardView) view.findViewById(R.id.email);
+        phoneBook = (CardView) view.findViewById(R.id.phone_book);
     }
 
     //点击事件
-    public void setViewClickListener(){
+    public void setViewClickListener() {
         email.setOnClickListener(clickListener);
         phoneBook.setOnClickListener(clickListener);
     }
+
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.email:
                     Intent intent = new Intent(getActivity(), BusinessEmailActivity.class);
                     startActivity(intent);

@@ -76,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="未配对"
@@ -122,6 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:src="@mipmap/meter_right" />
             </LinearLayout>
 

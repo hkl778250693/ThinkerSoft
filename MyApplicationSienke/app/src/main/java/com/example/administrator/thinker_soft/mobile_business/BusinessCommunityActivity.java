@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
@@ -29,7 +28,7 @@ public class BusinessCommunityActivity extends Activity {
     private ImageView more;
     private List<CommunityListViewItem> communityListViewItemList = new ArrayList<>();
     private CommunityAdapter adapter;
-    private RadioButton message, send;
+    private TextView message, send;
     private PopupWindow window;
 
     @Override
@@ -72,23 +71,23 @@ public class BusinessCommunityActivity extends Activity {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View popupView = BusinessCommunityActivity.this.getLayoutInflater().inflate(R.layout.popupwidow_business_community, null);
+                View popupView = getLayoutInflater().inflate(R.layout.popupwidow_business_community, null);
                 window = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                window.setAnimationStyle(R.mipmap.pop_banner);
                 window.setFocusable(true);
-                backgroundAlpha(0.6F);   //背景变暗
                 window.setOutsideTouchable(true);
+                window.setAnimationStyle(R.style.mypopwindow_anim_style);
                 window.update();
+                window.setBackgroundDrawable(getResources().getDrawable(R.color.white_transparent));
                 window.showAsDropDown(more, 0, 0);
+                backgroundAlpha(0.6F);   //背景变暗
                 window.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
                         backgroundAlpha(1.0F);
-                        more.setClickable(true);
                     }
                 });
-                message = (RadioButton) popupView.findViewById(R.id.message);
-                send = (RadioButton) popupView.findViewById(R.id.send);
+                message = (TextView) popupView.findViewById(R.id.message);
+                send = (TextView) popupView.findViewById(R.id.send);
 
                 message.setOnClickListener(clickListener);
                 send.setOnClickListener(clickListener);

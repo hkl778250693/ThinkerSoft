@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.mobile_business.BusinessCheckingInActivity;
@@ -22,7 +22,7 @@ import com.example.administrator.thinker_soft.mobile_business.BusinessWorkReport
 public class PersonWorkFragment extends Fragment {
 
     private View view;
-    private TextView schedule,personSet,workReport,GPS,examine;
+    private CardView schedule, personSet, workReport, GPS, examine;
 
     @Nullable
     @Override
@@ -36,16 +36,16 @@ public class PersonWorkFragment extends Fragment {
     }
 
     //绑定控件ID
-    public void bindView(){
-        schedule = (TextView) view.findViewById(R.id.schedule);
-        personSet = (TextView) view.findViewById(R.id.person_set);
-        workReport = (TextView) view.findViewById(R.id.work_report);
-        GPS = (TextView) view.findViewById(R.id.GPS);
-        examine = (TextView) view.findViewById(R.id.examine);
+    public void bindView() {
+        schedule = (CardView) view.findViewById(R.id.schedule);
+        personSet = (CardView) view.findViewById(R.id.person_set);
+        workReport = (CardView) view.findViewById(R.id.work_report);
+        GPS = (CardView) view.findViewById(R.id.GPS);
+        examine = (CardView) view.findViewById(R.id.examine);
     }
 
     //点击事件
-    public void setViewClickListener(){
+    public void setViewClickListener() {
         schedule.setOnClickListener(clickListener);
         personSet.setOnClickListener(clickListener);
         workReport.setOnClickListener(clickListener);
@@ -56,13 +56,12 @@ public class PersonWorkFragment extends Fragment {
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.schedule:
                     Intent intent = new Intent(getActivity(), BusinessScheduleActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.person_set:
-
                     Intent intent1 = new Intent(getActivity(), BusinessPersonSettingActivity.class);
                     startActivity(intent1);
                     break;

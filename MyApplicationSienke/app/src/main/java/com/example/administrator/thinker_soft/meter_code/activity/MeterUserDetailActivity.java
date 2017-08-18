@@ -26,7 +26,7 @@ import java.util.Locale;
 
 public class MeterUserDetailActivity extends Activity {
     private ImageView back;
-    private TextView save;
+    private TextView save,ceshi;
     private SQLiteDatabase db;  //数据库
     private Cursor cursor;
     private SharedPreferences sharedPreferences_login;
@@ -83,6 +83,7 @@ public class MeterUserDetailActivity extends Activity {
         meterStartdosageTv = (TextView) findViewById(R.id.start_dosage);
         meterRemissionTv = (TextView) findViewById(R.id.remission);
         meterRubbishTv = (TextView) findViewById(R.id.rubbish_cost);
+        ceshi = (TextView) findViewById(R.id.ceshi);
     }
 
     //初始化设置
@@ -109,6 +110,7 @@ public class MeterUserDetailActivity extends Activity {
     public void setViewClickListener() {
         back.setOnClickListener(clickListener);
         save.setOnClickListener(clickListener);
+        ceshi.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
@@ -117,6 +119,10 @@ public class MeterUserDetailActivity extends Activity {
             switch (v.getId()) {
                 case R.id.back:
                     MeterUserDetailActivity.this.finish();
+                    break;
+                case R.id.ceshi:
+                    Intent intent1 = new Intent(MeterUserDetailActivity.this,BluetoothActivity.class);
+                    startActivity(intent1);
                     break;
                 case R.id.save:
                     if (!"".equals(thisMonthEndDegree.getText().toString())) {
@@ -148,6 +154,7 @@ public class MeterUserDetailActivity extends Activity {
             thisMonthDosage = cursor.getString(cursor.getColumnIndex("this_month_dosage"));
             if("".equals(cursor.getString(cursor.getColumnIndex("meter_date")))){
                 meterDate = "暂无";
+
             }else {
                 meterDate = cursor.getString(cursor.getColumnIndex("meter_date"));
             }

@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <!-- 标题 -->
     <RelativeLayout
@@ -18,7 +18,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:padding="12dp"
-            android:src="@drawable/back_selector"/>
+            android:src="@drawable/back_selector" />
 
         <TextView
             android:id="@+id/userlist_tv"
@@ -27,30 +27,45 @@
             android:layout_centerInParent="true"
             android:text="用户抄表详情"
             android:textColor="@android:color/white"
-            android:textSize="22sp"/>
+            android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/save"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="12dp"
-            android:text="保存"
-            android:textColor="@drawable/normal_text_pressed_selector"
-            android:textSize="14sp"/>
+            android:orientation="horizontal">
 
+
+            <TextView
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="保存"
+                android:textColor="@drawable/normal_text_pressed_selector"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/ceshi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="保存"
+                android:textColor="@drawable/normal_text_pressed_selector"
+                android:textSize="14sp" />
+        </LinearLayout>
     </RelativeLayout>
     <!-- 中间部分 -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/gray_thin"
         android:fadingEdge="vertical"
         android:focusable="false"
-        android:scrollbars="none"
         android:padding="5dp"
-        android:background="@color/gray_thin">
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,21 +75,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center_vertical"
                 android:text="抄表数据："
-                android:layout_gravity="center"
                 android:textColor="@color/text_blue"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
             <!-- 经纬度 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/normal_button_bg_selector"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp">
+                android:padding="5dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -93,7 +108,7 @@
                         android:drawableStart="@mipmap/meter_degree"
                         android:text="经度:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/longitude"
@@ -101,15 +116,15 @@
                         android:layout_height="wrap_content"
                         android:text="111"
                         android:textColor="@color/text_gray"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -121,7 +136,7 @@
                         android:drawableStart="@mipmap/meter_degree"
                         android:text="纬度:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/latitude"
@@ -129,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:text="111"
                         android:textColor="@color/text_gray"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -162,7 +177,7 @@
                         android:drawableStart="@mipmap/meter_degree"
                         android:text="本月读数:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/this_month_end_degree"
@@ -172,20 +187,20 @@
                         android:background="@drawable/detail_edittext"
                         android:hint="输入读数"
                         android:maxLength="9"
-                        android:textSize="14sp"
-                        android:textColor="@color/text_black"
+                        android:paddingBottom="5dp"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:textCursorDrawable="@null"/>
+                        android:textColor="@color/text_black"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 本月用量 -->
 
                 <LinearLayout
@@ -207,14 +222,14 @@
                         android:gravity="center_vertical"
                         android:text="本月用量:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/this_month_dosage"
@@ -222,14 +237,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 上月读数 -->
 
                 <LinearLayout
@@ -251,14 +266,14 @@
                         android:gravity="center_vertical"
                         android:text="上月读数:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/last_month_degree"
@@ -266,14 +281,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
 
                 <!-- 上月用量 -->
 
@@ -296,14 +311,14 @@
                         android:gravity="center_vertical"
                         android:text="上月用量:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/last_month_dosage"
@@ -311,14 +326,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 抄表日期 -->
 
                 <LinearLayout
@@ -340,14 +355,14 @@
                         android:gravity="center_vertical"
                         android:text="抄表日期:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/meter_date"
@@ -355,14 +370,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 抄表标志 -->
 
                 <LinearLayout
@@ -384,13 +399,14 @@
                         android:gravity="center_vertical"
                         android:text="抄表标志:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/meter_flag"
@@ -398,7 +414,7 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -407,11 +423,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center_vertical"
                 android:text="用户信息："
-                android:layout_gravity="center"
                 android:textColor="@color/text_blue"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -443,14 +459,14 @@
                         android:gravity="center_vertical"
                         android:text="用户姓名:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/user_name"
@@ -458,14 +474,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 用户编号 -->
 
                 <LinearLayout
@@ -488,14 +504,14 @@
                         android:gravity="center_vertical"
                         android:text="用户编号:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/user_id"
@@ -503,14 +519,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 老编号 -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -530,14 +546,14 @@
                         android:gravity="center_vertical"
                         android:text="用户老编号"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/user_old_id"
@@ -545,14 +561,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 表号 -->
 
                 <LinearLayout
@@ -574,14 +590,14 @@
                         android:gravity="center_vertical"
                         android:text="表号"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/meter_number"
@@ -589,14 +605,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 所属片区 -->
 
                 <LinearLayout
@@ -618,14 +634,14 @@
                         android:gravity="center_vertical"
                         android:text="所属片区"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/area_name"
@@ -633,14 +649,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
 
                 <!-- 用户地址 -->
 
@@ -663,14 +679,14 @@
                         android:gravity="center_vertical"
                         android:text=" 用户地址:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/user_addres"
@@ -678,14 +694,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 用户电话 -->
 
                 <LinearLayout
@@ -707,14 +723,14 @@
                         android:gravity="center_vertical"
                         android:text="用户电话:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/user_phone"
@@ -722,14 +738,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 用户余额 -->
 
                 <LinearLayout
@@ -751,14 +767,14 @@
                         android:gravity="center_vertical"
                         android:text="用户余额:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/user_balance"
@@ -766,14 +782,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 欠费金额 -->
 
                 <LinearLayout
@@ -795,14 +811,14 @@
                         android:gravity="center_vertical"
                         android:text="欠费金额:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/owe_acount"
@@ -810,14 +826,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
 
                 <!-- 欠费月数 -->
 
@@ -840,14 +856,14 @@
                         android:gravity="center_vertical"
                         android:text="欠费月数:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/owe_months"
@@ -855,14 +871,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 用户性质 -->
 
                 <LinearLayout
@@ -884,14 +900,14 @@
                         android:gravity="center_vertical"
                         android:text="用户性质:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/user_property"
@@ -899,14 +915,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 抄表本 -->
 
                 <LinearLayout
@@ -928,14 +944,14 @@
                         android:gravity="center_vertical"
                         android:text="抄表本 :"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/meter_book"
@@ -943,14 +959,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 抄表序号 -->
 
                 <LinearLayout
@@ -972,14 +988,14 @@
                         android:gravity="center_vertical"
                         android:text="抄表序号:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/meter_serial_numb"
@@ -987,14 +1003,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 表型号 -->
 
                 <LinearLayout
@@ -1016,14 +1032,14 @@
                         android:gravity="center_vertical"
                         android:text="表型号:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/meter_model"
@@ -1031,14 +1047,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 抄表员 -->
 
                 <LinearLayout
@@ -1060,14 +1076,14 @@
                         android:gravity="center_vertical"
                         android:text="抄表员:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/meter_reader"
@@ -1075,14 +1091,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 更换量 -->
 
                 <LinearLayout
@@ -1104,14 +1120,14 @@
                         android:gravity="center_vertical"
                         android:text="更换量:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/change_dosage"
@@ -1119,14 +1135,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 启用量 -->
 
                 <LinearLayout
@@ -1148,13 +1164,14 @@
                         android:gravity="center_vertical"
                         android:text="启用量:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/start_dosage"
@@ -1162,14 +1179,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 加减量 -->
 
                 <LinearLayout
@@ -1191,14 +1208,14 @@
                         android:gravity="center_vertical"
                         android:text="加减量:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/remission"
@@ -1206,14 +1223,14 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/gray"/>
+                    android:background="@color/gray" />
                 <!-- 垃圾费 -->
 
                 <LinearLayout
@@ -1235,14 +1252,14 @@
                         android:gravity="center_vertical"
                         android:text="垃圾费:"
                         android:textColor="@color/text_black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/rubbish_cost"
@@ -1250,7 +1267,7 @@
                             android:layout_height="wrap_content"
                             android:text="111"
                             android:textColor="@color/text_gray"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

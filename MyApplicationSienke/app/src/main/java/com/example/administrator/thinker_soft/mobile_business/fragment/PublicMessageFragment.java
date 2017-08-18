@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.administrator.thinker_soft.R;
 import com.example.administrator.thinker_soft.mobile_business.BusinessCommunityActivity;
@@ -20,7 +20,7 @@ import com.example.administrator.thinker_soft.mobile_business.BusinessNewsActivi
  */
 public class PublicMessageFragment extends Fragment {
     private View view;
-    private TextView news,message,community;
+    private CardView news, message, community;
 
     @Nullable
     @Override
@@ -29,27 +29,27 @@ public class PublicMessageFragment extends Fragment {
 
         bindView(); //绑定控件ID
         setViewClickListener();//点击事件
-
         return view;
     }
 
     //绑定控件ID
-    public void bindView(){
-        news = (TextView) view.findViewById(R.id.news);
-        message = (TextView) view.findViewById(R.id.message);
-        community = (TextView) view.findViewById(R.id.community);
+    public void bindView() {
+        news = (CardView) view.findViewById(R.id.news);
+        message = (CardView) view.findViewById(R.id.message);
+        community = (CardView) view.findViewById(R.id.community);
     }
 
     //点击事件
-    public void setViewClickListener(){
+    public void setViewClickListener() {
         news.setOnClickListener(clickListener);
         message.setOnClickListener(clickListener);
         community.setOnClickListener(clickListener);
     }
+
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.news:
                     Intent intent = new Intent(getActivity(), BusinessNewsActivity.class);
                     startActivity(intent);

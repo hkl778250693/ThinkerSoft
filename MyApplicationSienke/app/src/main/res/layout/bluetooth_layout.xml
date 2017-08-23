@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_thin"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -33,13 +34,14 @@
             android:layout_marginRight="18dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/community_selector"
-            android:text="搜索设备"/>
+            android:text="搜索设备" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
             android:layout_below="@+id/searchDevices"
             android:background="@android:color/darker_gray" />
 
@@ -53,12 +55,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="未配对设备" />
 
             <ListView
+                android:layout_marginTop="10dp"
                 android:id="@+id/unbondDevices"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/bluetooth_text" />
         </LinearLayout>
 
         <View
@@ -67,7 +72,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/searchDevices"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="155dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
@@ -79,14 +84,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="已配对设备" />
 
             <ListView
+                android:layout_marginTop="10dp"
                 android:id="@+id/bondDevices"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/linearLayout1">
+                android:layout_below="@+id/linearLayout1"
+                android:background="@drawable/bluetooth_text">
 
             </ListView>
         </LinearLayout>
